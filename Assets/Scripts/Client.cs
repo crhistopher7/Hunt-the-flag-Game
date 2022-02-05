@@ -117,6 +117,7 @@ public class Client : MonoBehaviour
                 var seed = int.Parse(aData[1]);
                 this.seed = seed;
                 mapGenerator.GenerateMap(seed);
+                mapGenerator.name = "Map Generator";
 
                 SceneManager.LoadScene("SampleScene");
                 Invoke(nameof(startPlayerControllers), 3f);

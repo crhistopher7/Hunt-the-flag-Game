@@ -915,6 +915,8 @@ MonoBehaviour:
   clientNameInputField: {fileID: 956582926}
   serverAddressInputField: {fileID: 1940029641}
   passwordInputField: {fileID: 517053815}
+  seed: 0
+  mapGeneratorPrefab: {fileID: 5397334706774878371, guid: 571a9c033f78ba14abbd85f75126b0eb, type: 3}
 --- !u!4 &1332467349
 Transform:
   m_ObjectHideFlags: 0
@@ -1078,7 +1080,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 192.168.1.21
+  m_Text: 192.168.1.26
 --- !u!222 &1413434828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1623,7 +1625,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 192.168.1.21
+  m_Text: 192.168.1.26
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 2
   m_ReadOnly: 0

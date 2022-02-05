@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4428547406209404345}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -100, y: 1, z: -100.00003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5397334706275233022}
   m_Father: {fileID: 0}
@@ -49,7 +49,6 @@ MonoBehaviour:
   mapHeigth: 100
   noiseScale: 22.67
   drawMode: 1
-  seed: 80
   offset: {x: 0, y: 0}
   octaves: 5
   persistance: 0.496
@@ -112,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 5397334706275233023}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -100, y: 1, z: -100}
   m_Children: []
   m_Father: {fileID: 5397334706774878370}
   m_RootOrder: 0

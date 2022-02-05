@@ -8,13 +8,14 @@ public abstract class Pathfinder : MonoBehaviour
     public Vector3Int ObjectivePosition;
     public int SearchLength;
 
-    public MapGenerator MapGenerator;
+    protected MapGenerator MapGenerator;
 
     protected List<LogicMap> TilesSearch;
 
     private void Start()
     {
         MapGenerator = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
+        Debug.Log(MapGenerator.name);
     }
 
 

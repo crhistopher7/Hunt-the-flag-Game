@@ -5,7 +5,7 @@ using UnityEngine;
 public class AStar : Pathfinder
 {
 
-    public LogicMap getTileByPosition(Vector3Int vector)
+    public LogicMap GetTileByPosition(Vector3Int vector)
     {
         MapGenerator = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
         return MapGenerator.GetTile(vector);

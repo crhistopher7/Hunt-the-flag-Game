@@ -51,6 +51,11 @@ public class MapGenerator : MonoBehaviour
     };
 
     Dictionary<Vector3Int, LogicMap> NavMap;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         Instance = this;

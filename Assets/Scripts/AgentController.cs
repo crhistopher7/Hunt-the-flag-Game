@@ -55,7 +55,7 @@ public class AgentController : MatchBehaviour
 
             position = new Vector3Int(x, y, z);
 
-            point = AStar.getTileByPosition(Vector3Int.FloorToInt(position) / 10);
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(position) / 10);
 
         } while (point != null && !point.Walkable);
 
@@ -208,8 +208,8 @@ public class AgentController : MatchBehaviour
     public void BuildPath(Vector3Int ObjectivePosition)
     {
 
-        LogicMap current = AStar.getTileByPosition(new Vector3Int((int)Math.Round(rb.position.x)/10, (int)Math.Round(rb.position.y)/10, 0));
-        LogicMap objective = AStar.getTileByPosition(Vector3Int.FloorToInt(ObjectivePosition));
+        LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x)/10, (int)Math.Round(rb.position.y)/10, 0));
+        LogicMap objective = AStar.GetTileByPosition(Vector3Int.FloorToInt(ObjectivePosition));
 
         if (!objective.Walkable)
             return;
