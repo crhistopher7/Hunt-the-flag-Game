@@ -180,7 +180,6 @@ GameObject:
   - component: {fileID: 7736414060415969163}
   - component: {fileID: 7736414061086817891}
   - component: {fileID: 7736414061086817890}
-  - component: {fileID: -6187039937554860831}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Team1
@@ -314,17 +313,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3f4bd102988fa43a8f1d383cdfecaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-6187039937554860831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7736414061086817893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f9b6c533d8e60748b683cc3cf3b7de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

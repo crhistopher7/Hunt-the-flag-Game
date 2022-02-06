@@ -91,7 +91,7 @@ public class MapGenerator : MonoBehaviour
                         {
                             Position = new Vector3Int(x, y, 0),             
                             ClickPosition = new Vector3Int(-49+x, -49+y, 0),
-                            Walkable = (currentHeigth > 0.35f && currentHeigth <= 0.83f),
+                            Walkable = (currentHeigth > 0.34f && currentHeigth <= 0.74f),
                             MoveCost = moveCost,
                             ColorMapIndex = y * mapWidth + x
                         };

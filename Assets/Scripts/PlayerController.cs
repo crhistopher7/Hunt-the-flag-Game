@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public Text PointsPainel;
     private Client clientOfExecution;
     CaseConstructor caseConstructor;
-    System.Random prng = new System.Random(0);
+    System.Random prng;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,19 @@ public class PlayerController : MonoBehaviour
         PointsPainel.text = gameObject.tag + " Points: " + Points;
         clientOfExecution = GameObject.Find("Client").GetComponent<Client>();
         caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        prng = new System.Random(clientOfExecution.seed);
         StartAgents();
     }
 
     public void StartAgents()
     {
-        
-        
+        var matchObjects = FindObjectsOfType<MatchBehaviour>();
+        foreach (var matchObject in matchObjects)
+        {
+            if(matchObject.CompareTag(this.tag))
+                Destroy(matchObject.gameObject);
+        }
+
         Agents.Clear();
         ClickedAgents.Clear();
 
@@ -61,12 +67,11 @@ public class PlayerController : MonoBehaviour
             agent.transform.parent = this.transform;
             agent.InitPosition(prng.Next());
 
-
             Debug.Log("criando o " + agent.name);
-
             this.Agents.Add(agent);
             i++;
         } while (i <= numberOfAgents);
+        
     }
 
     // Update is called once per frame
@@ -89,11 +94,9 @@ public class PlayerController : MonoBehaviour
                     string send = "";
                     foreach (AgentController agent in ClickedAgents)
                     {
-
                         agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10);
 
                         send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                        // "actionType,agentX,ObjectReference,deceptiveAction,RelativeDistanceDirection,InitTime";
                         StartCoroutine(SendActionToCase("Move", agent, positionClick));
                         //SendWithTime("Move|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10);
                     }

@@ -286,18 +286,23 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void SetStrategyTypeInCase(string strategy)
     {
+        Debug.Log("entrou");
         if (strategy.Equals(Strategy.OFENSIVE.ToString()))
             currentCase.strategy = Strategy.OFENSIVE;
         else
             currentCase.strategy = Strategy.DEFENSIVE;
 
         canvasStrategy.SetActive(false);
+        Debug.Log("setou falso");
         //result
         SetResultInCase(true);
 
         //save 
         SaveCase(currentCase);
+        Debug.Log("salvou");
 
+        pcTeam1.enabled = false;
+        pcTeam2.enabled = false;
         //reiniciar players
         Debug.Log("start agents team 1");
         pcTeam1.StartAgents();
@@ -506,6 +511,7 @@ public partial class CaseConstructor : MonoBehaviour
 
     private void SaveCase(Case c)
     {
+        Debug.Log("salvando o caso");
         string str = "";
 
         str += c.id.ToString() + splitter;

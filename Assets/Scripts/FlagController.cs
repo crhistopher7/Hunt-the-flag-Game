@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlagController : MatchBehaviour
+public class FlagController : MonoBehaviour
 {
     public string team;
     public int value;

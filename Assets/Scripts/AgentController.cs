@@ -55,12 +55,12 @@ public class AgentController : MatchBehaviour
 
             position = new Vector3Int(x, y, z);
 
-            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(position) / 10);
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(x, y, 0)) / 10);
 
-        } while (point != null && !point.Walkable);
+        } while (!point.Walkable);
 
         this.transform.position = position;
-        rb = GetComponent<Rigidbody>();
+        Debug.Log("Setou posição do "+this.name);
     }
 
 

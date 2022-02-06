@@ -15,7 +15,6 @@ public abstract class Pathfinder : MonoBehaviour
     private void Start()
     {
         MapGenerator = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
-        Debug.Log(MapGenerator.name);
     }
 
 
