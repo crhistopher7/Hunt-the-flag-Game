@@ -33,12 +33,12 @@ public class PlayerController : MonoBehaviour
 
     public void StartAgents()
     {
-        var matchObjects = FindObjectsOfType<MatchBehaviour>();
+        /*var matchObjects = FindObjectsOfType<MatchBehaviour>();
         foreach (var matchObject in matchObjects)
         {
             if(matchObject.CompareTag(this.tag))
                 Destroy(matchObject.gameObject);
-        }
+        }*/
 
         Agents.Clear();
         ClickedAgents.Clear();

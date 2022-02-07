@@ -44,23 +44,14 @@ public partial class CaseConstructor : MonoBehaviour
 
     public GameObject canvasType;
     public GameObject canvasStrategy;
+    public GameObject canvasResult;
 
     // Start is called before the first frame update
     void Awake()
     {
         InitPlayers();
         StartFile();
-        ConstructInitCase();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown("d"))
-        {
-            Debug.Log("D pressionado");
-            currentCase.solutionType = Type.DECEPTIVE;
-            currentCase.plan.solutionType = Type.DECEPTIVE;
-        }
+        Invoke(nameof(ConstructInitCase), 0.5f);
     }
 
     public void StartFile()
@@ -286,23 +277,25 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void SetStrategyTypeInCase(string strategy)
     {
-        Debug.Log("entrou");
         if (strategy.Equals(Strategy.OFENSIVE.ToString()))
             currentCase.strategy = Strategy.OFENSIVE;
         else
             currentCase.strategy = Strategy.DEFENSIVE;
 
         canvasStrategy.SetActive(false);
-        Debug.Log("setou falso");
-        //result
-        SetResultInCase(true);
+        canvasResult.SetActive(true);
+    }
 
+    public void SetResultInCase(bool result)
+    {
+        currentCase.result = result;
+
+        canvasResult.SetActive(false);
         //save 
         SaveCase(currentCase);
-        Debug.Log("salvou");
 
-        pcTeam1.enabled = false;
-        pcTeam2.enabled = false;
+        pcTeam1.enabled = true;
+        pcTeam2.enabled = true;
         //reiniciar players
         Debug.Log("start agents team 1");
         pcTeam1.StartAgents();
@@ -310,12 +303,7 @@ public partial class CaseConstructor : MonoBehaviour
         pcTeam2.StartAgents();
 
         //inicia um novo caso
-        ConstructInitCase();
-    }
-
-    public void SetResultInCase(bool result)
-    {
-        currentCase.result = result;
+        Invoke(nameof(ConstructInitCase), 0.5f);
     }
 
     public Sector CalculeSector(AgentController a)
