@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //actionDefinition
-        action.actionDefinition = Type.NORMAL;
+        action.actionDefinition = TypeCase.NORMAL;
 
         //distance_direction
         Distance distance = caseConstructor.CalculeDistance(agent.transform.position, positionClick);

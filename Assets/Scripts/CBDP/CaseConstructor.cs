@@ -21,7 +21,7 @@ public enum Strategy
     DEFENSIVE, OFENSIVE
 }
 
-public enum Type
+public enum TypeCase
 {
     DECEPTIVE, NORMAL
 }
@@ -72,7 +72,7 @@ public partial class CaseConstructor : MonoBehaviour
         str += "MaO" + splitter;
 
         //matriz de distância/direção dos agentes em relação as bases
-        str += "MaBase" + splitter;
+        //str += "MaBase" + splitter;
 
         //matriz de distância/direção dos agentes em relação aos agentes
         str += "MaQd_int" + splitter;
@@ -81,7 +81,7 @@ public partial class CaseConstructor : MonoBehaviour
         str += "MaO_int" + splitter;
 
         //matriz de distância/direção dos agentes em relação as bases
-        str += "MaBase_int" + splitter;
+        //str += "MaBase_int" + splitter;
 
         //vetor de setor dos agentes
         str += "VaSec" + splitter;
@@ -92,8 +92,11 @@ public partial class CaseConstructor : MonoBehaviour
         //tipo do plano
         str += "Strategy" + splitter;
 
+        //resultado do plano
+        str += "Result" + splitter;
+
         //planning file
-        str += "Planning" + splitter;
+        str += "Planning";
 
         //salvando 
         Save(str);
@@ -221,8 +224,8 @@ public partial class CaseConstructor : MonoBehaviour
         this.initTime = DateTime.Now;
 
         //temporario
-        currentCase.solutionType = Type.NORMAL;
-        currentCase.plan.solutionType = Type.NORMAL;
+        currentCase.solutionType = TypeCase.NORMAL;
+        currentCase.plan.solutionType = TypeCase.NORMAL;
     }
 
     public void ConstructEndCase()
@@ -261,15 +264,15 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void SetSolutionTypeInCase(string type)
     {
-        if (type.Equals(Type.DECEPTIVE.ToString()))
+        if (type.Equals(TypeCase.DECEPTIVE.ToString()))
         {
-            currentCase.solutionType = Type.DECEPTIVE;
-            currentCase.plan.solutionType = Type.DECEPTIVE;
+            currentCase.solutionType = TypeCase.DECEPTIVE;
+            currentCase.plan.solutionType = TypeCase.DECEPTIVE;
         }    
         else
         {
-            currentCase.solutionType = Type.NORMAL;
-            currentCase.plan.solutionType = Type.NORMAL;
+            currentCase.solutionType = TypeCase.NORMAL;
+            currentCase.plan.solutionType = TypeCase.NORMAL;
         }
         canvasType.SetActive(false);
         canvasStrategy.SetActive(true);
@@ -450,10 +453,10 @@ public partial class CaseConstructor : MonoBehaviour
         action.agent = str[1];
         action.objetive = str[2];
         
-        if (str[3].Equals(Type.DECEPTIVE))
-            action.actionDefinition = Type.DECEPTIVE;
+        if (str[3].Equals(TypeCase.DECEPTIVE))
+            action.actionDefinition = TypeCase.DECEPTIVE;
         else
-            action.actionDefinition = Type.NORMAL;
+            action.actionDefinition = TypeCase.NORMAL;
 
         action.distance_direction = str[4];
         action.time = float.Parse(str[5]);
@@ -472,9 +475,10 @@ public partial class CaseConstructor : MonoBehaviour
             {
                 s += matrix[i, j].ToString()   + (delimiter);
             }
-
+            s = s.Remove(s.Length - 1, 1);
             s += "}:";
         }
+        s = s.Remove(s.Length - 1, 1);
 
         return s += "}";
     }
@@ -490,9 +494,10 @@ public partial class CaseConstructor : MonoBehaviour
             {
                 s += matrix[i, j].ToString() + (delimiter);
             }
-
+            s = s.Remove(s.Length - 1, 1);
             s += "}:";
         }
+        s = s.Remove(s.Length - 1, 1);
 
         return s += "}";
     }

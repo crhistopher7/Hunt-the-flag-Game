@@ -17,7 +17,7 @@ public partial class CaseConstructor
 
         public Sector[] vector_sector;
 
-        public Type solutionType;
+        public TypeCase solutionType;
         public Strategy strategy;
         public bool result;
         public Plan plan;
@@ -30,7 +30,7 @@ public partial class CaseConstructor
             public string action;
             public string agent;
             public string objetive;
-            public Type actionDefinition;
+            public TypeCase actionDefinition;
             public string distance_direction;
             public double time;
 
@@ -41,7 +41,7 @@ public partial class CaseConstructor
         }
 
         public int caseid;
-        public Type solutionType;
+        public TypeCase solutionType;
         public Queue<Action> actions;
 
 
