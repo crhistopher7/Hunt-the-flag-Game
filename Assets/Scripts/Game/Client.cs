@@ -117,7 +117,12 @@ public class Client : MonoBehaviour
                 mapGenerator.GenerateMap(seed);
                 mapGenerator.name = "Map Generator";
 
-                SceneManager.LoadScene("SampleScene");
+                if (clientName.Equals("IA"))
+                    SceneManager.LoadScene("MainWithAPI");
+             
+                else
+                    SceneManager.LoadScene("SampleScene");
+
                 Invoke(nameof(startPlayerControllers), 3f);
                 break;
 
