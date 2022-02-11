@@ -15,6 +15,7 @@ public class CaseReader : MonoBehaviour
     {
         cbr = new CBRAPI();
         ConvertCSVToCAseBase();
+
     }
 
     void ConvertCSVToCAseBase()
