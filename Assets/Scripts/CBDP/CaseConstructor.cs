@@ -469,78 +469,10 @@ public partial class CaseConstructor : MonoBehaviour
         currentCase.plan.actions.Enqueue(action);
     }
 
-    public string ToMatrixString(string[,] matrix, string delimiter = ",")
-    {
-        string s = "{";
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            s += "{";
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                s += matrix[i, j].ToString()   + (delimiter);
-            }
-            s = s.Remove(s.Length - 1, 1);
-            s += "}:";
-        }
-        s = s.Remove(s.Length - 1, 1);
-
-        return s += "}";
-    }
-
-    public string ToMatrixString(int[,] matrix, string delimiter = ",")
-    {
-        string s = "{";
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            s += "{";
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                s += matrix[i, j].ToString() + (delimiter);
-            }
-            s = s.Remove(s.Length - 1, 1);
-            s += "}:";
-        }
-        s = s.Remove(s.Length - 1, 1);
-
-        return s += "}";
-    }
-
     private void SaveCase(Case c)
     {
         Debug.Log("salvando o caso");
-        string str = "";
-
-        str += c.id.ToString() + splitter;
-        str += c.seedMap.ToString() + splitter;
-
-
-        str += ToMatrixString(c.matrix_agents) + splitter;     
-
-        str += ToMatrixString(c.matrix_objetives) + splitter;
-
-        //str += ToMatrixString(c.matrix_base) + splitter;
-
-        str += ToMatrixString(c.int_matrix_agents) + splitter;
-
-        str += ToMatrixString(c.int_matrix_objetives) + splitter;
-
-        //str += ToMatrixString(c.int_matrix_base) + splitter;
-
-        str += "{";
-        for (int i = 0; i < c.vector_sector.Length; i++) 
-        {
-            str += c.vector_sector[i].ToString();
-            if (i != c.vector_sector.Length - 1)
-                str += ",";
-        }
-        str += "}" + splitter;
-
-        str += c.solutionType.ToString() + splitter;
-        str += c.strategy.ToString() + splitter;
-        str += c.result.ToString() + splitter;
-        str += c.plan.ToString();
+        string str = c.ToString();
 
         Save(str);
         Debug.Log("Caso salvo!");
