@@ -29,10 +29,10 @@ public class CaseReader : MonoBehaviour
         consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
 
         // Estruturacao de como o caso sera consultado na base de casos
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 0 }, 1f, new LinearFunction(0, 10)));
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 1f, new Equals()));
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new LinearFunction(0, 10)));
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new Equals()));
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1, 7, 8, 9 }, 1f, new Equals()));
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2, 3 }, 1f, new Equals())); //criar uma função
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 1f, new LinearFunction(0, 10))); //criar função
+
 
         // Realizando uma consulta na base de casos
         List<Result> results = cbr.Retrieve(currentCase, consultStructure);
