@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CaseReader : MonoBehaviour
 {
-    public string dataBaseName = "CaseDataBase.txt";
+    public string dataBaseName = "CaseDataBaseTest.txt";
     public char splitter = ';';
     private CBRAPI cbr;
 
@@ -15,22 +15,91 @@ public class CaseReader : MonoBehaviour
     {
         cbr = new CBRAPI();
         ConvertCSVToCAseBase();
+        Case currentCase = CaseToCase(GetCurrentCase());
 
+        Case similiarCase = GetSimilarCase(currentCase);
+    }
+
+    private Case GetSimilarCase(Case currentCase)
+    {
+        // Instanciacao da estrutura do caso
+        ConsultStructure consultStructure = new ConsultStructure();
+
+        // Informando qual medida de similaridade global utilizar
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+
+        // Estruturacao de como o caso sera consultado na base de casos
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 0 }, 1f, new LinearFunction(0, 10)));
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 1f, new Equals()));
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new LinearFunction(0, 10)));
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new Equals()));
+
+        // Realizando uma consulta na base de casos
+        List<Result> results = cbr.Retrieve(currentCase, consultStructure);
+
+        // Exibindo o resultado da consulta
+        Debug.Log("Caso recuperado: " + results[0].id + ": com " + results[0].matchPercentage);
+
+        return results[0].matchCase;
+    }
+
+    private CaseConstructor.Case GetCurrentCase()
+    {
+        CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        return caseConstructor.GetCase();
+    }
+
+    private Case CaseToCase(CaseConstructor.Case @case)
+    {
+
+        Case caso = new Case();
+
+        //--------------- Estruturacao da descricao do problema do caso
+        //Id
+        caso.caseDescription.Add(new CaseFeature(0, "Id", typeof(int), @case.id));
+        //Seed
+        caso.caseDescription.Add(new CaseFeature(1, "Seed", typeof(int), @case.seedMap));
+        //MaQd
+        caso.caseDescription.Add(new CaseFeature(2, "MaQd", typeof(string[,]), @case.matrix_agents));
+        //MaO
+        caso.caseDescription.Add(new CaseFeature(3, "MaO", typeof(string[,]), @case.matrix_objetives));
+        //MaQd_int
+        caso.caseDescription.Add(new CaseFeature(4, "MaQd_int", typeof(int[,]), @case.int_matrix_agents));
+        //MaO_int
+        caso.caseDescription.Add(new CaseFeature(5, "MaO_int", typeof(int[,]), @case.int_matrix_objetives));
+        //VaSec
+        caso.caseDescription.Add(new CaseFeature(6, "VaSec", typeof(Sector[]), @case.vector_sector));
+        //CaseType
+        caso.caseDescription.Add(new CaseFeature(7, "CaseType", typeof(string), @case.solutionType.ToString()));
+        //Strategy
+        caso.caseDescription.Add(new CaseFeature(8, "Strategy", typeof(string), @case.strategy.ToString()));
+        //Result
+        caso.caseDescription.Add(new CaseFeature(9, "Result", typeof(string), @case.result.ToString()));
+
+        //--------------- Estruturacao da descricao da solucao do caso
+        //Planning
+        caso.caseSolution.Add(new CaseFeature(0, "Planning", typeof(string), @case.plan.ToString()));
+
+        return caso;
     }
 
     void ConvertCSVToCAseBase()
     {
         using var reader = new StreamReader(dataBaseName);
+        Debug.Log("Lendo " + dataBaseName);
+
         if (!reader.EndOfStream)
         {
             var header = reader.ReadLine();
             var features = header.Split(splitter);
-
+            Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 var values = line.Split(splitter);
+
+                Debug.Log("Lendo linha: " + line);
 
                 Case caso = new Case();
 
@@ -62,6 +131,7 @@ public class CaseReader : MonoBehaviour
 
                 // Adicionando um caso na base de casos
                 cbr.AddCase(caso);
+                Debug.Log("Caso carregado!");
             }
         }
     }
@@ -71,7 +141,7 @@ public class CaseReader : MonoBehaviour
         Sector[] vector_sector;
 
         // Removendo o {} de fora da matriz
-        string aux = str.Remove(1);
+        string aux = str.Remove(0, 1);
         aux = aux.Remove(aux.Length - 1, 1);
 
         // Separando em valores
@@ -93,7 +163,7 @@ public class CaseReader : MonoBehaviour
         string[,] matrix;
 
         // Removendo o {} de fora da matriz
-        string aux = str.Remove(1);
+        string aux = str.Remove(0, 1);
         aux = aux.Remove(aux.Length - 1, 1);
 
         // Separando em linhas
@@ -112,7 +182,7 @@ public class CaseReader : MonoBehaviour
             var line = lines[i];
 
             // Removendo o {}
-            line = line.Remove(1);
+            line = line.Remove(0, 1);
             line = line.Remove(line.Length - 1, 1);
 
             var values = line.Split(',');
@@ -131,7 +201,7 @@ public class CaseReader : MonoBehaviour
         int[,] matrix;
 
         // Removendo o {} de fora da matriz
-        string aux = str.Remove(1);
+        string aux = str.Remove(0, 1);
         aux = aux.Remove(aux.Length - 1, 1);
 
         // Separando em linhas
@@ -150,7 +220,7 @@ public class CaseReader : MonoBehaviour
             var line = lines[i];
 
             // Removendo o {}
-            line = line.Remove(1);
+            line = line.Remove(0, 1);
             line = line.Remove(line.Length - 1, 1);
 
             var values = line.Split(',');

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public partial class CaseConstructor
 {
-    class Case
+    public class Case
     {
         public int id;
         public int seedMap;

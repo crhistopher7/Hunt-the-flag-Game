@@ -1,0 +1,223 @@
+{
+    "caseBase": [
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "Id",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "Seed",
+                    "type": "System.Int32",
+                    "value": "90"
+                },
+                {
+                    "id": 2,
+                    "name": "MaQd",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 3,
+                    "name": "MaO",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 4,
+                    "name": "MaQd_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 5,
+                    "name": "MaO_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 6,
+                    "name": "VaSec",
+                    "type": "Sector[]",
+                    "value": "Sector[]"
+                },
+                {
+                    "id": 7,
+                    "name": "CaseType",
+                    "type": "System.String",
+                    "value": "DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "Strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "Result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:DECEPTIVE|actions:<Move,Agent4,,NORMAL,F,LB,-4,5330032>,<Move,Agent4,,NORMAL,F,LB,-8,3916124>,<Move,Agent1,,NORMAL,F,LB,-8,3926961>,<Move,Agent4,,NORMAL,F,LF,-14,3140365>,<Move,Agent1,,NORMAL,F,LF,-14,315069>,<Move,Agent4,,NORMAL,F,LF,-24,1307626>,<Move,Agent1,,NORMAL,F,LF,-24,1313505>,<Move,Agent4,,NORMAL,F,LF,-27,2528411>,<Move,Agent1,,NORMAL,F,LF,-27,2528411>,<Move,Agent4,,NORMAL,F,RF,-27,9501076>,<Move,Agent1,,NORMAL,F,RF,-27,9511051>,<Move,Agent4,Flag10,NORMAL,F,RF,-50,7527854>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "Id",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 1,
+                    "name": "Seed",
+                    "type": "System.Int32",
+                    "value": "90"
+                },
+                {
+                    "id": 2,
+                    "name": "MaQd",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 3,
+                    "name": "MaO",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 4,
+                    "name": "MaQd_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 5,
+                    "name": "MaO_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 6,
+                    "name": "VaSec",
+                    "type": "Sector[]",
+                    "value": "Sector[]"
+                },
+                {
+                    "id": 7,
+                    "name": "CaseType",
+                    "type": "System.String",
+                    "value": "NORMAL"
+                },
+                {
+                    "id": 8,
+                    "name": "Strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "Result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:1|solutionType:NORMAL|actions:<Move,Agent2,,NORMAL,F,RF,-26,9449239>,<Move,Agent2,Flag10,NORMAL,F,RF,-35,6770545>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "Id",
+                    "type": "System.Int32",
+                    "value": "2"
+                },
+                {
+                    "id": 1,
+                    "name": "Seed",
+                    "type": "System.Int32",
+                    "value": "90"
+                },
+                {
+                    "id": 2,
+                    "name": "MaQd",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 3,
+                    "name": "MaO",
+                    "type": "System.String[,]",
+                    "value": "System.String[,]"
+                },
+                {
+                    "id": 4,
+                    "name": "MaQd_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 5,
+                    "name": "MaO_int",
+                    "type": "System.Int32[,]",
+                    "value": "System.Int32[,]"
+                },
+                {
+                    "id": 6,
+                    "name": "VaSec",
+                    "type": "Sector[]",
+                    "value": "Sector[]"
+                },
+                {
+                    "id": 7,
+                    "name": "CaseType",
+                    "type": "System.String",
+                    "value": "NORMAL"
+                },
+                {
+                    "id": 8,
+                    "name": "Strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "Result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:2|solutionType:NORMAL|actions:<Move,Agent3,,NORMAL,F,RF,-6,4454297>,<Move,Agent3,,NORMAL,F,RF,-16,2461157>,<Move,Agent4,,NORMAL,F,RF,-16,247144>,<Move,Agent3,,NORMAL,F,RF,-20,3942688>,<Move,Agent4,,NORMAL,F,RF,-28,15426>,<Move,Agent3,,NORMAL,F,RF,-33,0792633>,<Move,Agent3,Flag10,NORMAL,F,RF,-44,7701794>)"
+                }
+            ]
+        }
+    ]
+}

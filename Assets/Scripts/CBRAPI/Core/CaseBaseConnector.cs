@@ -17,7 +17,7 @@ public class CaseBaseConnector  {
 	/// <summary>
 	/// Diretório em que os arquivos que representam a base de casos são armazenados.
 	/// </summary>
-	private string filePath = Application.streamingAssetsPath + "/CaseBase/";
+	private string filePath = ""; //Application.streamingAssetsPath + "/CaseBase/";
 
 	/// <summary>
 	/// Nome do arquivo que representa a base de casos.

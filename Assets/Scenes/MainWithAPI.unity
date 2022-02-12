@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8e9ce523e32da408428afd6338e833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataBaseName: CaseDataBaseTest.txt
+  splitter: 59
 --- !u!1 &91059967
 GameObject:
   m_ObjectHideFlags: 0

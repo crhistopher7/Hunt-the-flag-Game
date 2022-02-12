@@ -54,6 +54,11 @@ public partial class CaseConstructor : MonoBehaviour
         Invoke(nameof(ConstructInitCase), 0.5f);
     }
 
+    public Case GetCase()
+    {
+        return currentCase;
+    }
+
     public void StartFile()
     {
         //criar cabeçalhos 
