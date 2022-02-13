@@ -78,10 +78,10 @@ public class Client : MonoBehaviour
         }
     }
 
-    public void startPlayerControllers()
+    public void startPlayerControllers(string a, string b)
     {
-        pcTeam1 = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        pcTeam2 = GameObject.Find("Player2Controller").GetComponent<PlayerController>();
+        pcTeam1 = GameObject.Find(a).GetComponent<PlayerController>();
+        pcTeam2 = GameObject.Find(b).GetComponent<PlayerController>();
     }
 
     // Sending message to the server

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 /// <summary>
-/// Classe utilizada como função de similaridade local na qual compara se dois atributos são iguais.
+/// Classe utilizada como função de similaridade local na qual retorna a similaridade de duas matrizes.
 /// </summary>
 public class MatrixSimilarity : AbstractLocalSimilarity
 {
@@ -136,6 +137,9 @@ public class MatrixSimilarity : AbstractLocalSimilarity
                     //vazio a parte superior da matrix 
                     continue;
                 }
+                Debug.Log("i, j = " + i + ", " + j);
+                Debug.Log("A[i,j] = " + A[i, j]);
+                Debug.Log("B[i,j] = " + B[i, j]);
                 var a = A[i, j].Split('-');
                 var b = B[i, j].Split('-');
 
@@ -150,7 +154,7 @@ public class MatrixSimilarity : AbstractLocalSimilarity
         }
         similarity /= count;
 
-    	return similarity;
+    	return 1f - similarity;
 	}
 
     private float GetValue(string a, string b)

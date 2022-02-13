@@ -16,6 +16,8 @@ public class IAPlayerController : MonoBehaviour
     private Client clientOfExecution;
     CaseConstructor caseConstructor;
     System.Random prng;
+    bool hasPlan = false;
+    CaseConstructor.Plan plan;
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +35,6 @@ public class IAPlayerController : MonoBehaviour
 
     public void StartAgents()
     {
-        /*var matchObjects = FindObjectsOfType<MatchBehaviour>();
-        foreach (var matchObject in matchObjects)
-        {
-            if(matchObject.CompareTag(this.tag))
-                Destroy(matchObject.gameObject);
-        }*/
-
         Agents.Clear();
         ClickedAgents.Clear();
 
@@ -77,37 +72,17 @@ public class IAPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && clientController.Equals(clientOfExecution.getClientName()))
+        // A ia controla, se tem um plano executa
+        if (hasPlan)
         {
-            if (isClickedinAgent())
-            {
-                // caso precise fazer algo quando clico em um agente
-            }
-            else
-            {
-                // existe um agente e não cliquei em outro, vou fazer eles irem até o clique
-                if (ClickedAgents.Count > 0)
-                {
-                    Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    //Debug.Log(positionClick / 10);
-
-                    string send = "";
-                    foreach (AgentController agent in ClickedAgents)
-                    {
-                        agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10);
-
-                        send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                        StartCoroutine(SendActionToCase("Move", agent, positionClick));
-                        //SendWithTime("Move|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10);
-                    }
-                    clientOfExecution.Send(send);
-                }
-            }
+            //executar plano
         }
-        else if (Input.GetMouseButtonDown(1) && clientController.Equals(clientOfExecution.getClientName()))
-        {
-            ClickedAgents.Clear();
-        }
+    }
+
+    public void ReceivePlan(string plan)
+    {
+        this.plan = new CaseConstructor.Plan(plan);
+        this.hasPlan = true;
     }
 
     private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int positionClick)
@@ -127,11 +102,10 @@ public class IAPlayerController : MonoBehaviour
         {
             if (hit.transform != null)
             {
-                Rigidbody rigidbody;
-                if (rigidbody = hit.transform.GetComponent<Rigidbody>())
+                if (hit.transform.CompareTag("Team1") || hit.transform.CompareTag("Team2"))
                 {
                     //tem um gameobject, mandar no action
-                    action.objetive = rigidbody.transform.gameObject.name;
+                    action.objetive = hit.transform.gameObject.name;
 
                 }
                 else
@@ -173,7 +147,6 @@ public class IAPlayerController : MonoBehaviour
                 agent.BuildPath(new Vector3Int(x, y, 0));
                 return;
             }
-            
     }
 
     private bool isClickedinAgent()

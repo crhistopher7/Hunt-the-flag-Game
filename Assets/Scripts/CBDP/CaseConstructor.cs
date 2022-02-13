@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Distance
 {
@@ -49,7 +50,10 @@ public partial class CaseConstructor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        InitPlayers();
+        if (SceneManager.GetActiveScene().name.Equals("MainWithAPI"))
+            InitPlayers("IAPlayerController", "Player2Controller");
+        else
+            InitPlayers("PlayerController", "Player2Controller");
         StartFile();
         Invoke(nameof(ConstructInitCase), 0.5f);
     }
@@ -248,23 +252,23 @@ public partial class CaseConstructor : MonoBehaviour
 
     }
 
-    public void InitPlayers()
+    public void InitPlayers(string a, string b)
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/PlayerController");
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/"+a);
         GameObject go = Instantiate(prefab);
 
         pcTeam1 = go.GetComponent<PlayerController>();
-        pcTeam1.name = "PlayerController";
+        pcTeam1.name = a;
 
-        prefab = Resources.Load<GameObject>("Prefabs/Player2Controller");
+        prefab = Resources.Load<GameObject>("Prefabs/"+b);
         go = Instantiate(prefab);
 
         pcTeam2 = go.GetComponent<PlayerController>();
-        pcTeam2.name = "Player2Controller";
+        pcTeam2.name = b;
 
         //client playes
         Client client = GameObject.Find("Client").GetComponent<Client>();
-        client.startPlayerControllers();
+        client.startPlayerControllers(a, b);
     }
 
     public void SetSolutionTypeInCase(string type)

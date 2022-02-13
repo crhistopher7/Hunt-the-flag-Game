@@ -16,10 +16,24 @@ public class CaseReader : MonoBehaviour
     {
         cbr = new CBRAPI();
         ConvertCSVToCaseBase();
-        var @Case = GetCurrentCase().ToString().Split(splitter);
-        Case currentCase = CaseToCase(@Case);
+        Invoke(nameof(DoSimilarCase), 1f); ;
+    }
+
+    private void DoSimilarCase()
+    {
+        var @Case = GetCurrentCase().ToString();
+        Debug.Log("CASO ATUAL: " + Case);
+        Case currentCase = CaseToCase(@Case.Split(splitter));
 
         Case similiarCase = GetSimilarCase(currentCase);
+
+        SendPlan(similiarCase);
+    }
+
+    private void SendPlan(Case similiarCase)
+    {
+        IAPlayerController player = GameObject.Find("CaseConstructor").GetComponent<IAPlayerController>();
+        player.ReceivePlan(similiarCase.caseSolution[0].value);
     }
 
     private Case GetSimilarCase(Case currentCase)
@@ -31,9 +45,13 @@ public class CaseReader : MonoBehaviour
         consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
 
         // Estruturacao de como o caso sera consultado na base de casos
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1, 7, 8, 9 }, 1f, new Equals()));
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2, 3 }, 1f, new MatrixSimilarity())); //criar uma função
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 1f, new LinearFunction(0, 10))); //criar função
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 1f, new Equals()));            //Seed
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));            //Tipo do caso
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 1f, new Equals()));            //Estratégia 
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 9 }, 1f, new Equals()));            //Resultado
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));  //Matriz de agentes
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new MatrixSimilarity()));  //Matriz de objetivos
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 1f, new SectorSimilarity()));  //Vetor de setor dos agentes
 
 
         // Realizando uma consulta na base de casos
@@ -112,110 +130,5 @@ public class CaseReader : MonoBehaviour
         }
     }
 
-    private Sector[] StringToVecSector(string str)
-    {
-        Sector[] vector_sector;
-
-        // Removendo o {} de fora da matriz
-        string aux = str.Remove(0, 1);
-        aux = aux.Remove(aux.Length - 1, 1);
-
-        // Separando em valores
-        var values = aux.Split(',');
-
-        vector_sector = new Sector[values.Length];
-
-        for (int i = 0; i < vector_sector.Length; i++)
-        {
-            Enum.TryParse(values[i], out Sector sector);
-            vector_sector[i] = sector;
-        }
-
-        return vector_sector;
-    }
-
-    public string[,] StringToMatrix(string str)
-    {
-        string[,] matrix;
-
-        // Removendo o {} de fora da matriz
-        string aux = str.Remove(0, 1);
-        aux = aux.Remove(aux.Length - 1, 1);
-
-        // Separando em linhas
-        var lines = aux.Split(':');
-
-        // Pegando a quantidade de valores que tem na matrix
-        var columnsSize = CountOccurrences(lines[0], ',');
-
-        // Iniciando a matriz
-        matrix = new string[lines.Length, columnsSize];
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            // Exemplo: { VF - RB,A - LB,,,,,,,,,}
-
-            var line = lines[i];
-
-            // Removendo o {}
-            line = line.Remove(0, 1);
-            line = line.Remove(line.Length - 1, 1);
-
-            var values = line.Split(',');
-
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i, j] = values[j];
-            }
-        }
-
-        return matrix;
-    }
-
-    public int[,] StringToMatrixInt(string str)
-    {
-        int[,] matrix;
-
-        // Removendo o {} de fora da matriz
-        string aux = str.Remove(0, 1);
-        aux = aux.Remove(aux.Length - 1, 1);
-
-        // Separando em linhas
-        var lines = aux.Split(':');
-
-        // Pegando a quantidade de valores que tem na matrix
-        var columnsSize = CountOccurrences(lines[0], ',');
-
-        // Iniciando a matriz
-        matrix = new int[lines.Length, columnsSize];
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            // Exemplo: { VF - RB,A - LB,,,,,,,,,}
-
-            var line = lines[i];
-
-            // Removendo o {}
-            line = line.Remove(0, 1);
-            line = line.Remove(line.Length - 1, 1);
-
-            var values = line.Split(',');
-
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i, j] = int.Parse(values[j]);
-            }
-        }
-
-        return matrix;
-    }
-
-    int CountOccurrences(string str, char delimiter)
-    {
-        int count = 0;
-        foreach (char c in str)
-            if (c == delimiter) count++;
-
-        return count;
-    }
+ 
 }

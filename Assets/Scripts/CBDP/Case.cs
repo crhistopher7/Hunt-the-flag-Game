@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public partial class CaseConstructor
@@ -120,6 +121,46 @@ public partial class CaseConstructor
         public TypeCase solutionType;
         public Queue<Action> actions;
 
+        public Plan() { }
+
+        public Plan(string plan)
+        {
+            //(case_id:1|solutionType:DECEPTIVE|actions:<Move,Agent3,,NORMAL,F,LB,-30,6201883>,<Move,Agent3,,NORMAL,F,LF,-34,3447987>,<Move,Agent3,,NORMAL,F,LF,-38,8167663>,<Move,Agent3,,NORMAL,F,RF,-39,5241194>,<Move,Agent3,,NORMAL,F,LF,-41,01248>,<Move,Agent3,Flag1,NORMAL,F,LF,-46,8955223>)
+            
+            // removendo os ()
+            plan = plan.Remove(0, 1);
+            plan = plan.Remove(plan.Length - 1, 1);
+
+            var aux = plan.Split('|');
+
+            this.caseid = int.Parse(aux[0].Split(':')[1]);
+            Enum.TryParse(aux[1].Split(':')[1], out this.solutionType);
+
+            // actions
+            var actions = aux[2].Split(':')[1].Split(',');
+
+            for (int i = 0; i < actions.Length; i++)
+            {
+                var action_str = actions[i];
+
+                // removendo os <>
+                action_str = action_str.Remove(0, 1);
+                action_str = action_str.Remove(action_str.Length - 1, 1);
+
+                var features = action_str.Split(',');
+
+                Action action = new Action();
+
+                action.action = features[0];
+                action.agent = features[1];
+                action.objetive = features[2];
+                Enum.TryParse(features[3], out action.actionDefinition);
+                action.distance_direction = features[4];
+                action.time = Double.Parse(features[5]);
+
+            }
+
+        }
 
         public override string ToString()
         {
@@ -137,6 +178,7 @@ public partial class CaseConstructor
             str += ")";
             return str;	                       
         }
+
     }
 
 }
