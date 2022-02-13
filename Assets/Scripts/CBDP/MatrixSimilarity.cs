@@ -1,15 +1,110 @@
 ﻿using System;
-
+using System.Collections.Generic;
 /// <summary>
 /// Classe utilizada como função de similaridade local na qual compara se dois atributos são iguais.
 /// </summary>
 public class MatrixSimilarity : AbstractLocalSimilarity
 {
+    Dictionary<string, float> DicDistance = new Dictionary<string, float>()
+    {
+        {"VC-VC", 0f},
+        {"VC-C", 0.25f},
+        {"VC-A", 0.5f},
+        {"VC-F", 0.75f},
+        {"VC-VF", 1f},
+        {"C-VC", 0.25f},
+        {"C-C", 0.0f},
+        {"C-A", 0.25f},
+        {"C-F", 0.5f},
+        {"C-VF", 0.75f},
+        {"A-VC", 0.5f},
+        {"A-C", 0.25f},
+        {"A-A", 0.0f},
+        {"A-F", 0.25f},
+        {"A-VF", 0.5f},
+        {"F-VC", 0.75f},
+        {"F-C", 0.5f},
+        {"F-A", 0.25f},
+        {"F-F", 0.0f},
+        {"F-VF", 0.25f},
+        {"VF-VC", 1f},
+        {"VF-C", 0.75f},
+        {"VF-A", 0.5f},
+        {"VF-F", 0.25f},
+        {"VF-VF", 0f}
+    };
 
-	/// <summary>
-	/// Construtor da classe MatrixSimilarity.
-	/// </summary>
-	public MatrixSimilarity()
+    Dictionary<string, float> DicDirection = new Dictionary<string, float>()
+    {
+        {"F-F", 0},
+        {"F-RF", 0.25f},
+        {"F-LF", 0.25f},
+        {"F-R", 0.5f},
+        {"F-L", 0.5f},
+        {"F-B", 1},
+        {"F-RB", 0.75f},
+        {"F-LB", 0.75f},
+        {"RF-F", 0.25f},
+        {"RF-RF", 0},
+        {"RF-LF", 0.5f},
+        {"RF-R", 0.25f},
+        {"RF-L", 0.75f},
+        {"RF-B", 0.75f},
+        {"RF-RB", 0.5f},
+        {"RF-LB", 1},
+        {"LF-F", 0.25f},
+        {"LF-RF", 0.5f},
+        {"LF-LF", 0},
+        {"LF-R", 0.75f},
+        {"LF-L", 0.25f},
+        {"LF-B", 0.75f},
+        {"LF-RB", 1},
+        {"LF-LB", 0.5f},
+        {"R-F", 0.5f},
+        {"R-RF", 0.25f},
+        {"R-LF", 0.75f},
+        {"R-R", 0},
+        {"R-L", 1},
+        {"R-B", 0.5f},
+        {"R-RB", 0.25f},
+        {"R-LB", 0.75f},
+        {"L-F", 0.5f},
+        {"L-RF", 0.75f},
+        {"L-LF", 0.25f},
+        {"L-R", 1},
+        {"L-L", 0},
+        {"L-B", 0.5f},
+        {"L-RB", 0.75f},
+        {"L-LB", 0.25f},
+        {"B-F", 1},
+        {"B-RF", 0.75f},
+        {"B-LF", 0.75f},
+        {"B-R", 0.5f},
+        {"B-L", 0.5f},
+        {"B-B", 0},
+        {"B-RB", 0.25f},
+        {"B-LB", 0.25f},
+        {"RB-F", 0.75f},
+        {"RB-RF", 0.5f},
+        {"RB-LF", 1},
+        {"RB-R", 0.25f},
+        {"RB-L", 0.75f},
+        {"RB-B", 0.25f},
+        {"RB-RB", 0},
+        {"RB-LB", 0.5f},
+        {"LB-F", 0.75f},
+        {"LB-RF",1},
+        {"LB-LF", 0.5f},
+        {"LB-R", 0.75f},
+        {"LB-L", 0.25f},
+        {"LB-B", 0.25f},
+        {"LB-RB", 0.5f},
+        {"LB-LB", 0}
+    };
+    /// <summary>
+    /// Construtor da classe MatrixSimilarity.
+    /// </summary>
+    public MatrixSimilarity()
 	{
 
 	}
@@ -29,11 +124,42 @@ public class MatrixSimilarity : AbstractLocalSimilarity
         var A = StringToMatrix(value1);
         var B = StringToMatrix(value2);
 
-		if (value1 == value2)
-			return 1f;
-		else
-			return 0f;
+        float similarity = 0f;
+        int count = 0;
+
+        for (int i = 0; i < A.GetLength(0); i++)
+        {
+            for (int j = 0; j < A.GetLength(1); j++)
+            {
+                if (i <= j)
+                {
+                    //vazio a parte superior da matrix 
+                    continue;
+                }
+                var a = A[i, j].Split('-');
+                var b = B[i, j].Split('-');
+
+
+                DicDirection.TryGetValue(a[0] + '-' + b[0], out float v1);
+                DicDistance.TryGetValue(a[1] + '-' + b[1], out float v2);
+
+                similarity += ((v1 + v2)/2);
+
+                count++;
+            }
+        }
+        similarity /= count;
+
+    	return similarity;
 	}
+
+    private float GetValue(string a, string b)
+    {
+        DicDirection.TryGetValue(a, out float v1);
+        DicDistance.TryGetValue(b, out float v2);
+
+        return v1 + v2;
+    }
 
     private string[,] StringToMatrix(string str)
     {
