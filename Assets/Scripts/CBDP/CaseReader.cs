@@ -22,17 +22,17 @@ public class CaseReader : MonoBehaviour
     private void DoSimilarCase()
     {
         var @Case = GetCurrentCase().ToString();
-        Debug.Log("CASO ATUAL: " + Case);
+        Debug.Log("CASO ATUAL: " + @Case);
         Case currentCase = CaseToCase(@Case.Split(splitter));
 
         Case similiarCase = GetSimilarCase(currentCase);
-
+        Debug.Log("CASO SIMILAR - Solução: " + similiarCase.caseSolution[0].value);
         SendPlan(similiarCase);
     }
 
     private void SendPlan(Case similiarCase)
     {
-        IAPlayerController player = GameObject.Find("CaseConstructor").GetComponent<IAPlayerController>();
+        PlayerController player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         player.ReceivePlan(similiarCase.caseSolution[0].value);
     }
 

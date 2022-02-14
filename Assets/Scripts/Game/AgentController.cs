@@ -60,7 +60,7 @@ public class AgentController : MatchBehaviour
         } while (!point.Walkable);
 
         this.transform.position = position;
-        Debug.Log("Setou posição do "+this.name);
+        //Debug.Log("Setou posição do "+this.name);
     }
 
 

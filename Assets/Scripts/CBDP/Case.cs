@@ -137,15 +137,19 @@ public partial class CaseConstructor
             Enum.TryParse(aux[1].Split(':')[1], out this.solutionType);
 
             // actions
-            var actions = aux[2].Split(':')[1].Split(',');
+            var actions_str = aux[2].Split(':')[1];
+            actions_str = actions_str.Remove(actions_str.Length - 1, 1);
+
+            var actions = actions_str.Split('>');
+
+            this.actions = new Queue<Action>(); 
 
             for (int i = 0; i < actions.Length; i++)
             {
                 var action_str = actions[i];
 
-                // removendo os <>
+                // removendo os <
                 action_str = action_str.Remove(0, 1);
-                action_str = action_str.Remove(action_str.Length - 1, 1);
 
                 var features = action_str.Split(',');
 
@@ -158,6 +162,7 @@ public partial class CaseConstructor
                 action.distance_direction = features[4];
                 action.time = Double.Parse(features[5]);
 
+                this.actions.Enqueue(action);
             }
 
         }

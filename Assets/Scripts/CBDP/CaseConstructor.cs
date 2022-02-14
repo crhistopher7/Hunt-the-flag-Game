@@ -50,10 +50,8 @@ public partial class CaseConstructor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (SceneManager.GetActiveScene().name.Equals("MainWithAPI"))
-            InitPlayers("IAPlayerController", "Player2Controller");
-        else
-            InitPlayers("PlayerController", "Player2Controller");
+
+        InitPlayers("PlayerController", "Player2Controller");
         StartFile();
         Invoke(nameof(ConstructInitCase), 0.5f);
     }

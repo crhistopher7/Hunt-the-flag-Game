@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     CaseConstructor caseConstructor;
     System.Random prng;
 
+    bool hasPlan = false;
+    private DateTime dateStartPlan;
+    CaseConstructor.Plan plan;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +37,6 @@ public class PlayerController : MonoBehaviour
 
     public void StartAgents()
     {
-        /*var matchObjects = FindObjectsOfType<MatchBehaviour>();
-        foreach (var matchObject in matchObjects)
-        {
-            if(matchObject.CompareTag(this.tag))
-                Destroy(matchObject.gameObject);
-        }*/
-
         Agents.Clear();
         ClickedAgents.Clear();
 
@@ -67,7 +64,7 @@ public class PlayerController : MonoBehaviour
             agent.transform.parent = this.transform;
             agent.InitPosition(prng.Next());
 
-            Debug.Log("criando o " + agent.name);
+            //Debug.Log("criando o " + agent.name);
             this.Agents.Add(agent);
             i++;
         } while (i <= numberOfAgents);
@@ -77,7 +74,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && clientController.Equals(clientOfExecution.getClientName()))
+        // A ia controla, se tem um plano executa
+        if (hasPlan)
+        {
+            var action = plan.actions.Peek();
+
+            if (action.time <= (dateStartPlan - DateTime.Now).TotalSeconds)
+            {
+                // Pode executar a próxima ação do plano
+                action = plan.actions.Dequeue();
+
+                ExecuteAction(action);
+            }
+
+        }
+        else if (Input.GetMouseButtonDown(0) && clientController.Equals(clientOfExecution.getClientName()))
         {
             if (isClickedinAgent())
             {
@@ -108,6 +119,171 @@ public class PlayerController : MonoBehaviour
         {
             ClickedAgents.Clear();
         }
+    }
+
+    private void ExecuteAction(CaseConstructor.Plan.Action action)
+    {
+        switch (action.action)
+        {
+            case "Move":
+                {
+                    Vector3Int objetivePosition;
+                    // Verificar se existe um objetivo
+                    if (action.objetive.Equals(""))
+                    {
+                        Vector3 position = new Vector3();
+                        foreach (AgentController agent in Agents)
+                            if (agent.name == action.agent)
+                            {
+                                position = agent.transform.position;
+                                break;
+                            }
+                        //não existe, então usar o distance_direction
+                        objetivePosition = GetPositionByDistanceDirection(action.distance_direction, position);
+                    }
+                    else
+                    {
+                        //usar a localização do objetivo
+                        objetivePosition = GetPositionByName(action.objetive);
+                    }
+
+                    // TODO Verificar o actionDefinition para ação enganosa
+
+                    // Mandando movimentação
+                    ReceiveMove(action.agent, objetivePosition.x, objetivePosition.y);
+                    // Mandando movimentação para o servidor
+                    clientOfExecution.Send("Moves|" + gameObject.tag + "|" + action.agent + "|" + objetivePosition.x + "|" + objetivePosition.y + "#");
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    private Vector3Int GetPositionByDistanceDirection(string objetive, Vector3 positionAgent)
+    {
+        Debug.Log("Objetivo: " + objetive);
+
+        var distance = objetive.Split('-')[0];
+        var direction = objetive.Split('-')[1];
+
+        int maxDistance = 0;
+        int minDistance = 0;
+
+        int maxDirection = 0;
+        int minDirection = 0;
+
+        switch (distance)
+        {
+            case "VC":
+                maxDistance = 87;
+                minDistance = 0;
+                break;
+            case "C":
+                maxDistance = 175;
+                minDistance = 88;
+                break;
+            case "A":
+                maxDistance = 352;
+                minDistance = 176;
+                break;
+            case "F":
+                maxDistance = 706;
+                minDistance = 353;
+                break;
+            case "VF":
+                maxDistance = 1414;
+                minDistance = 707;
+                break;
+            default:
+                break;
+        }
+
+        switch (direction)
+        {
+            case "F":
+                maxDirection = 112;
+                minDirection = 68;
+                break;
+            case "RF":
+                maxDirection = 67;
+                minDirection = 23;
+                break;
+            case "LF":
+                maxDirection = 157;
+                minDirection = 113;
+                break;
+            case "R":
+                maxDirection = 382;
+                minDirection = 338;
+                break;
+            case "L":
+                maxDirection = 202;
+                minDirection = 158;
+                break;
+            case "B":
+                maxDirection = 292;
+                minDirection = 248;
+                break;
+            case "RB":
+                maxDirection = 337;
+                minDirection = 293;
+                break;
+            case "LB":
+                maxDirection = 247;
+                minDirection = 203;
+                break;
+            default:
+                break;
+
+        }
+
+        // Pegar valores aleatórios entre os intervalos determinados
+        // repetir até que a posição seja possível de atingir
+        Vector3Int position;
+        LogicMap point;
+        var AStar = GameObject.Find("A*").GetComponent<AStar>();
+        var random = new System.Random();
+        do
+        {
+
+            double h = random.Next(minDistance, maxDistance);
+            double angle = random.Next(minDirection, maxDirection);
+
+            position = PositionByDistanceAndAngle(angle, h, new Vector2(positionAgent.x, positionAgent.y));
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / 10);
+            Debug.Log("Point.Walk:" + point);
+        } while (point == null || !point.Walkable);
+
+        return position;
+    }
+
+    private Vector3Int PositionByDistanceAndAngle(double angle, double distance, Vector2 point)
+    {
+        // Co (x) = sen * D
+        double x = Math.Sin(angle) * distance;
+        // Ca (y) = cos * D
+        double y = Math.Cos(angle) * distance;
+
+        //offset em relação ao ponto
+        x += point.x;
+        y += point.y;
+
+        return new Vector3Int((int)x, (int)y, 0);
+    }
+
+    private Vector3Int GetPositionByName(string objetive)
+    {
+        var gameObject = GameObject.Find(objetive);
+
+        return Vector3Int.FloorToInt(gameObject.transform.position);
+    }
+
+    public void ReceivePlan(string plan)
+    {
+        this.plan = new CaseConstructor.Plan(plan);
+        dateStartPlan = DateTime.Now;
+        hasPlan = true;
     }
 
     private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int positionClick)

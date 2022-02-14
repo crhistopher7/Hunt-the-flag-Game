@@ -99,8 +99,14 @@ public class IAPlayerController : MonoBehaviour
                     // Verificar se existe um objetivo
                     if (action.objetive.Equals(""))
                     {
+                        Vector3 position = new Vector3();
+                        foreach (AgentController agent in Agents)
+                            if (agent.name == action.agent)
+                            {
+                                position = agent.transform.position;
+                            }
                         //não existe, então usar o distance_direction
-                        objetivePosition = GetPositionByDistanceDirection(action.objetive);
+                        objetivePosition = GetPositionByDistanceDirection(action.objetive, position);
                     }
                     else
                     {
@@ -121,16 +127,16 @@ public class IAPlayerController : MonoBehaviour
         }
     }
 
-    private Vector3Int GetPositionByDistanceDirection(string objetive)
+    private Vector3Int GetPositionByDistanceDirection(string objetive, Vector3 positionAgent)
     {
         var distance = objetive.Split('-')[0];
         var direction = objetive.Split('-')[1];
 
-        int maxDistance;
-        int minDistance;
+        int maxDistance = 0;
+        int minDistance = 0;
 
-        int maxDirection;
-        int minDirection;
+        int maxDirection = 0;
+        int minDirection = 0;
 
         switch (distance)
         {
@@ -161,79 +167,74 @@ public class IAPlayerController : MonoBehaviour
         switch (direction)
         {
             case "F":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 112;
+                minDirection = 68;
                 break;
             case "RF":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 67;
+                minDirection = 23;
                 break;
             case "LF":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 157;
+                minDirection = 113;
                 break;
             case "R":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 382;
+                minDirection = 338;
                 break;
             case "L":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 202;
+                minDirection = 158;
                 break;
             case "B":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 292;
+                minDirection = 248;
                 break;
             case "RB":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 337;
+                minDirection = 293;
                 break;
             case "LB":
-                maxDirection = 0;
-                minDirection = 0;
+                maxDirection = 247;
+                minDirection = 203;
                 break;
             default:
                 break;
 
         }
+        
+        // Pegar valores aleatórios entre os intervalos determinados
+        // repetir até que a posição seja possível de atingir
+        Vector3Int position;
+        LogicMap point;
+        var AStar = GameObject.Find("A*").GetComponent<AStar>();
+        var random = new System.Random();
+        do
+        {
 
-        Vector3Int position = PositionByDistanceAndAngle(0, 0, new Vector2Int(0, 0));
+            double h = random.Next(minDistance, maxDistance);
+            double angle = random.Next(minDirection, maxDirection);
+            
+            position = PositionByDistanceAndAngle(angle, h, new Vector2(positionAgent.x, positionAgent.y));
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / 10);
 
-       
+        } while (point == null || !point.Walkable);
 
-        throw new NotImplementedException();
+        return position;
     }
 
-    private Vector3Int PositionByDistanceAndAngle(int v1, int v2, Vector2Int vector2Int)
+    private Vector3Int PositionByDistanceAndAngle(double angle, double distance, Vector2 point)
     {
-        double rad = 64.10;
-        rad *= Math.PI / 180;
+        // Co (x) = sen * D
+        double x = Math.Sin(angle) * distance;
+        // Ca (y) = cos * D
+        double y = Math.Cos(angle) * distance;
 
-        double angDist = 0.343 / 6371;
+        //offset em relação ao ponto
+        x += point.x;
+        y += point.y;
 
-        Console.WriteLine("Angular distance:" + angDist);
-
-        double latitude = 3.170620;
-        double longitude = 103.151279;
-
-        latitude *= Math.PI / 180;
-        longitude *= Math.PI / 180;
-
-        double lat2 = Math.Asin(Math.Sin(latitude) * Math.Cos(angDist) + Math.Cos(latitude) * Math.Sin(angDist) * Math.Cos(rad));
-
-        double forAtana = Math.Sin(rad) * Math.Sin(angDist) * Math.Cos(latitude);
-        double forAtanb = Math.Cos(angDist) - Math.Sin(latitude) * Math.Sin(lat2);
-
-        double lon2 = longitude + Math.Atan2(forAtana, forAtanb);
-
-
-        //double finalLat = latitude + lat2;
-        //double finalLon = longitude + lon2;
-
-        lat2 *= 180 / Math.PI;
-        lon2 *= 180 / Math.PI;
-
-        return new Vector3Int((int)lat2, (int)lon2, 0);
+        return new Vector3Int((int)x, (int)y, 0);
     }
 
     private Vector3Int GetPositionByName(string objetive)

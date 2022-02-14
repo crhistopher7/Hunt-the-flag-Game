@@ -137,9 +137,7 @@ public class MatrixSimilarity : AbstractLocalSimilarity
                     //vazio a parte superior da matrix 
                     continue;
                 }
-                Debug.Log("i, j = " + i + ", " + j);
-                Debug.Log("A[i,j] = " + A[i, j]);
-                Debug.Log("B[i,j] = " + B[i, j]);
+
                 var a = A[i, j].Split('-');
                 var b = B[i, j].Split('-');
 
