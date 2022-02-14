@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1024670822225801373}
   - component: {fileID: 2459531450581319213}
   m_Layer: 0
-  m_Name: Flag10
+  m_Name: Flag10_Team1
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4760378855642573163}
   - component: {fileID: 2084382040845940059}
   m_Layer: 0
-  m_Name: Flag1
+  m_Name: Flag1_Team1
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

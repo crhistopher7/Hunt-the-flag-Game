@@ -112,6 +112,8 @@ public class IAPlayerController : MonoBehaviour
 
                     // Mandando movimentação
                     ReceiveMove(action.agent, objetivePosition.x, objetivePosition.y);
+                    // Mandando movimentação para o servidor
+                    clientOfExecution.Send("Moves|" + gameObject.tag + "|" + action.agent + "|" + objetivePosition.x + "|" + objetivePosition.y + "#");
                     break;
             }
             default:
@@ -121,12 +123,124 @@ public class IAPlayerController : MonoBehaviour
 
     private Vector3Int GetPositionByDistanceDirection(string objetive)
     {
+        var distance = objetive.Split('-')[0];
+        var direction = objetive.Split('-')[1];
+
+        int maxDistance;
+        int minDistance;
+
+        int maxDirection;
+        int minDirection;
+
+        switch (distance)
+        {
+            case "VC":
+                maxDistance = 87;
+                minDistance = 0;
+                break;
+            case "C":
+                maxDistance = 175;
+                minDistance = 88;
+                break;
+            case "A":
+                maxDistance = 352;
+                minDistance = 176;
+                break;
+            case "F":
+                maxDistance = 706;
+                minDistance = 353;
+                break;
+            case "VF":
+                maxDistance = 1414;
+                minDistance = 707;
+                break;
+            default:
+                break;
+        }
+
+        switch (direction)
+        {
+            case "F":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "RF":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "LF":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "R":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "L":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "B":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "RB":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            case "LB":
+                maxDirection = 0;
+                minDirection = 0;
+                break;
+            default:
+                break;
+
+        }
+
+        Vector3Int position = PositionByDistanceAndAngle(0, 0, new Vector2Int(0, 0));
+
+       
+
         throw new NotImplementedException();
+    }
+
+    private Vector3Int PositionByDistanceAndAngle(int v1, int v2, Vector2Int vector2Int)
+    {
+        double rad = 64.10;
+        rad *= Math.PI / 180;
+
+        double angDist = 0.343 / 6371;
+
+        Console.WriteLine("Angular distance:" + angDist);
+
+        double latitude = 3.170620;
+        double longitude = 103.151279;
+
+        latitude *= Math.PI / 180;
+        longitude *= Math.PI / 180;
+
+        double lat2 = Math.Asin(Math.Sin(latitude) * Math.Cos(angDist) + Math.Cos(latitude) * Math.Sin(angDist) * Math.Cos(rad));
+
+        double forAtana = Math.Sin(rad) * Math.Sin(angDist) * Math.Cos(latitude);
+        double forAtanb = Math.Cos(angDist) - Math.Sin(latitude) * Math.Sin(lat2);
+
+        double lon2 = longitude + Math.Atan2(forAtana, forAtanb);
+
+
+        //double finalLat = latitude + lat2;
+        //double finalLon = longitude + lon2;
+
+        lat2 *= 180 / Math.PI;
+        lon2 *= 180 / Math.PI;
+
+        return new Vector3Int((int)lat2, (int)lon2, 0);
     }
 
     private Vector3Int GetPositionByName(string objetive)
     {
-        throw new NotImplementedException();
+        var gameObject = GameObject.Find(objetive);
+
+        return Vector3Int.FloorToInt(gameObject.transform.position);
     }
 
     public void ReceivePlan(string plan)
@@ -198,29 +312,5 @@ public class IAPlayerController : MonoBehaviour
                 agent.BuildPath(new Vector3Int(x, y, 0));
                 return;
             }
-    }
-
-    private bool isClickedinAgent()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 10000.0f))
-        {
-             foreach (AgentController agent in Agents)
-             {
-                 if (agent && hit.transform == agent.transform)
-                 {   
-                     if (!ClickedAgents.Contains(agent))
-                     {
-                         ClickedAgents.Add(agent);
-                         return true;
-                     }
-                     break;
-                 }
-                         
-             }
-        }
-        return false;
     }
 }

@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         Distance distance = caseConstructor.CalculeDistance(agent.transform.position, positionClick);
         Direction direction = caseConstructor.CalculeDirection(positionClick.x, positionClick.y);
 
-        action.distance_direction = distance.ToString() + ',' + direction.ToString();
+        action.distance_direction = distance.ToString() + '-' + direction.ToString();
 
         //time
         action.time = (caseConstructor.initTime - DateTime.Now).TotalSeconds;
