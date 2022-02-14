@@ -166,6 +166,7 @@ public partial class CaseConstructor
         {
             string str = "(case_id:" + caseid + "|solutionType:" + solutionType + "|actions:";
 
+            var actions = this.actions;
             //add cada ação
             while (actions.Count != 0)
             {

@@ -127,11 +127,10 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform != null)
             {
-                Rigidbody rigidbody;
-                if (rigidbody = hit.transform.GetComponent<Rigidbody>())
+                if (hit.transform.CompareTag("Team1") || hit.transform.CompareTag("Team2"))
                 {
                     //tem um gameobject, mandar no action
-                    action.objetive = rigidbody.transform.gameObject.name;
+                    action.objetive = hit.transform.gameObject.name;
 
                 }
                 else

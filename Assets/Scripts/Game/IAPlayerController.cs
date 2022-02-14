@@ -17,6 +17,7 @@ public class IAPlayerController : MonoBehaviour
     CaseConstructor caseConstructor;
     System.Random prng;
     bool hasPlan = false;
+    private DateTime dateStartPlan;
     CaseConstructor.Plan plan;
 
     // Start is called before the first frame update
@@ -75,14 +76,64 @@ public class IAPlayerController : MonoBehaviour
         // A ia controla, se tem um plano executa
         if (hasPlan)
         {
-            //executar plano
+            var action = plan.actions.Peek();
+
+            if (action.time <= (dateStartPlan - DateTime.Now).TotalSeconds)
+            {
+                // Pode executar a próxima ação do plano
+                action = plan.actions.Dequeue();
+
+                ExecuteAction(action);
+            }
+           
         }
+    }
+
+    private void ExecuteAction(CaseConstructor.Plan.Action action)
+    {
+        switch (action.action)
+        {
+            case "Move":
+            {
+                    Vector3Int objetivePosition;
+                    // Verificar se existe um objetivo
+                    if (action.objetive.Equals(""))
+                    {
+                        //não existe, então usar o distance_direction
+                        objetivePosition = GetPositionByDistanceDirection(action.objetive);
+                    }
+                    else
+                    {
+                        //usar a localização do objetivo
+                        objetivePosition = GetPositionByName(action.objetive);
+                    }
+
+                    // TODO Verificar o actionDefinition para ação enganosa
+
+                    // Mandando movimentação
+                    ReceiveMove(action.agent, objetivePosition.x, objetivePosition.y);
+                    break;
+            }
+            default:
+                break;
+        }
+    }
+
+    private Vector3Int GetPositionByDistanceDirection(string objetive)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Vector3Int GetPositionByName(string objetive)
+    {
+        throw new NotImplementedException();
     }
 
     public void ReceivePlan(string plan)
     {
         this.plan = new CaseConstructor.Plan(plan);
-        this.hasPlan = true;
+        dateStartPlan = DateTime.Now;
+        hasPlan = true;
     }
 
     private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int positionClick)
