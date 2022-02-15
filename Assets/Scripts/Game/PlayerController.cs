@@ -78,13 +78,18 @@ public class PlayerController : MonoBehaviour
         if (hasPlan)
         {
             var action = plan.actions.Peek();
-
+           
             if (action.time <= (dateStartPlan - DateTime.Now).TotalSeconds)
             {
                 // Pode executar a próxima ação do plano
                 action = plan.actions.Dequeue();
-
+                Debug.Log("Executando ação: " + action.ToString());
                 ExecuteAction(action);
+
+                if (plan.actions.Count == 0)
+                {
+                    hasPlan = false;
+                }
             }
 
         }
@@ -128,6 +133,7 @@ public class PlayerController : MonoBehaviour
             case "Move":
                 {
                     Vector3Int objetivePosition;
+
                     // Verificar se existe um objetivo
                     if (action.objetive.Equals(""))
                     {
@@ -150,7 +156,7 @@ public class PlayerController : MonoBehaviour
                     // TODO Verificar o actionDefinition para ação enganosa
 
                     // Mandando movimentação
-                    ReceiveMove(action.agent, objetivePosition.x, objetivePosition.y);
+                    //ReceiveMove(action.agent, objetivePosition.x, objetivePosition.y);
                     // Mandando movimentação para o servidor
                     clientOfExecution.Send("Moves|" + gameObject.tag + "|" + action.agent + "|" + objetivePosition.x + "|" + objetivePosition.y + "#");
                     break;
@@ -162,8 +168,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector3Int GetPositionByDistanceDirection(string objetive, Vector3 positionAgent)
     {
-        Debug.Log("Objetivo: " + objetive);
-
         var distance = objetive.Split('-')[0];
         var direction = objetive.Split('-')[1];
 
@@ -252,10 +256,10 @@ public class PlayerController : MonoBehaviour
 
             position = PositionByDistanceAndAngle(angle, h, new Vector2(positionAgent.x, positionAgent.y));
             point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / 10);
-            Debug.Log("Point.Walk:" + point);
+
         } while (point == null || !point.Walkable);
 
-        return position;
+        return position / 10;
     }
 
     private Vector3Int PositionByDistanceAndAngle(double angle, double distance, Vector2 point)
@@ -276,7 +280,7 @@ public class PlayerController : MonoBehaviour
     {
         var gameObject = GameObject.Find(objetive);
 
-        return Vector3Int.FloorToInt(gameObject.transform.position);
+        return Vector3Int.FloorToInt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0)/10);
     }
 
     public void ReceivePlan(string plan)

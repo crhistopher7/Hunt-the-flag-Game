@@ -26,7 +26,7 @@ public class CaseReader : MonoBehaviour
         Case currentCase = CaseToCase(@Case.Split(splitter));
 
         Case similiarCase = GetSimilarCase(currentCase);
-        Debug.Log("CASO SIMILAR - Solução: " + similiarCase.caseSolution[0].value);
+        Debug.Log("CASO SIMILAR: Solução: " + similiarCase.caseSolution[0].value);
         SendPlan(similiarCase);
     }
 
@@ -58,7 +58,7 @@ public class CaseReader : MonoBehaviour
         List<Result> results = cbr.Retrieve(currentCase, consultStructure);
 
         // Exibindo o resultado da consulta
-        Debug.Log("Caso recuperado: " + results[0].id + ": com " + results[0].matchPercentage);
+        Debug.Log("Caso recuperado: " + results[0].id + " com " + (results[0].matchPercentage*100).ToString("0.00") + "% de similaridade");
 
         return results[0].matchCase;
     }
@@ -112,22 +112,22 @@ public class CaseReader : MonoBehaviour
         {
             var header = reader.ReadLine();
             features = header.Split(splitter);
-            Debug.Log("Cabeçalho: " + header);
+            //Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 var values = line.Split(splitter);
 
-                Debug.Log("Lendo linha: " + line);
+                //Debug.Log("Lendo linha: " + line);
 
                 Case caso = CaseToCase(values);
 
                 // Adicionando um caso na base de casos
                 cbr.AddCase(caso);
-                Debug.Log("Caso carregado!");
             }
         }
+        Debug.Log("Base de casos carregada!");
     }
 
  

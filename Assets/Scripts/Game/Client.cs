@@ -39,7 +39,6 @@ public class Client : MonoBehaviour
 
     public string getClientName()
     {
-        Debug.Log(clientName);
         return clientName;
     }
 
@@ -90,7 +89,7 @@ public class Client : MonoBehaviour
         if (!socketReady)
             return;
 
-        Debug.Log("SEND:  "+data);
+        //Debug.Log("Send to Server:  "+data);
 
         writer.WriteLine(data);
         writer.Flush();
@@ -100,7 +99,7 @@ public class Client : MonoBehaviour
     private void OnIncomingData(string data)
     {
         string[] aData = data.Split('|');
-        Debug.Log("Received from server: " + data);
+        //Debug.Log("Received from server: " + data);
 
         switch (aData[0])
         {
@@ -123,7 +122,7 @@ public class Client : MonoBehaviour
                 else
                     SceneManager.LoadScene("SampleScene");
 
-                Invoke(nameof(startPlayerControllers), 3f);
+                // Invoke(nameof(startPlayerControllers), 3f);
                 break;
 
             case "AgentMoved":

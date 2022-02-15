@@ -140,6 +140,7 @@ public partial class CaseConstructor
             var actions_str = aux[2].Split(':')[1];
             actions_str = actions_str.Remove(actions_str.Length - 1, 1);
 
+            actions_str = actions_str.Replace(">,", ">");
             var actions = actions_str.Split('>');
 
             this.actions = new Queue<Action>(); 
@@ -149,7 +150,7 @@ public partial class CaseConstructor
                 var action_str = actions[i];
 
                 // removendo os <
-                action_str = action_str.Remove(0, 1);
+                action_str = action_str.Replace("<", "");
 
                 var features = action_str.Split(',');
 
@@ -162,6 +163,7 @@ public partial class CaseConstructor
                 action.distance_direction = features[4];
                 action.time = Double.Parse(features[5]);
 
+                Debug.Log("Criado o Action: " + action.ToString());
                 this.actions.Enqueue(action);
             }
 

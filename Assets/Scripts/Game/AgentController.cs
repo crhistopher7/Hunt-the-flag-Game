@@ -194,7 +194,7 @@ public class AgentController : MatchBehaviour
     {
         level.life -= 1;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
-        Debug.Log(level.life);
+        //Debug.Log(level.life);
     }
 
     bool CheckFriendAgent(RaycastHit hit)

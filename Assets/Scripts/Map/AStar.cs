@@ -37,7 +37,7 @@ public class AStar : Pathfinder
             if (current == objective)
             {
                 TilesSearch.Add(current);
-                Debug.Log("Achou o Objetivo");
+                //Debug.Log("Achou o Objetivo");
                 break;
             }
             openSet.RemoveAt(0);
