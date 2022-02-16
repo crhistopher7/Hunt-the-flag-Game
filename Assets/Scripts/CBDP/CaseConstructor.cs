@@ -476,7 +476,7 @@ public partial class CaseConstructor : MonoBehaviour
             action.actionDefinition = TypeCase.NORMAL;
 
         action.distance_direction = str[4];
-        action.time = float.Parse(str[5]);
+        action.time = int.Parse(str[5]);
 
         currentCase.plan.actions.Enqueue(action);
     }
