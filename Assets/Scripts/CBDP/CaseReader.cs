@@ -16,15 +16,15 @@ public class CaseReader : MonoBehaviour
     {
         cbr = new CBRAPI();
         ConvertCSVToCaseBase();
-        Invoke(nameof(DoSimilarCase), 1f); ;
+        Invoke(nameof(DoSimilarCase), 1f);
     }
-
-    private void DoSimilarCase()
+    public void DoSimilarCase()
     {
-        var @Case = GetCurrentCase().ToString();
-        Debug.Log("CASO ATUAL: " + @Case);
-        Case currentCase = CaseToCase(@Case.Split(splitter));
+        var @Case = GetCurrentCase();
+        var case_str = @Case.ToString();
 
+        Debug.Log("CASO ATUAL: " + case_str);
+        Case currentCase = CaseToCase(case_str.Split(splitter));
         Case similiarCase = GetSimilarCase(currentCase);
         Debug.Log("CASO SIMILAR: Solução: " + similiarCase.caseSolution[0].value);
         SendPlan(similiarCase);
@@ -45,20 +45,35 @@ public class CaseReader : MonoBehaviour
         consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
 
         // Estruturacao de como o caso sera consultado na base de casos
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 1f, new Equals()));            //Seed
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));            //Tipo do caso
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 1f, new Equals()));            //Estratégia 
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 9 }, 1f, new Equals()));            //Resultado
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 0.5f, new Equals()));            //Seed
+        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));            //Tipo do caso
+        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 1f, new Equals()));            //Estratégia 
+        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 9 }, 1f, new Equals()));            //Resultado
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));  //Matriz de agentes
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new MatrixSimilarity()));  //Matriz de objetivos
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 1f, new SectorSimilarity()));  //Vetor de setor dos agentes
 
-
-        // Realizando uma consulta na base de casos
+        // Realizando uma consulta na base de casos (lista já ordenada por maior score)
         List<Result> results = cbr.Retrieve(currentCase, consultStructure);
 
-        // Exibindo o resultado da consulta
-        Debug.Log("Caso recuperado: " + results[0].id + " com " + (results[0].matchPercentage*100).ToString("0.00") + "% de similaridade");
+        // Entre os resltados encontrar o melhor que é (Enganoso, ofensivo e Funcionou)
+        foreach (Result result in results)
+        {
+            //DECEPTIVE;OFENSIVE;True
+            if (result.matchCase.caseDescription[7].value.Equals("DECEPTIVE") && 
+                result.matchCase.caseDescription[8].value.Equals("OFENSIVE") &&
+                result.matchCase.caseDescription[9].value.Equals("True"))
+            {
+                // Exibindo o resultado da consulta
+                Debug.Log("Caso recuperado: " + result.id + " com " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
+
+                return result.matchCase;
+            }
+        }
+
+
+        // Não encontrou um que possui essas 3 dependencias 
+        Debug.Log("Caso recuperado: " + results[0].id + " com " + (results[0].matchPercentage * 100).ToString("0.00") + "% de similaridade");
 
         return results[0].matchCase;
     }

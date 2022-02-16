@@ -304,6 +304,12 @@ public partial class CaseConstructor : MonoBehaviour
         //save 
         SaveCase(currentCase);
 
+        //RestartGame
+        RestartGame();
+    }
+
+    private void RestartGame()
+    {
         pcTeam1.enabled = true;
         pcTeam2.enabled = true;
         //reiniciar players
@@ -314,6 +320,10 @@ public partial class CaseConstructor : MonoBehaviour
 
         //inicia um novo caso
         Invoke(nameof(ConstructInitCase), 0.5f);
+
+        var caseReader = GameObject.Find("CaseReader").GetComponent<CaseReader>();
+
+        Invoke(nameof(caseReader.DoSimilarCase), 0.5f);
     }
 
     public Sector CalculeSector(AgentController a)
