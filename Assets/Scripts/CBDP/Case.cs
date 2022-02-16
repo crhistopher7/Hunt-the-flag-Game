@@ -109,7 +109,7 @@ public partial class CaseConstructor
             public string objetive;
             public TypeCase actionDefinition;
             public string distance_direction;
-            public double time;
+            public int time;
 
             public override string ToString()
             {
@@ -161,7 +161,7 @@ public partial class CaseConstructor
                 action.objetive = features[2];
                 Enum.TryParse(features[3], out action.actionDefinition);
                 action.distance_direction = features[4];
-                action.time = Double.Parse(features[5]);
+                action.time = int.Parse(features[5]);
 
                 Debug.Log("Criado o Action: " + action.ToString());
                 this.actions.Enqueue(action);

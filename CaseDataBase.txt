@@ -96,3 +96,11 @@ Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
 Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
 Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
 Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning
+Id;Seed;MaQd;MaO;MaQd_int;MaO_int;VaSec;CaseType;Strategy;Result;Planning

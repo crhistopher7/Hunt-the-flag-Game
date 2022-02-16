@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             var action = plan.actions.Peek();
            
-            if (action.time <= (dateStartPlan - DateTime.Now).TotalSeconds)
+            if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
             {
                 // Pode executar a próxima ação do plano
                 action = plan.actions.Dequeue();
@@ -149,6 +149,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("Executando a ação que possui objetivo");
                         //usar a localização do objetivo
                         objetivePosition = GetPositionByName(action.objetive);
                     }
@@ -328,7 +329,7 @@ public class PlayerController : MonoBehaviour
         action.distance_direction = distance.ToString() + '-' + direction.ToString();
 
         //time
-        action.time = (caseConstructor.initTime - DateTime.Now).TotalSeconds;
+        action.time = (int) Math.Round((DateTime.Now - caseConstructor.initTime).TotalSeconds);
 
         //send to plan
         caseConstructor.PlanAddAction(action);
