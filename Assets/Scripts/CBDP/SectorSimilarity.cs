@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 /// <summary>
 /// Classe utilizada como função de similaridade local na qual retorna a similaridade de dois vetores de setor.
 /// </summary>
@@ -24,7 +25,7 @@ public class SectorSimilarity : AbstractLocalSimilarity
     {
         string value1 = searchCase.caseDescription[consultParams.indexes[0]].value;
         string value2 = retrieveCase.caseDescription[consultParams.indexes[0]].value;
-        float similarity = 0;
+        float similarity;
 
         int countDefensive_A = 0;
         int countNeutral_A = 0;
@@ -59,6 +60,8 @@ public class SectorSimilarity : AbstractLocalSimilarity
         diff += Math.Abs(countNeutral_A - countNeutral_B);
 
         similarity = diff / A.Length;
+
+        Debug.Log("Similaridade do Vetor do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
 
         return 1f - similarity;
     }

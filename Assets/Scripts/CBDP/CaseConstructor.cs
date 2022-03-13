@@ -137,8 +137,8 @@ public partial class CaseConstructor : MonoBehaviour
 
         //matriz de distancia/direção entre os agentes e agentes (string e int)
         List<AgentController> agents_list = new List<AgentController>();
-        agents_list.AddRange(pcTeam1.Agents);
-        agents_list.AddRange(pcTeam2.Agents);
+        agents_list.AddRange(OrderAgentList(pcTeam1.Agents));
+        agents_list.AddRange(OrderAgentList(pcTeam2.Agents));
 
         currentCase.matrix_agents = new string[agents_list.Count, agents_list.Count];
         currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
@@ -233,6 +233,11 @@ public partial class CaseConstructor : MonoBehaviour
         //temporario
         currentCase.solutionType = TypeCase.NORMAL;
         currentCase.plan.solutionType = TypeCase.NORMAL;
+    }
+
+    private List<AgentController> OrderAgentList(List<AgentController> agents)
+    {
+        return agents.OrderBy(p => p.transform.position.x).ThenBy(p => p.transform.position.y).ToList();
     }
 
     public void ConstructEndCase()

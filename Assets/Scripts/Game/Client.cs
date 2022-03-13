@@ -113,7 +113,7 @@ public class Client : MonoBehaviour
                 var mapGenerator = Instantiate(mapGeneratorPrefab);
                 var seed = int.Parse(aData[1]);
                 this.seed = seed;
-                mapGenerator.GenerateMap(seed);
+                mapGenerator.GenerateMap(7);
                 mapGenerator.name = "Map Generator";
 
                 if (clientName.Equals("IA"))

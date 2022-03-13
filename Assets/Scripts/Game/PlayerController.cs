@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
         }
 
         int i = 1;
+        //prng = new System.Random(clientOfExecution.seed);
         do
         {
             go = Instantiate(prefab);

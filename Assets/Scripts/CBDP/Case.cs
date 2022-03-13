@@ -163,7 +163,7 @@ public partial class CaseConstructor
                 action.distance_direction = features[4];
                 action.time = int.Parse(features[5]);
 
-                Debug.Log("Criado o Action: " + action.ToString());
+                //Debug.Log("Criado o Action: " + action.ToString());
                 this.actions.Enqueue(action);
             }
 

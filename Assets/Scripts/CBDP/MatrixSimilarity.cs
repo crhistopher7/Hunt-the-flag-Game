@@ -142,8 +142,8 @@ public class MatrixSimilarity : AbstractLocalSimilarity
                 var b = B[i, j].Split('-');
 
 
-                DicDirection.TryGetValue(a[0] + '-' + b[0], out float v1);
-                DicDistance.TryGetValue(a[1] + '-' + b[1], out float v2);
+                DicDistance.TryGetValue((a[0] + '-' + b[0]).ToString(), out float v1);
+                DicDirection.TryGetValue((a[1] + '-' + b[1]).ToString(), out float v2);
 
                 similarity += ((v1 + v2)/2);
 
@@ -152,6 +152,7 @@ public class MatrixSimilarity : AbstractLocalSimilarity
         }
         similarity /= count;
 
+        Debug.Log("Similaridade da Matriz id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
     	return 1f - similarity;
 	}
 
