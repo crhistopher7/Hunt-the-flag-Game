@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Distance
 {
@@ -46,6 +47,8 @@ public partial class CaseConstructor : MonoBehaviour
     public GameObject canvasType;
     public GameObject canvasStrategy;
     public GameObject canvasResult;
+    public GameObject canvasDescription;
+    public InputField inputDescription;
 
     // Start is called before the first frame update
     void Awake()
@@ -98,6 +101,9 @@ public partial class CaseConstructor : MonoBehaviour
 
         //tipo do plano
         str += "Strategy" + splitter;
+
+        //description
+        str += "Description" + splitter;
 
         //resultado do plano
         str += "Result" + splitter;
@@ -298,14 +304,22 @@ public partial class CaseConstructor : MonoBehaviour
             currentCase.strategy = Strategy.DEFENSIVE;
 
         canvasStrategy.SetActive(false);
+        canvasDescription.SetActive(true);
+    }
+
+    public void SetDescriptionInCase()
+    {
+        currentCase.description = inputDescription.text;
+
+        canvasDescription.SetActive(false);
         canvasResult.SetActive(true);
     }
 
     public void SetResultInCase(bool result)
     {
         currentCase.result = result;
-
         canvasResult.SetActive(false);
+        
         //save 
         SaveCase(currentCase);
 

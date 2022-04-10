@@ -21,6 +21,7 @@ public partial class CaseConstructor
         public TypeCase solutionType;
         public Strategy strategy;
         public bool result;
+        public string description;
         public Plan plan;
 
         public override string ToString()
@@ -56,6 +57,7 @@ public partial class CaseConstructor
             str += solutionType.ToString() + splitter;
             str += strategy.ToString() + splitter;
             str += result.ToString() + splitter;
+            str += description + splitter;
             str += plan.ToString();
 
             return str;
