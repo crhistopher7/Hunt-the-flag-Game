@@ -13,7 +13,6 @@ public class AgentController : MatchBehaviour
     protected Vector3 CurrentPosition;
     private float DistanceToChangeWayPoint = 0.5f;
     List<LogicMap> path;
-    Rigidbody rb;
     int indexPath;
     protected bool followingpath;
     Sensor sensor;
@@ -33,7 +32,6 @@ public class AgentController : MatchBehaviour
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         level = new AgentLevel(1);
-        rb = GetComponent<Rigidbody>();
         followingpath = false;
         isCarryingFlag = false;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
@@ -83,7 +81,7 @@ public class AgentController : MatchBehaviour
             Move();
             CheckWayPoint();
             if (isCarryingFlag)
-                flagCarrying.Agentposition = rb.position;
+                flagCarrying.Agentposition = transform.position;
         }
 
     }
@@ -208,7 +206,7 @@ public class AgentController : MatchBehaviour
     public void BuildPath(Vector3Int ObjectivePosition)
     {
 
-        LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x)/10, (int)Math.Round(rb.position.y)/10, 0));
+        LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(transform.position.x)/10, (int)Math.Round(transform.position.y)/10, 0));
         LogicMap objective = AStar.GetTileByPosition(Vector3Int.FloorToInt(ObjectivePosition));
 
         if (!objective.Walkable)
@@ -222,14 +220,14 @@ public class AgentController : MatchBehaviour
 
     private void Move()
     {
-        Vector3 targetDirection = path[indexPath].ClickPosition - Vector3Int.FloorToInt(rb.position/10);
+        Vector3 targetDirection = path[indexPath].ClickPosition - Vector3Int.FloorToInt(transform.position/10);
 
-        rb.MovePosition(rb.position + (targetDirection * Time.fixedDeltaTime * level.speed));
+        transform.position = Vector3.MoveTowards(transform.position, targetDirection, level.speed * Time.fixedDeltaTime);
     }
     
     private void CheckWayPoint()
     {
-        Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(rb.position.x/10, rb.position.y/10));
+        Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(transform.position.x/10, transform.position.y/10));
         Vector2 newPosition =  new Vector2(path[indexPath].ClickPosition.x, path[indexPath].ClickPosition.y);
         
 
@@ -240,16 +238,9 @@ public class AgentController : MatchBehaviour
             if (indexPath == path.Count)
             {
                 followingpath = false;
-                rb.angularVelocity.Set(0, 0, 0);
             }
            
         }
 
     }
-
-    public Rigidbody GetRigidbody()
-    {
-        return this.rb;
-    }
-
 }

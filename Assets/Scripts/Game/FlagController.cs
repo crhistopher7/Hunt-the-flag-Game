@@ -10,14 +10,12 @@ public class FlagController : MonoBehaviour
     public Vector3 Agentposition;
     public Vector3 StartFlagposition;
     public float agentSpeed;
-    Rigidbody rb;
     public bool beingCarried;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.MovePosition(StartFlagposition);
+        transform.position = StartFlagposition;
         beingCarried = false;
     }
 
@@ -31,14 +29,13 @@ public class FlagController : MonoBehaviour
 
     void Move()
     {
-        Vector3 targetDirection = Agentposition - rb.position;
-        rb.MovePosition(rb.position + (targetDirection * Time.fixedDeltaTime * agentSpeed));
+        Vector3 targetDirection = Agentposition - transform.position;
+        transform.position = Vector3.MoveTowards(transform.position, targetDirection, agentSpeed * Time.fixedDeltaTime);
     }
 
     internal void RestartPosition()
     {
-        rb.MovePosition(StartFlagposition);
-        rb.angularVelocity.Set(0, 0, 0);
+        transform.position = StartFlagposition;
         beingCarried = false;
     }
 }

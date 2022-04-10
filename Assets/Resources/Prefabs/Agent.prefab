@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 7736414061086817889}
   - component: {fileID: 7736414061086817888}
   - component: {fileID: 7736414060415969163}
-  - component: {fileID: 7736414061086817891}
   - component: {fileID: 7736414061086817890}
   m_Layer: 0
   m_Name: Agent
@@ -229,7 +228,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b8b3c8d3974a9c64ea0007884eae0bc3, type: 2}
+  - {fileID: 2100000, guid: 7934b37ee7b168f4babf8d7f46bac606, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -287,22 +286,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b8b3c8d3974a9c64ea0007884eae0bc3, type: 2}
   - {fileID: 2100000, guid: ea98710a824e59748be6ef17be3deffb, type: 2}
   seed: 0
---- !u!54 &7736414061086817891
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7736414061086817893}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
 --- !u!114 &7736414061086817890
 MonoBehaviour:
   m_ObjectHideFlags: 0
