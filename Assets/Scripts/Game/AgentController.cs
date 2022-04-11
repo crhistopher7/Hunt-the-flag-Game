@@ -36,7 +36,7 @@ public class AgentController : MatchBehaviour
         isCarryingFlag = false;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
 
-        AStar = GameObject.Find("A*").GetComponent<AStar>();
+        //AStar = GameObject.Find("A*").GetComponent<AStar>();
     }
 
     public void InitPosition(int seed)
