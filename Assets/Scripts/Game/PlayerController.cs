@@ -9,17 +9,26 @@ public class PlayerController : MonoBehaviour
     public List<AgentController> Agents;
     public List<AgentController> EnemyAgents;
     public List<AgentController> ClickedAgents;
-    public string clientController;
+    public string clientCanBeController;
     public int Points;
     public int numberOfAgents = 5;
     public Text PointsPainel;
     private Client clientOfExecution;
+    private string clientName;
     CaseConstructor caseConstructor;
     System.Random prng;
 
     bool hasPlan = false;
     private DateTime dateStartPlan;
     CaseConstructor.Plan plan;
+
+    bool dragSelect;
+
+
+    Vector3 p1;
+    Vector3 p2;
+    //the corners of our 2d selection box
+    Vector2[] corners;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +39,8 @@ public class PlayerController : MonoBehaviour
         PointsPainel = GameObject.Find(gameObject.tag+" Points").GetComponent<Text>();
         PointsPainel.text = gameObject.tag + " Points: " + Points;
         clientOfExecution = GameObject.Find("Client").GetComponent<Client>();
+        clientName = clientOfExecution.getClientName();
+
         caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
         prng = new System.Random(clientOfExecution.seed);
         StartAgents();
@@ -76,54 +87,142 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // A ia controla, se tem um plano executa
-        if (hasPlan)
+        if (clientName.Equals("IA"))
         {
-            var action = plan.actions.Peek();
-           
-            if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
+            if (hasPlan)
             {
-                // Pode executar a próxima ação do plano
-                action = plan.actions.Dequeue();
-                Debug.Log("Executando ação: " + action.ToString());
-                ExecuteAction(action);
-
-                if (plan.actions.Count == 0)
-                {
-                    hasPlan = false;
-                }
+                ExecutePlan();
             }
-
         }
-        else if (Input.GetMouseButtonDown(0) && clientController.Equals(clientOfExecution.getClientName()))
+        else if (clientCanBeController.Equals(clientName))
         {
-            if (isClickedinAgent())
-            {
-                // caso precise fazer algo quando clico em um agente
-            }
-            else
-            {
-                // existe um agente e não cliquei em outro, vou fazer eles irem até o clique
-                if (ClickedAgents.Count > 0)
-                {
-                    Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    //Debug.Log(positionClick / 10);
+            //1. Quando pressiona o botão, pega o ponto
+            if (Input.GetMouseButtonDown(0))
+                p1 = Input.mousePosition;
 
-                    string send = "";
-                    foreach (AgentController agent in ClickedAgents)
+            //2. Se continuou pressionando e moveu um ponto, pode criar a box
+            if (Input.GetMouseButton(0))
+                if ((p1 - Input.mousePosition).magnitude > 40)
+                    dragSelect = true;
+
+            //3. Quando soltar o botão...
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (dragSelect == false) //Não moveu o mouse
+                {
+                    if(IsClickedinAgent(p1)) //Clicou em um agente. Perguntar Path
+                        ShowCanvasPath(p1);
+                }
+                else // Selecionou pela box
+                {
+                    p2 = Input.mousePosition;
+                    corners = getBoundingBox(p1, p2);
+
+                    //Quais agentes estão dentro dos limites da box
+                    foreach (AgentController agent in Agents)
                     {
-                        agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10);
-
-                        send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                        StartCoroutine(SendActionToCase("Move", agent, positionClick));
-                        //SendWithTime("Move|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10);
+                        Vector3 positon = agent.transform.position;
+                        if(VerifyPointInLimits(positon, corners))
+                        {
+                            // O agente esta dentro da box, adicionar na lista
+                            if (!ClickedAgents.Contains(agent))
+                            {
+                                ClickedAgents.Add(agent);
+                            }
+                        }
                     }
-                    clientOfExecution.Send(send);
-                }
+                    
+                    if(ClickedAgents.Count >= 1)
+                    {
+                        // Tem agentes, perguntar o path
+                        ShowCanvasPath(p2);
+                    }
+
+                }//end marquee select
+                dragSelect = false;
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("Limpando a lista de agentes selecionados pelo click do mouse");
+                ClickedAgents.Clear();
             }
         }
-        else if (Input.GetMouseButtonDown(1) && clientController.Equals(clientOfExecution.getClientName()))
+    }
+
+    private bool VerifyPointInLimits(Vector3 positon, Vector2[] corners)
+    {
+        if (positon.x <= corners[3].x && positon.x >= corners[0].x
+            && positon.y >= corners[3].y && positon.y <= corners[0].y)
+            return true;
+        return false;
+    }
+
+    //create a bounding box (4 corners in order) from the start and end mouse position
+    public Vector2[] getBoundingBox(Vector2 p1, Vector2 p2)
+    {
+        // Min and Max to get 2 corners of rectangle regardless of drag direction.
+        var bottomLeft = Vector3.Min(p1, p2);
+        var topRight = Vector3.Max(p1, p2);
+
+        // 0 = top left; 1 = top right; 2 = bottom left; 3 = bottom right;
+        Vector2[] corners =
         {
-            ClickedAgents.Clear();
+            new Vector2(bottomLeft.x, topRight.y),
+            new Vector2(topRight.x, topRight.y),
+            new Vector2(bottomLeft.x, bottomLeft.y),
+            new Vector2(topRight.x, bottomLeft.y)
+        };
+        return corners;
+    }
+
+    private void ShowCanvasPath(Vector3 point)
+    {
+        // Mostrar Canvas do path
+        throw new NotImplementedException();
+    }
+
+    private void ShowArrowPathConstructor()
+    {
+        // a resposta deve abrir o modo de seta, de acordo com o path escolhido
+        throw new NotImplementedException();
+        // a resposta da seta cria o envio pro servidor e pro caso
+        // o retorno do servidor envia pra execução da ação(ões) 
+        // existe um agente e não cliquei em outro, vou fazer eles irem até o clique
+        if (ClickedAgents.Count > 0)
+        {
+            Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            //Debug.Log(positionClick / 10);
+
+            string send = "";
+            foreach (AgentController agent in ClickedAgents)
+            {
+                agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10);
+
+                send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
+                StartCoroutine(SendActionToCase("Move", agent, positionClick));
+            }
+            clientOfExecution.Send(send);
+        }
+        //limpar agentes da lista 
+
+    }
+
+    private void ExecutePlan()
+    {
+        var action = plan.actions.Peek();
+
+        if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
+        {
+            // Pode executar a próxima ação do plano
+            action = plan.actions.Dequeue();
+            Debug.Log("Executando ação: " + action.ToString());
+            ExecuteAction(action);
+
+            if (plan.actions.Count == 0)
+            {
+                hasPlan = false;
+            }
         }
     }
 
@@ -338,14 +437,6 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator SendWithTime(string send)
-    {
-        // doing something
-        clientOfExecution.Send(send);
-        // waits 5 seconds
-        yield return new WaitForSeconds(0.5f);
-    }
-
     public void ReceiveMove(string name, int x, int y)
     {
         foreach (AgentController agent in Agents)
@@ -357,12 +448,11 @@ public class PlayerController : MonoBehaviour
             
     }
 
-    private bool isClickedinAgent()
+    private bool IsClickedinAgent(Vector3 point)
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(point);
 
-        if (Physics.Raycast(ray, out hit, 10000.0f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
         {
              foreach (AgentController agent in Agents)
              {
@@ -380,4 +470,15 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
+    private void OnGUI()
+    {
+        if (dragSelect == true)
+        {
+            var rect = Utils.GetScreenRect(p1, Input.mousePosition);
+            Utils.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));
+            Utils.DrawScreenRectBorder(rect, 2, new Color(0.8f, 0.8f, 0.95f));
+        }
+    }
+
 }

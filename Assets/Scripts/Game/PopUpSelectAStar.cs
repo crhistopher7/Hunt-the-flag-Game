@@ -29,7 +29,7 @@ public class PopUpSelectAStar : MonoBehaviour
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, cam, out anchoredPos);
 
-            anchoredPos = new Vector2(anchoredPos.x + 80, anchoredPos.y - 45);
+            anchoredPos = new Vector2(anchoredPos.x + 80, anchoredPos.y - 30);
             rectPanel.anchoredPosition = anchoredPos;
         }
     }
