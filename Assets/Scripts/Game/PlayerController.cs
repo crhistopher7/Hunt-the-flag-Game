@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour
     CaseConstructor caseConstructor;
     System.Random prng;
 
+    public GameObject canvasSelectPathfinder;
+    public Dropdown dropdown;
+    public RectTransform rectPanel;
+    public RectTransform rectCanvas;
+    public Camera cam;
+
     bool hasPlan = false;
     private DateTime dateStartPlan;
     CaseConstructor.Plan plan;
@@ -178,8 +184,14 @@ public class PlayerController : MonoBehaviour
 
     private void ShowCanvasPath(Vector3 point)
     {
-        // Mostrar Canvas do path
-        throw new NotImplementedException();
+        // Mostrar Canvas do path 
+        canvasSelectPathfinder.SetActive(true);
+        Vector2 anchoredPos;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, cam, out anchoredPos);
+
+        anchoredPos = new Vector2(anchoredPos.x + 80, anchoredPos.y - 30);
+        rectPanel.anchoredPosition = anchoredPos;
     }
 
     private void ShowArrowPathConstructor()
