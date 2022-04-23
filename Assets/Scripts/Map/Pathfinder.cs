@@ -4,12 +4,7 @@ using UnityEngine;
 
 public abstract class Pathfinder : MonoBehaviour
 {
-    public Vector3Int InitialPosition;
-    public Vector3Int ObjectivePosition;
-    public int SearchLength;
-
     protected MapGenerator MapGenerator;
-
     protected List<LogicMap> TilesSearch;
 
     private void Start()
@@ -18,38 +13,9 @@ public abstract class Pathfinder : MonoBehaviour
     }
 
 
-    [ContextMenu("Search")]
-    void TriggerSearch()
-    {
-       Search(MapGenerator.GetTile(InitialPosition), MapGenerator.GetTile(ObjectivePosition));
-    }
-
-    [ContextMenu("Print Path")]
-    void TriggerPrintPath()
-    {
-        LogicMap objective = MapGenerator.GetTile(ObjectivePosition);
-
-        if (TilesSearch.Contains(objective))
-        {
-            List<LogicMap> path = BuildPath(objective);
-            PrintPath(path);
-        }
-        else
-        {
-            Debug.Log("Objetivo não encontrado");
-        }
-    }
-
     // Métodos
-    public abstract void Search(LogicMap start, LogicMap objective);
+    public abstract void Search(LogicMap start, LogicMap objective, LogicMap deceptiveObjective = null);
     
-    public void PrintPath(List<LogicMap> path)
-    {
-        foreach (LogicMap t in path)
-        {
-            Debug.Log(t.Position);
-        }
-    }
 
     public List<LogicMap> BuildPath(LogicMap objective)
     {
@@ -64,5 +30,11 @@ public abstract class Pathfinder : MonoBehaviour
         path.Add(temp);
         path.Reverse();
         return path;
+    }
+
+    public LogicMap GetTileByPosition(Vector3Int vector)
+    {
+        MapGenerator = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
+        return MapGenerator.GetTile(vector);
     }
 }

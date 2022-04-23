@@ -12,6 +12,7 @@ public class AgentController : MatchBehaviour
     public int minY;
     protected Vector3 CurrentPosition;
     private float DistanceToChangeWayPoint = 0.5f;
+    public int indexTypePath;
     List<LogicMap> path;
     int indexPath;
     protected bool followingpath;
@@ -25,6 +26,8 @@ public class AgentController : MatchBehaviour
     Renderer rend;
     public int seed;
     System.Random prng;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -203,11 +206,11 @@ public class AgentController : MatchBehaviour
         return true;
     }
 
-    public void BuildPath(Vector3Int ObjectivePosition)
+    public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition)
     {
 
         LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(transform.position.x)/10, (int)Math.Round(transform.position.y)/10, 0));
-        LogicMap objective = AStar.GetTileByPosition(Vector3Int.FloorToInt(ObjectivePosition));
+        LogicMap objective = AStar.GetTileByPosition(Vector3Int.FloorToInt(objectivePosition));
 
         if (!objective.Walkable)
             return;

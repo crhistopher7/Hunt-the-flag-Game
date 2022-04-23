@@ -8,30 +8,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum Distance
-{
-    VC = 1, C = 2, A = 3, F = 4, VF = 5
-}
-
-public enum Direction
-{
-    F = 10, RF = 20, LF = 30, R = 40, L = 50, B = 60, RB = 70, LB = 80
-}
-
-public enum Strategy
-{
-    DEFENSIVE, OFENSIVE
-}
-
-public enum TypeCase
-{
-    DECEPTIVE, NORMAL
-}
-
-public enum Sector
-{
-    DEFENSIVE, NEUTRAL, OFENSIVE
-}
 
 public partial class CaseConstructor : MonoBehaviour
 {
@@ -53,7 +29,6 @@ public partial class CaseConstructor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
         InitPlayers("PlayerController", "Player2Controller");
         StartFile();
         Invoke(nameof(ConstructInitCase), 0.5f);
@@ -237,8 +212,8 @@ public partial class CaseConstructor : MonoBehaviour
         this.initTime = DateTime.Now;
 
         //temporario
-        currentCase.solutionType = TypeCase.NORMAL;
-        currentCase.plan.solutionType = TypeCase.NORMAL;
+        currentCase.solutionType = CaseType.NORMAL;
+        currentCase.plan.solutionType = CaseType.NORMAL;
     }
 
     private List<AgentController> OrderAgentList(List<AgentController> agents)
@@ -282,15 +257,15 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void SetSolutionTypeInCase(string type)
     {
-        if (type.Equals(TypeCase.DECEPTIVE.ToString()))
+        if (type.Equals(CaseType.DECEPTIVE.ToString()))
         {
-            currentCase.solutionType = TypeCase.DECEPTIVE;
-            currentCase.plan.solutionType = TypeCase.DECEPTIVE;
+            currentCase.solutionType = CaseType.DECEPTIVE;
+            currentCase.plan.solutionType = CaseType.DECEPTIVE;
         }    
         else
         {
-            currentCase.solutionType = TypeCase.NORMAL;
-            currentCase.plan.solutionType = TypeCase.NORMAL;
+            currentCase.solutionType = CaseType.NORMAL;
+            currentCase.plan.solutionType = CaseType.NORMAL;
         }
         canvasType.SetActive(false);
         canvasStrategy.SetActive(true);
@@ -489,10 +464,10 @@ public partial class CaseConstructor : MonoBehaviour
         action.agent = str[1];
         action.objetive = str[2];
         
-        if (str[3].Equals(TypeCase.DECEPTIVE))
-            action.actionDefinition = TypeCase.DECEPTIVE;
+        if (str[3].Equals(CaseType.DECEPTIVE))
+            action.actionDefinition = CaseType.DECEPTIVE;
         else
-            action.actionDefinition = TypeCase.NORMAL;
+            action.actionDefinition = CaseType.NORMAL;
 
         action.distance_direction = str[4];
         action.time = int.Parse(str[5]);

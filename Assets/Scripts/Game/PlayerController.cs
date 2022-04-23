@@ -24,11 +24,18 @@ public class PlayerController : MonoBehaviour
     public RectTransform rectCanvas;
     public Camera cam;
 
+    public DrawArrowLine line;
+    private bool isDrawLine;
+    private int indexTypePath;
+
     bool hasPlan = false;
     private DateTime dateStartPlan;
     CaseConstructor.Plan plan;
 
     bool dragSelect;
+
+    Vector3Int deceptivePosition;
+    bool hasDeceptivePosition;
 
 
     Vector3 p1;
@@ -49,6 +56,9 @@ public class PlayerController : MonoBehaviour
 
         caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
         prng = new System.Random(clientOfExecution.seed);
+        isDrawLine = false;
+        hasDeceptivePosition = false;
+        indexTypePath = 0;
         StartAgents();
     }
 
@@ -92,66 +102,115 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // A ia controla, se tem um plano executa
-        if (clientName.Equals("IA"))
+        if (!isDrawLine)
         {
-            if (hasPlan)
+            // A ia controla, se tem um plano executa
+            if (clientName.Equals("IA"))
             {
-                ExecutePlan();
-            }
-        }
-        else if (clientCanBeController.Equals(clientName))
-        {
-            //1. Quando pressiona o botão, pega o ponto
-            if (Input.GetMouseButtonDown(0))
-                p1 = Input.mousePosition;
-
-            //2. Se continuou pressionando e moveu um ponto, pode criar a box
-            if (Input.GetMouseButton(0))
-                if ((p1 - Input.mousePosition).magnitude > 40)
-                    dragSelect = true;
-
-            //3. Quando soltar o botão...
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (dragSelect == false) //Não moveu o mouse
+                if (hasPlan)
                 {
-                    if(IsClickedinAgent(p1)) //Clicou em um agente. Perguntar Path
-                        ShowCanvasPath(p1);
+                    ExecutePlan();
                 }
-                else // Selecionou pela box
-                {
-                    p2 = Input.mousePosition;
-                    corners = getBoundingBox(p1, p2);
+            }
+            else if (clientCanBeController.Equals(clientName))
+            {
+                //1. Quando pressiona o botão, pega o ponto
+                if (Input.GetMouseButtonDown(0))
+                    p1 = Input.mousePosition;
 
-                    //Quais agentes estão dentro dos limites da box
-                    foreach (AgentController agent in Agents)
+                //2. Se continuou pressionando e moveu um ponto, pode criar a box
+                if (Input.GetMouseButton(0))
+                    if ((p1 - Input.mousePosition).magnitude > 40)
+                        dragSelect = true;
+
+                //3. Quando soltar o botão...
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (dragSelect == false) //Não moveu o mouse
                     {
-                        Vector3 positon = agent.transform.position;
-                        if(VerifyPointInLimits(positon, corners))
+                        if (IsClickedinAgent(p1)) //Clicou em um agente. Perguntar Path
+                            ShowCanvasPath(p1);
+                    }
+                    else // Selecionou pela box
+                    {
+                        p2 = Input.mousePosition;
+                        corners = getBoundingBox(p1, p2);
+
+                        //Quais agentes estão dentro dos limites da box
+                        foreach (AgentController agent in Agents)
                         {
-                            // O agente esta dentro da box, adicionar na lista
-                            if (!ClickedAgents.Contains(agent))
+                            Vector3 positon = agent.transform.position;
+                            if (VerifyPointInLimits(positon, corners))
                             {
-                                ClickedAgents.Add(agent);
+                                // O agente esta dentro da box, adicionar na lista
+                                if (!ClickedAgents.Contains(agent))
+                                {
+                                    ClickedAgents.Add(agent);
+                                }
                             }
                         }
-                    }
-                    
-                    if(ClickedAgents.Count >= 1)
-                    {
-                        // Tem agentes, perguntar o path
-                        ShowCanvasPath(p2);
-                    }
 
-                }//end marquee select
-                dragSelect = false;
+                        if (ClickedAgents.Count >= 1)
+                        {
+                            // Tem agentes, perguntar o path
+                            ShowCanvasPath(p2);
+                        }
+
+                    }//end marquee select
+                    dragSelect = false;
+                }
             }
-
-            if (Input.GetMouseButtonDown(1))
+        } 
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Limpando a lista de agentes selecionados pelo click do mouse");
-                ClickedAgents.Clear();
+                if (indexTypePath == 0)
+                {
+                    DestroyLineDrawer();
+                    Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    
+                    string send = "";
+                    foreach (AgentController agent in ClickedAgents)
+                    {
+                        agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10, Vector3Int.forward);
+                    
+                        send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
+                        StartCoroutine(SendActionToCase("Move", agent, positionClick));
+                    }
+                    clientOfExecution.Send(send);
+
+                    ClickedAgents.Clear();
+                    isDrawLine = false;
+                }
+                else
+                {
+                    DestroyLineDrawer();
+                    if (!hasDeceptivePosition)
+                    {
+                        deceptivePosition = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                        InstantiateLineDrawer(deceptivePosition, Color.green);
+                        hasDeceptivePosition = true;
+                    }
+                    else
+                    {
+                        Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+                        string send = "";
+                        foreach (AgentController agent in ClickedAgents)
+                        {
+                            agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10, Vector3Int.forward);
+
+                            send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
+                            StartCoroutine(SendActionToCase("Move", agent, positionClick));
+                        }
+                        clientOfExecution.Send(send);
+
+                        ClickedAgents.Clear();
+                        isDrawLine = false;
+                        hasDeceptivePosition = false;
+                    }
+                }
             }
         }
     }
@@ -194,30 +253,60 @@ public class PlayerController : MonoBehaviour
         rectPanel.anchoredPosition = anchoredPos;
     }
 
+    public void SetPathfinder()
+    {
+        string pathSelected = dropdown.options[dropdown.value].text;
+        Debug.Log("Path selected: " + pathSelected);
+
+        indexTypePath = dropdown.value;
+
+        foreach (AgentController agent in ClickedAgents)
+        {
+            agent.indexTypePath = indexTypePath;
+        }
+
+        canvasSelectPathfinder.SetActive(false);
+        ShowArrowPathConstructor();
+        dropdown.value = 0;
+    }
+
     private void ShowArrowPathConstructor()
     {
-        // a resposta deve abrir o modo de seta, de acordo com o path escolhido
-        throw new NotImplementedException();
-        // a resposta da seta cria o envio pro servidor e pro caso
-        // o retorno do servidor envia pra execução da ação(ões) 
-        // existe um agente e não cliquei em outro, vou fazer eles irem até o clique
-        if (ClickedAgents.Count > 0)
-        {
-            Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //Debug.Log(positionClick / 10);
+        PathType path = (PathType)indexTypePath;
 
-            string send = "";
+        //Se o path é normal, precisamos de somente uma seta
+        if (path.Equals(PathType.NORMAL))
+        {
             foreach (AgentController agent in ClickedAgents)
             {
-                agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10);
-
-                send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                StartCoroutine(SendActionToCase("Move", agent, positionClick));
+                InstantiateLineDrawer(agent.transform.position, Color.green);
             }
-            clientOfExecution.Send(send);
         }
-        //limpar agentes da lista 
+        else
+        {
+            foreach (AgentController agent in ClickedAgents)
+            {
+                InstantiateLineDrawer(agent.transform.position, Color.red);
+            }
+            // Qualquer outro, preciso de um passo a mais, o passo enganoso
+        }
+    }
 
+    private void InstantiateLineDrawer(Vector3 position, Color color)
+    {
+        var drawLine = Instantiate(line);
+        drawLine.initialPosition = position;
+        drawLine.canDraw = true;
+        drawLine.LineRenderer.startColor = color;
+        drawLine.LineRenderer.endColor = color;
+    }
+
+    private void DestroyLineDrawer()
+    {
+        var lines = FindObjectsOfType<DrawArrowLine>();
+
+        foreach (var line in lines)
+            Destroy(line.gameObject);
     }
 
     private void ExecutePlan()
@@ -432,7 +521,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //actionDefinition
-        action.actionDefinition = TypeCase.NORMAL;
+        action.actionDefinition = CaseType.NORMAL;
 
         //distance_direction
         Distance distance = caseConstructor.CalculeDistance(agent.transform.position, positionClick);
@@ -454,7 +543,7 @@ public class PlayerController : MonoBehaviour
         foreach (AgentController agent in Agents)
             if (agent.name == name)
             {
-                agent.BuildPath(new Vector3Int(x, y, 0));
+                agent.BuildPath(new Vector3Int(x, y, 0), Vector3Int.zero);
                 return;
             }
             
