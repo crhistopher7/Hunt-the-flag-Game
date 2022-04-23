@@ -406,7 +406,13 @@ MonoBehaviour:
   Agents: []
   EnemyAgents: []
   ClickedAgents: []
-  clientController: admin2
+  clientCanBeController: Admin2
   Points: 0
   numberOfAgents: 5
-  PointsPainel: {fileID: 0}
+  PointsPainel: {fileID: 7456990147499095244, guid: 24b9e241e7e59a8429e59ad3ec1dbbbe, type: 3}
+  caseConstructor: {fileID: 0}
+  canvasSelectPathfinder: {fileID: 7178182064859540125, guid: 0a945fef3de13214f93cddf5cf33a5e8, type: 3}
+  dropdown: {fileID: 8408035640877543709, guid: 2b7c423d528025948adab16acfe5edee, type: 3}
+  rectPanel: {fileID: 2210901852359783535, guid: 216475ae6d8daaf4e81df179e7178871, type: 3}
+  rectCanvas: {fileID: 651413950386005728, guid: 0a945fef3de13214f93cddf5cf33a5e8, type: 3}
+  line: {fileID: 9178176319412945875, guid: 2ce518ee6992c884db04bbd8572a3065, type: 3}

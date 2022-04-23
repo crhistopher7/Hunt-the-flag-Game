@@ -15,16 +15,15 @@ public class PlayerController : MonoBehaviour
     public Text PointsPainel;
     private Client clientOfExecution;
     private string clientName;
-    CaseConstructor caseConstructor;
+    public CaseConstructor caseConstructor;
     System.Random prng;
 
     public GameObject canvasSelectPathfinder;
     public Dropdown dropdown;
     public RectTransform rectPanel;
     public RectTransform rectCanvas;
-    public Camera cam;
+    public GameObject line;
 
-    public DrawArrowLine line;
     private bool isDrawLine;
     private int indexTypePath;
 
@@ -40,26 +39,39 @@ public class PlayerController : MonoBehaviour
 
     Vector3 p1;
     Vector3 p2;
-    //the corners of our 2d selection box
     Vector2[] corners;
 
-    // Start is called before the first frame update
     void Start()
+    {
+        FindComponents();
+        SetVariables();
+        StartAgents();
+    }
+
+    private void SetVariables()
     {
         ClickedAgents = new List<AgentController>();
         Agents = new List<AgentController>();
-        Points = 0;
-        PointsPainel = GameObject.Find(gameObject.tag+" Points").GetComponent<Text>();
-        PointsPainel.text = gameObject.tag + " Points: " + Points;
-        clientOfExecution = GameObject.Find("Client").GetComponent<Client>();
-        clientName = clientOfExecution.getClientName();
-
-        caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
         prng = new System.Random(clientOfExecution.seed);
+
+        Points = 0;
+        PointsPainel.text = gameObject.tag + " Points: " + Points;
+        clientName = clientOfExecution.getClientName();
         isDrawLine = false;
         hasDeceptivePosition = false;
         indexTypePath = 0;
-        StartAgents();
+    }
+
+    private void FindComponents()
+    {
+        PointsPainel = GameObject.Find(gameObject.tag + " Points").GetComponent<Text>();
+        clientOfExecution = GameObject.Find("Client").GetComponent<Client>();
+        caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
+
+        dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
+        rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
+        rectCanvas = canvasSelectPathfinder.GetComponent<RectTransform>();
     }
 
     public void StartAgents()
@@ -126,14 +138,15 @@ public class PlayerController : MonoBehaviour
                 //3. Quando soltar o botão...
                 if (Input.GetMouseButtonUp(0))
                 {
+                    p1 = Camera.main.ScreenToWorldPoint(p1);
                     if (dragSelect == false) //Não moveu o mouse
                     {
                         if (IsClickedinAgent(p1)) //Clicou em um agente. Perguntar Path
-                            ShowCanvasPath(p1);
+                            ShowCanvasPath();
                     }
                     else // Selecionou pela box
                     {
-                        p2 = Input.mousePosition;
+                        p2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         corners = getBoundingBox(p1, p2);
 
                         //Quais agentes estão dentro dos limites da box
@@ -146,14 +159,16 @@ public class PlayerController : MonoBehaviour
                                 if (!ClickedAgents.Contains(agent))
                                 {
                                     ClickedAgents.Add(agent);
+                                    Debug.Log("Adicionando agente nos selecteds");
                                 }
                             }
                         }
 
                         if (ClickedAgents.Count >= 1)
                         {
+                            Debug.Log(ClickedAgents.Count);
                             // Tem agentes, perguntar o path
-                            ShowCanvasPath(p2);
+                            ShowCanvasPath();
                         }
 
                     }//end marquee select
@@ -165,54 +180,46 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
                 if (indexTypePath == 0)
                 {
                     DestroyLineDrawer();
-                    Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    
-                    string send = "";
-                    foreach (AgentController agent in ClickedAgents)
-                    {
-                        agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10, Vector3Int.forward);
-                    
-                        send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                        StartCoroutine(SendActionToCase("Move", agent, positionClick));
-                    }
-                    clientOfExecution.Send(send);
-
-                    ClickedAgents.Clear();
-                    isDrawLine = false;
+                    SendPathToAgents(positionClick, deceptivePosition);
                 }
                 else
                 {
                     DestroyLineDrawer();
                     if (!hasDeceptivePosition)
                     {
-                        deceptivePosition = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                        InstantiateLineDrawer(deceptivePosition, Color.green);
+                        deceptivePosition = positionClick;
+                        InstantiateLineDrawer(positionClick, Color.green);
                         hasDeceptivePosition = true;
                     }
                     else
                     {
-                        Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-                        string send = "";
-                        foreach (AgentController agent in ClickedAgents)
-                        {
-                            agent.BuildPath(new Vector3Int(positionClick.x, positionClick.y, 0) / 10, Vector3Int.forward);
-
-                            send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + positionClick.x / 10 + "|" + positionClick.y / 10 + "#");
-                            StartCoroutine(SendActionToCase("Move", agent, positionClick));
-                        }
-                        clientOfExecution.Send(send);
-
-                        ClickedAgents.Clear();
-                        isDrawLine = false;
+                        SendPathToAgents(positionClick, deceptivePosition);
                         hasDeceptivePosition = false;
                     }
                 }
             }
         }
+    }
+
+    private void SendPathToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
+    {
+        string send = "";
+        foreach (AgentController agent in ClickedAgents)
+        {
+            agent.BuildPath(objectivePosition, deceptivePosition);
+
+            send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + objectivePosition.x + "|" + objectivePosition.y + "#");
+            StartCoroutine(SendActionToCase("Move", agent, objectivePosition));
+        }
+        clientOfExecution.Send(send);
+
+       // ClickedAgents.Clear();
+        isDrawLine = false;
     }
 
     private bool VerifyPointInLimits(Vector3 positon, Vector2[] corners)
@@ -241,15 +248,15 @@ public class PlayerController : MonoBehaviour
         return corners;
     }
 
-    private void ShowCanvasPath(Vector3 point)
+    private void ShowCanvasPath()
     {
         // Mostrar Canvas do path 
         canvasSelectPathfinder.SetActive(true);
         Vector2 anchoredPos;
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, cam, out anchoredPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, Camera.main, out anchoredPos);
 
-        anchoredPos = new Vector2(anchoredPos.x + 80, anchoredPos.y - 30);
+        anchoredPos = new Vector2(anchoredPos.x, anchoredPos.y);
         rectPanel.anchoredPosition = anchoredPos;
     }
 
@@ -264,37 +271,48 @@ public class PlayerController : MonoBehaviour
         {
             agent.indexTypePath = indexTypePath;
         }
-
+        canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
         canvasSelectPathfinder.SetActive(false);
         ShowArrowPathConstructor();
         dropdown.value = 0;
+
     }
 
     private void ShowArrowPathConstructor()
     {
+        
         PathType path = (PathType)indexTypePath;
 
         //Se o path é normal, precisamos de somente uma seta
         if (path.Equals(PathType.NORMAL))
         {
+            Debug.Log("Normal");
+            Debug.Log(ClickedAgents.Count);
             foreach (AgentController agent in ClickedAgents)
             {
+                Debug.Log(ClickedAgents);
                 InstantiateLineDrawer(agent.transform.position, Color.green);
             }
         }
         else
         {
+            Debug.Log("Enganoso");
             foreach (AgentController agent in ClickedAgents)
             {
+                Debug.Log(ClickedAgents);
                 InstantiateLineDrawer(agent.transform.position, Color.red);
             }
             // Qualquer outro, preciso de um passo a mais, o passo enganoso
         }
+        
     }
 
     private void InstantiateLineDrawer(Vector3 position, Color color)
     {
-        var drawLine = Instantiate(line);
+        Debug.Log("InstantiateLineDrawer");
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Line");
+        GameObject go = Instantiate(prefab);
+        DrawArrowLine drawLine = go.GetComponent<DrawArrowLine>();
         drawLine.initialPosition = position;
         drawLine.canDraw = true;
         drawLine.LineRenderer.startColor = color;
