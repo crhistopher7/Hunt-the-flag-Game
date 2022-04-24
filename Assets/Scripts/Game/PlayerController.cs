@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject line;
 
     private bool isDrawLine;
+    private bool isShowCanvas;
     private int indexTypePath;
 
     bool hasPlan = false;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         clientName = clientOfExecution.getClientName();
         isDrawLine = false;
         hasDeceptivePosition = false;
+        isShowCanvas = false;
         indexTypePath = 0;
     }
 
@@ -114,99 +116,99 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDrawLine)
+        // A ia controla, se tem um plano executa
+        if (clientName.Equals("IA") && hasPlan)
+            ExecutePlan();
+
+        else if (clientCanBeController.Equals(clientName))
         {
-            // A ia controla, se tem um plano executa
-            if (clientName.Equals("IA"))
+            if (!isDrawLine && !isShowCanvas)
             {
-                if (hasPlan)
-                {
-                    ExecutePlan();
-                }
+                SelectAgentsMode();
             }
-            else if (clientCanBeController.Equals(clientName))
+            else
             {
-                //1. Quando pressiona o botão, pega o ponto
-                if (Input.GetMouseButtonDown(0))
-                    p1 = Input.mousePosition;
-
-                //2. Se continuou pressionando e moveu um ponto, pode criar a box
-                if (Input.GetMouseButton(0))
-                    if ((p1 - Input.mousePosition).magnitude > 40)
-                        dragSelect = true;
-
-                //3. Quando soltar o botão...
-                if (Input.GetMouseButtonUp(0))
-                {
-                    p1 = Camera.main.ScreenToWorldPoint(p1);
-                    if (dragSelect == false) //Não moveu o mouse
-                    {
-                        if (IsClickedinAgent(p1)) //Clicou em um agente. Perguntar Path
-                            ShowCanvasPath();
-                    }
-                    else // Selecionou pela box
-                    {
-                        p2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        corners = getBoundingBox(p1, p2);
-
-                        //Quais agentes estão dentro dos limites da box
-                        foreach (AgentController agent in Agents)
-                        {
-                            Vector3 positon = agent.transform.position;
-                            if (VerifyPointInLimits(positon, corners))
-                            {
-                                // O agente esta dentro da box, adicionar na lista
-                                if (!ClickedAgents.Contains(agent))
-                                {
-                                    ClickedAgents.Add(agent);
-                                    Debug.Log("Adicionando agente nos selecteds");
-                                }
-                            }
-                        }
-
-                        if (ClickedAgents.Count >= 1)
-                        {
-                            Debug.Log(ClickedAgents.Count);
-                            // Tem agentes, perguntar o path
-                            ShowCanvasPath();
-                        }
-
-                    }//end marquee select
-                    dragSelect = false;
-                }
+                BuildingObjectivesPoints();
             }
-        } 
-        else
+        }
+        
+    }
+
+    private void BuildingObjectivesPoints()
+    {
+        if (Input.GetMouseButtonDown(0) && !isShowCanvas)
         {
-            if (Input.GetMouseButtonDown(0))
+            Debug.Log("Pegando o ponto de path");
+            Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            DestroyLineDrawer();
+            if (indexTypePath == 0)
             {
-                Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                Debug.Log(positionClick);
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
-                if (indexTypePath == 0)
-                {
-                    DestroyLineDrawer();
-                    SendPathToAgents(positionClick, deceptivePosition);
-                }
-                else
-                {
-                    DestroyLineDrawer();
-                    if (!hasDeceptivePosition)
-                    {
-                        deceptivePosition = positionClick;
-                        InstantiateLineDrawer(positionClick, Color.green);
-                        hasDeceptivePosition = true;
-                    }
-                    else
-                    {
-                        SendPathToAgents(positionClick, deceptivePosition);
-                        hasDeceptivePosition = false;
-                    }
-                }
+                Debug.Log(positionClick);
+                SendObjectivesToAgents(positionClick, deceptivePosition);
             }
+            else if (!hasDeceptivePosition)
+            {
+                deceptivePosition = positionClick;
+                InstantiateLineDrawer(positionClick, Color.green);
+                hasDeceptivePosition = true;
+            }
+            else
+            {
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
+                SendObjectivesToAgents(positionClick, deceptivePosition);
+                hasDeceptivePosition = false;
+            }
+
         }
     }
 
-    private void SendPathToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
+    private void SelectAgentsMode()
+    {
+        //1. Quando pressiona o botão, pega o ponto
+        if (Input.GetMouseButtonDown(0))
+            if (Input.GetKey(KeyCode.LeftShift))
+                p1 = Input.mousePosition;
+            else
+                if (IsClickedinAgent(Input.mousePosition)) //Clicou em um agente. Perguntar Path
+                ShowCanvasPath();
+
+        //2. Se continuou pressionando e moveu um ponto, pode criar a box
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
+            if ((p1 - Input.mousePosition).magnitude > 40)
+                dragSelect = true;
+
+        //3. Quando soltar o botão...
+        if (Input.GetMouseButtonUp(0) && Input.GetKey(KeyCode.LeftShift) && dragSelect)
+        {
+            p1 = Camera.main.ScreenToWorldPoint(p1);
+            p2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            corners = getBoundingBox(p1, p2);
+
+            //Quais agentes estão dentro dos limites da box
+            foreach (AgentController agent in Agents)
+            {
+                Vector3 positon = agent.transform.position;
+                if (VerifyPointInLimits(positon, corners))
+                {
+                    // O agente esta dentro da box, adicionar na lista
+                    if (!ClickedAgents.Contains(agent))
+                    {
+                        ClickedAgents.Add(agent);
+                        Debug.Log("Adicionando agente nos selecteds");
+                    }
+                }
+            }
+
+            if (ClickedAgents.Count >= 1)
+                ShowCanvasPath(); // Tem agentes, perguntar o path
+
+            dragSelect = false;
+        }
+    }
+
+    private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
     {
         string send = "";
         foreach (AgentController agent in ClickedAgents)
@@ -218,7 +220,7 @@ public class PlayerController : MonoBehaviour
         }
         clientOfExecution.Send(send);
 
-       // ClickedAgents.Clear();
+        ClickedAgents.Clear();
         isDrawLine = false;
     }
 
@@ -250,6 +252,7 @@ public class PlayerController : MonoBehaviour
 
     private void ShowCanvasPath()
     {
+        isShowCanvas = true;
         // Mostrar Canvas do path 
         canvasSelectPathfinder.SetActive(true);
         Vector2 anchoredPos;
@@ -275,36 +278,17 @@ public class PlayerController : MonoBehaviour
         canvasSelectPathfinder.SetActive(false);
         ShowArrowPathConstructor();
         dropdown.value = 0;
-
     }
 
     private void ShowArrowPathConstructor()
     {
-        
+        isDrawLine = true;
+        isShowCanvas = false;
         PathType path = (PathType)indexTypePath;
+        Color color = path.Equals(PathType.NORMAL) ? Color.green : Color.red;
 
-        //Se o path é normal, precisamos de somente uma seta
-        if (path.Equals(PathType.NORMAL))
-        {
-            Debug.Log("Normal");
-            Debug.Log(ClickedAgents.Count);
-            foreach (AgentController agent in ClickedAgents)
-            {
-                Debug.Log(ClickedAgents);
-                InstantiateLineDrawer(agent.transform.position, Color.green);
-            }
-        }
-        else
-        {
-            Debug.Log("Enganoso");
-            foreach (AgentController agent in ClickedAgents)
-            {
-                Debug.Log(ClickedAgents);
-                InstantiateLineDrawer(agent.transform.position, Color.red);
-            }
-            // Qualquer outro, preciso de um passo a mais, o passo enganoso
-        }
-        
+        foreach (AgentController agent in ClickedAgents)
+            InstantiateLineDrawer(agent.transform.position, color);
     }
 
     private void InstantiateLineDrawer(Vector3 position, Color color)
@@ -314,13 +298,13 @@ public class PlayerController : MonoBehaviour
         GameObject go = Instantiate(prefab);
         DrawArrowLine drawLine = go.GetComponent<DrawArrowLine>();
         drawLine.initialPosition = position;
-        drawLine.canDraw = true;
         drawLine.LineRenderer.startColor = color;
         drawLine.LineRenderer.endColor = color;
     }
 
     private void DestroyLineDrawer()
     {
+        Debug.Log("Destruindo as linhas");
         var lines = FindObjectsOfType<DrawArrowLine>();
 
         foreach (var line in lines)
@@ -584,7 +568,6 @@ public class PlayerController : MonoBehaviour
                      }
                      break;
                  }
-                         
              }
         }
         return false;
