@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (!hasDeceptivePosition)
             {
-                deceptivePosition = positionClick;
+                deceptivePosition = new Vector3Int(positionClick.x, positionClick.y, 0) / 10; ;
                 InstantiateLineDrawer(positionClick, Color.green);
                 hasDeceptivePosition = true;
             }
@@ -213,9 +213,9 @@ public class PlayerController : MonoBehaviour
         string send = "";
         foreach (AgentController agent in ClickedAgents)
         {
-            agent.BuildPath(objectivePosition, deceptivePosition);
-
-            send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + objectivePosition.x + "|" + objectivePosition.y + "#");
+            send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + agent.indexTypePath + "|" +
+                objectivePosition.x + "|" + objectivePosition.y + "|" +
+                deceptivePosition.x + "|" + deceptivePosition.y + "#");
             StartCoroutine(SendActionToCase("Move", agent, objectivePosition));
         }
         clientOfExecution.Send(send);
@@ -450,7 +450,7 @@ public class PlayerController : MonoBehaviour
         // repetir até que a posição seja possível de atingir
         Vector3Int position;
         LogicMap point;
-        var AStar = GameObject.Find("A*").GetComponent<AStar>();
+        var AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
         var random = new System.Random();
         do
         {
@@ -540,15 +540,15 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    public void ReceiveMove(string name, int x, int y)
+    public void ReceiveMove(string name, Vector3Int objectivePosition, Vector3Int deceptivePosition, int indexPath)
     {
         foreach (AgentController agent in Agents)
             if (agent.name == name)
             {
-                agent.BuildPath(new Vector3Int(x, y, 0), Vector3Int.zero);
+                agent.indexTypePath = indexPath;
+                agent.BuildPath(objectivePosition, deceptivePosition);
                 return;
             }
-            
     }
 
     private bool IsClickedinAgent(Vector3 point)

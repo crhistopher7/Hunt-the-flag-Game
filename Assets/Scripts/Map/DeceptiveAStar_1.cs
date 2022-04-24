@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class DeceptiveAStar_1 : Pathfinder
 {
-    public override void Search(LogicMap start, LogicMap objective, LogicMap deceptiveObjective = null)
+    public override void Search(LogicMap start, LogicMap objective, LogicMap deceptiveObjective)
     {
-        int iterationCount = 0;
-        MapGenerator.ClearSearch();
-        TilesSearch = new List<LogicMap>();
+        //MapGenerator.ClearSearch();
 
-        if (!objective.Walkable)
+        if (!objective.Walkable || !deceptiveObjective.Walkable)
         {
             Debug.Log("O objetivo não pode ser alcançado");
             return;
         }
+        print("Primeiro path");
+        NormalAStar(start, deceptiveObjective);
+        print("Segundo path");
+        // NormalAStar(deceptiveObjective, objective);
+        print("saiu");
+    }
+
+    public void print(string str)
+    {
+        Debug.Log(str);
+    }
+
+    public void NormalAStar(LogicMap start, LogicMap objective)
+    {
+        int iterationCount = 0;
+        TilesSearch = new List<LogicMap>();
 
         LogicMap current;
 
@@ -59,5 +73,4 @@ public class DeceptiveAStar_1 : Pathfinder
             }
         }
     }
-
 }

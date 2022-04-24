@@ -126,18 +126,27 @@ public class Client : MonoBehaviour
                 break;
 
             case "AgentMoved":
-                //("AgentMoved|" + aData[1] + "|" + aData[2] + "|" + aData[3] + "|" + aData[4], clients)
-                int x, y;
-                Int32.TryParse(aData[3], out x);
-                Int32.TryParse(aData[4], out y);
+                //"Moves|" + gameObject.tag + "|" + agent.name + "|" + agent.indexTypePath +
+                //objectivePosition.x + "|" + objectivePosition.y + "|" +
+                //deceptivePosition.x + "|" + deceptivePosition.y + "#"
+                int indexpath, objectiveX, objectiveY, deceptiveX, deceptiveY;
+
+                Int32.TryParse(aData[3], out indexpath);
+                Int32.TryParse(aData[4], out objectiveX);
+                Int32.TryParse(aData[5], out objectiveY);
+                Int32.TryParse(aData[6], out deceptiveX);
+                Int32.TryParse(aData[7], out deceptiveY);
+
+                Vector3Int objectivePosition = new Vector3Int(objectiveX, objectiveY, 0);
+                Vector3Int deceptivePosition = new Vector3Int(deceptiveX, deceptiveY, 0);
 
                 if (aData[1] == "Team1")
                 {
-                    pcTeam1.ReceiveMove(aData[2], x, y);
+                    pcTeam1.ReceiveMove(aData[2], objectivePosition, deceptivePosition, indexpath);
                 }
                 else
                 {
-                    pcTeam2.ReceiveMove(aData[2], x, y);
+                    pcTeam2.ReceiveMove(aData[2], objectivePosition, deceptivePosition, indexpath);
                 }
 
                 break;
@@ -147,20 +156,26 @@ public class Client : MonoBehaviour
                 string[] movesData = (data.Substring(0, data.Length - 1)).Split('#');
                 string[] moveData;
 
-                
                 foreach (string move in movesData)
                 {
+                    
                     moveData = move.Split('|');
-                    Int32.TryParse(moveData[3], out int X);
-                    Int32.TryParse(moveData[4], out int Y);
+                    Int32.TryParse(moveData[3], out indexpath);
+                    Int32.TryParse(moveData[4], out objectiveX);
+                    Int32.TryParse(moveData[5], out objectiveY);
+                    Int32.TryParse(moveData[6], out deceptiveX);
+                    Int32.TryParse(moveData[7], out deceptiveY);
+
+                    objectivePosition = new Vector3Int(objectiveX, objectiveY, 0);
+                    deceptivePosition = new Vector3Int(deceptiveX, deceptiveY, 0);
 
                     if (moveData[1] == "Team1")
                     {
-                        pcTeam1.ReceiveMove(moveData[2], X, Y);
+                        pcTeam1.ReceiveMove(moveData[2], objectivePosition, deceptivePosition, indexpath);
                     }
                     else
                     {
-                        pcTeam2.ReceiveMove(moveData[2], X, Y);
+                        pcTeam2.ReceiveMove(moveData[2], objectivePosition, deceptivePosition, indexpath);
                     }
                 }
 

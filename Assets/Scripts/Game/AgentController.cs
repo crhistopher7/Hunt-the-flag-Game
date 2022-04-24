@@ -6,6 +6,11 @@ using UnityEngine;
 public class AgentController : MatchBehaviour
 {
     public AStar AStar;
+    public DeceptiveAStar_1 DeceptiveAStar_1;
+    public DeceptiveAStar_2 DeceptiveAStar_2;
+    public DeceptiveAStar_3 DeceptiveAStar_3;
+    public DeceptiveAStar_4 DeceptiveAStar_4;
+
     public int maxX;
     public int minX;
     public int maxY;
@@ -41,7 +46,11 @@ public class AgentController : MatchBehaviour
         isCarryingFlag = false;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
 
-        //AStar = GameObject.Find("A*").GetComponent<AStar>();
+        AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
+        DeceptiveAStar_1 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_1>();
+        DeceptiveAStar_2 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_2>();
+        DeceptiveAStar_3 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_3>();
+        DeceptiveAStar_4 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_4>();
     }
 
     public void InitPosition(int seed)
@@ -217,9 +226,46 @@ public class AgentController : MatchBehaviour
         if (!objective.Walkable)
             return;
 
-        indexPath = 0;
-        AStar.Search(current, objective);
-        path = AStar.BuildPath(objective);
+        if (indexTypePath == 0)
+        {
+            indexPath = 0;
+            AStar.Search(current, objective);
+            path = AStar.BuildPath(objective);
+        }
+        else
+        {
+            LogicMap deceptiveObjective = AStar.GetTileByPosition(Vector3Int.FloorToInt(deceptivePosition));
+
+            if (!deceptiveObjective.Walkable)
+                return;
+
+            indexPath = 0;
+            if (indexTypePath == 1)
+            {
+                AStar.Search(current, deceptiveObjective);
+                path = AStar.BuildPath(deceptiveObjective);
+                AStar.Search(deceptiveObjective, objective);
+                var secondPath = AStar.BuildPath(objective);
+
+                path.AddRange(secondPath);
+            }
+            else if (indexTypePath == 2)
+            {
+                DeceptiveAStar_2.Search(current, objective, deceptiveObjective);
+                path = DeceptiveAStar_2.BuildPath(objective);
+            }
+            else if (indexTypePath == 3)
+            {
+                DeceptiveAStar_3.Search(current, objective, deceptiveObjective);
+                path = DeceptiveAStar_3.BuildPath(objective);
+            }
+            else
+            {
+                DeceptiveAStar_4.Search(current, objective, deceptiveObjective);
+                path = DeceptiveAStar_4.BuildPath(objective);
+            }
+        }
+       
         followingpath = true;
     }
 

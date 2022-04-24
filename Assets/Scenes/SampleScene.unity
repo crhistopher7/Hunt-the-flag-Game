@@ -460,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7094141867835991196, guid: c2ad8e0e1bc5a7f4caf854caf9801144, type: 3}
       propertyPath: m_Name
-      value: A*
+      value: Pathfinder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ad8e0e1bc5a7f4caf854caf9801144, type: 3}
