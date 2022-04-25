@@ -17,9 +17,9 @@ public enum Strategy
     DEFENSIVE, OFENSIVE
 }
 
-public enum CaseType
+public enum DeceptiveLevel
 {
-    DECEPTIVE, NORMAL
+    HIGHLY_DECEPTIVE, PARTIALLY_DECEPTIVE, LITTLE_DECEPTIVE, NOT_DECEPTIVE
 }
 
 public enum Sector

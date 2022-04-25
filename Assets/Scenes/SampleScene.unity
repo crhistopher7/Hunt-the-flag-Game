@@ -146,6 +146,54 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3593299229787649080, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299229787649080, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetStrategyTypeInCase
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299229894121587, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299229894121587, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSolutionTypeInCase
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299229907352997, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299229907352997, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetDescriptionInCase
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299229951638071, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299229951638071, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetStrategyTypeInCase
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299230066167407, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299230066167407, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSolutionTypeInCase
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299230339853240, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299230339853240, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResultInCase
+      objectReference: {fileID: 0}
     - target: {fileID: 3593299231176417185, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -193,6 +241,14 @@ PrefabInstance:
     - target: {fileID: 3593299231176417189, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593299231201838982, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8576367696605153070}
+    - target: {fileID: 3593299231201838982, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResultInCase
       objectReference: {fileID: 0}
     - target: {fileID: 7242567234739014566, guid: bee700fa577259b43af5676f28fbb0b0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -541,3 +597,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09fc2f9d913f9bb42b1a806669958467, type: 3}
+--- !u!114 &8576367696605153070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8576367697068514080, guid: 09fc2f9d913f9bb42b1a806669958467, type: 3}
+  m_PrefabInstance: {fileID: 8576367696605153069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434fbe603ab23bf4580114804c94c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -45,43 +45,43 @@ public partial class CaseConstructor : MonoBehaviour
         string str = "";
 
         //id
-        str += "Id" + splitter;
+        str += "caseID" + splitter;
 
         //seed
-        str += "Seed" + splitter;
+        str += "seed" + splitter;
 
         //matriz de distância/direção dos agentes em relação aos agentes
-        str += "MaQd" + splitter;
+        str += "agentsRelationships" + splitter;
 
         //matriz de distância/direção dos agentes em relação aos objetivos
-        str += "MaO" + splitter;
+        str += "agentsGoalsRelationships" + splitter;
 
         //matriz de distância/direção dos agentes em relação as bases
-        //str += "MaBase" + splitter;
+        //str += "agentsBasesRelationships" + splitter;
 
         //matriz de distância/direção dos agentes em relação aos agentes
-        str += "MaQd_int" + splitter;
+        str += "agentsRelationships_int" + splitter;
 
         //matriz de distância/direção dos agentes em relação aos objetivos
-        str += "MaO_int" + splitter;
+        str += "agentsGoalsRelationships_int" + splitter;
 
         //matriz de distância/direção dos agentes em relação as bases
-        //str += "MaBase_int" + splitter;
+        //str += "agentsBasesRelationships_int" + splitter;
 
         //vetor de setor dos agentes
-        str += "VaSec" + splitter;
+        str += "agentsBattleFieldLocalization" + splitter;
 
         //deceptive
-        str += "CaseType" + splitter;
+        str += "deceptiveLevel" + splitter;
 
         //tipo do plano
-        str += "Strategy" + splitter;
+        str += "strategy" + splitter;
 
         //description
-        str += "Description" + splitter;
+        str += "description" + splitter;
 
         //resultado do plano
-        str += "Result" + splitter;
+        str += "result" + splitter;
 
         //planning file
         str += "Planning";
@@ -212,8 +212,8 @@ public partial class CaseConstructor : MonoBehaviour
         this.initTime = DateTime.Now;
 
         //temporario
-        currentCase.solutionType = CaseType.NORMAL;
-        currentCase.plan.solutionType = CaseType.NORMAL;
+        currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
+        currentCase.plan.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
     }
 
     private List<AgentController> OrderAgentList(List<AgentController> agents)
@@ -257,15 +257,15 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void SetSolutionTypeInCase(string type)
     {
-        if (type.Equals(CaseType.DECEPTIVE.ToString()))
+        if (type.Equals("DECEPTIVE"))
         {
-            currentCase.solutionType = CaseType.DECEPTIVE;
-            currentCase.plan.solutionType = CaseType.DECEPTIVE;
+            //currentCase.solutionType = DeceptiveLevel.DECEPTIVE;
+            //currentCase.plan.solutionType = DeceptiveLevel.DECEPTIVE;
         }    
         else
         {
-            currentCase.solutionType = CaseType.NORMAL;
-            currentCase.plan.solutionType = CaseType.NORMAL;
+            currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
+            currentCase.plan.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
         }
         canvasType.SetActive(false);
         canvasStrategy.SetActive(true);
@@ -315,9 +315,13 @@ public partial class CaseConstructor : MonoBehaviour
         //inicia um novo caso
         Invoke(nameof(ConstructInitCase), 0.5f);
 
-        var caseReader = GameObject.Find("CaseReader").GetComponent<CaseReader>();
+        if (GameObject.Find("Client").GetComponent<Client>().getClientName().Equals("IA"))
+        {
+            var caseReader = GameObject.Find("CaseReader").GetComponent<CaseReader>();
 
-        Invoke(nameof(caseReader.DoSimilarCase), 0.5f);
+            Invoke(nameof(caseReader.DoSimilarCase), 0.5f);
+        }
+        
     }
 
     public Sector CalculeSector(AgentController a)
@@ -463,14 +467,13 @@ public partial class CaseConstructor : MonoBehaviour
         action.action = str[0];
         action.agent = str[1];
         action.objetive = str[2];
-        
-        if (str[3].Equals(CaseType.DECEPTIVE))
-            action.actionDefinition = CaseType.DECEPTIVE;
-        else
-            action.actionDefinition = CaseType.NORMAL;
 
-        action.distance_direction = str[4];
-        action.time = int.Parse(str[5]);
+        Enum.TryParse(str[3], out action.actionDefinition);
+        Enum.TryParse(str[4], out action.pathType);
+
+        action.distance_direction = str[5];
+        action.distance_directionDeceptive = str[6];
+        action.time = int.Parse(str[7]);
 
         currentCase.plan.actions.Enqueue(action);
     }

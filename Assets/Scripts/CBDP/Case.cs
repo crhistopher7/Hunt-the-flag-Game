@@ -18,7 +18,7 @@ public partial class CaseConstructor
 
         public Sector[] vector_sector;
 
-        public CaseType solutionType;
+        public DeceptiveLevel solutionType;
         public Strategy strategy;
         public bool result;
         public string description;
@@ -109,27 +109,27 @@ public partial class CaseConstructor
             public string action;
             public string agent;
             public string objetive;
-            public CaseType actionDefinition;
+            public DeceptiveLevel actionDefinition;
+            public PathType pathType;
             public string distance_direction;
+            public string distance_directionDeceptive;
             public int time;
 
             public override string ToString()
             {
-                return action + "," + agent + "," + objetive + "," + actionDefinition + "," + distance_direction + "," + time;
+                return action + "," + agent + "," + objetive + "," + actionDefinition + "," +
+                    pathType + "," + distance_direction + "," + distance_directionDeceptive + "," + time;
             }
         }
 
         public int caseid;
-        public CaseType solutionType;
+        public DeceptiveLevel solutionType;
         public Queue<Action> actions;
 
         public Plan() { }
 
         public Plan(string plan)
         {
-            //(case_id:1|solutionType:DECEPTIVE|actions:<Move,Agent3,,NORMAL,F,LB,-30,6201883>,<Move,Agent3,,NORMAL,F,LF,-34,3447987>,<Move,Agent3,,NORMAL,F,LF,-38,8167663>,<Move,Agent3,,NORMAL,F,RF,-39,5241194>,<Move,Agent3,,NORMAL,F,LF,-41,01248>,<Move,Agent3,Flag1,NORMAL,F,LF,-46,8955223>)
-            
-            // removendo os ()
             plan = plan.Remove(0, 1);
             plan = plan.Remove(plan.Length - 1, 1);
 
@@ -151,7 +151,6 @@ public partial class CaseConstructor
             {
                 var action_str = actions[i];
 
-                // removendo os <
                 action_str = action_str.Replace("<", "");
 
                 var features = action_str.Split(',');
@@ -162,8 +161,10 @@ public partial class CaseConstructor
                 action.agent = features[1];
                 action.objetive = features[2];
                 Enum.TryParse(features[3], out action.actionDefinition);
-                action.distance_direction = features[4];
-                action.time = int.Parse(features[5]);
+                Enum.TryParse(features[4], out action.pathType);
+                action.distance_direction = features[5];
+                action.distance_directionDeceptive = features[6];
+                action.time = int.Parse(features[7]);
 
                 //Debug.Log("Criado o Action: " + action.ToString());
                 this.actions.Enqueue(action);

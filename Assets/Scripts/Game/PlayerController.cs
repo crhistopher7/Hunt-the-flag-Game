@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(positionClick);
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
                 Debug.Log(positionClick);
-                SendObjectivesToAgents(positionClick, deceptivePosition);
+                SendObjectivesToAgents(positionClick, deceptivePosition, false);
             }
             else if (!hasDeceptivePosition)
             {
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
-                SendObjectivesToAgents(positionClick, deceptivePosition);
+                SendObjectivesToAgents(positionClick, deceptivePosition, true);
                 hasDeceptivePosition = false;
             }
 
@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
+    private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition, bool isDeceptive)
     {
         string send = "";
         foreach (AgentController agent in ClickedAgents)
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
             send += ("Moves|" + gameObject.tag + "|" + agent.name + "|" + agent.indexTypePath + "|" +
                 objectivePosition.x + "|" + objectivePosition.y + "|" +
                 deceptivePosition.x + "|" + deceptivePosition.y + "#");
-            StartCoroutine(SendActionToCase("Move", agent, objectivePosition));
+            StartCoroutine(SendActionToCase("Move", agent, objectivePosition, deceptivePosition, isDeceptive));
         }
         clientOfExecution.Send(send);
 
@@ -494,7 +494,7 @@ public class PlayerController : MonoBehaviour
         hasPlan = true;
     }
 
-    private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int positionClick)
+    private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int objetivePosition, Vector3Int deceptivePosition, bool isDeceptive)
     {
         CaseConstructor.Plan.Action action = new CaseConstructor.Plan.Action();
 
@@ -507,7 +507,7 @@ public class PlayerController : MonoBehaviour
         // objetive
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 10000.0f))
+        if (Physics.Raycast(ray, out hit, 50000.0f))
         {
             if (hit.transform != null)
             {
@@ -523,11 +523,17 @@ public class PlayerController : MonoBehaviour
         }
 
         //actionDefinition
-        action.actionDefinition = CaseType.NORMAL;
+        action.actionDefinition = isDeceptive ? DeceptiveLevel.LITTLE_DECEPTIVE: DeceptiveLevel.NOT_DECEPTIVE;
 
         //distance_direction
-        Distance distance = caseConstructor.CalculeDistance(agent.transform.position, positionClick);
-        Direction direction = caseConstructor.CalculeDirection(positionClick.x, positionClick.y);
+        Distance distance = caseConstructor.CalculeDistance(agent.transform.position, objetivePosition);
+        Direction direction = caseConstructor.CalculeDirection(objetivePosition.x, objetivePosition.y);
+
+        action.distance_direction = distance.ToString() + '-' + direction.ToString();
+
+        //distance_direction Deceptive objetive
+        distance = caseConstructor.CalculeDistance(agent.transform.position, deceptivePosition);
+        direction = caseConstructor.CalculeDirection(deceptivePosition.x, deceptivePosition.y);
 
         action.distance_direction = distance.ToString() + '-' + direction.ToString();
 
