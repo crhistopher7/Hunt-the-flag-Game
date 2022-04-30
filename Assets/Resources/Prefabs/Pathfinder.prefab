@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 461983293335933507}
   - component: {fileID: 3058127622543584383}
   m_Layer: 0
-  m_Name: A_
+  m_Name: Pathfinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7094141867835991196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6996718d23ef6b4b8cf79fee8327e6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b900dfc61e3ee344b3cc1647619ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6769408725388199338
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7094141867835991196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45bbb05069d1de244a268b868ea0a28d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0986bb5b95e5e7f4598d37983d1ca341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1421449227820890833
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7094141867835991196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b19f9911f249344b1b7c2f00d70391, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b3da7e07cb333546837792d02df2a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &461983293335933507
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7094141867835991196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ab4890ccec2c44794c117d11488500, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a3e433e5db499b42bfff0ebdf1fca19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3058127622543584383
@@ -92,6 +92,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7094141867835991196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66de1edaff5730d41b1fb21fe02536c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 177d985bfe208e841ba3ba7b6544956f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

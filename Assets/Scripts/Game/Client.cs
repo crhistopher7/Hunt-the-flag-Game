@@ -30,6 +30,7 @@ public class Client : MonoBehaviour
     private PlayerController pcTeam1;
     private PlayerController pcTeam2;
 
+    private bool debugMode = true;
 
     private void Start()
     {
@@ -86,6 +87,12 @@ public class Client : MonoBehaviour
     // Sending message to the server
     public void Send(string data)
     {
+        if(debugMode)
+        {
+            OnIncomingData(data);
+            return;
+        }
+
         if (!socketReady)
             return;
 
@@ -109,18 +116,7 @@ public class Client : MonoBehaviour
                 break;
             // foi autenticado, carrega a cena
             case "Authenticated":
-                //pedir seed
-                var mapGenerator = Instantiate(mapGeneratorPrefab);
-                var seed = int.Parse(aData[1]);
-                this.seed = seed;
-                mapGenerator.GenerateMap(7);
-                mapGenerator.name = "Map Generator";
-
-                if (clientName.Equals("IA"))
-                    SceneManager.LoadScene("MainWithAPI");
-             
-                else
-                    SceneManager.LoadScene("SampleScene");
+                StartSimulation(aData[1]);
 
                 // Invoke(nameof(startPlayerControllers), 3f);
                 break;
@@ -190,6 +186,20 @@ public class Client : MonoBehaviour
         }
     }
 
+    private void StartSimulation(string strSeed)
+    {
+        var mapGenerator = Instantiate(mapGeneratorPrefab);
+        var seed = int.Parse(strSeed);
+        this.seed = seed;
+        mapGenerator.GenerateMap(7);
+        mapGenerator.name = "Map Generator";
+
+        if (clientName.Equals("IA"))
+            SceneManager.LoadScene("MainWithAPI");
+
+        else
+            SceneManager.LoadScene("SampleScene");
+    }
 
     private void OnApplicationQuit()
     {
@@ -215,14 +225,26 @@ public class Client : MonoBehaviour
         password = passwordInputField.text;
         clientName = clientNameInputField.text;
         CloseSocket();
-        try
+        if(debugMode)
         {
-            ConnectToServer(serverAddressInputField.text, portToConnect);
+            StartSimulation("7");
         }
-        catch (Exception e)
+        else
         {
-            Debug.Log(e.Message);
+            try
+            {
+                ConnectToServer(serverAddressInputField.text, portToConnect);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+            }
         }
+    }
+
+    public void ChangeDebugMode()
+    {
+        debugMode = !debugMode;
     }
 }
 

@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6861783790023987541, guid: ce6bae2899f489d49bdcb81a4500ee8b, type: 3}
+      - m_Target: {fileID: 6861783790023987541, guid: a67b83e5b048c57459eaf7a3c8404887, type: 3}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SetPathfinder
         m_Mode: 1
@@ -1211,7 +1211,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 3593299231176417188, guid: ec1053bbfe125c14781e76f469eea5b7, type: 3}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

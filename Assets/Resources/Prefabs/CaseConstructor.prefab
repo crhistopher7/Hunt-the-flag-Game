@@ -40,14 +40,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8576367697068514081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 434fbe603ab23bf4580114804c94c44e, type: 3}
+  m_Script: {fileID: 11500000, guid: fc71558450d785947a64e47adf653074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dataBaseName: CaseDataBase.txt
   splitter: 59
   maxDistance: 1414
-  canvasType: {fileID: 5844850245731281259, guid: 2e64931523552fb4194eaa28074f6152, type: 3}
-  canvasStrategy: {fileID: 6911560106496647351, guid: 3b908e7429d5923488b3f06d9db84cd4, type: 3}
-  canvasResult: {fileID: 692459701022522348, guid: ee4c237ef49614c4e94d2156986c4d5b, type: 3}
-  canvasDescription: {fileID: 686077704940784108, guid: de680b7382731fc43b8e1bafc3445f0c, type: 3}
-  inputDescription: {fileID: 4753427209538490078, guid: 7fb5d637dc6712b42acbf636e60fa399, type: 3}
+  canvasType: {fileID: 0}
+  canvasStrategy: {fileID: 0}
+  canvasResult: {fileID: 0}
+  canvasDescription: {fileID: 0}
+  inputDescription: {fileID: 0}
