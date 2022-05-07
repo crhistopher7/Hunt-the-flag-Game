@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     Vector3 p1;
     Vector3 p2;
     Vector2[] corners;
+    Vector3 pointOfCanvasPath;
 
     void Start()
     {
@@ -140,6 +141,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Pegando o ponto de path");
             Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            
+            Debug.Log(positionClick);
             DestroyLineDrawer();
             if (indexTypePath == 0)
             {
@@ -172,7 +175,11 @@ public class PlayerController : MonoBehaviour
                 p1 = Input.mousePosition;
             else
                 if (IsClickedinAgent(Input.mousePosition)) //Clicou em um agente. Perguntar Path
-                ShowCanvasPath();
+                {
+                    pointOfCanvasPath = Input.mousePosition;
+                    ShowCanvasPath();
+            
+                }    
 
         //2. Se continuou pressionando e moveu um ponto, pode criar a box
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
@@ -182,10 +189,11 @@ public class PlayerController : MonoBehaviour
         //3. Quando soltar o botão...
         if (Input.GetMouseButtonUp(0) && Input.GetKey(KeyCode.LeftShift) && dragSelect)
         {
+            pointOfCanvasPath = new Vector3((p1.x + Input.mousePosition.x) / 2, (p1.y + Input.mousePosition.y) / 2, p1.z);
+
             p1 = Camera.main.ScreenToWorldPoint(p1);
             p2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             corners = getBoundingBox(p1, p2);
-
             //Quais agentes estão dentro dos limites da box
             foreach (AgentController agent in Agents)
             {
@@ -257,7 +265,7 @@ public class PlayerController : MonoBehaviour
         canvasSelectPathfinder.SetActive(true);
         Vector2 anchoredPos;
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, Camera.main, out anchoredPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, pointOfCanvasPath, Camera.main, out anchoredPos);
 
         anchoredPos = new Vector2(anchoredPos.x, anchoredPos.y);
         rectPanel.anchoredPosition = anchoredPos;

@@ -191,7 +191,10 @@ public class Client : MonoBehaviour
         var mapGenerator = Instantiate(mapGeneratorPrefab);
         var seed = int.Parse(strSeed);
         this.seed = seed;
-        mapGenerator.GenerateMap(7);
+
+        mapGenerator.GenerateRealMap("C:/100x100.png");
+        
+        //mapGenerator.GenerateMap(7);
         mapGenerator.name = "Map Generator";
 
         if (clientName.Equals("IA"))

@@ -243,6 +243,7 @@ public class AgentController : MatchBehaviour
             indexPath = 0;
             if (indexTypePath == 1)
             {
+                // Funcionando 
                 AStar.Search(current, deceptiveObjective);
                 path = AStar.BuildPath(deceptiveObjective);
                 AStar.Search(deceptiveObjective, objective);
@@ -252,17 +253,22 @@ public class AgentController : MatchBehaviour
             }
             else if (indexTypePath == 2)
             {
+                // WIP: está dando erro no FindTarget
+
+                //DeceptiveAStar_2.Search(current, objective, deceptiveObjective);
                 LogicMap target = FindTarget(current, objective, deceptive);
 
                 AStar.Search(current, target);
                 path = AStar.BuildPath(deceptiveObjective);
                 AStar.Search(deceptiveObjective, objective);
                 var secondPath = AStar.BuildPath(objective);
-
                 path.AddRange(secondPath);
             }
             else if (indexTypePath == 3)
             {
+                // WIP: está dando erro no FindTarget
+                
+                //DeceptiveAStar_3.Search(current, objective, deceptiveObjective);
                 LogicMap target = FindTarget(current, objective, deceptive);
 
                 AStar.Search(current, target);
@@ -274,31 +280,39 @@ public class AgentController : MatchBehaviour
             }
             else
             {
+                // Não esta Implementado 
                 DeceptiveAStar_4.Search(current, objective, deceptiveObjective);
                 path = DeceptiveAStar_4.BuildPath(objective);
             }
         }
        
-        followingpath = true;
+        if(path.Count == 1)
+        {
+            path.Clear();
+        } 
+        else
+        {
+            followingpath = true;
+        }
     }
 
     private LogicMap FindTarget(LogicMap current, LogicMap objective, LogicMap deceptive)
     {
         AStar.Search(current, deceptive);
         var path1 = AStar.BuildPath(deceptive);
-        var rmp = 0; // Aqui vai o custo do path do current -> deceptive
+        var rmp = AStar.CostPath(current); // Aqui vai o custo do path do current -> deceptive
         AStar.Search(deceptive, objective);
         var pathDecptiveObjective = AStar.BuildPath(objective);
-        var cost = 0; // Aqui vai o custo do path do deceptive -> objective
-        var targetCost = rmp - cost;
+        var cost = AStar.CostPath(deceptive); ; // Aqui vai o custo do path do deceptive -> objective
+        var targetCost = cost - rmp;
 
         LogicMap currentPosition = deceptive;
-        var costSoFar = 0; // Maior custo possivel
+        var costSoFar = 0f;
         var next = 1;
-        while(costSoFar > targetCost)
+        while(costSoFar < targetCost)
         {
             AStar.Search(currentPosition, pathDecptiveObjective[next]);
-            cost = 0; // ^^^^ 
+            cost = AStar.CostPath(currentPosition); // ^^^^ 
             costSoFar = costSoFar + cost;
             currentPosition = pathDecptiveObjective[next];
             next = next + 1;
@@ -308,8 +322,7 @@ public class AgentController : MatchBehaviour
         {
             next = next - 1;
         }
-
-        return pathDecptiveObjective[next];
+        return pathDecptiveObjective[next-1];
     }
 
     private void Move()

@@ -32,22 +32,22 @@ public class CameraController : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         cam.orthographicSize -= scroll * scrollSpeed * 100f * Time.deltaTime;
 
-        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 50f, 510f);
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 50f, 5100f);
 
 
         
         // 4 8+1 (x*2 + x/4)
 
-        if (cam.orthographicSize >= 225f)
+        if (cam.orthographicSize >= 2250f)
         {
             pos.x = 0;
         }
         else
         {
             float size = (cam.orthographicSize * cam.aspect);
-            pos.x = Mathf.Clamp(pos.x, -510 + size, 510 - size);
+            pos.x = Mathf.Clamp(pos.x, -5100 + size, 5100 - size);
         }
-        pos.y = Mathf.Clamp(pos.y, -510 + cam.orthographicSize, 510 - cam.orthographicSize);
+        pos.y = Mathf.Clamp(pos.y, -5100 + cam.orthographicSize, 5100 - cam.orthographicSize);
 
         transform.position = pos;
     }
