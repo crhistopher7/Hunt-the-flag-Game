@@ -19,5 +19,4 @@ public class DrawArrowLine : MonoBehaviour
         LineRenderer.SetPosition(0, new Vector3(position.x, position.y, 0));
         LineRenderer.SetPosition(1, new Vector3(mousePosition.x, mousePosition.y, 0));
     }
-
 }

@@ -78,7 +78,7 @@ public class CaseReader : MonoBehaviour
         return results[0].matchCase;
     }
 
-    private CaseConstructor.Case GetCurrentCase()
+    private CaseCBDP GetCurrentCase()
     {
         CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
         return caseConstructor.GetCase();

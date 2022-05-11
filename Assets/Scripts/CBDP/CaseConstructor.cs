@@ -13,10 +13,8 @@ public partial class CaseConstructor : MonoBehaviour
 {
     public string dataBaseName = "CaseDataBase.txt";
     public char splitter = ';';
-    private PlayerController pcTeam1;
-    private PlayerController pcTeam2;
     private int idOfLast = 0;
-    Case currentCase;
+    CaseCBDP currentCase;
     public int maxDistance = 1414;
     public DateTime initTime;
 
@@ -29,12 +27,11 @@ public partial class CaseConstructor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        InitPlayers("PlayerController", "Player2Controller");
         StartFile();
         Invoke(nameof(ConstructInitCase), 0.5f);
     }
 
-    public Case GetCase()
+    public CaseCBDP GetCase()
     {
         return currentCase;
     }
@@ -108,18 +105,18 @@ public partial class CaseConstructor : MonoBehaviour
 
     public void ConstructInitCase()
     {
-        currentCase = new Case();
+        currentCase = new CaseCBDP();
 
         // id do caso
-        currentCase.id = GetId();
+        currentCase.caseId = GetId();
 
         // Seed do mapa
         currentCase.seedMap = GameObject.Find("Client").GetComponent<Client>().seed;
 
         //matriz de distancia/direção entre os agentes e agentes (string e int)
         List<AgentController> agents_list = new List<AgentController>();
-        agents_list.AddRange(OrderAgentList(pcTeam1.Agents));
-        agents_list.AddRange(OrderAgentList(pcTeam2.Agents));
+        //agents_list.AddRange(OrderAgentList(pcTeam1.Agents));
+        //agents_list.AddRange(OrderAgentList(pcTeam2.Agents));
 
         currentCase.matrix_agents = new string[agents_list.Count, agents_list.Count];
         currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
@@ -204,8 +201,8 @@ public partial class CaseConstructor : MonoBehaviour
         //init plan
         currentCase.plan = new Plan
         {
-            caseid = currentCase.id,
-            actions = new Queue<Plan.Action>()
+            caseid = currentCase.caseId,
+            actions = new Queue<Action>()
         };
 
         //iniciar o contador de tempo (pegar o time)
@@ -228,31 +225,12 @@ public partial class CaseConstructor : MonoBehaviour
         foreach (var matchObject in matchObjects)
             Destroy(matchObject.gameObject);
 
-        pcTeam1.enabled = false;
-        pcTeam2.enabled = false;
+        //pcTeam1.enabled = false;
+        //pcTeam2.enabled = false;
 
         //mostrar os paineis e esperar resposta
         canvasType.SetActive(true);
 
-    }
-
-    public void InitPlayers(string a, string b)
-    {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/"+a);
-        GameObject go = Instantiate(prefab);
-
-        pcTeam1 = go.GetComponent<PlayerController>();
-        pcTeam1.name = a;
-
-        prefab = Resources.Load<GameObject>("Prefabs/"+b);
-        go = Instantiate(prefab);
-
-        pcTeam2 = go.GetComponent<PlayerController>();
-        pcTeam2.name = b;
-
-        //client playes
-        Client client = GameObject.Find("Client").GetComponent<Client>();
-        client.startPlayerControllers(a, b);
     }
 
     public void SetSolutionTypeInCase(string type)
@@ -299,29 +277,7 @@ public partial class CaseConstructor : MonoBehaviour
         SaveCase(currentCase);
 
         //RestartGame
-        RestartGame();
-    }
-
-    private void RestartGame()
-    {
-        pcTeam1.enabled = true;
-        pcTeam2.enabled = true;
-        //reiniciar players
-        Debug.Log("start agents team 1");
-        pcTeam1.StartAgents();
-        Debug.Log("start agents team 2");
-        pcTeam2.StartAgents();
-
-        //inicia um novo caso
-        Invoke(nameof(ConstructInitCase), 0.5f);
-
-        if (GameObject.Find("Client").GetComponent<Client>().getClientName().Equals("IA"))
-        {
-            var caseReader = GameObject.Find("CaseReader").GetComponent<CaseReader>();
-
-            Invoke(nameof(caseReader.DoSimilarCase), 0.5f);
-        }
-        
+        //RestartGame();
     }
 
     public Sector CalculeSector(AgentController a)
@@ -452,7 +408,7 @@ public partial class CaseConstructor : MonoBehaviour
         return Distance.VC;
     }
 
-    public void PlanAddAction(Plan.Action action)
+    public void PlanAddAction(Action action)
     {
         currentCase.plan.actions.Enqueue(action);
     }
@@ -462,7 +418,7 @@ public partial class CaseConstructor : MonoBehaviour
 
         string[] str = str_action.Split(',');
 
-        Plan.Action action = new Plan.Action();
+        Action action = new Action();
 
         action.action = str[0];
         action.agent = str[1];
@@ -478,7 +434,7 @@ public partial class CaseConstructor : MonoBehaviour
         currentCase.plan.actions.Enqueue(action);
     }
 
-    private void SaveCase(Case c)
+    private void SaveCase(CaseCBDP c)
     {
         Debug.Log("salvando o caso");
         string str = c.ToString();

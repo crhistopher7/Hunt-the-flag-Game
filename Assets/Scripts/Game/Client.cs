@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Net.Sockets;
 using System.IO;
 using System;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Globalization;
-using UnityEngine.AI;
 
 public class Client : MonoBehaviour
 {
@@ -24,18 +21,21 @@ public class Client : MonoBehaviour
     public InputField passwordInputField;
     public int seed;
     private CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+    private SimulationController simulationController;
 
     public MapGenerator mapGeneratorPrefab;
-
-    private PlayerController pcTeam1;
-    private PlayerController pcTeam2;
-
     private bool debugMode = true;
+    private string playerControllerTag = "Team1";
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         culture.NumberFormat.NumberDecimalSeparator = ".";
+    }
+
+    public void SearchSimulationController()
+    {
+        simulationController = GameObject.Find("SimulationCOntroller").GetComponent<SimulationController>();
     }
 
     public string getClientName()
@@ -78,12 +78,6 @@ public class Client : MonoBehaviour
         }
     }
 
-    public void startPlayerControllers(string a, string b)
-    {
-        pcTeam1 = GameObject.Find(a).GetComponent<PlayerController>();
-        pcTeam2 = GameObject.Find(b).GetComponent<PlayerController>();
-    }
-
     // Sending message to the server
     public void Send(string data)
     {
@@ -114,71 +108,39 @@ public class Client : MonoBehaviour
             case "WhoAreYou":
                 Send("Iam|" + clientName + "|" + password);
                 break;
+
             // foi autenticado, carrega a cena
             case "Authenticated":
                 StartSimulation(aData[1]);
-
-                // Invoke(nameof(startPlayerControllers), 3f);
-                break;
-
-            case "AgentMoved":
-                //"Moves|" + gameObject.tag + "|" + agent.name + "|" + agent.indexTypePath +
-                //objectivePosition.x + "|" + objectivePosition.y + "|" +
-                //deceptivePosition.x + "|" + deceptivePosition.y + "#"
-                int indexpath, objectiveX, objectiveY, deceptiveX, deceptiveY;
-
-                Int32.TryParse(aData[3], out indexpath);
-                Int32.TryParse(aData[4], out objectiveX);
-                Int32.TryParse(aData[5], out objectiveY);
-                Int32.TryParse(aData[6], out deceptiveX);
-                Int32.TryParse(aData[7], out deceptiveY);
-
-                Vector3Int objectivePosition = new Vector3Int(objectiveX, objectiveY, 0);
-                Vector3Int deceptivePosition = new Vector3Int(deceptiveX, deceptiveY, 0);
-
-                if (aData[1] == "Team1")
-                {
-                    pcTeam1.ReceiveMove(aData[2], objectivePosition, deceptivePosition, indexpath);
-                }
-                else
-                {
-                    pcTeam2.ReceiveMove(aData[2], objectivePosition, deceptivePosition, indexpath);
-                }
-
                 break;
 
             case "Moves":
-                //
                 string[] movesData = (data.Substring(0, data.Length - 1)).Split('#');
                 string[] moveData;
+                int objectiveX, objectiveY, deceptiveX, deceptiveY;
+                PathType pathType;
+               
 
                 foreach (string move in movesData)
                 {
-                    
                     moveData = move.Split('|');
-                    Int32.TryParse(moveData[3], out indexpath);
+
+                    string action = moveData[0];
+                    string team = moveData[1];
+                    string agent = moveData[2];
+                    Enum.TryParse(moveData[3], out pathType);
                     Int32.TryParse(moveData[4], out objectiveX);
                     Int32.TryParse(moveData[5], out objectiveY);
                     Int32.TryParse(moveData[6], out deceptiveX);
                     Int32.TryParse(moveData[7], out deceptiveY);
+                    Vector3Int objectivePosition = new Vector3Int(objectiveX, objectiveY, 0);
+                    Vector3Int deceptivePosition = new Vector3Int(deceptiveX, deceptiveY, 0);
 
-                    objectivePosition = new Vector3Int(objectiveX, objectiveY, 0);
-                    deceptivePosition = new Vector3Int(deceptiveX, deceptiveY, 0);
-
-                    if (moveData[1] == "Team1")
-                    {
-                        pcTeam1.ReceiveMove(moveData[2], objectivePosition, deceptivePosition, indexpath);
-                    }
-                    else
-                    {
-                        pcTeam2.ReceiveMove(moveData[2], objectivePosition, deceptivePosition, indexpath);
-                    }
+                    simulationController.ReceiveMove(agent, team, objectivePosition, deceptivePosition, pathType);
                 }
 
                 break;
             case "Restart":
-                pcTeam1.StartAgents();
-                pcTeam2.StartAgents();
                 break;
             default:
                 Debug.Log("Unrecognizable command received");
@@ -193,15 +155,10 @@ public class Client : MonoBehaviour
         this.seed = seed;
 
         mapGenerator.GenerateRealMap("C:/100x100.png");
-        
         //mapGenerator.GenerateMap(7);
         mapGenerator.name = "Map Generator";
 
-        if (clientName.Equals("IA"))
-            SceneManager.LoadScene("MainWithAPI");
-
-        else
-            SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainSystem");
     }
 
     private void OnApplicationQuit()
@@ -248,6 +205,16 @@ public class Client : MonoBehaviour
     public void ChangeDebugMode()
     {
         debugMode = !debugMode;
+    }
+
+    public void ChangePlayerControllerTag(string tag)
+    {
+        playerControllerTag = tag;
+    }
+
+    public string GetPlayerControllerTag()
+    {
+        return playerControllerTag;
     }
 }
 

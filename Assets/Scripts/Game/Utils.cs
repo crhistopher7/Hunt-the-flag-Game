@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 //used for drawing our marquee
 public static class Utils
@@ -50,6 +52,47 @@ public static class Utils
         var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
         // Create Rect
         return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+    }
+
+    public static void InstantiateLineDrawer(Vector3 position, Color color)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Line");
+        GameObject go = Object.Instantiate(prefab);
+        DrawArrowLine drawLine = go.GetComponent<DrawArrowLine>();
+        drawLine.initialPosition = position;
+        drawLine.LineRenderer.startColor = color;
+        drawLine.LineRenderer.endColor = color;
+    }
+
+    public static void DestroyLineDrawer()
+    {
+        Debug.Log("Destruindo as linhas");
+        var lines = Object.FindObjectsOfType<DrawArrowLine>();
+
+        foreach (var line in lines)
+            Object.Destroy(line.gameObject);
+    }
+
+    public static bool VerifyPointInLimits(Vector3 positon, Vector2[] corners)
+    {
+        if (positon.x <= corners[3].x && positon.x >= corners[0].x
+            && positon.y >= corners[3].y && positon.y <= corners[0].y)
+            return true;
+        return false;
+    }
+
+    public static Vector3Int PositionByDistanceAndAngle(double angle, double distance, Vector2 point)
+    {
+        // Co (x) = sen * D
+        double x = Math.Sin(angle) * distance;
+        // Ca (y) = cos * D
+        double y = Math.Cos(angle) * distance;
+
+        //offset em relação ao ponto
+        x += point.x;
+        y += point.y;
+
+        return new Vector3Int((int)x, (int)y, 0);
     }
 }
 

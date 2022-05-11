@@ -17,7 +17,6 @@ public class AgentController : MatchBehaviour
     public int minY;
     protected Vector3 CurrentPosition;
     private float DistanceToChangeWayPoint = 0.5f;
-    public int indexTypePath;
     List<LogicMap> path;
     int indexPath;
     protected bool followingpath;
@@ -217,7 +216,7 @@ public class AgentController : MatchBehaviour
         return true;
     }
 
-    public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition)
+    public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
 
         LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x) / 10, (int)Math.Round(rb.position.y) / 10, 0));
@@ -227,7 +226,7 @@ public class AgentController : MatchBehaviour
         if (!objective.Walkable)
             return;
 
-        if (indexTypePath == 0)
+        if (pathType == PathType.NORMAL)
         {
             indexPath = 0;
             AStar.Search(current, objective);
@@ -241,7 +240,7 @@ public class AgentController : MatchBehaviour
                 return;
 
             indexPath = 0;
-            if (indexTypePath == 1)
+            if (pathType == PathType.DECEPTIVE_1)
             {
                 // Funcionando 
                 AStar.Search(current, deceptiveObjective);
@@ -251,7 +250,7 @@ public class AgentController : MatchBehaviour
 
                 path.AddRange(secondPath);
             }
-            else if (indexTypePath == 2)
+            else if (pathType == PathType.DECEPTIVE_2)
             {
                 // WIP: está dando erro no FindTarget
 
@@ -264,7 +263,7 @@ public class AgentController : MatchBehaviour
                 var secondPath = AStar.BuildPath(objective);
                 path.AddRange(secondPath);
             }
-            else if (indexTypePath == 3)
+            else if (pathType == PathType.DECEPTIVE_3)
             {
                 // WIP: está dando erro no FindTarget
                 

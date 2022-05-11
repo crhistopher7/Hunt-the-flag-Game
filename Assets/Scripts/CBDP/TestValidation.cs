@@ -80,8 +80,8 @@ public class TestValidation : MonoBehaviour
         int[] counts_a = new int[size];
         int[] counts_b = new int[size];
 
-        var A = new CaseConstructor.Plan(caseSolution1).actions.ToList();
-        var B = new CaseConstructor.Plan(caseSolution2).actions.ToList();
+        var A = new Plan(caseSolution1).actions.ToList();
+        var B = new Plan(caseSolution2).actions.ToList();
 
         for (int i = 0; i < size; i++)
         {
@@ -117,7 +117,7 @@ public class TestValidation : MonoBehaviour
         return 1f - similarity;
     }
 
-    private CaseConstructor.Case GetCurrentCase()
+    private CaseCBDP GetCurrentCase()
     {
         CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
         return caseConstructor.GetCase();

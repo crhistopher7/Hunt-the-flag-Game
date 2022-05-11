@@ -42,34 +42,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4428547406209404345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5533f93981da14986b2f43ef68dadd, type: 3}
+  m_Script: {fileID: 11500000, guid: cb6732373f1488d4e8d87e01ba09be08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapWidth: 100
   mapHeigth: 100
-  noiseScale: 22
+  noiseScale: 23
   drawMode: 1
   offset: {x: 0, y: 0}
-  octaves: 5
-  persistance: 0.5
-  lacunarity: 2
-  autoUpdate: 1
+  octaves: 20
+  persistance: 0.501
+  lacunarity: 5
+  autoUpdate: 0
   regions:
-  - name: WaterDeep
-    heigth: 0.2
-    color: {r: 0.13679248, g: 0.14512551, b: 1, a: 0}
-  - name: WaterShallow
-    heigth: 0.34
-    color: {r: 0.1462264, g: 0.8165745, b: 1, a: 0}
-  - name: Send
-    heigth: 0.4
-    color: {r: 1, g: 0.75347257, b: 0, a: 0}
-  - name: Grass
-    heigth: 0.74
-    color: {r: 0, g: 0.49056602, b: 0.046150096, a: 0}
-  - name: Rock
-    heigth: 1
-    color: {r: 0.3018868, g: 0.061532643, b: 0, a: 0}
+  - name: green
+    heigth: 0
+    color: {r: 0, g: 0.4528302, b: 0.10228233, a: 0}
+  - name: rock
+    heigth: 0.8
+    color: {r: 0.18867922, g: 0.16414179, b: 0.09166963, a: 0}
 --- !u!114 &29699982983941675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +70,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4428547406209404345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704e6cb30157d964da6ada11fbb8cfbe, type: 3}
+  m_Script: {fileID: 11500000, guid: 38c6c2fb3b7e9f540bf6b3f888b2c319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textureRender: {fileID: 5397334706275233020}
