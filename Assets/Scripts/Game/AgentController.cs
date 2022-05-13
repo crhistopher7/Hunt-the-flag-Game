@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class AgentController : MatchBehaviour
 {
-    public AStar AStar;
-    public DeceptiveAStar_1 DeceptiveAStar_1;
-    public DeceptiveAStar_2 DeceptiveAStar_2;
-    public DeceptiveAStar_3 DeceptiveAStar_3;
-    public DeceptiveAStar_4 DeceptiveAStar_4;
+    private AStar AStar;
+    private DeceptiveAStar_1 DeceptiveAStar_1;
+    private DeceptiveAStar_2 DeceptiveAStar_2;
+    private DeceptiveAStar_3 DeceptiveAStar_3;
+    private DeceptiveAStar_4 DeceptiveAStar_4;
 
     public int maxX;
     public int minX;
@@ -71,7 +71,6 @@ public class AgentController : MatchBehaviour
         } while (!point.Walkable);
 
         this.transform.position = position;
-        //Debug.Log("Setou posição do "+this.name);
     }
 
 
@@ -146,7 +145,7 @@ public class AgentController : MatchBehaviour
                     if (!transform.CompareTag(flagController.team) && !isCarryingFlag && !flagController.beingCarried)
                     {
                         //por enquanto o caso fecha aqui
-                        CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+                        CBDP caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CBDP>();
                         caseConstructor.ConstructEndCase();
                         
 

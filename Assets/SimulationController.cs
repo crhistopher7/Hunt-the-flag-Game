@@ -11,13 +11,11 @@ public class SimulationController : MonoBehaviour
     private PathfinderPointsController pathfinderPointsController;
     private GameObject canvasSelectPathfinder;
     private List<AgentController> selectedAgents;
-    private List<AgentController> team1Agents;
-    private List<AgentController> team2Agents;
     private Dropdown dropdown;
     private RectTransform rectPanel;
     private RectTransform rectCanvas;
     private PathType pathType;
-    private CaseConstructor caseConstructor;
+    private CBDP cbdp;
     private PlayerController pcTeam1;
     private PlayerController pcTeam2;
 
@@ -60,8 +58,6 @@ public class SimulationController : MonoBehaviour
     {
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
-        team1Agents = new List<AgentController>();
-        team2Agents = new List<AgentController>();
         clientOfExecution.SearchSimulationController();
 
         EnableComponentSelectController();
@@ -77,7 +73,7 @@ public class SimulationController : MonoBehaviour
         dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
         rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
         rectCanvas = canvasSelectPathfinder.GetComponent<RectTransform>();
-        caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        cbdp = GameObject.Find("CaseConstructor").GetComponent<CBDP>();
     }
 
     private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
@@ -86,7 +82,7 @@ public class SimulationController : MonoBehaviour
         foreach (AgentController agent in selectedAgents)
         {
             send.AddMessage("Moves", gameObject.tag, agent, pathType, objectivePosition, deceptivePosition);
-            //StartCoroutine(SendActionToCase("Move", agent, objectivePosition, deceptivePosition, pathType));
+            StartCoroutine(SendActionToCase("Move", agent, objectivePosition, deceptivePosition, pathType));
         }
         clientOfExecution.Send(send.ToString());
         selectedAgents.Clear();
@@ -123,7 +119,7 @@ public class SimulationController : MonoBehaviour
 
     public bool VerifySelectedGroupAgent(Vector2[] corners)
     {
-        var Agents = CompareTag("Team1") ? team1Agents : team2Agents;
+        var Agents = CompareTag("Team1") ? pcTeam1.Agents : pcTeam2.Agents;
 
         //Quais agentes estão dentro dos limites da box
         foreach (AgentController agent in Agents)
@@ -155,6 +151,7 @@ public class SimulationController : MonoBehaviour
     public void DesableComponentSelectController()
     {
         selectController.enabled = false;
+        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e não perguntar path'
         ShowCanvasPath();
     }
 
@@ -372,56 +369,42 @@ public class SimulationController : MonoBehaviour
         hasPlan = true;
     }
 
-    private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int objetivePosition, Vector3Int deceptivePosition, bool isDeceptive)
+    private IEnumerator SendActionToCase(string str_action, AgentController agent, Vector3Int objetivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
-        Action action = new Action();
-
-        //action
-        action.action = str_action;
-
-        //agent
-        action.agent = agent.name;
-
-        // objetive
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 50000.0f))
+        Action action = new Action
         {
-            if (hit.transform != null)
-            {
-                if (hit.transform.CompareTag("Team1") || hit.transform.CompareTag("Team2"))
-                {
-                    //tem um gameobject, mandar no action
-                    action.objetive = hit.transform.gameObject.name;
 
-                }
-                else
-                    action.objetive = "";
-            }
-        }
+            //action
+            action = str_action,
 
-        //actionDefinition
-        action.actionDefinition = isDeceptive ? DeceptiveLevel.LITTLE_DECEPTIVE : DeceptiveLevel.NOT_DECEPTIVE;
+            //agent
+            agent = agent.name,
+
+            //actionDefinition
+            pathType = pathType,
+
+            // objetive
+            objetive = Utils.GetObjetive(Input.mousePosition),
+
+            //time
+            time = (int)Math.Round((DateTime.Now - cbdp.initTime).TotalSeconds)
+        };
 
         //distance_direction
-        Distance distance = caseConstructor.CalculeDistance(agent.transform.position, objetivePosition);
-        Direction direction = caseConstructor.CalculeDirection(objetivePosition.x, objetivePosition.y);
+        Distance distance = CBDPUtils.CalculeDistance(agent.transform.position, objetivePosition);
+        Direction direction = CBDPUtils.CalculeDirection(objetivePosition.x, objetivePosition.y);
 
         action.distance_direction = distance.ToString() + '-' + direction.ToString();
 
         //distance_direction Deceptive objetive
-        distance = caseConstructor.CalculeDistance(agent.transform.position, deceptivePosition);
-        direction = caseConstructor.CalculeDirection(deceptivePosition.x, deceptivePosition.y);
+        distance = CBDPUtils.CalculeDistance(agent.transform.position, deceptivePosition);
+        direction = CBDPUtils.CalculeDirection(deceptivePosition.x, deceptivePosition.y);
 
         action.distance_direction = distance.ToString() + '-' + direction.ToString();
 
-        //time
-        action.time = (int)Math.Round((DateTime.Now - caseConstructor.initTime).TotalSeconds);
-
         //send to plan
-        caseConstructor.PlanAddAction(action);
+        cbdp.PlanAddAction(action);
 
         yield return null;
     }
-
 }

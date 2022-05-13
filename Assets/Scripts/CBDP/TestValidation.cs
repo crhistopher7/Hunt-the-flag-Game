@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class TestValidation : MonoBehaviour
 {
-    public string dataBaseName = "CaseDataBaseTest.txt";
-    public char splitter = ';';
     private CBRAPI cbr;
     private string[] features;
     // Start is called before the first frame update
@@ -23,7 +21,7 @@ public class TestValidation : MonoBehaviour
         var case_str = "8;7;{{,,,,,,,,,}:{A-B,,,,,,,,,}:{A-R,F-RF,,,,,,,,}:{VF-L,F-L,VF-L,,,,,,,}:{A-B,C-R,A-LB,VF-R,,,,,,}:{VF-LB,F-LB,VF-LB,F-B,VF-LB,,,,,}:{VF-LB,F-LB,VF-LB,A-B,VF-LB,A-LF,,,,}:{VF-B,F-RB,F-B,VF-R,F-B,VF-R,VF-R,,,}:{VF-LB,VF-LB,VF-LB,F-B,VF-LB,A-L,A-B,VF-L,,}:{VF-B,F-B,VF-B,VF-RB,F-B,F-R,VF-R,A-LB,VF-R,}};{{VC-F,F-R,VF-F,VF-F}:{A-B,F-RB,F-RF,F-F}:{A-R,F-R,VF-RF,VF-F}:{VF-L,A-LB,F-F,VF-LF}:{A-RB,F-R,VF-RF,F-F}:{VF-LB,VF-B,VC-F,F-L}:{VF-LB,F-B,A-LF,F-L}:{F-B,VF-RB,F-R,A-RF}:{VF-LB,VF-B,A-L,F-L}:{VF-B,VF-RB,F-R,C-R}};{{0,0,0,0,0,0,0,0,0,0}:{63,0,0,0,0,0,0,0,0,0}:{43,24,0,0,0,0,0,0,0,0}:{55,54,55,0,0,0,0,0,0,0}:{63,42,83,45,0,0,0,0,0,0}:{85,84,85,64,85,0,0,0,0,0}:{85,84,85,63,85,33,0,0,0,0}:{65,74,64,45,64,45,45,0,0,0}:{85,85,85,64,85,53,63,55,0,0}:{65,64,65,75,64,44,45,83,45,0}};{{11,44,15,15}:{63,74,24,14}:{43,44,25,15}:{55,83,14,35}:{73,44,25,14}:{85,65,11,54}:{85,64,33,54}:{64,75,44,23}:{85,65,53,54}:{65,75,44,42}};{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE};DECEPTIVE;OFENSIVE;True;(case_id:5|solutionType:DECEPTIVE|actions:<Move,Agent3,,NORMAL,F-LB,8>,<Move,Agent1,,NORMAL,F-LB,8>,<Move,Agent5,,NORMAL,F-LB,8>,<Move,Agent2,,NORMAL,F-LB,8>,<Move,Agent3,,NORMAL,F-LF,20>,<Move,Agent1,,NORMAL,F-LF,20>,<Move,Agent5,,NORMAL,F-LF,20>,<Move,Agent2,,NORMAL,F-LF,20>,<Move,Agent4,,NORMAL,F-RF,22>,<Move,Agent3,,NORMAL,F-LF,29>,<Move,Agent2,,NORMAL,F-LF,32>,<Move,Agent1,,NORMAL,F-LF,34>,<Move,Agent5,,NORMAL,F-LF,36>,<Move,Agent4,,NORMAL,F-RF,44>,<Move,Agent5,,NORMAL,F-LF,54>,<Move,Agent1,,NORMAL,F-LF,54>,<Move,Agent3,,NORMAL,F-LF,54>,<Move,Agent2,,NORMAL,F-LF,54>,<Move,Agent5,,NORMAL,F-RF,60>,<Move,Agent1,,NORMAL,F-RF,60>,<Move,Agent3,,NORMAL,F-RF,60>,<Move,Agent2,,NORMAL,F-RF,60>,<Move,Agent4,,NORMAL,F-RF,64>)";
 
         Debug.Log("CASO ATUAL: " + case_str);
-        Case currentCase = CaseToCase(case_str.Split(splitter));
+        Case currentCase = CaseToCase(case_str.Split(Config.SPLITTER));
         Case similiarCase = GetSimilarCase(currentCase);
         Debug.Log("CASO SIMILAR: Solução: " + similiarCase.caseSolution[0].value);
         //SendPlan(similiarCase);
@@ -31,8 +29,8 @@ public class TestValidation : MonoBehaviour
 
     private void SendPlan(Case similiarCase)
     {
-        PlayerController player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        player.ReceivePlan(similiarCase.caseSolution[0].value);
+        SimulationController simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+        simulationController.ReceivePlan(similiarCase.caseSolution[0].value);
     }
 
     private Case GetSimilarCase(Case currentCase)
@@ -119,7 +117,7 @@ public class TestValidation : MonoBehaviour
 
     private CaseCBDP GetCurrentCase()
     {
-        CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        CBDP caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CBDP>();
         return caseConstructor.GetCase();
     }
 
@@ -159,19 +157,19 @@ public class TestValidation : MonoBehaviour
 
     void ConvertCSVToCaseBase()
     {
-        using var reader = new StreamReader(dataBaseName);
-        Debug.Log("Lendo " + dataBaseName);
+        using var reader = new StreamReader(Config.DATA_BASE);
+        Debug.Log("Lendo " + Config.DATA_BASE);
 
         if (!reader.EndOfStream)
         {
             var header = reader.ReadLine();
-            features = header.Split(splitter);
+            features = header.Split(Config.SPLITTER);
             //Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
-                var values = line.Split(splitter);
+                var values = line.Split(Config.SPLITTER);
 
                 //Debug.Log("Lendo linha: " + line);
 

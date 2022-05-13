@@ -9,13 +9,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public partial class CaseConstructor : MonoBehaviour
+public class CBDP : MonoBehaviour
 {
-    public string dataBaseName = "CaseDataBase.txt";
-    public char splitter = ';';
     private int idOfLast = 0;
     CaseCBDP currentCase;
-    public int maxDistance = 1414;
     public DateTime initTime;
 
     public GameObject canvasType;
@@ -42,43 +39,43 @@ public partial class CaseConstructor : MonoBehaviour
         string str = "";
 
         //id
-        str += "caseID" + splitter;
+        str += "caseID" + Config.SPLITTER;
 
         //seed
-        str += "seed" + splitter;
+        str += "seed" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação aos agentes
-        str += "agentsRelationships" + splitter;
+        str += "agentsRelationships" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação aos objetivos
-        str += "agentsGoalsRelationships" + splitter;
+        str += "agentsGoalsRelationships" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação as bases
-        //str += "agentsBasesRelationships" + splitter;
+        //str += "agentsBasesRelationships" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação aos agentes
-        str += "agentsRelationships_int" + splitter;
+        str += "agentsRelationships_int" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação aos objetivos
-        str += "agentsGoalsRelationships_int" + splitter;
+        str += "agentsGoalsRelationships_int" + Config.SPLITTER;
 
         //matriz de distância/direção dos agentes em relação as bases
-        //str += "agentsBasesRelationships_int" + splitter;
+        //str += "agentsBasesRelationships_int" + Config.SPLITTER;
 
         //vetor de setor dos agentes
-        str += "agentsBattleFieldLocalization" + splitter;
+        str += "agentsBattleFieldLocalization" + Config.SPLITTER;
 
         //deceptive
-        str += "deceptiveLevel" + splitter;
+        str += "deceptiveLevel" + Config.SPLITTER;
 
         //tipo do plano
-        str += "strategy" + splitter;
+        str += "strategy" + Config.SPLITTER;
 
         //description
-        str += "description" + splitter;
+        str += "description" + Config.SPLITTER;
 
         //resultado do plano
-        str += "result" + splitter;
+        str += "result" + Config.SPLITTER;
 
         //planning file
         str += "Planning";
@@ -134,8 +131,8 @@ public partial class CaseConstructor : MonoBehaviour
 
                 float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, agents_list[j].transform);
 
-                Distance distance = CalculeDistance(agents_list[i].transform, agents_list[j].transform);
-                Direction direction = CalculeDirection(sensorDirection[0], sensorDirection[1]);
+                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, agents_list[j].transform.position);
+                Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
                 currentCase.matrix_agents[i, j] = distance.ToString() + '-' + direction.ToString();
                 currentCase.int_matrix_agents[i, j] = (int)distance + (int)direction;
@@ -154,8 +151,8 @@ public partial class CaseConstructor : MonoBehaviour
             {
                 float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, flags[j].transform);
 
-                Distance distance = CalculeDistance(agents_list[i].transform, flags[j].transform);
-                Direction direction = CalculeDirection(sensorDirection[0], sensorDirection[1]);
+                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, flags[j].transform.position);
+                Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
                 currentCase.matrix_objetives[i, j] = distance.ToString() + '-' + direction.ToString();
                 currentCase.int_matrix_objetives[i, j] = (int)distance + (int)direction;
@@ -301,112 +298,7 @@ public partial class CaseConstructor : MonoBehaviour
         return Sector.NEUTRAL;
     }
 
-    public Direction CalculeDirection(float x, float y)
-    {
-        if (x > -0.5 && x < 0.5)
-        {
-            if (y == 1)
-            {
-                return Direction.F;
-            } 
-            else
-            {
-                return Direction.B;
-            }
-        }
-
-        if (y > -0.5 && y < 0.5)
-        {
-            if (x == 1)
-            {
-                return Direction.R;
-            }
-            else
-            {
-                return Direction.L;
-            }
-        }
-
-        if (x >= 0.5)
-        {
-            if (y >= 0.5)
-            {
-                return Direction.RF;
-            } 
-            else
-            {
-                return Direction.RB;
-            }
-        } 
-
-        else
-        {
-            if (y >= 0.5)
-            {
-                return Direction.LF;
-            }
-            else
-            {
-                return Direction.LB;
-            }
-        }
-    }
-
-    public Distance CalculeDistance(Transform a, Transform b)
-    {
-        float distance = Vector3.Distance(a.position, b.position);
-
-        //1414 é a maior distancia
-        if (distance >= maxDistance / 2)
-        {
-            return Distance.VF;
-        }
-
-        if (distance >= maxDistance / 4)
-        {
-            return Distance.F;
-        }
-
-        if (distance >= maxDistance / 8)
-        {
-            return Distance.A;
-        }
-
-        if (distance >= maxDistance / 16)
-        {
-            return Distance.C;
-        }
-
-        return Distance.VC;
-    }
-
-    public Distance CalculeDistance(Vector3 a, Vector3 b)
-    {
-        float distance = Vector3.Distance(a, b);
-
-        //1414 é a maior distancia
-        if (distance >= maxDistance / 2)
-        {
-            return Distance.VF;
-        }
-
-        if (distance >= maxDistance / 4)
-        {
-            return Distance.F;
-        }
-
-        if (distance >= maxDistance / 8)
-        {
-            return Distance.A;
-        }
-
-        if (distance >= maxDistance / 16)
-        {
-            return Distance.C;
-        }
-
-        return Distance.VC;
-    }
+    
 
     public void PlanAddAction(Action action)
     {
@@ -446,7 +338,7 @@ public partial class CaseConstructor : MonoBehaviour
     private void Save(string str)
     {
         //Open File
-        TextWriter tw = new StreamWriter(dataBaseName, true);
+        TextWriter tw = new StreamWriter(Config.DATA_BASE, true);
 
         //Write to file
         tw.WriteLine(str);

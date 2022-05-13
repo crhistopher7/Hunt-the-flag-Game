@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class CaseReader : MonoBehaviour
 {
-    public string dataBaseName = "CaseDataBaseTest.txt";
-    public char splitter = ';';
     private CBRAPI cbr;
     private string[] features;
 
@@ -24,7 +22,7 @@ public class CaseReader : MonoBehaviour
         var case_str = @Case.ToString();
 
         Debug.Log("CASO ATUAL: " + case_str);
-        Case currentCase = CaseToCase(case_str.Split(splitter));
+        Case currentCase = CaseToCase(case_str.Split(Config.SPLITTER));
         Case similiarCase = GetSimilarCase(currentCase);
         Debug.Log("CASO SIMILAR: Solução: " + similiarCase.caseSolution[0].value);
         SendPlan(similiarCase);
@@ -32,8 +30,8 @@ public class CaseReader : MonoBehaviour
 
     private void SendPlan(Case similiarCase)
     {
-        PlayerController player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        player.ReceivePlan(similiarCase.caseSolution[0].value);
+        SimulationController simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+        simulationController.ReceivePlan(similiarCase.caseSolution[0].value);
     }
 
     private Case GetSimilarCase(Case currentCase)
@@ -80,7 +78,7 @@ public class CaseReader : MonoBehaviour
 
     private CaseCBDP GetCurrentCase()
     {
-        CaseConstructor caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CaseConstructor>();
+        CBDP caseConstructor = GameObject.Find("CaseConstructor").GetComponent<CBDP>();
         return caseConstructor.GetCase();
     }
 
@@ -120,19 +118,19 @@ public class CaseReader : MonoBehaviour
 
     void ConvertCSVToCaseBase()
     {
-        using var reader = new StreamReader(dataBaseName);
-        Debug.Log("Lendo " + dataBaseName);
+        using var reader = new StreamReader(Config.DATA_BASE);
+        Debug.Log("Lendo " + Config.DATA_BASE);
 
         if (!reader.EndOfStream)
         {
             var header = reader.ReadLine();
-            features = header.Split(splitter);
+            features = header.Split(Config.SPLITTER);
             //Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
-                var values = line.Split(splitter);
+                var values = line.Split(Config.SPLITTER);
 
                 //Debug.Log("Lendo linha: " + line);
 

@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public List<AgentController> Agents;
     public List<AgentController> ClickedAgents;
     public int Points;
-    public int numberOfAgents = 5;
     public Text PointsPainel;
     System.Random prng;
 
@@ -46,8 +45,7 @@ public class PlayerController : MonoBehaviour
             agent.InitPosition(prng.Next());
             this.Agents.Add(agent);
             i++;
-        } while (i <= numberOfAgents);
-        
+        } while (i <= Config.NUMBER_OF_AGENTS);
     }
 
     /// <summary>

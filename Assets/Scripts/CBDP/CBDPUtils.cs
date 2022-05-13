@@ -34,5 +34,81 @@ public enum PathType
 
 public static class CBDPUtils
 {
-    
+    public static Distance CalculeDistance(Vector3 a, Vector3 b)
+    {
+        float distance = Vector3.Distance(a, b);
+
+        if (distance >= Config.MAX_DISTANCE / 2)
+        {
+            return Distance.VF;
+        }
+
+        if (distance >= Config.MAX_DISTANCE / 4)
+        {
+            return Distance.F;
+        }
+
+        if (distance >= Config.MAX_DISTANCE / 8)
+        {
+            return Distance.A;
+        }
+
+        if (distance >= Config.MAX_DISTANCE / 16)
+        {
+            return Distance.C;
+        }
+
+        return Distance.VC;
+    }
+
+    public static Direction CalculeDirection(float x, float y)
+    {
+        if (x > -0.5 && x < 0.5)
+        {
+            if (y == 1)
+            {
+                return Direction.F;
+            }
+            else
+            {
+                return Direction.B;
+            }
+        }
+
+        if (y > -0.5 && y < 0.5)
+        {
+            if (x == 1)
+            {
+                return Direction.R;
+            }
+            else
+            {
+                return Direction.L;
+            }
+        }
+
+        if (x >= 0.5)
+        {
+            if (y >= 0.5)
+            {
+                return Direction.RF;
+            }
+            else
+            {
+                return Direction.RB;
+            }
+        }
+
+        else
+        {
+            if (y >= 0.5)
+            {
+                return Direction.LF;
+            }
+            else
+            {
+                return Direction.LB;
+            }
+        }
+    }
 }
