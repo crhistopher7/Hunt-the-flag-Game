@@ -10,6 +10,11 @@ public class SimulationController : MonoBehaviour
     private SelectController selectController;
     private PathfinderPointsController pathfinderPointsController;
     private GameObject canvasSelectPathfinder;
+    private GameObject canvasType;
+    private GameObject canvasStrategy;
+    private GameObject canvasResult;
+    private GameObject canvasDescription;
+    private InputField inputDescription;
     private List<AgentController> selectedAgents;
     private Dropdown dropdown;
     private RectTransform rectPanel;
@@ -121,7 +126,7 @@ public class SimulationController : MonoBehaviour
     {
         var Agents = CompareTag("Team1") ? pcTeam1.Agents : pcTeam2.Agents;
 
-        //Quais agentes estão dentro dos limites da box
+        //Quais agentes estï¿½o dentro dos limites da box
         foreach (AgentController agent in Agents)
         {
             Vector3 positon = agent.transform.position;
@@ -151,7 +156,7 @@ public class SimulationController : MonoBehaviour
     public void DesableComponentSelectController()
     {
         selectController.enabled = false;
-        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e não perguntar path'
+        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e nï¿½o perguntar path'
         ShowCanvasPath();
     }
 
@@ -215,9 +220,9 @@ public class SimulationController : MonoBehaviour
 
         if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
         {
-            // Pode executar a próxima ação do plano
+            // Pode executar a prï¿½xima aï¿½ï¿½o do plano
             action = plan.actions.Dequeue();
-            Debug.Log("Executando ação: " + action.ToString());
+            Debug.Log("Executando aï¿½ï¿½o: " + action.ToString());
             ExecuteAction(action);
 
             if (plan.actions.Count == 0)
@@ -239,18 +244,18 @@ public class SimulationController : MonoBehaviour
                     if (action.objetive.Equals(""))
                     {
                         Vector3 position = GetPositionByName(action.agent);
-                        //não existe, então usar o distance_direction
+                        //nï¿½o existe, entï¿½o usar o distance_direction
                         objetivePosition = GetPositionByDistanceDirection(action.distance_direction, position);
                     }
                     else
                     {
-                        Debug.Log("Executando a ação que possui objetivo");
-                        //usar a localização do objetivo
+                        Debug.Log("Executando a aï¿½ï¿½o que possui objetivo");
+                        //usar a localizaï¿½ï¿½o do objetivo
                         objetivePosition = GetPositionByName(action.objetive);
                     }
 
-                    // TODO Verificar o actionDefinition para ação enganosa
-                    // Mandando movimentação para o servidor
+                    // TODO Verificar o actionDefinition para aï¿½ï¿½o enganosa
+                    // Mandando movimentaï¿½ï¿½o para o servidor
                     clientOfExecution.Send("Moves|" + gameObject.tag + "|" + action.agent + "|" + objetivePosition.x + "|" + objetivePosition.y + "#");
                     break;
                 }
@@ -335,8 +340,8 @@ public class SimulationController : MonoBehaviour
 
         }
 
-        // Pegar valores aleatórios entre os intervalos determinados
-        // repetir até que a posição seja possível de atingir
+        // Pegar valores aleatï¿½rios entre os intervalos determinados
+        // repetir atï¿½ que a posiï¿½ï¿½o seja possï¿½vel de atingir
         Vector3Int position;
         LogicMap point;
         var AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();

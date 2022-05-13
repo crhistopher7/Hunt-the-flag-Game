@@ -15,11 +15,6 @@ public class CBDP : MonoBehaviour
     CaseCBDP currentCase;
     public DateTime initTime;
 
-    public GameObject canvasType;
-    public GameObject canvasStrategy;
-    public GameObject canvasResult;
-    public GameObject canvasDescription;
-    public InputField inputDescription;
 
     // Start is called before the first frame update
     void Awake()
@@ -35,7 +30,7 @@ public class CBDP : MonoBehaviour
 
     public void StartFile()
     {
-        //criar cabeçalhos 
+        //criar cabeï¿½alhos 
         string str = "";
 
         //id
@@ -44,22 +39,22 @@ public class CBDP : MonoBehaviour
         //seed
         str += "seed" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação aos agentes
+        //matriz de distï¿½ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o aos agentes
         str += "agentsRelationships" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação aos objetivos
+        //matriz de distï¿½ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o aos objetivos
         str += "agentsGoalsRelationships" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação as bases
+        //matriz de distï¿½ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o as bases
         //str += "agentsBasesRelationships" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação aos agentes
+        //matriz de distï¿½ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o aos agentes
         str += "agentsRelationships_int" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação aos objetivos
+        //matriz de distÃ¢ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o aos objetivos
         str += "agentsGoalsRelationships_int" + Config.SPLITTER;
 
-        //matriz de distância/direção dos agentes em relação as bases
+        //matriz de distï¿½ncia/direï¿½ï¿½o dos agentes em relaï¿½ï¿½o as bases
         //str += "agentsBasesRelationships_int" + Config.SPLITTER;
 
         //vetor de setor dos agentes
@@ -92,7 +87,7 @@ public class CBDP : MonoBehaviour
 /*
         if (idOfLast == -1)
         {
-            // primeiro caso da execução, tem q pegar o ultimo
+            // primeiro caso da execuï¿½ï¿½o, tem q pegar o ultimo
             idOfLast = 0;
             //int.TryParse(aData[0], out idOfLast);
         }*/
@@ -110,7 +105,7 @@ public class CBDP : MonoBehaviour
         // Seed do mapa
         currentCase.seedMap = GameObject.Find("Client").GetComponent<Client>().seed;
 
-        //matriz de distancia/direção entre os agentes e agentes (string e int)
+        //matriz de distancia/direï¿½ï¿½o entre os agentes e agentes (string e int)
         List<AgentController> agents_list = new List<AgentController>();
         //agents_list.AddRange(OrderAgentList(pcTeam1.Agents));
         //agents_list.AddRange(OrderAgentList(pcTeam2.Agents));
@@ -139,7 +134,7 @@ public class CBDP : MonoBehaviour
             }
         }
 
-        //matriz de distancia/direção entre os agentes e objetivos (string e int)
+        //matriz de distancia/direï¿½ï¿½o entre os agentes e objetivos (string e int)
         GameObject[] flags = GameObject.FindGameObjectsWithTag("Flag");
 
         currentCase.matrix_objetives = new string[agents_list.Count, flags.Length];
@@ -159,7 +154,7 @@ public class CBDP : MonoBehaviour
             }
         }
 
-        //matriz de distancia/direção entre os agentes e bases (string e int)
+        //matriz de distancia/direï¿½ï¿½o entre os agentes e bases (string e int)
         /*GameObject base1 = GameObject.Find("BaseTeam1");
         GameObject base2 = GameObject.Find("BaseTeam2");
 
