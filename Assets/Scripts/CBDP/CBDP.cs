@@ -20,7 +20,6 @@ public class CBDP : MonoBehaviour
     void Start()
     {
         StartFile();
-        Invoke(nameof(ConstructInitCase), 0.5f);
     }
 
     public CaseCBDP GetCase()
@@ -95,7 +94,7 @@ public class CBDP : MonoBehaviour
         return idOfLast++;
     }
 
-    public void ConstructInitCase()
+    public void ConstructInitCase(List<AgentController> agentsTeam1, List<AgentController> agentsTeam2)
     {
         currentCase = new CaseCBDP();
 
@@ -107,9 +106,11 @@ public class CBDP : MonoBehaviour
 
         //matriz de distancia/dire��o entre os agentes e agentes (string e int)
         List<AgentController> agents_list = new List<AgentController>();
-        //agents_list.AddRange(OrderAgentList(pcTeam1.Agents));
-        //agents_list.AddRange(OrderAgentList(pcTeam2.Agents));
-
+        Debug.Log(agentsTeam1.Count);
+        Debug.Log(agentsTeam2.Count);
+        agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam1));
+        agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam2));
+        Debug.Log(agents_list.Count);
         currentCase.matrix_agents = new string[agents_list.Count, agents_list.Count];
         currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
         for (int i = 0; i < agents_list.Count; i++)
@@ -205,10 +206,7 @@ public class CBDP : MonoBehaviour
         currentCase.plan.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
     }
 
-    private List<AgentController> OrderAgentList(List<AgentController> agents)
-    {
-        return agents.OrderBy(p => p.transform.position.x).ThenBy(p => p.transform.position.y).ToList();
-    }
+    
 
     public void SetSolutionTypeInCase(DeceptiveLevel type)
     {

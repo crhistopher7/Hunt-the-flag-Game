@@ -9,10 +9,10 @@ public static class Config
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
 
-    public static int[] LIMITS_X_AGENT_TEAM_1 = {0, 0};
-    public static int[] LIMITS_X_AGENT_TEAM_2 = {0, 0};
-    public static int[] LIMITS_Y_AGENT_TEAM_1 = {0, 0};
-    public static int[] LIMITS_Y_AGENT_TEAM_2 = {0, 0};
+    public static int[] LIMITS_X_AGENT_TEAM_1 = {-490, 490};
+    public static int[] LIMITS_X_AGENT_TEAM_2 = {-490, 490};
+    public static int[] LIMITS_Y_AGENT_TEAM_1 = {-490, -100};
+    public static int[] LIMITS_Y_AGENT_TEAM_2 = {100, 490};
 
 
 
@@ -25,4 +25,11 @@ public static class Config
     public static string TAG_TEAM_2 = "Team2";
     public static string TAG_FLAG = "Flag";
 
+    public static float MAX_WALKABLE = 1f;
+    public static float MIN_WALKABLE = 0f;
+
+    public static bool Walkable(float value)
+    {
+        return (value > MIN_WALKABLE && value <= MAX_WALKABLE);
+    }
 }

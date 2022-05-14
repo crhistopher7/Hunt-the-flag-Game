@@ -17,7 +17,7 @@ public class PathfinderPointsController : MonoBehaviour
     }
     private void FindComponents()
     {
-        simulationController = GameObject.Find("Simulation Controller").GetComponent<SimulationController>();
+        simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
     }
 
     private void SetVariables()
@@ -41,6 +41,7 @@ public class PathfinderPointsController : MonoBehaviour
             Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             Utils.DestroyLineDrawer();
+            pathType = simulationController.GetPathType();
             if (pathType.Equals(PathType.NORMAL))
             {
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;

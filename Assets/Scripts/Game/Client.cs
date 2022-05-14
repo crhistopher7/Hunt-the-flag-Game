@@ -81,7 +81,8 @@ public class Client : MonoBehaviour
     // Sending message to the server
     public void Send(string data)
     {
-        if(debugMode)
+        Debug.Log("Send to Server:  " + data);
+        if (debugMode)
         {
             OnIncomingData(data);
             return;
@@ -89,8 +90,6 @@ public class Client : MonoBehaviour
 
         if (!socketReady)
             return;
-
-        //Debug.Log("Send to Server:  "+data);
 
         writer.WriteLine(data);
         writer.Flush();
@@ -100,7 +99,7 @@ public class Client : MonoBehaviour
     private void OnIncomingData(string data)
     {
         string[] aData = data.Split('|');
-        //Debug.Log("Received from server: " + data);
+        Debug.Log("Received from server: " + data);
 
         switch (aData[0])
         {
@@ -115,7 +114,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "Moves":
-                string[] movesData = (data.Substring(0, data.Length - 1)).Split('#');
+                string[] movesData = data.Split('#');
                 string[] moveData;
                 int objectiveX, objectiveY, deceptiveX, deceptiveY;
                 PathType pathType;
@@ -124,7 +123,6 @@ public class Client : MonoBehaviour
                 foreach (string move in movesData)
                 {
                     moveData = move.Split('|');
-
                     string action = moveData[0];
                     string team = moveData[1];
                     string agent = moveData[2];

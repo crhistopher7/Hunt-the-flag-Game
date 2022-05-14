@@ -123,9 +123,15 @@ public class SimulationController : MonoBehaviour
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
         clientOfExecution.SearchSimulationController();
+        Invoke(nameof(ComandStartCase), 0.5f);
 
         EnableComponentSelectController();
         DesableComponentPathfinderPointsController();
+    }
+
+    private void ComandStartCase()
+    {
+        cbdp.ConstructInitCase(pcTeam1.Agents, pcTeam2.Agents);
     }
 
     private void FindComponents()

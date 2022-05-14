@@ -14,11 +14,11 @@ public class Message
         string str = action + splitter;
         str += team + splitter;
         str += agent.name + splitter;
-        str += typePath + splitter;
-        str += objective.x + splitter;
-        str += objective.y + splitter;
-        str += deceptiveObjetive.x + splitter;
-        str += deceptiveObjetive.y;
+        str += typePath.ToString() + splitter;
+        str += objective.x.ToString() + splitter;
+        str += objective.y.ToString() + splitter;
+        str += deceptiveObjetive.x.ToString() + splitter;
+        str += deceptiveObjetive.y.ToString();
 
         message.AddLast(str);
     }

@@ -90,7 +90,7 @@ public class MapGenerator : MonoBehaviour
                         int moveCost = int.MaxValue;
 
                         //pode andar em tudo que não for agua
-                        if (currentHeigth > 0.34f && currentHeigth <= 0.74f)
+                        if (Config.Walkable(currentHeigth))
                         {
                             moveCost = 1;
                         }
@@ -99,7 +99,7 @@ public class MapGenerator : MonoBehaviour
                         {
                             Position = new Vector3Int(x, y, 0),
                             ClickPosition = new Vector3Int(-49 + x, -49 + y, 0),
-                            Walkable = (currentHeigth > 0.34f && currentHeigth <= 0.74f),
+                            Walkable = Config.Walkable(currentHeigth),
                             MoveCost = moveCost,
                             ColorMapIndex = y * tex.width + x
                         };
@@ -144,7 +144,7 @@ public class MapGenerator : MonoBehaviour
                         int moveCost = int.MaxValue;
 
                         //pode andar em tudo que não for agua
-                        if (currentHeigth > 0.34f && currentHeigth <= 0.74f)
+                        if (Config.Walkable(currentHeigth))
                         {
                             moveCost = 1;
                         }
@@ -153,7 +153,7 @@ public class MapGenerator : MonoBehaviour
                         {
                             Position = new Vector3Int(x, y, 0),             
                             ClickPosition = new Vector3Int(-49+x, -49+y, 0),
-                            Walkable = (currentHeigth > 0.34f && currentHeigth <= 0.74f),
+                            Walkable = Config.Walkable(currentHeigth),
                             MoveCost = moveCost,
                             ColorMapIndex = y * mapWidth + x
                         };
@@ -193,8 +193,6 @@ public class MapGenerator : MonoBehaviour
             return tile;
         return null;
     }
-
-    
 
     public void ClearSearch()
     {

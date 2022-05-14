@@ -128,7 +128,7 @@ MonoBehaviour:
   team: Team1
   value: 1
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 0, y: 0, z: 0}
+  StartFlagposition: {x: 400, y: -400, z: -10}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &400750587488615192
@@ -403,6 +403,6 @@ MonoBehaviour:
   team: Team1
   value: 10
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 10, y: 0, z: 0}
+  StartFlagposition: {x: -400, y: -400, z: -10}
   agentSpeed: 0
   beingCarried: 0

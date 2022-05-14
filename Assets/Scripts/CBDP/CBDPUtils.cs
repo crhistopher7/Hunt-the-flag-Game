@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum Distance
@@ -34,6 +35,11 @@ public enum PathType
 
 public static class CBDPUtils
 {
+    public static List<AgentController> OrderAgentList(List<AgentController> agents)
+    {
+        return agents.OrderBy(p => p.transform.position.x).ThenBy(p => p.transform.position.y).ToList();
+    }
+
     public static Distance CalculeDistance(Vector3 a, Vector3 b)
     {
         float distance = Vector3.Distance(a, b);
