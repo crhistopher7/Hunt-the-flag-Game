@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MatchBehaviour
 {
     public List<AgentController> Agents;
-    public List<AgentController> ClickedAgents;
     public int Points;
     public Text PointsPainel;
     System.Random prng;
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
         GameObject prefab = Resources.Load("Prefabs/Agent") as GameObject;
         GameObject go;
         string name = "Agent";
-        Color color = (CompareTag("Team1")) ? Color.blue : Color.red;
+        Color color = (CompareTag(Config.TAG_TEAM_1)) ? Color.blue : Color.red;
 
         int i = 1;
         do

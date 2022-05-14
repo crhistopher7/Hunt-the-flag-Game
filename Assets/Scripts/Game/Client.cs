@@ -25,7 +25,7 @@ public class Client : MonoBehaviour
 
     public MapGenerator mapGeneratorPrefab;
     private bool debugMode = true;
-    private string playerControllerTag = "Team1";
+    private string playerControllerTag = Config.TAG_TEAM_1;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class Client : MonoBehaviour
 
     public void SearchSimulationController()
     {
-        simulationController = GameObject.Find("SimulationCOntroller").GetComponent<SimulationController>();
+        simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
     }
 
     public string getClientName()

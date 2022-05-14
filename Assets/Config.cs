@@ -11,4 +11,11 @@ public static class Config
 
     public static char SPLITTER = ';';
     public static string DATA_BASE = "CaseDataBase.txt";
+
+    public static string PLAYER_CONTROLLER_1 = "PlayerController";
+    public static string PLAYER_CONTROLLER_2 = "Player2Controller";
+    public static string TAG_TEAM_1 = "Team1";
+    public static string TAG_TEAM_2 = "Team2";
+    public static string TAG_FLAG = "Flag";
+
 }

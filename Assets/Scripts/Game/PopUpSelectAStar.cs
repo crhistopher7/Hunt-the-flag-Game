@@ -13,23 +13,15 @@ public class PopUpSelectAStar : MonoBehaviour
 
     string pathSelected;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
             canvasSelectPathfinder.SetActive(true);
-            Vector2 anchoredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, cam, out Vector2 anchoredPos);
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, Input.mousePosition, cam, out anchoredPos);
-
-            anchoredPos = new Vector2(anchoredPos.x + 80, anchoredPos.y - 30);
+            anchoredPos = new Vector2(anchoredPos.x, anchoredPos.y);
             rectPanel.anchoredPosition = anchoredPos;
         }
     }

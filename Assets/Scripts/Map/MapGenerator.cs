@@ -13,12 +13,6 @@ public struct TerrainType
     public Color color;
 }
 
-
-public class MatchBehaviour : MonoBehaviour
-{
-
-}
-
 public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance;

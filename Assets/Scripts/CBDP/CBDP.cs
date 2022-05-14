@@ -17,7 +17,7 @@ public class CBDP : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         StartFile();
         Invoke(nameof(ConstructInitCase), 0.5f);
@@ -135,7 +135,7 @@ public class CBDP : MonoBehaviour
         }
 
         //matriz de distancia/dire��o entre os agentes e objetivos (string e int)
-        GameObject[] flags = GameObject.FindGameObjectsWithTag("Flag");
+        GameObject[] flags = GameObject.FindGameObjectsWithTag(Config.TAG_FLAG);
 
         currentCase.matrix_objetives = new string[agents_list.Count, flags.Length];
         currentCase.int_matrix_objetives = new int[agents_list.Count, flags.Length];
@@ -210,73 +210,32 @@ public class CBDP : MonoBehaviour
         return agents.OrderBy(p => p.transform.position.x).ThenBy(p => p.transform.position.y).ToList();
     }
 
-    public void ConstructEndCase()
+    public void SetSolutionTypeInCase(DeceptiveLevel type)
     {
-        var matchObjects = FindObjectsOfType<MatchBehaviour>();
-
-        foreach (var matchObject in matchObjects)
-            Destroy(matchObject.gameObject);
-
-        //pcTeam1.enabled = false;
-        //pcTeam2.enabled = false;
-
-        //mostrar os paineis e esperar resposta
-        canvasType.SetActive(true);
-
+        currentCase.solutionType = type;
+        currentCase.plan.solutionType = type;
     }
 
-    public void SetSolutionTypeInCase(string type)
+    public void SetStrategyTypeInCase(Strategy strategy)
     {
-        if (type.Equals("DECEPTIVE"))
-        {
-            //currentCase.solutionType = DeceptiveLevel.DECEPTIVE;
-            //currentCase.plan.solutionType = DeceptiveLevel.DECEPTIVE;
-        }    
-        else
-        {
-            currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
-            currentCase.plan.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
-        }
-        canvasType.SetActive(false);
-        canvasStrategy.SetActive(true);
+        currentCase.strategy = strategy;
     }
 
-    public void SetStrategyTypeInCase(string strategy)
+    public void SetDescriptionInCase(string text)
     {
-        if (strategy.Equals(Strategy.OFENSIVE.ToString()))
-            currentCase.strategy = Strategy.OFENSIVE;
-        else
-            currentCase.strategy = Strategy.DEFENSIVE;
-
-        canvasStrategy.SetActive(false);
-        canvasDescription.SetActive(true);
-    }
-
-    public void SetDescriptionInCase()
-    {
-        currentCase.description = inputDescription.text;
-
-        canvasDescription.SetActive(false);
-        canvasResult.SetActive(true);
+        currentCase.description = text;
     }
 
     public void SetResultInCase(bool result)
     {
         currentCase.result = result;
-        canvasResult.SetActive(false);
-        
-        //save 
-        SaveCase(currentCase);
-
-        //RestartGame
-        //RestartGame();
     }
 
     public Sector CalculeSector(AgentController a)
     {
         if (a.transform.position.y < -100)
         {
-            if (a.CompareTag("Team1"))
+            if (a.CompareTag(Config.TAG_TEAM_1))
                 return Sector.DEFENSIVE;
             else
                 return Sector.OFENSIVE;
@@ -284,7 +243,7 @@ public class CBDP : MonoBehaviour
 
         if (a.transform.position.y > 100)
         {
-            if (a.CompareTag("Team1"))
+            if (a.CompareTag(Config.TAG_TEAM_2))
                 return Sector.OFENSIVE;
             else
                 return Sector.DEFENSIVE;
@@ -292,8 +251,6 @@ public class CBDP : MonoBehaviour
 
         return Sector.NEUTRAL;
     }
-
-    
 
     public void PlanAddAction(Action action)
     {
@@ -321,7 +278,7 @@ public class CBDP : MonoBehaviour
         currentCase.plan.actions.Enqueue(action);
     }
 
-    private void SaveCase(CaseCBDP c)
+    public void SaveCase(CaseCBDP c)
     {
         Debug.Log("salvando o caso");
         string str = c.ToString();

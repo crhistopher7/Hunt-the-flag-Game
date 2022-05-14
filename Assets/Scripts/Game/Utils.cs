@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-//used for drawing our marquee
+public class MatchBehaviour : MonoBehaviour
+{
+
+}
 public static class Utils
 {
     static Texture2D _whiteTexture;
@@ -100,7 +103,7 @@ public static class Utils
         Ray ray = Camera.main.ScreenPointToRay(vector);
         if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
             if (hit.transform != null)
-                if (hit.transform.CompareTag("Team1") || hit.transform.CompareTag("Team2"))
+                if (hit.transform.CompareTag(Config.TAG_TEAM_1) || hit.transform.CompareTag(Config.TAG_TEAM_2))
                     return hit.transform.gameObject.name;              
 
         return "";

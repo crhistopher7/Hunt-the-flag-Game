@@ -9,7 +9,6 @@ public class AgentLevel
     public float speed;
     public int sensorMultiplier;
 
-
     public AgentLevel(int requestLevel)
     {
         switch (requestLevel)

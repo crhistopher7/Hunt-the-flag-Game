@@ -33,7 +33,7 @@ public class SimulationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitPlayers("PlayerController", "Player2Controller");
+        InitPlayers();
         FindComponents();
         SetVariables();
     }
@@ -44,19 +44,78 @@ public class SimulationController : MonoBehaviour
             ExecutePlan();
     }
 
-    public void InitPlayers(string a, string b)
+    public void InitPlayers()
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + a);
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + Config.PLAYER_CONTROLLER_1);
         GameObject go = Instantiate(prefab);
 
         pcTeam1 = go.GetComponent<PlayerController>();
-        pcTeam1.name = a;
+        pcTeam1.name = Config.PLAYER_CONTROLLER_1;
 
-        prefab = Resources.Load<GameObject>("Prefabs/" + b);
+        prefab = Resources.Load<GameObject>("Prefabs/" + Config.PLAYER_CONTROLLER_2);
         go = Instantiate(prefab);
 
         pcTeam2 = go.GetComponent<PlayerController>();
-        pcTeam2.name = b;
+        pcTeam2.name = Config.PLAYER_CONTROLLER_2;
+    }
+
+    public void EndCase()
+    {
+        //Destruir os agents
+        var matchObjects = FindObjectsOfType<MatchBehaviour>();
+
+        foreach (var matchObject in matchObjects)
+            Destroy(matchObject.gameObject);
+
+
+        //Iniciar mostragem de canvas
+        //Mandar respostas para o cbdp
+        canvasType.SetActive(true);
+
+        //InitPlayers no final pra reiniciar
+    }
+
+    public void SetSolutionType(string type)
+    {
+        if (type.Equals("DECEPTIVE"))
+            //Calcular nível de engano
+            cbdp.SetSolutionTypeInCase(DeceptiveLevel.LITTLE_DECEPTIVE);
+        else
+            cbdp.SetSolutionTypeInCase(DeceptiveLevel.NOT_DECEPTIVE);
+
+        canvasType.SetActive(false);
+        canvasStrategy.SetActive(true);
+    }
+
+    public void SetStrategyType(string strategy)
+    {
+        if (strategy.Equals(Strategy.OFENSIVE.ToString()))
+            cbdp.SetStrategyTypeInCase(Strategy.OFENSIVE);
+        else
+            cbdp.SetStrategyTypeInCase(Strategy.DEFENSIVE);
+
+        canvasStrategy.SetActive(false);
+        canvasDescription.SetActive(true);
+    }
+
+    public void SetDescription()
+    {
+        cbdp.SetDescriptionInCase(inputDescription.text);
+
+        canvasDescription.SetActive(false);
+        canvasResult.SetActive(true);
+    }
+
+    public void SetResult(bool result)
+    {
+        cbdp.SetResultInCase(result);
+        canvasResult.SetActive(false);
+
+        //save case
+        cbdp.SaveCase(cbdp.GetCase());
+
+        //RestartGame
+        InitPlayers();
     }
 
     private void SetVariables()
@@ -93,17 +152,6 @@ public class SimulationController : MonoBehaviour
         selectedAgents.Clear();
     }
 
-    private void RestartGame()
-    {
-        pcTeam1.enabled = true;
-        pcTeam2.enabled = true;
-        //reiniciar players
-        Debug.Log("start agents team 1");
-        pcTeam1.StartAgents();
-        Debug.Log("start agents team 2");
-        pcTeam2.StartAgents();
-    }
-
     private void ShowCanvasPath()
     {
         canvasSelectPathfinder.SetActive(true);
@@ -124,7 +172,7 @@ public class SimulationController : MonoBehaviour
 
     public bool VerifySelectedGroupAgent(Vector2[] corners)
     {
-        var Agents = CompareTag("Team1") ? pcTeam1.Agents : pcTeam2.Agents;
+        var Agents = CompareTag(Config.TAG_TEAM_1) ? pcTeam1.Agents : pcTeam2.Agents;
 
         //Quais agentes est�o dentro dos limites da box
         foreach (AgentController agent in Agents)
@@ -156,7 +204,7 @@ public class SimulationController : MonoBehaviour
     public void DesableComponentSelectController()
     {
         selectController.enabled = false;
-        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e n�o perguntar path'
+        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e não perguntar path'
         ShowCanvasPath();
     }
 
@@ -208,7 +256,7 @@ public class SimulationController : MonoBehaviour
 
     public void ReceiveMove(string name, string team, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
-        if (team == "Team1")
+        if (team.Equals(Config.TAG_TEAM_1))
             pcTeam1.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
         else
             pcTeam2.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
@@ -220,9 +268,9 @@ public class SimulationController : MonoBehaviour
 
         if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
         {
-            // Pode executar a pr�xima a��o do plano
+            // Pode executar a proxima acao do plano
             action = plan.actions.Dequeue();
-            Debug.Log("Executando a��o: " + action.ToString());
+            Debug.Log("Executando ação: " + action.ToString());
             ExecuteAction(action);
 
             if (plan.actions.Count == 0)
@@ -364,7 +412,7 @@ public class SimulationController : MonoBehaviour
     {
         var gameObject = GameObject.Find(objetive);
 
-        return Vector3Int.FloorToInt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0) / 10);
+        return Vector3Int.FloorToInt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0) / Config.MAP_OFFSET);
     }
 
     public void ReceivePlan(string plan)

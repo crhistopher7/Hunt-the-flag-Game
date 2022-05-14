@@ -43,18 +43,18 @@ public class PathfinderPointsController : MonoBehaviour
             Utils.DestroyLineDrawer();
             if (pathType.Equals(PathType.NORMAL))
             {
-                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
                 simulationController.ReceiveObjectivePositions(positionClick, deceptivePosition);
             }
             else if (!hasDeceptivePosition)
             {
-                deceptivePosition = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
+                deceptivePosition = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
                 Utils.InstantiateLineDrawer(positionClick, Color.green);
                 hasDeceptivePosition = true;
             }
             else
             {
-                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / 10;
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
                 simulationController.ReceiveObjectivePositions(positionClick, deceptivePosition);
                 hasDeceptivePosition = false;
             }

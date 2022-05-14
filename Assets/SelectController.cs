@@ -27,7 +27,7 @@ public class SelectController : MonoBehaviour
 
     private void FindComponents()
     {
-        simulationController = GameObject.Find("Simulation Controller").GetComponent<SimulationController>();
+        simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
     }
 
     private void SetVariables()
