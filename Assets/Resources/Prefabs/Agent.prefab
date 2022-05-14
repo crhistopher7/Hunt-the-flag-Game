@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e69628b254d0b6844be0a749db029c60, type: 2}
+  - {fileID: 2100000, guid: 61b41e34f02d85340925c83ef280d119, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,15 +72,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!1 &7736414060981692363
@@ -133,7 +133,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 725121c1c963b844b8b4785681844bdf, type: 2}
+  - {fileID: 2100000, guid: d6f51ae76f75f0f4aab6960c5ae1a6f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,7 +229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 529983893a8ed9c44a9ef11a76a4a0b2, type: 2}
+  - {fileID: 2100000, guid: 9b8f606fcffa06f4a805680d7c94ef33, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,24 +273,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7736414061086817893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae1002127806f545b4a9385ee51cf97, type: 3}
+  m_Script: {fileID: 11500000, guid: 501f895f631dcbd40ab823eff36aa5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AStar: {fileID: 7094141867835991194, guid: 027b64fa259a41f43a74f77a749ae78c, type: 3}
-  DeceptiveAStar_1: {fileID: 6769408725388199338, guid: 027b64fa259a41f43a74f77a749ae78c, type: 3}
-  DeceptiveAStar_2: {fileID: 1421449227820890833, guid: 027b64fa259a41f43a74f77a749ae78c, type: 3}
-  DeceptiveAStar_3: {fileID: 461983293335933507, guid: 027b64fa259a41f43a74f77a749ae78c, type: 3}
-  DeceptiveAStar_4: {fileID: 3058127622543584383, guid: 027b64fa259a41f43a74f77a749ae78c, type: 3}
-  maxX: 500
-  minX: -500
-  maxY: -100
-  minY: -500
-  indexTypePath: 0
+  maxX: 0
+  minX: 0
+  maxY: 0
+  minY: 0
   isCarryingFlag: 0
-  lifeBar: {fileID: 7736414060981692360}
-  materials:
-  - {fileID: 2100000, guid: c611ab6eff1404f4fa6ccff8cb1a67a0, type: 2}
-  - {fileID: 2100000, guid: 513e0f9798556ad43a991b5bbfbe5a97, type: 2}
+  lifeBar: {fileID: 7736414060887094470}
+  materials: []
   seed: 0
 --- !u!114 &7736414061086817890
 MonoBehaviour:
@@ -301,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7736414061086817893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705d046d692668748b81ab2e3dcec9e3, type: 3}
+  m_Script: {fileID: 11500000, guid: dd3f4bd102988fa43a8f1d383cdfecaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &6148305773255007118

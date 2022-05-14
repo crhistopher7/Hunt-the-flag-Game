@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44cf9ee138770904aa9972e0f4ac912a, type: 2}
+  - {fileID: 2100000, guid: 74f682877889741478ad83b2135d775a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,13 +122,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 88484582904719568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef9a8dc1ad14354ea2d85c232fe2cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team: Team1
   value: 1
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 214, y: -405, z: -11}
+  StartFlagposition: {x: 0, y: 0, z: 0}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &400750587488615192
@@ -191,7 +191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e8fa4fd1a4e7834aa375ff41aa2daa2, type: 2}
+  - {fileID: 2100000, guid: 6ad0c4d2d1bd372429ed0c109e2e7d11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -269,22 +269,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3807371785204781298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419afcb9560cbbe4da6b99fe88360681, type: 3}
+  m_Script: {fileID: 11500000, guid: 364d78fdd8a6e4348a5392903102e175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Agents: []
-  EnemyAgents: []
-  ClickedAgents: []
-  clientCanBeController: admin
   Points: 0
-  numberOfAgents: 5
-  PointsPainel: {fileID: 4793142285139765149, guid: ddd01e10b08ee0d498639caea1b6e33d, type: 3}
-  caseConstructor: {fileID: 0}
-  canvasSelectPathfinder: {fileID: 0}
-  dropdown: {fileID: 8408035640877543709, guid: adca2d2dabbc58a46883797fdb3f2748, type: 3}
-  rectPanel: {fileID: 2210901852359783535, guid: 8edad6191980fc642aa1e18dd0bc3896, type: 3}
-  rectCanvas: {fileID: 0}
-  line: {fileID: 9178176319412945875, guid: 8112efc65c4e79449bb71523a6363841, type: 3}
+  PointsPainel: {fileID: 4793142285139765149, guid: 65636f155538c49489796e6330e2b04b, type: 3}
 --- !u!1 &8003570891602515807
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44cf9ee138770904aa9972e0f4ac912a, type: 2}
+  - {fileID: 2100000, guid: 74f682877889741478ad83b2135d775a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -407,12 +397,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8003570891602515807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef9a8dc1ad14354ea2d85c232fe2cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team: Team1
   value: 10
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: -214, y: -405, z: -11}
+  StartFlagposition: {x: 10, y: 0, z: 0}
   agentSpeed: 0
   beingCarried: 0

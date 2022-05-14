@@ -9,6 +9,13 @@ public static class Config
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
 
+    public static int[] LIMITS_X_AGENT_TEAM_1 = {0, 0};
+    public static int[] LIMITS_X_AGENT_TEAM_2 = {0, 0};
+    public static int[] LIMITS_Y_AGENT_TEAM_1 = {0, 0};
+    public static int[] LIMITS_Y_AGENT_TEAM_2 = {0, 0};
+
+
+
     public static char SPLITTER = ';';
     public static string DATA_BASE = "CaseDataBase.txt";
 

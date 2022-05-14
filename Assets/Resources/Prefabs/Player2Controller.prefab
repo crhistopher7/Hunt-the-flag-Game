@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1672fb5d4fe49d6499e60431df05777d, type: 2}
+  - {fileID: 2100000, guid: 3842fd2cc8a807940b5027383f9516a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4a49090e1e0488b418f17588de3f50d3, type: 2}
+  - {fileID: 2100000, guid: 85c2249a70dafce4086322131565fa02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,13 +217,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2802877164082616619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef9a8dc1ad14354ea2d85c232fe2cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team: Team2
   value: 10
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 214, y: 420, z: -11}
+  StartFlagposition: {x: 0, y: 0, z: 0}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &5102108362764092809
@@ -288,7 +288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4a49090e1e0488b418f17588de3f50d3, type: 2}
+  - {fileID: 2100000, guid: 85c2249a70dafce4086322131565fa02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,13 +348,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5102108362764092809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef9a8dc1ad14354ea2d85c232fe2cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team: Team2
   value: 1
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: -214, y: 440, z: -11}
+  StartFlagposition: {x: 0, y: 0, z: 0}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &5484188477978713651
@@ -400,19 +400,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5484188477978713651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419afcb9560cbbe4da6b99fe88360681, type: 3}
+  m_Script: {fileID: 11500000, guid: 364d78fdd8a6e4348a5392903102e175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Agents: []
-  EnemyAgents: []
-  ClickedAgents: []
-  clientCanBeController: admin2
   Points: 0
-  numberOfAgents: 5
-  PointsPainel: {fileID: 0}
-  caseConstructor: {fileID: 0}
-  canvasSelectPathfinder: {fileID: 0}
-  dropdown: {fileID: 0}
-  rectPanel: {fileID: 0}
-  rectCanvas: {fileID: 0}
-  line: {fileID: 0}
+  PointsPainel: {fileID: 7456990147499095244, guid: 24b9e241e7e59a8429e59ad3ec1dbbbe, type: 3}

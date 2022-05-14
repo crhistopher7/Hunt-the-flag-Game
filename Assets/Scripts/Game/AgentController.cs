@@ -11,10 +11,7 @@ public class AgentController : MatchBehaviour
     private DeceptiveAStar_3 DeceptiveAStar_3;
     private DeceptiveAStar_4 DeceptiveAStar_4;
 
-    public int maxX;
-    public int minX;
-    public int maxY;
-    public int minY;
+   
     protected Vector3 CurrentPosition;
     private float DistanceToChangeWayPoint = 0.5f;
     List<LogicMap> path;
@@ -54,14 +51,17 @@ public class AgentController : MatchBehaviour
 
     public void InitPosition(int seed)
     {
+        var limits_x = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_X_AGENT_TEAM_1 : Config.LIMITS_X_AGENT_TEAM_2;
+        var limits_y = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_Y_AGENT_TEAM_1 : Config.LIMITS_Y_AGENT_TEAM_2;
+
         prng = new System.Random(seed);
         LogicMap point;
         Vector3Int position;
         do
         {
 
-            int x = prng.Next(minX, maxX);
-            int y = prng.Next(minY, maxY);
+            int x = prng.Next(limits_x[0], limits_x[1]);
+            int y = prng.Next(limits_y[0], limits_y[1]);
             int z = (int)this.transform.position.z;
 
             position = new Vector3Int(x, y, z);

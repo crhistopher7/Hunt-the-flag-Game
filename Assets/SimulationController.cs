@@ -134,6 +134,11 @@ public class SimulationController : MonoBehaviour
         selectController = gameObject.GetComponent<SelectController>();
         pathfinderPointsController = gameObject.GetComponent<PathfinderPointsController>();
         canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
+        canvasType = Camera.main.transform.Find("CanvasType").gameObject;
+        canvasStrategy = Camera.main.transform.Find("CanvasStrategy").gameObject;
+        canvasResult = Camera.main.transform.Find("CanvasResult").gameObject;
+        canvasDescription = Camera.main.transform.Find("CanvasDescription").gameObject;
+        inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
         dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
         rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
         rectCanvas = canvasSelectPathfinder.GetComponent<RectTransform>();
