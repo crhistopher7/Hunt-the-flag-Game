@@ -51,6 +51,7 @@ public class AgentController : MatchBehaviour
 
     public void InitPosition(int seed)
     {
+        AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
         var limits_x = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_X_AGENT_TEAM_1 : Config.LIMITS_X_AGENT_TEAM_2;
         var limits_y = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_Y_AGENT_TEAM_1 : Config.LIMITS_Y_AGENT_TEAM_2;
 

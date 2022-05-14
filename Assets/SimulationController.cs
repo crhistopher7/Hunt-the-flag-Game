@@ -142,7 +142,7 @@ public class SimulationController : MonoBehaviour
         dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
         rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
         rectCanvas = canvasSelectPathfinder.GetComponent<RectTransform>();
-        cbdp = GameObject.Find("CaseConstructor").GetComponent<CBDP>();
+        cbdp = GameObject.Find("CBDP").GetComponent<CBDP>();
     }
 
     private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
