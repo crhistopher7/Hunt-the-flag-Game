@@ -37,7 +37,6 @@ public class PathfinderPointsController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Pegando o ponto de path");
             Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             Utils.DestroyLineDrawer();

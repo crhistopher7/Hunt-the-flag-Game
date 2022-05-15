@@ -59,7 +59,6 @@ public class PlayerController : MatchBehaviour
         foreach (AgentController agent in Agents)
             if (agent.name == name)
             {
-                Debug.Log("Fazer path");
                 agent.BuildPath(objectivePosition, deceptivePosition, pathType);
                 return;
             }

@@ -81,7 +81,7 @@ public class Client : MonoBehaviour
     // Sending message to the server
     public void Send(string data)
     {
-        Debug.Log("Send to Server:  " + data);
+        //Debug.Log("Send to Server:  " + data);
         if (debugMode)
         {
             OnIncomingData(data);
@@ -99,7 +99,7 @@ public class Client : MonoBehaviour
     private void OnIncomingData(string data)
     {
         string[] aData = data.Split('|');
-        Debug.Log("Received from server: " + data);
+        //Debug.Log("Received from server: " + data);
 
         switch (aData[0])
         {

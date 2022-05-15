@@ -55,9 +55,6 @@ public class AgentController : MatchBehaviour
         var limits_x = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_X_AGENT_TEAM_1 : Config.LIMITS_X_AGENT_TEAM_2;
         var limits_y = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_Y_AGENT_TEAM_1 : Config.LIMITS_Y_AGENT_TEAM_2;
 
-        Debug.Log(limits_x[0]);
-        Debug.Log(limits_y[0]);
-
         prng = new System.Random(seed);
         LogicMap point;
         Vector3Int position;
@@ -70,7 +67,6 @@ public class AgentController : MatchBehaviour
             position = new Vector3Int(x, y, z);
 
             point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(x, y, 0)) / Config.MAP_OFFSET);
-            Debug.Log("Point -- " + point);
         } while (!point.Walkable);
 
         this.transform.position = position;

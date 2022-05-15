@@ -14,6 +14,7 @@ public class SimulationController : MonoBehaviour
     private GameObject canvasStrategy;
     private GameObject canvasResult;
     private GameObject canvasDescription;
+    private GameObject canvasPainels;
     private InputField inputDescription;
     private List<AgentController> selectedAgents;
     private Dropdown dropdown;
@@ -36,9 +37,10 @@ public class SimulationController : MonoBehaviour
         InitPlayers();
         FindComponents();
         SetVariables();
+        SearchSimillarCases();
     }
 
-    private void Update()
+    void Update()
     {
         if (hasPlan)
             ExecutePlan();
@@ -67,12 +69,8 @@ public class SimulationController : MonoBehaviour
         foreach (var matchObject in matchObjects)
             Destroy(matchObject.gameObject);
 
-
-        //Iniciar mostragem de canvas
-        //Mandar respostas para o cbdp
+        canvasPainels.SetActive(false);
         canvasType.SetActive(true);
-
-        //InitPlayers no final pra reiniciar
     }
 
     public void SetSolutionType(string type)
@@ -116,6 +114,7 @@ public class SimulationController : MonoBehaviour
 
         //RestartGame
         InitPlayers();
+        canvasPainels.SetActive(true);
     }
 
     private void SetVariables()
@@ -144,6 +143,7 @@ public class SimulationController : MonoBehaviour
         canvasStrategy = Camera.main.transform.Find("CanvasStrategy").gameObject;
         canvasResult = Camera.main.transform.Find("CanvasResult").gameObject;
         canvasDescription = Camera.main.transform.Find("CanvasDescription").gameObject;
+        canvasPainels = Camera.main.transform.Find("CanvasPainels").gameObject;
         inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
         dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
         rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
@@ -165,6 +165,7 @@ public class SimulationController : MonoBehaviour
 
     private void ShowCanvasPath()
     {
+        canvasPainels.SetActive(false);
         canvasSelectPathfinder.SetActive(true);
         Vector2 anchoredPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, pointOfCanvasPath, Camera.main, out anchoredPos);
@@ -245,10 +246,10 @@ public class SimulationController : MonoBehaviour
     public void SetPathfinder()
     {
         pathType = (PathType)dropdown.value;
-        Debug.Log("Path selected: " + pathType);
         
         canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
         canvasSelectPathfinder.SetActive(false);
+        canvasPainels.SetActive(true);
         ShowArrowPathConstructor();
         dropdown.value = 0;
     }
@@ -470,5 +471,12 @@ public class SimulationController : MonoBehaviour
         cbdp.PlanAddAction(action);
 
         yield return null;
+    }
+
+    private void SearchSimillarCases()
+    {
+        //Lista de [Descrição, Plano]
+        List<string[]> cases = cbdp.SearchSimilarCases();
+        // preencher o canvasPainels
     }
 }

@@ -69,7 +69,6 @@ public static class Utils
 
     public static void DestroyLineDrawer()
     {
-        Debug.Log("Destruindo as linhas");
         var lines = Object.FindObjectsOfType<DrawArrowLine>();
 
         foreach (var line in lines)
