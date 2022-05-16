@@ -20,8 +20,10 @@ public class CBDP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //iniciar o contador de tempo (pegar o time)
+        this.initTime = DateTime.Now;
         cbr = new CBRAPI();
-        StartFile();
+        //StartFile();
         ConvertCSVToCaseBase();
     }
 
@@ -39,14 +41,14 @@ public class CBDP : MonoBehaviour
         {
             var header = reader.ReadLine();
             features = header.Split(Config.SPLITTER);
-            //Debug.Log("Cabeçalho: " + header);
+            Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 var values = line.Split(Config.SPLITTER);
 
-                //Debug.Log("Lendo linha: " + line);
+                Debug.Log("Lendo linha: " + line);
 
                 Case caso = CaseToCase(values);
 
@@ -85,7 +87,7 @@ public class CBDP : MonoBehaviour
         //Result
         caso.caseDescription.Add(new CaseFeature(9, features[9], typeof(string), values[9]));
         //Description
-        caso.caseDescription.Add(new CaseFeature(9, features[10], typeof(string), values[10]));
+        caso.caseDescription.Add(new CaseFeature(10, features[10], typeof(string), values[10]));
 
         //--------------- Estruturacao da descricao da solucao do caso
         //Planning
@@ -262,9 +264,6 @@ public class CBDP : MonoBehaviour
             caseid = currentCase.caseId,
             actions = new Queue<Action>()
         };
-
-        //iniciar o contador de tempo (pegar o time)
-        this.initTime = DateTime.Now;
 
         //temporario
         currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;

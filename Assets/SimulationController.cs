@@ -15,7 +15,9 @@ public class SimulationController : MonoBehaviour
     private GameObject canvasResult;
     private GameObject canvasDescription;
     private GameObject canvasPainels;
+    private GameObject textUISimilarCases;
     private InputField inputDescription;
+    private InputField similarCaseInput;
     private List<AgentController> selectedAgents;
     private Dropdown dropdown;
     private RectTransform rectPanel;
@@ -24,10 +26,11 @@ public class SimulationController : MonoBehaviour
     private CBDP cbdp;
     private PlayerController pcTeam1;
     private PlayerController pcTeam2;
-
+    private List<string[]> listOfSimilarCases;
     private bool hasPlan = false;
     private DateTime dateStartPlan;
     private Plan plan;
+
 
     public Vector3 pointOfCanvasPath;
 
@@ -37,7 +40,7 @@ public class SimulationController : MonoBehaviour
         InitPlayers();
         FindComponents();
         SetVariables();
-        SearchSimillarCases();
+        Invoke(nameof(SearchSimillarCases), 0.5f);
     }
 
     void Update()
@@ -98,7 +101,7 @@ public class SimulationController : MonoBehaviour
 
     public void SetDescription()
     {
-        cbdp.SetDescriptionInCase(inputDescription.text);
+        cbdp.SetDescriptionInCase(inputDescription.text.Replace(Config.SPLITTER, ' '));
 
         canvasDescription.SetActive(false);
         canvasResult.SetActive(true);
@@ -115,6 +118,17 @@ public class SimulationController : MonoBehaviour
         //RestartGame
         InitPlayers();
         canvasPainels.SetActive(true);
+    }
+
+    public void ExecuteSimilarCase()
+    {
+        string strigIdCase = similarCaseInput.text;
+
+        if (Int32.TryParse(strigIdCase, out int id) && listOfSimilarCases.Count > id && id >= 0)
+        {
+            Debug.Log("Executando o Plano: " + listOfSimilarCases[id][1]);
+            ReceivePlan(listOfSimilarCases[id][1]);
+        }
     }
 
     private void SetVariables()
@@ -144,6 +158,8 @@ public class SimulationController : MonoBehaviour
         canvasResult = Camera.main.transform.Find("CanvasResult").gameObject;
         canvasDescription = Camera.main.transform.Find("CanvasDescription").gameObject;
         canvasPainels = Camera.main.transform.Find("CanvasPainels").gameObject;
+        textUISimilarCases = canvasPainels.transform.Find("Right Panel").transform.Find("Scroll View").transform.Find("Viewport").transform.Find("Content").transform.Find("CaseText").gameObject;
+        similarCaseInput = canvasPainels.transform.Find("Right Panel").transform.Find("SimilarCaseInput").GetComponent<InputField>();
         inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
         dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
         rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
@@ -156,7 +172,7 @@ public class SimulationController : MonoBehaviour
         Message send = new Message();
         foreach (AgentController agent in selectedAgents)
         {
-            send.AddMessage("Moves", gameObject.tag, agent, pathType, objectivePosition, deceptivePosition);
+            send.AddMessage("Moves", gameObject.tag, agent.name, pathType, objectivePosition, deceptivePosition);
             StartCoroutine(SendActionToCase("Move", agent, objectivePosition, deceptivePosition, pathType));
         }
         clientOfExecution.Send(send.ToString());
@@ -298,25 +314,23 @@ public class SimulationController : MonoBehaviour
         {
             case "Move":
                 {
-                    Vector3Int objetivePosition;
-
+                    Vector3Int objetivePosition, deceptivePosition = new Vector3Int();
+                    Vector3 position = GetPositionByName(action.agent);
                     // Verificar se existe um objetivo
                     if (action.objetive.Equals(""))
-                    {
-                        Vector3 position = GetPositionByName(action.agent);
                         //n�o existe, ent�o usar o distance_direction
                         objetivePosition = GetPositionByDistanceDirection(action.distance_direction, position);
-                    }
                     else
-                    {
-                        Debug.Log("Executando a a��o que possui objetivo");
                         //usar a localiza��o do objetivo
                         objetivePosition = GetPositionByName(action.objetive);
-                    }
 
-                    // TODO Verificar o actionDefinition para a��o enganosa
+                    if (!action.pathType.Equals(PathType.NORMAL))
+                        deceptivePosition = GetPositionByDistanceDirection(action.distance_directionDeceptive, position);
+
                     // Mandando movimenta��o para o servidor
-                    clientOfExecution.Send("Moves|" + gameObject.tag + "|" + action.agent + "|" + objetivePosition.x + "|" + objetivePosition.y + "#");
+                    Message send = new Message();
+                    send.AddMessage("Moves", gameObject.tag, action.agent, action.pathType, objetivePosition, deceptivePosition);
+                    clientOfExecution.Send(send.ToString());
                     break;
                 }
             default:
@@ -413,11 +427,11 @@ public class SimulationController : MonoBehaviour
             double angle = random.Next(minDirection, maxDirection);
 
             position = Utils.PositionByDistanceAndAngle(angle, h, new Vector2(positionAgent.x, positionAgent.y));
-            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / 10);
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / Config.MAP_OFFSET);
 
         } while (point == null || !point.Walkable);
 
-        return position / 10;
+        return position / Config.MAP_OFFSET;
     }
 
     private Vector3Int GetPositionByName(string objetive)
@@ -465,7 +479,7 @@ public class SimulationController : MonoBehaviour
         distance = CBDPUtils.CalculeDistance(agent.transform.position, deceptivePosition);
         direction = CBDPUtils.CalculeDirection(deceptivePosition.x, deceptivePosition.y);
 
-        action.distance_direction = distance.ToString() + '-' + direction.ToString();
+        action.distance_directionDeceptive = distance.ToString() + '-' + direction.ToString();
 
         //send to plan
         cbdp.PlanAddAction(action);
@@ -476,7 +490,19 @@ public class SimulationController : MonoBehaviour
     private void SearchSimillarCases()
     {
         //Lista de [Descrição, Plano]
-        List<string[]> cases = cbdp.SearchSimilarCases();
+        listOfSimilarCases = cbdp.SearchSimilarCases();
         // preencher o canvasPainels
+        Text text = textUISimilarCases.GetComponent<Text>();
+        string str = "";
+        int i = 0;
+        foreach (string[] c in listOfSimilarCases)
+        {
+            str += "Case " + i.ToString();
+            str += " " + c[0];
+            str += "\n\n";
+            i++;
+        }
+
+        text.text = str;
     }
 }

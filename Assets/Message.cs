@@ -9,11 +9,11 @@ public class Message
 
     public LinkedList<string> message = new LinkedList<string>();
 
-    public void AddMessage(string action, string team, AgentController agent, PathType typePath, Vector3Int objective, Vector3Int deceptiveObjetive) 
+    public void AddMessage(string action, string team, string agent, PathType typePath, Vector3Int objective, Vector3Int deceptiveObjetive) 
     {
         string str = action + splitter;
         str += team + splitter;
-        str += agent.name + splitter;
+        str += agent + splitter;
         str += typePath.ToString() + splitter;
         str += objective.x.ToString() + splitter;
         str += objective.y.ToString() + splitter;

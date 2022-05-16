@@ -61,7 +61,7 @@ public class SectorSimilarity : AbstractLocalSimilarity
 
         similarity = diff / A.Length;
 
-        Debug.Log("Similaridade do Vetor do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
+        //Debug.Log("Similaridade do Vetor do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
 
         return 1f - similarity;
     }
