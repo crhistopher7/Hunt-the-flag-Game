@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// CBDP Plan class used in Case
+/// </summary>
 public class Plan
 {
     public int caseid;

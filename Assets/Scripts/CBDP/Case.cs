@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// CBDP Case class
+/// </summary>
 public class CaseCBDP
 {
     public int caseId;
