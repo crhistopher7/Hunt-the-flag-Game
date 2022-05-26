@@ -21,24 +21,24 @@ public class TestValidation : MonoBehaviour
         // Estruturacao de como o caso sera consultado na base de casos
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 0.2f, new Equals()));            //Seed
         //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));            //Tipo do caso
-        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 1f, new Equals()));            //Estratégia 
+        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 1f, new Equals()));            //Estrat?gia 
         //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 9 }, 1f, new Equals()));            //Resultado
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));  //Matriz de agentes
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 0.4f, new MatrixSimilarity()));  //Matriz de objetivos
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 0.2f, new SectorSimilarity()));  //Vetor de setor dos agentes
 
-        // Realizando uma consulta na base de casos (lista já ordenada por maior score)
+        // Realizando uma consulta na base de casos (lista j? ordenada por maior score)
         List<Result> results = cbr.Retrieve(currentCase, consultStructure);
 
-        // Entre os resltados encontrar o melhor que é (Enganoso, ofensivo e Funcionou)
+        // Entre os resltados encontrar o melhor que ? (Enganoso, ofensivo e Funcionou)
         foreach (Result result in results)
         {
             Debug.Log("Caso: " + result.matchCase.caseDescription[0].value + " com " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
-            Debug.Log("Caso: " + result.matchCase.caseDescription[0].value + "Similaridade Solução: " + (PlanSimilarity(result.matchCase.caseSolution[0].value, currentCase.caseSolution[0].value) * 100).ToString("0.00") + "%");
+            Debug.Log("Caso: " + result.matchCase.caseDescription[0].value + "Similaridade Solu??o: " + (PlanSimilarity(result.matchCase.caseSolution[0].value, currentCase.caseSolution[0].value) * 100).ToString("0.00") + "%");
         }
 
 
-        // Não encontrou um que possui essas 3 dependencias 
+        // N?o encontrou um que possui essas 3 dependencias 
         Debug.Log("Caso recuperado: " + results[0].matchCase.caseDescription[0].value + " com " + (results[0].matchPercentage * 100).ToString("0.00") + "% de similaridade");
 
 

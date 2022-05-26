@@ -18,6 +18,10 @@ public class Action
     public string distance_directionDeceptive;
     public int time;
 
+    /// <summary>
+    /// Override do ToString
+    /// </summary>
+    /// <returns>Retorna uma string única contendo todas as variáveis separadas por ','</returns>
     public override string ToString()
     {
         return action + "," + agent + "," + objetive + "," + actionDefinition + "," +

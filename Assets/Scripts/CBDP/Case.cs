@@ -24,7 +24,11 @@ public class CaseCBDP
     public bool result;
     public string description;
     public Plan plan;
-
+    
+    /// <summary>
+    /// Override do ToString
+    /// </summary>
+    /// <returns>Retorna uma string única contendo todas as variáveis separadas por ','</returns>
     public override string ToString()
     {
         string str = "";
@@ -64,6 +68,12 @@ public class CaseCBDP
         return str;
     }
 
+    /// <summary>
+    /// Função que reescreve uma matriz[,] do tipo string em forma de string
+    /// </summary>
+    /// <param name="matrix">A matriz[,] do tipo string</param>
+    /// <param name="delimiter">Delimitador</param>
+    /// <returns>Matrix no formato de string</returns>
     public string ToMatrixString(string[,] matrix, string delimiter = ",")
     {
         string s = "{";
@@ -83,6 +93,12 @@ public class CaseCBDP
         return s += "}";
     }
 
+    /// <summary>
+    /// Função que reescreve uma matriz[,] do tipo int em forma de string
+    /// </summary>
+    /// <param name="matrix">A matriz[,] do tipo int</param>
+    /// <param name="delimiter">Delimitador</param>
+    /// <returns>Matrix no formato de string</returns>
     public string ToMatrixString(int[,] matrix, string delimiter = ",")
     {
         string s = "{";
