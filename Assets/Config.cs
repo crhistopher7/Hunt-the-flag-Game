@@ -15,18 +15,24 @@ public static class Config
     public static int[] LIMITS_Y_AGENT_TEAM_2 = {100, 490};
 
 
+    public static float LIMIAR_HIGHLY_DECEPTIVE = 0.75f;
+    public static float LIMIAR_PARTIALLY_DECEPTIVE = 0.3f;
+    public static float LIMIAR_LITTLE_DECEPTIVE = 0.001f;
 
     public static char SPLITTER = ';';
     public static string DATA_BASE = "CaseDataBase.txt";
 
     public static string PLAYER_CONTROLLER_1 = "PlayerController";
     public static string PLAYER_CONTROLLER_2 = "Player2Controller";
+    public static string PATHFINDER = "Pathfinder";
     public static string TAG_TEAM_1 = "Team1";
     public static string TAG_TEAM_2 = "Team2";
     public static string TAG_FLAG = "Flag";
 
     public static float MAX_WALKABLE = 1f;
     public static float MIN_WALKABLE = 0f;
+
+
 
     public static bool Walkable(float value)
     {

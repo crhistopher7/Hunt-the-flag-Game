@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class MatchBehaviour : MonoBehaviour
-{
-
-}
+public class MatchBehaviour : MonoBehaviour { }
 public static class Utils
 {
     static Texture2D _whiteTexture;

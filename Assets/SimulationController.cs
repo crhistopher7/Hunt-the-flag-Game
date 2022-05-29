@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Classe que realiza o controle do simulador e a comunicação com o CBDP
+/// </summary>
 public class SimulationController : MonoBehaviour
 {
     private Client clientOfExecution;
@@ -49,6 +52,9 @@ public class SimulationController : MonoBehaviour
             ExecutePlan();
     }
 
+    /// <summary>
+    /// Função que istancia os prefabs dos controladores de cada time de agentes
+    /// </summary>
     public void InitPlayers()
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + Config.PLAYER_CONTROLLER_1);
@@ -64,6 +70,9 @@ public class SimulationController : MonoBehaviour
         pcTeam2.name = Config.PLAYER_CONTROLLER_2;
     }
 
+    /// <summary>
+    /// Função que destrói os agentes do caso corrente e inicia os paineis de informação do caso
+    /// </summary>
     public void EndCase()
     {
         //Destruir os agents
@@ -76,11 +85,17 @@ public class SimulationController : MonoBehaviour
         canvasType.SetActive(true);
     }
 
+    /// <summary>
+    /// Função que recebe o tipo de caso (enganoso ou normal) e envia para o CBDP a informação
+    /// </summary>
+    /// <param name="type">string que diz 'DECEPTIVE' ou 'NORMAL'</param>
     public void SetSolutionType(string type)
     {
         if (type.Equals("DECEPTIVE"))
-            //Calcular nível de engano
-            cbdp.SetSolutionTypeInCase(DeceptiveLevel.LITTLE_DECEPTIVE);
+        {
+            DeceptiveLevel level = cbdp.CalculateDeceptionLevel();
+            cbdp.SetSolutionTypeInCase(level);
+        }            
         else
             cbdp.SetSolutionTypeInCase(DeceptiveLevel.NOT_DECEPTIVE);
 
@@ -88,6 +103,10 @@ public class SimulationController : MonoBehaviour
         canvasStrategy.SetActive(true);
     }
 
+    /// <summary>
+    /// Função que recebe a estratégia do caso (ofensivo ou defensivo) e envia para o CBDP a informação
+    /// </summary>
+    /// <param name="strategy">string que diz 'OFENSIVE' ou 'DEFENSIVE'</param>
     public void SetStrategyType(string strategy)
     {
         if (strategy.Equals(Strategy.OFENSIVE.ToString()))
@@ -99,6 +118,9 @@ public class SimulationController : MonoBehaviour
         canvasDescription.SetActive(true);
     }
 
+    /// <summary>
+    /// Função que recebe a estratégia do caso (ofensivo ou defensivo) e envia para o CBDP a informação
+    /// </summary>
     public void SetDescription()
     {
         cbdp.SetDescriptionInCase(inputDescription.text.Replace(Config.SPLITTER, ' '));
@@ -107,6 +129,10 @@ public class SimulationController : MonoBehaviour
         canvasResult.SetActive(true);
     }
 
+    /// <summary>
+    /// Função que recebe o resultado do caso (true ou false) e envia para o CBDP a informação. Chama o inicializador dos players
+    /// </summary>
+    /// <param name="result">resultado do caso</param>
     public void SetResult(bool result)
     {
         cbdp.SetResultInCase(result);
@@ -120,6 +146,9 @@ public class SimulationController : MonoBehaviour
         canvasPainels.SetActive(true);
     }
 
+    /// <summary>
+    /// Função que executa recebe a escolha do plano escolhido e passa para a função que o executa
+    /// </summary>
     public void ExecuteSimilarCase()
     {
         string strigIdCase = similarCaseInput.text;
@@ -131,22 +160,30 @@ public class SimulationController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Função que seta valores iniciais em variáveis
+    /// </summary>
     private void SetVariables()
     {
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
         clientOfExecution.SearchSimulationController();
         Invoke(nameof(ComandStartCase), 0.5f);
-
         EnableComponentSelectController();
         DesableComponentPathfinderPointsController();
     }
 
+    /// <summary>
+    /// Função que passa para o cbdp construir um caso a partir da lista dos agentes
+    /// </summary>
     private void ComandStartCase()
     {
         cbdp.ConstructInitCase(pcTeam1.Agents, pcTeam2.Agents);
     }
 
+    /// <summary>
+    /// Função que busca componentes na cena e atribui a variáveis
+    /// </summary>
     private void FindComponents()
     {
         clientOfExecution = GameObject.Find("Client").GetComponent<Client>();

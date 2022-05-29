@@ -233,7 +233,955 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)"
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)0"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Usa path enganoso até uma posição central e vai para o objetivo"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,C-RB,2>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes com uma movimentação ambigua até um último ponto enganoso"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes em direção ao objetivo enganoso e outro grupo para uma posição ambigua central no mapa, por fim, desloca as tropas para o objetivo enganoso e vai em direção para o objetivo real"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)0"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Usa path enganoso até uma posição central e vai para o objetivo"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,C-RB,2>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes com uma movimentação ambigua até um último ponto enganoso"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes em direção ao objetivo enganoso e outro grupo para uma posição ambigua central no mapa, por fim, desloca as tropas para o objetivo enganoso e vai em direção para o objetivo real"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)0"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Usa path enganoso até uma posição central e vai para o objetivo"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,C-RB,2>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes com uma movimentação ambigua até um último ponto enganoso"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes em direção ao objetivo enganoso e outro grupo para uma posição ambigua central no mapa, por fim, desloca as tropas para o objetivo enganoso e vai em direção para o objetivo real"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)0"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Usa path enganoso até uma posição central e vai para o objetivo"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,C-RB,2>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes com uma movimentação ambigua até um último ponto enganoso"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent2,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,8>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,VC-LF,,10>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "7"
+                },
+                {
+                    "id": 2,
+                    "name": "agentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,,,,,,}:{F-L,,,,,,,,,}:{F-LF,C-F,,,,,,,,}:{F-L,C-LF,C-LB,,,,,,,}:{VF-L,A-L,A-L,C-L,,,,,,}:{F-B,VF-RB,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,VF-B,F-B,VF-B,F-L,,,,}:{F-LB,F-B,F-B,F-B,F-B,F-LF,C-F,,,}:{F-LB,F-B,F-B,F-B,F-B,F-L,C-LF,C-LB,,}:{VF-L,F-LB,F-B,F-B,F-B,VF-L,A-L,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "agentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-R,A-LB,F-F,VF-RF}:{A-R,F-L,VF-LF,VF-F}:{A-R,F-L,VF-LF,VF-F}:{VC-B,VF-L,VF-LF,VF-F}:{C-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-L,F-R}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,F-L,A-RF}:{F-B,VF-LB,VF-L,A-F}:{F-B,VF-LB,VF-L,A-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "agentsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{0,0,0,0,0,0,0,0,0,0}:{54,0,0,0,0,0,0,0,0,0}:{34,12,0,0,0,0,0,0,0,0}:{54,32,82,0,0,0,0,0,0,0}:{55,53,53,52,0,0,0,0,0,0}:{64,75,75,75,75,0,0,0,0,0}:{84,64,65,64,65,54,0,0,0,0}:{84,64,64,64,64,34,12,0,0,0}:{84,64,64,64,64,54,32,82,0,0}:{55,84,64,64,64,55,53,53,52,0}}"
+                },
+                {
+                    "id": 5,
+                    "name": "agentsGoalsRelationships_int",
+                    "type": "System.String",
+                    "value": "{{45,83,14,25}:{43,54,35,15}:{43,54,35,15}:{61,55,35,15}:{52,55,35,15}:{75,65,52,44}:{64,85,54,23}:{64,85,54,23}:{64,85,55,13}:{64,85,55,13}}"
+                },
+                {
+                    "id": 6,
+                    "name": "agentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                },
+                {
+                    "id": 7,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "LITTLE_DECEPTIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 9,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "True"
+                },
+                {
+                    "id": 10,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "Desloca um grupo de agentes em direção ao objetivo enganoso e outro grupo para uma posição ambigua central no mapa, por fim, desloca as tropas para o objetivo enganoso e vai em direção para o objetivo real"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:LITTLE_DECEPTIVE|actions:<Move,Agent3,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,3>,<Move,Agent4,,HIGHLY_DECEPTIVE,NORMAL,A-LF,,4>,<Move,Agent5,,HIGHLY_DECEPTIVE,NORMAL,F-LF,,5>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,8>,<Move,Agent2,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-LB,,9>,<Move,Agent3,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,11>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,12>,<Move,Agent5,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,,13>)0"
                 }
             ]
         }

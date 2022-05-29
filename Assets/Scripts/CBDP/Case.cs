@@ -11,11 +11,11 @@ public class CaseCBDP
     public int seedMap;
     public string[,] matrix_agents;
     public string[,] matrix_objetives;
-    public string[,] matrix_base;
+    public string[,] matrix_agents_distance_angle;
 
     public int[,] int_matrix_agents;
     public int[,] int_matrix_objetives;
-    public int[,] int_matrix_base;
+    public int[,] int_matrix_agents_distance_angle;
 
     public Sector[] vector_sector;
 
@@ -42,13 +42,11 @@ public class CaseCBDP
 
         str += ToMatrixString(matrix_objetives) + splitter;
 
-        //str += ToMatrixString(matrix_base) + splitter;
+        str += ToMatrixString(matrix_agents_distance_angle) + splitter;
 
         str += ToMatrixString(int_matrix_agents) + splitter;
 
         str += ToMatrixString(int_matrix_objetives) + splitter;
-
-        //str += ToMatrixString(int_matrix_base) + splitter;
 
         str += "{";
         for (int i = 0; i < vector_sector.Length; i++)

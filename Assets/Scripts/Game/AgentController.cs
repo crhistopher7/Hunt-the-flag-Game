@@ -42,16 +42,16 @@ public class AgentController : MatchBehaviour
         isCarryingFlag = false;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
 
-        AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
-        DeceptiveAStar_1 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_1>();
-        DeceptiveAStar_2 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_2>();
-        DeceptiveAStar_3 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_3>();
-        DeceptiveAStar_4 = GameObject.Find("Pathfinder").GetComponent<DeceptiveAStar_4>();
+        AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
+        DeceptiveAStar_1 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_1>();
+        DeceptiveAStar_2 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_2>();
+        DeceptiveAStar_3 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_3>();
+        DeceptiveAStar_4 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_4>();
     }
 
     public void InitPosition(int seed)
     {
-        AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
+        AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
         var limits_x = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_X_AGENT_TEAM_1 : Config.LIMITS_X_AGENT_TEAM_2;
         var limits_y = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_Y_AGENT_TEAM_1 : Config.LIMITS_Y_AGENT_TEAM_2;
 
@@ -79,7 +79,7 @@ public class AgentController : MatchBehaviour
         //verificar se esse agente morreu
         if(level.life <= 0)
         {
-            Die();
+            //Die();
         }
 
         //verificar se encontrou agentes ou bandeira ao seu redor 

@@ -24,7 +24,9 @@ public class SelectController : MonoBehaviour
         SelectAgentsMode();
     }
 
-
+    /// <summary>
+    /// Função que busca componentes na cena e atribui a variáveis
+    /// </summary>
     private void FindComponents()
     {
         simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();

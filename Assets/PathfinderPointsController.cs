@@ -15,6 +15,10 @@ public class PathfinderPointsController : MonoBehaviour
         FindComponents();
         SetVariables();
     }
+
+    /// <summary>
+    /// Função que busca componentes na cena e atribui a variáveis
+    /// </summary>
     private void FindComponents()
     {
         simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();

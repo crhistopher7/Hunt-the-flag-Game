@@ -1,18 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 
 public class CBDP : MonoBehaviour
 {
     private int idOfLast = 0;
-    CaseCBDP currentCase;
+    private CaseCBDP currentCase;
     public DateTime initTime;
     private CBRAPI cbr;
     private string[] features;
@@ -94,6 +90,36 @@ public class CBDP : MonoBehaviour
         caso.caseSolution.Add(new CaseFeature(0, features[11], typeof(string), values[11]));
 
         return caso;
+    }
+
+    /// <summary>
+    /// Função que retorna o nível enganoso do caso atual a partir da quantidade de ações enganosas no plano
+    /// </summary>
+    /// <returns>Nível enganoso</returns>
+    public DeceptiveLevel CalculateDeceptionLevel()
+    {
+        var actions = currentCase.plan.actions;
+        int countTotalActions = actions.Count;
+        int countDeceptiveActions = 0;
+
+        if (countTotalActions == 0)
+            return DeceptiveLevel.NOT_DECEPTIVE;
+
+        while (actions.Count != 0)
+        {
+            Action action = actions.Dequeue();
+            if (!action.actionDefinition.Equals(DeceptiveLevel.NOT_DECEPTIVE))
+                countDeceptiveActions++;  
+        }
+
+        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_HIGHLY_DECEPTIVE)
+            return DeceptiveLevel.HIGHLY_DECEPTIVE;
+        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_PARTIALLY_DECEPTIVE)
+            return DeceptiveLevel.PARTIALLY_DECEPTIVE;
+        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_LITTLE_DECEPTIVE)
+            return DeceptiveLevel.LITTLE_DECEPTIVE;
+
+        return DeceptiveLevel.NOT_DECEPTIVE;
     }
 
     public void StartFile()
@@ -179,7 +205,7 @@ public class CBDP : MonoBehaviour
         agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam2));
 
         currentCase.matrix_agents = new string[agents_list.Count, agents_list.Count];
-        currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
+        currentCase.matrix_agents_distance_angle = new string[agents_list.Count, agents_list.Count];
         for (int i = 0; i < agents_list.Count; i++)
         {
             for (int j = 0; j < agents_list.Count; j++)
@@ -188,7 +214,7 @@ public class CBDP : MonoBehaviour
                 {
                     //vazio a parte superior da matrix 
                     currentCase.matrix_agents[i, j] = "";
-                    currentCase.int_matrix_agents[i, j] = 0;
+                    currentCase.matrix_agents_distance_angle[i, j] = "";
                     continue;
                 }
 
@@ -197,58 +223,33 @@ public class CBDP : MonoBehaviour
                 Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, agents_list[j].transform.position);
                 Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
+                float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
+                float angle = Vector3.Angle(agents_list[i].transform.position, agents_list[j].transform.position);
+
                 currentCase.matrix_agents[i, j] = distance.ToString() + '-' + direction.ToString();
-                currentCase.int_matrix_agents[i, j] = (int)distance + (int)direction;
+                currentCase.matrix_agents_distance_angle[i, j] = distance_float.ToString() + '-' + angle.ToString();
             }
         }
 
         //matriz de distancia/dire��o entre os agentes e objetivos (string e int)
-        GameObject[] flags = GameObject.FindGameObjectsWithTag(Config.TAG_FLAG);
+        GameObject[] objectives = GameObject.FindGameObjectsWithTag(Config.TAG_FLAG);
 
-        currentCase.matrix_objetives = new string[agents_list.Count, flags.Length];
-        currentCase.int_matrix_objetives = new int[agents_list.Count, flags.Length];
+        currentCase.matrix_objetives = new string[agents_list.Count, objectives.Length];
+        currentCase.int_matrix_objetives = new int[agents_list.Count, objectives.Length];
 
         for (int i = 0; i < agents_list.Count; i++)
         {
-            for (int j = 0; j < flags.Length; j++)
+            for (int j = 0; j < objectives.Length; j++)
             {
-                float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, flags[j].transform);
+                float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, objectives[j].transform);
 
-                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, flags[j].transform.position);
+                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, objectives[j].transform.position);
                 Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
                 currentCase.matrix_objetives[i, j] = distance.ToString() + '-' + direction.ToString();
                 currentCase.int_matrix_objetives[i, j] = (int)distance + (int)direction;
             }
         }
-
-        //matriz de distancia/dire��o entre os agentes e bases (string e int)
-        /*GameObject base1 = GameObject.Find("BaseTeam1");
-        GameObject base2 = GameObject.Find("BaseTeam2");
-
-        currentCase.matrix_base = new string[agents_list.Count, 2];
-        currentCase.int_matrix_base = new int[agents_list.Count, 2];
-
-        for (int i = 0; i < agents_list.Count; i++)
-        {
-
-            float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, base1.transform);
-
-            Distance distance = CalculeDistance(agents_list[i].transform, base1.transform);
-            Direction direction = CalculeDirection(sensorDirection[0], sensorDirection[1]);
-
-            currentCase.matrix_objetives[i, 0] = distance.ToString() + '-' + direction.ToString();
-            currentCase.int_matrix_objetives[i, 0] = (int)distance + (int)direction;
-
-
-            sensorDirection = Sensor.CheckDirection(agents_list[i].transform, base2.transform);
-
-            distance = CalculeDistance(agents_list[i].transform, base2.transform);
-            direction = CalculeDirection(sensorDirection[0], sensorDirection[1]);
-
-            currentCase.matrix_objetives[i, 0] = distance.ToString() + '-' + direction.ToString();
-            currentCase.int_matrix_objetives[i, 0] = (int)distance + (int)direction;
-        }*/
 
         //vetor setores
         currentCase.vector_sector = new Sector[agents_list.Count];
