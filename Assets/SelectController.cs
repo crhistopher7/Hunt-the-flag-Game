@@ -32,6 +32,9 @@ public class SelectController : MonoBehaviour
         simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
     }
 
+    /// <summary>
+    /// Função que seta valores iniciais em variáveis
+    /// </summary>
     private void SetVariables()
     {
         dragSelect = false;

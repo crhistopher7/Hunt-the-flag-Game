@@ -126,67 +126,21 @@ public class CBDP : MonoBehaviour
     {
         //criar cabe�alhos 
         string str = "";
-
-        //id
         str += "caseID" + Config.SPLITTER;
-
-        //seed
         str += "seed" + Config.SPLITTER;
-
-        //matriz de dist�ncia/dire��o dos agentes em rela��o aos agentes
         str += "agentsRelationships" + Config.SPLITTER;
-
-        //matriz de dist�ncia/dire��o dos agentes em rela��o aos objetivos
         str += "agentsGoalsRelationships" + Config.SPLITTER;
-
-        //matriz de dist�ncia/dire��o dos agentes em rela��o as bases
-        //str += "agentsBasesRelationships" + Config.SPLITTER;
-
-        //matriz de dist�ncia/dire��o dos agentes em rela��o aos agentes
         str += "agentsRelationships_int" + Config.SPLITTER;
-
-        //matriz de distância/dire��o dos agentes em rela��o aos objetivos
         str += "agentsGoalsRelationships_int" + Config.SPLITTER;
-
-        //matriz de dist�ncia/dire��o dos agentes em rela��o as bases
-        //str += "agentsBasesRelationships_int" + Config.SPLITTER;
-
-        //vetor de setor dos agentes
         str += "agentsBattleFieldLocalization" + Config.SPLITTER;
-
-        //deceptive
         str += "deceptiveLevel" + Config.SPLITTER;
-
-        //tipo do plano
         str += "strategy" + Config.SPLITTER;
-
-        //description
         str += "description" + Config.SPLITTER;
-
-        //resultado do plano
         str += "result" + Config.SPLITTER;
 
-        //planning file
         str += "Planning";
-
         //salvando 
         Save(str);
-    }
-
-    public int GetId()
-    {
-        //string lastLine = File.ReadLines(dataBaseName).Last();
-        //string[] aData = lastLine.Split(splitter);
-
-/*
-        if (idOfLast == -1)
-        {
-            // primeiro caso da execu��o, tem q pegar o ultimo
-            idOfLast = 0;
-            //int.TryParse(aData[0], out idOfLast);
-        }*/
-
-        return idOfLast++;
     }
 
     public void ConstructInitCase(List<AgentController> agentsTeam1, List<AgentController> agentsTeam2)
@@ -194,7 +148,7 @@ public class CBDP : MonoBehaviour
         currentCase = new CaseCBDP();
 
         // id do caso
-        currentCase.caseId = GetId();
+        currentCase.caseId = idOfLast++;
 
         // Seed do mapa
         currentCase.seedMap = GameObject.Find("Client").GetComponent<Client>().seed;
@@ -206,6 +160,8 @@ public class CBDP : MonoBehaviour
 
         currentCase.matrix_agents = new string[agents_list.Count, agents_list.Count];
         currentCase.matrix_agents_distance_angle = new string[agents_list.Count, agents_list.Count];
+        currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
+
         for (int i = 0; i < agents_list.Count; i++)
         {
             for (int j = 0; j < agents_list.Count; j++)
@@ -215,6 +171,7 @@ public class CBDP : MonoBehaviour
                     //vazio a parte superior da matrix 
                     currentCase.matrix_agents[i, j] = "";
                     currentCase.matrix_agents_distance_angle[i, j] = "";
+                    currentCase.int_matrix_agents[i, j] = 0;
                     continue;
                 }
 
@@ -228,6 +185,7 @@ public class CBDP : MonoBehaviour
 
                 currentCase.matrix_agents[i, j] = distance.ToString() + '-' + direction.ToString();
                 currentCase.matrix_agents_distance_angle[i, j] = distance_float.ToString() + '-' + angle.ToString();
+                currentCase.int_matrix_agents[i, j] = (int)distance + (int)direction;
             }
         }
 

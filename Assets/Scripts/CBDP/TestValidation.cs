@@ -40,11 +40,6 @@ public class TestValidation : MonoBehaviour
 
         // N?o encontrou um que possui essas 3 dependencias 
         Debug.Log("Caso recuperado: " + results[0].matchCase.caseDescription[0].value + " com " + (results[0].matchPercentage * 100).ToString("0.00") + "% de similaridade");
-
-
-
-
-
         return results[0].matchCase;
     }
 

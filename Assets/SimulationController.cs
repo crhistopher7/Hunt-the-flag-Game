@@ -18,9 +18,8 @@ public class SimulationController : MonoBehaviour
     private GameObject canvasResult;
     private GameObject canvasDescription;
     private GameObject canvasPainels;
-    private GameObject textUISimilarCases;
+    private GameObject contentButtonsCase;
     private InputField inputDescription;
-    private InputField similarCaseInput;
     private List<AgentController> selectedAgents;
     private Dropdown dropdown;
     private RectTransform rectPanel;
@@ -33,6 +32,7 @@ public class SimulationController : MonoBehaviour
     private bool hasPlan = false;
     private DateTime dateStartPlan;
     private Plan plan;
+    private int selectedSimilarCaseId;
 
 
     public Vector3 pointOfCanvasPath;
@@ -151,14 +151,26 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void ExecuteSimilarCase()
     {
-        string strigIdCase = similarCaseInput.text;
-
-        if (Int32.TryParse(strigIdCase, out int id) && listOfSimilarCases.Count > id && id >= 0)
+        if (selectedSimilarCaseId == -1)
         {
-            Debug.Log("Executando o Plano: " + listOfSimilarCases[id][1]);
-            ReceivePlan(listOfSimilarCases[id][1]);
+            Debug.Log("Deve escolher um caso similar primeiro");
+            return;
         }
+
+        Debug.Log("Executando o Plano: " + listOfSimilarCases[selectedSimilarCaseId][1]);
+        ReceivePlan(listOfSimilarCases[selectedSimilarCaseId][1]);
     }
+
+    /// <summary>
+    /// Função que recebe o id do plano escolhido como similar e o seta na variável do plano similar
+    /// </summary>
+    /// <param name="id"></param>
+    public void SetIdOfSimilarCaseSelected(int id)
+    {
+        Debug.Log("Setou o id: " + id.ToString() + " como caso similar");
+        selectedSimilarCaseId = id;
+    }
+
 
     /// <summary>
     /// Função que seta valores iniciais em variáveis
@@ -167,6 +179,7 @@ public class SimulationController : MonoBehaviour
     {
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
+        selectedSimilarCaseId = -1;
         clientOfExecution.SearchSimulationController();
         Invoke(nameof(ComandStartCase), 0.5f);
         EnableComponentSelectController();
@@ -189,18 +202,15 @@ public class SimulationController : MonoBehaviour
         clientOfExecution = GameObject.Find("Client").GetComponent<Client>();
         selectController = gameObject.GetComponent<SelectController>();
         pathfinderPointsController = gameObject.GetComponent<PathfinderPointsController>();
-        canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
         canvasType = Camera.main.transform.Find("CanvasType").gameObject;
         canvasStrategy = Camera.main.transform.Find("CanvasStrategy").gameObject;
         canvasResult = Camera.main.transform.Find("CanvasResult").gameObject;
         canvasDescription = Camera.main.transform.Find("CanvasDescription").gameObject;
         canvasPainels = Camera.main.transform.Find("CanvasPainels").gameObject;
-        textUISimilarCases = canvasPainels.transform.Find("Right Panel").transform.Find("Scroll View").transform.Find("Viewport").transform.Find("Content").transform.Find("CaseText").gameObject;
-        similarCaseInput = canvasPainels.transform.Find("Right Panel").transform.Find("SimilarCaseInput").GetComponent<InputField>();
+        canvasSelectPathfinder = canvasPainels.transform.Find("Left Panel").transform.Find("PathSelect").gameObject;
+        dropdown = canvasSelectPathfinder.transform.Find("Text").GetComponentInChildren<Dropdown>();
+        contentButtonsCase = canvasPainels.transform.Find("Right Panel").transform.Find("Scroll View").transform.Find("Viewport").transform.Find("Content").gameObject;
         inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
-        dropdown = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").transform.Find("Text").GetComponentInChildren<Dropdown>();
-        rectPanel = canvasSelectPathfinder.transform.Find("Canvas").transform.Find("Panel").GetComponent<RectTransform>();
-        rectCanvas = canvasSelectPathfinder.GetComponent<RectTransform>();
         cbdp = GameObject.Find("CBDP").GetComponent<CBDP>();
     }
 
@@ -216,15 +226,7 @@ public class SimulationController : MonoBehaviour
         selectedAgents.Clear();
     }
 
-    private void ShowCanvasPath()
-    {
-        canvasPainels.SetActive(false);
-        canvasSelectPathfinder.SetActive(true);
-        Vector2 anchoredPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, pointOfCanvasPath, Camera.main, out anchoredPos);
-        anchoredPos = new Vector2(anchoredPos.x, anchoredPos.y);
-        rectPanel.anchoredPosition = anchoredPos;
-    }
+
 
     private void ShowArrowPathConstructor()
     {
@@ -269,8 +271,7 @@ public class SimulationController : MonoBehaviour
     public void DesableComponentSelectController()
     {
         selectController.enabled = false;
-        // TODO Se toogle de 'estou consultando planos que usam esses agentes estiver true, pesquisar e não perguntar path'
-        ShowCanvasPath();
+        canvasSelectPathfinder.SetActive(true);
     }
 
     public void DesableComponentPathfinderPointsController()
@@ -283,16 +284,12 @@ public class SimulationController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(point);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
-        {
             if (hit.transform.CompareTag(gameObject.tag))
-            {
                 if (hit.transform.gameObject.TryGetComponent<AgentController>(out AgentController agent))
                 {
                     selectedAgents.Add(agent);
                     return true;
                 }
-            }
-        }
         return false;
     }
 
@@ -300,9 +297,8 @@ public class SimulationController : MonoBehaviour
     {
         pathType = (PathType)dropdown.value;
         
-        canvasSelectPathfinder = Camera.main.transform.Find("CanvasSelectAStar").gameObject;
+        canvasSelectPathfinder = canvasPainels.transform.Find("Left Panel").transform.Find("PathSelect").gameObject;
         canvasSelectPathfinder.SetActive(false);
-        canvasPainels.SetActive(true);
         ShowArrowPathConstructor();
         dropdown.value = 0;
     }
@@ -333,15 +329,12 @@ public class SimulationController : MonoBehaviour
 
         if (action.time <= (DateTime.Now - dateStartPlan).TotalSeconds)
         {
-            // Pode executar a proxima acao do plano
             action = plan.actions.Dequeue();
             Debug.Log("Executando ação: " + action.ToString());
             ExecuteAction(action);
 
             if (plan.actions.Count == 0)
-            {
                 hasPlan = false;
-            }
         }
     }
 
@@ -455,7 +448,7 @@ public class SimulationController : MonoBehaviour
         // repetir at� que a posi��o seja poss�vel de atingir
         Vector3Int position;
         LogicMap point;
-        var AStar = GameObject.Find("Pathfinder").GetComponent<AStar>();
+        var AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
         var random = new System.Random();
         do
         {
@@ -489,20 +482,10 @@ public class SimulationController : MonoBehaviour
     {
         Action action = new Action
         {
-
-            //action
             action = str_action,
-
-            //agent
             agent = agent.name,
-
-            //actionDefinition
             pathType = pathType,
-
-            // objetive
             objetive = Utils.GetObjetive(Input.mousePosition),
-
-            //time
             time = (int)Math.Round((DateTime.Now - cbdp.initTime).TotalSeconds)
         };
 
@@ -528,18 +511,24 @@ public class SimulationController : MonoBehaviour
     {
         //Lista de [Descrição, Plano]
         listOfSimilarCases = cbdp.SearchSimilarCases();
-        // preencher o canvasPainels
-        Text text = textUISimilarCases.GetComponent<Text>();
-        string str = "";
+
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/ButtonCase");
+
         int i = 0;
         foreach (string[] c in listOfSimilarCases)
         {
-            str += "Case " + i.ToString();
-            str += " " + c[0];
-            str += "\n\n";
+
+            GameObject go = Instantiate(prefab);
+            go.transform.parent = contentButtonsCase.transform;
+
+            Text text = go.GetComponentInChildren<Text>();
+            Button button = go.GetComponent<Button>();
+
+            button.onClick.AddListener(delegate { SetIdOfSimilarCaseSelected(i); });
+            text.text = "Case " + i.ToString() + ": " + c[0];
+
             i++;
         }
 
-        text.text = str;
     }
 }

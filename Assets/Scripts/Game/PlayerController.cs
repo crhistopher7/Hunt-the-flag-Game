@@ -17,12 +17,18 @@ public class PlayerController : MatchBehaviour
         StartAgents();
     }
 
+    /// <summary>
+    /// Função que seta valores iniciais em variáveis
+    /// </summary>
     private void SetVariables()
     {
         Agents = new List<AgentController>();
         prng = new System.Random();
     }
 
+    /// <summary>
+    /// Função que inicializa os agentes de player de acordo com a quantidade de agentes setada nos configs em posições randomicas
+    /// </summary>
     public void StartAgents()
     {
         Agents.Clear();

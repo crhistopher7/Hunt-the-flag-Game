@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 100f;
-    float panBorderThickeness = 10f;
-    public float scrollSpeed = 100f;
+    private float panSpeed = 100f;
+    private float panBorderThickeness = 5f;
+    private float scrollSpeed = 100f;
 
     Camera cam;
 
@@ -32,22 +32,22 @@ public class CameraController : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         cam.orthographicSize -= scroll * scrollSpeed * 100f * Time.deltaTime;
 
-        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 50f, 5100f);
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 50f, Config.CAMERA_LIMIT_PAN);
 
 
         
         // 4 8+1 (x*2 + x/4)
 
-        if (cam.orthographicSize >= 2250f)
+        if (cam.orthographicSize >= Config.CAMERA_LIMIT_PAN/2)
         {
             pos.x = 0;
         }
         else
         {
             float size = (cam.orthographicSize * cam.aspect);
-            pos.x = Mathf.Clamp(pos.x, -5100 + size, 5100 - size);
+            pos.x = Mathf.Clamp(pos.x, -Config.CAMERA_LIMIT_PAN + size, Config.CAMERA_LIMIT_PAN - size);
         }
-        pos.y = Mathf.Clamp(pos.y, -5100 + cam.orthographicSize, 5100 - cam.orthographicSize);
+        pos.y = Mathf.Clamp(pos.y, -Config.CAMERA_LIMIT_PAN + cam.orthographicSize, Config.CAMERA_LIMIT_PAN - cam.orthographicSize);
 
         transform.position = pos;
     }

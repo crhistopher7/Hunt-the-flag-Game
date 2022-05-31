@@ -77,10 +77,9 @@ public class AgentController : MatchBehaviour
     void Update()
     {
         //verificar se esse agente morreu
-        if(level.life <= 0)
-        {
+        //if(level.life <= 0)
             //Die();
-        }
+
 
         //verificar se encontrou agentes ou bandeira ao seu redor 
         List<RaycastHit> listOfHit = sensor.Check();
@@ -94,7 +93,6 @@ public class AgentController : MatchBehaviour
             if (isCarryingFlag)
                 flagCarrying.Agentposition = rb.position;
         }
-
     }
 
     private void Die()
@@ -168,8 +166,8 @@ public class AgentController : MatchBehaviour
                 else if (!CheckFriendAgent(hit))
                 {
                     // este agente é inimigo, setar um dano para ele
-                    AgentController EnemyAgentController = hit.transform.GetComponent<AgentController>();
-                    Invoke(nameof(EnemyAgentController.SetDamage), 0.1f);
+                    //AgentController EnemyAgentController = hit.transform.GetComponent<AgentController>();
+                    //Invoke(nameof(EnemyAgentController.SetDamage), 0.1f);
                 } 
                 
             }

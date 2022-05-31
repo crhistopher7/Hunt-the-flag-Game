@@ -24,6 +24,9 @@ public class PathfinderPointsController : MonoBehaviour
         simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
     }
 
+    /// <summary>
+    /// Função que seta valores iniciais em variáveis
+    /// </summary>
     private void SetVariables()
     {
         pathType = simulationController.GetPathType();

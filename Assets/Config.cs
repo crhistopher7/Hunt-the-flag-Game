@@ -32,7 +32,7 @@ public static class Config
     public static float MAX_WALKABLE = 1f;
     public static float MIN_WALKABLE = 0f;
 
-
+    public static float CAMERA_LIMIT_PAN = 510f;
 
     public static bool Walkable(float value)
     {
