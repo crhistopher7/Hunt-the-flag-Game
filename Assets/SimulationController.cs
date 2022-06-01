@@ -34,9 +34,6 @@ public class SimulationController : MonoBehaviour
     private Plan plan;
     private int selectedSimilarCaseId;
 
-
-    public Vector3 pointOfCanvasPath;
-
     // Start is called before the first frame update
     void Start()
     {

@@ -48,9 +48,8 @@ public class SelectController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
                 mousePosition1 = Input.mousePosition;
             else
-                if (simulationController.VerifySelectedSingleAgent(Input.mousePosition)) //Clicou em um agente. Perguntar Path
+                if (simulationController.VerifySelectedSingleAgent(Input.mousePosition)) // Clicou em um agente. Perguntar Path
                 {
-                    simulationController.pointOfCanvasPath = Input.mousePosition;
                     simulationController.DesableComponentSelectController();
                 }
 
@@ -70,7 +69,6 @@ public class SelectController : MonoBehaviour
 
             if (simulationController.VerifySelectedGroupAgent(corners))
             {
-                simulationController.pointOfCanvasPath = pointOfCanvasPath;
                 simulationController.DesableComponentSelectController();
             }
             dragSelect = false;
