@@ -487,6 +487,15 @@ public class SimulationController : MonoBehaviour
             time = (int)Math.Round((DateTime.Now - cbdp.initTime).TotalSeconds)
         };
 
+        if (pathType.Equals(PathType.NORMAL))
+            action.actionDefinition = DeceptiveLevel.NOT_DECEPTIVE;
+        else if (pathType.Equals(PathType.DECEPTIVE_1))
+            action.actionDefinition = DeceptiveLevel.HIGHLY_DECEPTIVE;
+        else if (pathType.Equals(PathType.DECEPTIVE_2) || pathType.Equals(PathType.DECEPTIVE_3))
+            action.actionDefinition = DeceptiveLevel.PARTIALLY_DECEPTIVE;
+        else
+            action.actionDefinition = DeceptiveLevel.LITTLE_DECEPTIVE;
+
         //distance_direction
         Distance distance = CBDPUtils.CalculeDistance(agent.transform.position, objetivePosition);
         Direction direction = CBDPUtils.CalculeDirection(objetivePosition.x, objetivePosition.y);

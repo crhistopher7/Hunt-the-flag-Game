@@ -97,18 +97,16 @@ public class CBDP : MonoBehaviour
     /// <returns>Nível enganoso</returns>
     public DeceptiveLevel CalculateDeceptionLevel()
     {
-        var actions = currentCase.plan.actions;
-        int countTotalActions = actions.Count;
+        int countTotalActions = currentCase.plan.actions.Count;
         int countDeceptiveActions = 0;
 
         if (countTotalActions == 0)
             return DeceptiveLevel.NOT_DECEPTIVE;
 
-        while (actions.Count != 0)
+        foreach (Action action in currentCase.plan.actions)
         {
-            Action action = actions.Dequeue();
             if (!action.actionDefinition.Equals(DeceptiveLevel.NOT_DECEPTIVE))
-                countDeceptiveActions++;  
+                countDeceptiveActions++;
         }
 
         if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_HIGHLY_DECEPTIVE)
@@ -222,10 +220,6 @@ public class CBDP : MonoBehaviour
             caseid = currentCase.caseId,
             actions = new Queue<Action>()
         };
-
-        //temporario
-        currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
-        currentCase.plan.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
     }
 
     
@@ -274,6 +268,7 @@ public class CBDP : MonoBehaviour
 
     public void PlanAddAction(Action action)
     {
+        Debug.Log("Adicionando Action: " + action.ToString());
         currentCase.plan.actions.Enqueue(action);
     }
 

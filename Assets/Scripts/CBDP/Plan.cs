@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 /// <summary>
 /// CBDP Plan class used in Case
@@ -13,7 +15,10 @@ public class Plan
     public DeceptiveLevel solutionType;
     public Queue<Action> actions;
 
-    public Plan() { }
+    public Plan() 
+    {
+        this.actions = new Queue<Action>();
+    }
 
     public Plan(string plan)
     {
@@ -53,7 +58,6 @@ public class Plan
             action.distance_directionDeceptive = features[6];
             action.time = int.Parse(features[7]);
 
-            //Debug.Log("Criado o Action: " + action.ToString());
             this.actions.Enqueue(action);
         }
 
@@ -63,17 +67,14 @@ public class Plan
     {
         string str = "(case_id:" + caseid + "|solutionType:" + solutionType + "|actions:";
 
-        var actions = this.actions;
-        //add cada ação
-        while (actions.Count != 0)
+        Debug.Log("tamanho da fila de ações: " + this.actions.Count);
+
+        foreach (Action action in this.actions)
         {
-            Action action = actions.Dequeue();
-            str += "<" + action.ToString() + ">";
-            if (actions.Count != 0)
-                str += ",";
+            str += "<" + action.ToString() + ">,";
         }
 
-        str += ")";
+        str += str.Remove(str.Length - 1, 1) + ")";
         return str;
     }
 
