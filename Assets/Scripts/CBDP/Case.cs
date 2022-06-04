@@ -32,39 +32,44 @@ public class CaseCBDP
     public override string ToString()
     {
         string str = "";
-        char splitter = ';';
 
-        str += caseId.ToString() + splitter;
-        str += seedMap.ToString() + splitter;
-
-
-        str += ToMatrixString(matrix_agents) + splitter;
-
-        str += ToMatrixString(matrix_objetives) + splitter;
-
-        str += ToMatrixString(matrix_agents_distance_angle) + splitter;
-
-        str += ToMatrixString(int_matrix_agents) + splitter;
-
-        str += ToMatrixString(int_matrix_objetives) + splitter;
-
-        str += "{";
-        for (int i = 0; i < vector_sector.Length; i++)
-        {
-            str += vector_sector[i].ToString();
-            if (i != vector_sector.Length - 1)
-                str += ",";
-        }
-        str += "}" + splitter;
-
-        str += solutionType.ToString() + splitter;
-        str += strategy.ToString() + splitter;
-        str += result.ToString() + splitter;
-        str += description + splitter;
+        str += caseId.ToString() + Config.SPLITTER;
+        str += seedMap.ToString() + Config.SPLITTER;
+        str += ToMatrixString(matrix_agents) + Config.SPLITTER;
+        str += ToMatrixString(matrix_objetives) + Config.SPLITTER;
+        str += ToMatrixString(matrix_agents_distance_angle) + Config.SPLITTER;
+        str += ToMatrixString(int_matrix_agents) + Config.SPLITTER;
+        str += ToMatrixString(int_matrix_objetives) + Config.SPLITTER;
+        str += ToVectorString(vector_sector) + Config.SPLITTER;
+        str += solutionType.ToString() + Config.SPLITTER;
+        str += strategy.ToString() + Config.SPLITTER;
+        str += description + Config.SPLITTER;
+        str += result.ToString() + Config.SPLITTER;
         str += plan.ToString();
 
         return str;
     }
+
+    /// <summary>
+    /// Função que reescreve um vetor do tipo Sector em forma de string
+    /// </summary>
+    /// <param name="vector">Vetor do tipo Sector</param>
+    /// /// <param name="delimiter">Delimitador</param>
+    /// <returns>Vetor no formato de string</returns>
+    private string ToVectorString(Sector[] vector, string delimiter = ",")
+    {
+        string str = "{";
+        for (int i = 0; i < vector.Length; i++)
+        {
+            str += vector[i].ToString();
+            if (i != vector.Length - 1)
+                str += delimiter;
+        }
+        str += "}";
+        return str;
+    }
+
+
 
     /// <summary>
     /// Função que reescreve uma matriz[,] do tipo string em forma de string

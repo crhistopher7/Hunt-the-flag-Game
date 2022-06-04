@@ -140,6 +140,7 @@ public class SimulationController : MonoBehaviour
 
         //RestartGame
         InitPlayers();
+        Invoke(nameof(ComandStartCase), 0.5f);
         canvasPainels.SetActive(true);
     }
 
