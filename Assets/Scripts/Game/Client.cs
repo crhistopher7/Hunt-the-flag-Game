@@ -15,27 +15,39 @@ public class Client : MonoBehaviour
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
-    private StreamReader reader;
-    public InputField clientNameInputField;
-    public InputField serverAddressInputField;
-    public InputField passwordInputField;
-    public int seed;
+    private StreamReader reader; 
     private CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
     private SimulationController simulationController;
-
-    public MapGenerator mapGeneratorPrefab;
     private bool debugMode = true;
     private string playerControllerTag = Config.TAG_TEAM_1;
+
+    private InputField clientNameInputField;
+    private InputField serverAddressInputField;
+    private InputField passwordInputField;
+    private MapGenerator mapGeneratorPrefab;
+    private int seed = 0;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         culture.NumberFormat.NumberDecimalSeparator = ".";
+        FindComponents();
     }
+
+    private void FindComponents()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
+        clientNameInputField = canvas.transform.Find("UserNameInputField").GetComponent<InputField>();
+        serverAddressInputField = canvas.transform.Find("IPInput").GetComponent<InputField>();
+        passwordInputField = canvas.transform.Find("PasswordInputField").GetComponent<InputField>();
+        GameObject mapGeneratorPrefab = Resources.Load("Prefabs/" + Config.MAP_GENERATOR) as GameObject;
+        this.mapGeneratorPrefab = mapGeneratorPrefab.GetComponent<MapGenerator>();
+    }
+
 
     public void SearchSimulationController()
     {
-        simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+        simulationController = GameObject.Find(Config.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
     }
 
     public string getClientName()
@@ -152,11 +164,10 @@ public class Client : MonoBehaviour
         var seed = int.Parse(strSeed);
         this.seed = seed;
 
-        mapGenerator.GenerateRealMap("C:/100x100.png");
-        //mapGenerator.GenerateMap(7);
-        mapGenerator.name = "Map Generator";
+        mapGenerator.GenerateRealMap(Config.MAP_FILE);
+        mapGenerator.name = Config.MAP_GENERATOR;
 
-        SceneManager.LoadScene("MainSystem");
+        SceneManager.LoadScene(Config.MAIN_SCENE);
     }
 
     private void OnApplicationQuit()

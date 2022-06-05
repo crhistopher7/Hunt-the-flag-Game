@@ -148,7 +148,7 @@ public class CBDP : MonoBehaviour
         currentCase.caseId = idOfLast++;
 
         // Seed do mapa
-        currentCase.seedMap = GameObject.Find("Client").GetComponent<Client>().seed;
+        currentCase.seedMap = 0; //GameObject.Find("Client").GetComponent<Client>().seed;
 
         //matriz de distancia/dire��o entre os agentes e agentes (string e int)
         List<AgentController> agents_list = new List<AgentController>();

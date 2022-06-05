@@ -9,6 +9,9 @@ public static class Config
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
 
+
+    public static string MAP_FILE = "C:/100x100.png";
+
     public static int[] LIMITS_X_AGENT_TEAM_1 = {-490, 490};
     public static int[] LIMITS_X_AGENT_TEAM_2 = {-490, 490};
     public static int[] LIMITS_Y_AGENT_TEAM_1 = {-490, -100};
@@ -28,6 +31,12 @@ public static class Config
     public static string TAG_TEAM_1 = "Team1";
     public static string TAG_TEAM_2 = "Team2";
     public static string TAG_FLAG = "Flag";
+    public static string MAP_GENERATOR = "Map Generator";
+    public static string SIMULATION_CONTROLLER = "SimulationController";
+    
+
+    //CENAS
+    public static string MAIN_SCENE = "MainSystem";
 
     public static float MAX_WALKABLE = 1f;
     public static float MIN_WALKABLE = 0f;

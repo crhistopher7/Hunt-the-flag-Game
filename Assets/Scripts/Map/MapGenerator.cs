@@ -16,22 +16,22 @@ public struct TerrainType
 public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance;
-    public int mapWidth;
-    public int mapHeigth;
-    public float noiseScale;
+    private int mapWidth = 100;
+    private int mapHeigth = 100;
+    private float noiseScale = 23;
 
     public enum DrawMode { NoiseMap, ColourMap};
-    public DrawMode drawMode;
+    private DrawMode drawMode;
 
     //public int seed;
-    public Vector2 offset;
+    private Vector2 offset = new Vector2(0, 0);
 
-    public int octaves;
+    private int octaves = 20;
     [Range(0,1)]
-    public float persistance;
-    public float lacunarity;
+    private float persistance = 0.5f;
+    private float lacunarity = 5;
 
-    public bool autoUpdate;
+    private bool autoUpdate = false;
 
     public TerrainType[] regions;
     Color[] colourMap;
