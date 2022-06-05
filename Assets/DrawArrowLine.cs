@@ -16,7 +16,7 @@ public class DrawArrowLine : MonoBehaviour
 
     private void DrawLine(Vector3 position, Vector3 mousePosition)
     {
-        LineRenderer.SetPosition(0, new Vector3(position.x, position.y, 0));
-        LineRenderer.SetPosition(1, new Vector3(mousePosition.x, mousePosition.y, 0));
+        LineRenderer.SetPosition(0, new Vector3(position.x, position.y, -10));
+        LineRenderer.SetPosition(1, new Vector3(mousePosition.x, mousePosition.y, -10));
     }
 }

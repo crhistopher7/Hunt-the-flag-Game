@@ -59,7 +59,7 @@ public class SelectController : MonoBehaviour
                 dragSelect = true;
 
         //3. Quando soltar o botão...
-        if (Input.GetMouseButtonUp(0) && Input.GetKey(KeyCode.LeftShift) && dragSelect)
+        if (Input.GetMouseButtonUp(0) && dragSelect)
         {
             var pointOfCanvasPath = new Vector3((mousePosition1.x + Input.mousePosition.x) / 2, (mousePosition1.y + Input.mousePosition.y) / 2, mousePosition1.z);
 
