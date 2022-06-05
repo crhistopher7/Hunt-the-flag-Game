@@ -223,7 +223,7 @@ MonoBehaviour:
   team: Team2
   value: 10
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 214, y: 420, z: -11}
+  StartFlagposition: {x: 400, y: 400, z: -10}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &5102108362764092809
@@ -354,7 +354,7 @@ MonoBehaviour:
   team: Team2
   value: 1
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: -214, y: 440, z: -11}
+  StartFlagposition: {x: -400, y: 400, z: -10}
   agentSpeed: 0
   beingCarried: 0
 --- !u!1 &5484188477978713651
@@ -404,9 +404,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agents: []
-  EnemyAgents: []
-  ClickedAgents: []
-  clientController: admin2
   Points: 0
-  numberOfAgents: 5
-  PointsPainel: {fileID: 0}
+  PointsPainel: {fileID: 7456990147499095244, guid: 24b9e241e7e59a8429e59ad3ec1dbbbe, type: 3}
