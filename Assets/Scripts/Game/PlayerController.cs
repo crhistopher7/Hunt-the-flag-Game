@@ -46,7 +46,7 @@ public class PlayerController : MatchBehaviour
             agent.name = name + i.ToString();
             agent.tag = this.tag;
             agent.GetComponent<Renderer>().material.color = color;
-            agent.transform.parent = this.transform;
+            agent.transform.SetParent(this.transform);
             agent.InitPosition(prng.Next());
             this.Agents.Add(agent);
             i++;

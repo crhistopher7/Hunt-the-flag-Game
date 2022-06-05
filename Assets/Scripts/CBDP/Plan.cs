@@ -73,9 +73,7 @@ public class Plan
         {
             str += "<" + action.ToString() + ">,";
         }
-
-        str += str.Remove(str.Length - 1, 1) + ")";
-        return str;
+        return str.Remove(str.Length - 1, 1) + ")";
     }
 
 }

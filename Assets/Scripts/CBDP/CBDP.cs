@@ -19,7 +19,7 @@ public class CBDP : MonoBehaviour
         //iniciar o contador de tempo (pegar o time)
         this.initTime = DateTime.Now;
         cbr = new CBRAPI();
-        StartFile();
+        //StartFile();
         ConvertCSVToCaseBase();
     }
 
@@ -180,8 +180,8 @@ public class CBDP : MonoBehaviour
                 float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
                 float angle = Vector3.Angle(agents_list[i].transform.position, agents_list[j].transform.position);
 
-                currentCase.matrix_agents[i, j] = distance.ToString() + '-' + direction.ToString();
-                currentCase.matrix_agents_distance_angle[i, j] = distance_float.ToString() + '-' + angle.ToString();
+                currentCase.matrix_agents[i, j] = distance.ToString() + "-" + direction.ToString();
+                currentCase.matrix_agents_distance_angle[i, j] = distance_float.ToString() + "-" + angle.ToString();
                 currentCase.int_matrix_agents[i, j] = (int)distance + (int)direction;
             }
         }
@@ -344,7 +344,7 @@ public class CBDP : MonoBehaviour
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 8 }, 0.1f, new Equals()));              //deceptiveLevel
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));    //agentsRelationships
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 0.2f, new MatrixSimilarity()));  //agentsGoalsRelationships
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 4 }, 0.3f, new MatrixSimilarity()));  //agentsRelationships_distance_angle
+        //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 4 }, 0.3f, new MatrixSimilarity()));  //agentsRelationships_distance_angle
         //consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 0.1f, new SectorSimilarity()));  //agentsBattleFieldLocalization
 
         // Realizando uma consulta na base de casos (lista já ordenada por maior score)

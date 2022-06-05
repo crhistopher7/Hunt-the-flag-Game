@@ -521,21 +521,22 @@ public class SimulationController : MonoBehaviour
 
         GameObject prefab = Resources.Load<GameObject>("Prefabs/ButtonCase");
 
-        int i = 0;
-        foreach (string[] c in listOfSimilarCases)
+        for (int i = 0; i < listOfSimilarCases.Count; i++)
         {
-
-            GameObject go = Instantiate(prefab);
-            go.transform.parent = contentButtonsCase.transform;
+            GameObject go = new GameObject();
+            go = Instantiate(prefab);
+            go.transform.SetParent(contentButtonsCase.transform);
 
             Text text = go.GetComponentInChildren<Text>();
             Button button = go.GetComponent<Button>();
-
-            button.onClick.AddListener(delegate { SetIdOfSimilarCaseSelected(i); });
-            text.text = "Case " + i.ToString() + ": " + c[0];
-
-            i++;
+            SetButtonOnClickAnswer(button, i);
+            text.text = "Case " + i.ToString() + ": " + listOfSimilarCases[i][0];
         }
 
+    }
+
+    private void SetButtonOnClickAnswer(Button button, int value)
+    {
+        button.onClick.AddListener(() => SetIdOfSimilarCaseSelected(value));
     }
 }
