@@ -391,7 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449bc27c6f43349428864b8d7b7d76a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointOfCanvasPath: {x: 0, y: 0, z: 0}
 --- !u!4 &138579476
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,7 +1360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 911210007426306649, guid: f15926a3e937f6d4d8aeb27997801634, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 199.34409
+      value: 199.34412
       objectReference: {fileID: 0}
     - target: {fileID: 911210007426306654, guid: f15926a3e937f6d4d8aeb27997801634, type: 3}
       propertyPath: m_Pivot.x
