@@ -62,7 +62,7 @@ public class AgentController : MatchBehaviour
         {
             int x = prng.Next(limits_x[0], limits_x[1]);
             int y = prng.Next(limits_y[0], limits_y[1]);
-            int z = (int)this.transform.position.z;
+            int z = Config.AGENT_POSITION_Z;
 
             position = new Vector3Int(x, y, z);
 

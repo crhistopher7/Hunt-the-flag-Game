@@ -31,8 +31,6 @@ public class MapGenerator : MonoBehaviour
     private float persistance = 0.5f;
     private float lacunarity = 5;
 
-    private bool autoUpdate = false;
-
     public TerrainType[] regions;
     Color[] colourMap;
     MapDisplay display;
@@ -89,7 +87,7 @@ public class MapGenerator : MonoBehaviour
                 float currentHeigth = pixel.grayscale;
                 int moveCost = int.MaxValue;
 
-                Debug.Log(currentHeigth);
+                // Debug.Log(currentHeigth);
                 if (Config.Walkable(currentHeigth))
                     moveCost = 1;
 

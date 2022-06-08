@@ -8,6 +8,7 @@ public static class Config
     public static int POINTS_TEAM_2 = 0;
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
+    public static int AGENT_POSITION_Z = -10;
 
 
     public static string MAP_FILE = "Heightmap/Heightmap_0_0.png";
@@ -46,8 +47,8 @@ public static class Config
     //CENAS
     public static string MAIN_SCENE = "MainSystem";
 
-    public static float MAX_WALKABLE = 1f;
-    public static float MIN_WALKABLE = 0f;
+    public static float MAX_WALKABLE = 0.8f;
+    public static float MIN_WALKABLE = 0.1f;
 
     public static float CAMERA_LIMIT_PAN = 1360f;
 

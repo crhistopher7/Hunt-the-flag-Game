@@ -21,7 +21,7 @@ public class PathfinderPointsController : MonoBehaviour
     /// </summary>
     private void FindComponents()
     {
-        simulationController = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+        simulationController = GameObject.Find(Config.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
     }
 
     /// <summary>
