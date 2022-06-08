@@ -56,23 +56,28 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
     }
 
-    public void GenerateRealMap(string imgPath)
+    public void GenerateRealMap(string path, string heightmap, string realmap)
     {
-        Texture2D tex = null;
         byte[] fileData;
 
-        if (File.Exists(imgPath))
+        if (!File.Exists(path + heightmap) || !File.Exists(path + realmap))
         {
-            fileData = File.ReadAllBytes(imgPath);
-            tex = new Texture2D(2, 2);
-            tex.LoadImage(fileData);
+            Debug.Log(path + heightmap);
+            Debug.Log(path + realmap);
+            Debug.LogError("Não encontrou as imagens do mapa");
+            return;
         }
+            
+
+        fileData = File.ReadAllBytes(path + heightmap);
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(fileData);
+
 
         float[,] mapBytes = new float[tex.width, tex.height];
 
         NavMap = new Dictionary<Vector3Int, LogicMap>();
         display = FindObjectOfType<MapDisplay>();
-        colourMap = new Color[tex.height * tex.width];
         Debug.Log(tex.height);
         Debug.Log(tex.width);
 
@@ -82,44 +87,30 @@ public class MapGenerator : MonoBehaviour
             {
                 Color pixel = tex.GetPixel(x, y);
                 float currentHeigth = pixel.grayscale;
-                for (int i = 0; i < regions.Length; i++)
+                int moveCost = int.MaxValue;
+
+                Debug.Log(currentHeigth);
+                if (Config.Walkable(currentHeigth))
+                    moveCost = 1;
+
+                LogicMap logicMap = new LogicMap
                 {
-                    if (currentHeigth <= regions[i].heigth)
-                    {
-                        colourMap[y * tex.width + x] = regions[i].color;
-                        int moveCost = int.MaxValue;
-
-                        //pode andar em tudo que não for agua
-                        if (Config.Walkable(currentHeigth))
-                        {
-                            moveCost = 1;
-                        }
-
-                        LogicMap logicMap = new LogicMap
-                        {
-                            Position = new Vector3Int(x, y, 0),
-                            ClickPosition = new Vector3Int(-49 + x, -49 + y, 0),
-                            Walkable = Config.Walkable(currentHeigth),
-                            MoveCost = moveCost,
-                            ColorMapIndex = y * tex.width + x
-                        };
-                        //Debug.Log(logicMap.ClickPosition);
-                        NavMap.Add(logicMap.ClickPosition, logicMap);
-
-                        break;
-                    }
-                }
+                    Position = new Vector3Int(x, y, 0),
+                    ClickPosition = new Vector3Int(Config.CLICK_POSITION_OFFSET + x, Config.CLICK_POSITION_OFFSET + y, 0),
+                    Walkable = Config.Walkable(currentHeigth),
+                    MoveCost = moveCost,
+                    ColorMapIndex = y * tex.width + x
+                };
+                //Debug.Log(logicMap.ClickPosition);
+                NavMap.Add(logicMap.ClickPosition, logicMap);
             }
         }
 
-        if (drawMode == DrawMode.NoiseMap)
-        {
-            display.DrawnTexture(tex);
-        }
-        else if (drawMode == DrawMode.ColourMap)
-        {
-            display.DrawnTexture(TextureGenerator.TextureFromColourMap(colourMap, tex.width, tex.width));
-        }
+        fileData = File.ReadAllBytes(path + realmap);
+        Texture2D real_tex = new Texture2D(2, 2);
+        real_tex.LoadImage(fileData);
+
+        display.DrawnTexture(real_tex, tex.width, tex.height);
     }
 
     public void GenerateMap(int seed)
@@ -152,7 +143,7 @@ public class MapGenerator : MonoBehaviour
                         LogicMap logicMap = new LogicMap
                         {
                             Position = new Vector3Int(x, y, 0),             
-                            ClickPosition = new Vector3Int(-49+x, -49+y, 0),
+                            ClickPosition = new Vector3Int(Config.CLICK_POSITION_OFFSET + x, Config.CLICK_POSITION_OFFSET + y, 0),
                             Walkable = Config.Walkable(currentHeigth),
                             MoveCost = moveCost,
                             ColorMapIndex = y * mapWidth + x
@@ -170,16 +161,16 @@ public class MapGenerator : MonoBehaviour
 
         if (drawMode == DrawMode.NoiseMap)
         {
-            display.DrawnTexture(TextureGenerator.TextureFromHeigthMap(noiseMap));
+            display.DrawnTexture(TextureGenerator.TextureFromHeigthMap(noiseMap), mapWidth, mapHeigth);
         } else if (drawMode == DrawMode.ColourMap)
         {
-            display.DrawnTexture(TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeigth));
+            display.DrawnTexture(TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeigth), mapWidth, mapHeigth);
         }
     }
 
     public void UpdateTexture()
     {
-        display.DrawnTexture(TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeigth));
+        display.DrawnTexture(TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeigth), mapWidth, mapHeigth);
     }
 
     public void PaintTile(LogicMap tile, Color color)

@@ -10,12 +10,20 @@ public static class Config
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
 
 
-    public static string MAP_FILE = "C:/100x100.png";
+    public static string MAP_FILE = "Heightmap/Heightmap_0_0.png";
+    public static string MAP_SATELLITE_FILE = "Satelite/Satelite_0_0.png";
+    public static string MAP_PATH = "C:/Users/crisl/OneDrive/Documentos/GitHub/Hunt the flag Game/Assets/Resources/Mapas/MapasCortados/";
 
-    public static int[] LIMITS_X_AGENT_TEAM_1 = {-490, 490};
-    public static int[] LIMITS_X_AGENT_TEAM_2 = {-490, 490};
-    public static int[] LIMITS_Y_AGENT_TEAM_1 = {-490, -100};
-    public static int[] LIMITS_Y_AGENT_TEAM_2 = {100, 490};
+    //public static int[] LIMITS_X_AGENT_TEAM_1 = {-490, 490};
+    //public static int[] LIMITS_X_AGENT_TEAM_2 = {-490, 490};
+    //public static int[] LIMITS_Y_AGENT_TEAM_1 = {-490, -100};
+    //public static int[] LIMITS_Y_AGENT_TEAM_2 = {100, 490};
+    //public static int CLICK_POSITION_OFFSET = -49;
+    public static int[] LIMITS_X_AGENT_TEAM_1 = { -1340, 1340 };
+    public static int[] LIMITS_X_AGENT_TEAM_2 = { -1340, 1340 };
+    public static int[] LIMITS_Y_AGENT_TEAM_1 = { -1340, -270 };
+    public static int[] LIMITS_Y_AGENT_TEAM_2 = { 270, 1340 };
+    public static int CLICK_POSITION_OFFSET = -134;
 
 
     public static float LIMIAR_HIGHLY_DECEPTIVE = 0.75f;
@@ -41,7 +49,7 @@ public static class Config
     public static float MAX_WALKABLE = 1f;
     public static float MIN_WALKABLE = 0f;
 
-    public static float CAMERA_LIMIT_PAN = 510f;
+    public static float CAMERA_LIMIT_PAN = 1360f;
 
     public static bool Walkable(float value)
     {
