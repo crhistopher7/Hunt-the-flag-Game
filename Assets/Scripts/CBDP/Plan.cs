@@ -67,8 +67,6 @@ public class Plan
     {
         string str = "(case_id:" + caseid + "|solutionType:" + solutionType + "|actions:";
 
-        Debug.Log("tamanho da fila de ações: " + this.actions.Count);
-
         foreach (Action action in this.actions)
         {
             str += "<" + action.ToString() + ">,";

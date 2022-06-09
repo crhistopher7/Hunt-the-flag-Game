@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float panSpeed = 100f;
+    private float panSpeed = 200f;
     private float panBorderThickeness = 5f;
     private float scrollSpeed = 100f;
 

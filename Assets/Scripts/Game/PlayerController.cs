@@ -36,7 +36,9 @@ public class PlayerController : MatchBehaviour
         GameObject prefab = Resources.Load("Prefabs/Agent") as GameObject;
         GameObject go;
         string name = "Agent";
-        Color color = (CompareTag(Config.TAG_TEAM_1)) ? Color.blue : Color.red;
+        Material material = (CompareTag(Config.TAG_TEAM_1)) ? 
+            Resources.Load(Config.MATERIAL_AGENT_TEAM_1, typeof(Material)) as Material 
+            : Resources.Load(Config.MATERIAL_AGENT_TEAM_2, typeof(Material)) as Material;
 
         int i = 1;
         do
@@ -45,8 +47,9 @@ public class PlayerController : MatchBehaviour
             AgentController agent = go.GetComponent<AgentController>();
             agent.name = name + i.ToString();
             agent.tag = this.tag;
-            agent.GetComponent<Renderer>().material.color = color;
+            agent.GetComponent<Renderer>().sharedMaterial = material;
             agent.transform.SetParent(this.transform);
+            agent.transform.localScale = new Vector3(Config.AGENT_SCALE, Config.AGENT_SCALE, 1);
             agent.InitPosition(prng.Next());
             this.Agents.Add(agent);
             i++;

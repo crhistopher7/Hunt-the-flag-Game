@@ -523,8 +523,8 @@ public class SimulationController : MonoBehaviour
 
         for (int i = 0; i < listOfSimilarCases.Count; i++)
         {
-            GameObject go = new GameObject();
-            go = Instantiate(prefab);
+            GameObject go = Instantiate(prefab);
+            go.transform.position = contentButtonsCase.transform.position;
             go.transform.SetParent(contentButtonsCase.transform);
 
             Text text = go.GetComponentInChildren<Text>();

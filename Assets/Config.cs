@@ -8,7 +8,6 @@ public static class Config
     public static int POINTS_TEAM_2 = 0;
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
-    public static int AGENT_POSITION_Z = -10;
 
 
     public static string MAP_FILE = "Heightmap/Heightmap_0_0.png";
@@ -42,7 +41,13 @@ public static class Config
     public static string TAG_FLAG = "Flag";
     public static string MAP_GENERATOR = "Map Generator";
     public static string SIMULATION_CONTROLLER = "SimulationController";
-    
+
+
+    public static string MATERIAL_AGENT_TEAM_1 = "Agents/UnitType/Friend/Materials/infantaria";
+    public static string MATERIAL_AGENT_TEAM_2 = "Agents/UnitType/Hostile/Materials/infantaria";
+    public static int AGENT_SCALE = 25;
+    public static int AGENT_POSITION_Z = -10;
+
 
     //CENAS
     public static string MAIN_SCENE = "MainSystem";

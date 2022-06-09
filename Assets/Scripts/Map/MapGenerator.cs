@@ -76,8 +76,6 @@ public class MapGenerator : MonoBehaviour
 
         NavMap = new Dictionary<Vector3Int, LogicMap>();
         display = FindObjectOfType<MapDisplay>();
-        Debug.Log(tex.height);
-        Debug.Log(tex.width);
 
         for (int y = 0; y < tex.height; y++) 
         { 

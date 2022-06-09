@@ -31,18 +31,17 @@ public class CBDP : MonoBehaviour
     private void ConvertCSVToCaseBase()
     {
         using var reader = new StreamReader(Config.DATA_BASE);
-        Debug.Log("Lendo " + Config.DATA_BASE);
 
         if (!reader.EndOfStream)
         {
             var header = reader.ReadLine();
             features = header.Split(Config.SPLITTER);
-            Debug.Log("Cabeçalho: " + header);
+            //Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
-                Debug.Log("Lendo linha: " + line);
+                //Debug.Log("Lendo linha: " + line);
 
                 var values = line.Split(Config.SPLITTER);
                 Case c = CaseToCase(values);
