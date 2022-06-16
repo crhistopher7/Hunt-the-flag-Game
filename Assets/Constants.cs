@@ -7,7 +7,7 @@ public static class Constants
     public static int POINTS_TEAM_1 = 0;
     public static int POINTS_TEAM_2 = 0;
     public static int MAX_DISTANCE = 1414;
-    public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
+    public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa 
 
     
     public static string MAP_FILE = @"\Heightmap_0_0.png";
