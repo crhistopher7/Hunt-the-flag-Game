@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : MatchBehaviour
 {
     public List<AgentController> Agents;
-    public int Points;
-    public Text PointsPainel;
     System.Random prng;
 
     void Start()

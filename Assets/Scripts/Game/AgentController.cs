@@ -151,16 +151,6 @@ public class AgentController : MatchBehaviour
                     isCarryingFlag = false;
                     rend.sharedMaterial = materials[0];
                     //TODO aumentar de nivel quando pegar uma bandeira
-
-                    //devo dar pontos por ter pego a bandeira
-                    PlayerController pc;
-                    if (transform.CompareTag(Constants.TAG_TEAM_1))
-                        pc = GameObject.Find(Constants.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
-                    else
-                        pc = GameObject.Find(Constants.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
-                    
-                    pc.Points += flagCarrying.value;
-                    pc.PointsPainel.text = pc.gameObject.tag + " Points: " + pc.Points;
                 }
                 //verificar se são inimigos
                 else if (!CheckFriendAgent(hit))
