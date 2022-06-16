@@ -95,6 +95,7 @@ public class MapGenerator : MonoBehaviour
                     ClickPosition = new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0),
                     Walkable = Constants.Walkable(currentHeigth),
                     MoveCost = moveCost,
+                    heigth = currentHeigth,
                     ColorMapIndex = y * tex.width + x
                 };
                 //Debug.Log(logicMap.ClickPosition);

@@ -12,5 +12,6 @@ public class LogicMap
     public float CostToObjective;
     public float Score;
     public int MoveCost;
+    public float heigth;
     public LogicMap Previous;
 }

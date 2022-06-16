@@ -48,8 +48,12 @@ public class AStar : Pathfinder
 
                 next.CostFromOrigin = current.CostFromOrigin + next.MoveCost;
                 next.Previous = current;
+
+                var v1 = new Vector3(next.ClickPosition.x, next.ClickPosition.y, next.heigth);
+                var v2 = new Vector3(objective.ClickPosition.x, objective.ClickPosition.y, objective.heigth);
+
                 // Heuristica
-                next.CostToObjective = Vector3Int.Distance(next.ClickPosition, objective.ClickPosition) *10;
+                next.CostToObjective = Vector3.Distance(v1, v2) * Constants.HEURISTIC_MULTIPLIER;
                 next.Score = next.CostToObjective + next.CostFromOrigin;
 
                 if (!TilesSearch.Contains(next))
@@ -60,7 +64,7 @@ public class AStar : Pathfinder
         }
     }
 
-    public void SearchOctile(LogicMap start, LogicMap objective, LogicMap deceptiveObjective)
+    public void SearchOctile(LogicMap start, LogicMap objective, LogicMap deceptiveObjective = null)
     {
         int iterationCount = 0;
         MapGenerator.ClearSearch();

@@ -73,7 +73,7 @@ public static class CBDPUtils
         AStar.Search(pointA, pointB);
         List<LogicMap>  path = AStar.BuildPath(pointB);
 
-        if (path.Count == 1)
+        if (path.Count == 0)
             return float.MaxValue;
 
         float distance = 0;

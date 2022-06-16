@@ -44,6 +44,7 @@ public static class Constants
     public static int AGENT_SCALE = 25;
     public static int AGENT_POSITION_Z = -10;
 
+    public static float HEURISTIC_MULTIPLIER = 10;
 
     //CENAS
     public static string MAIN_SCENE = "MainSystem";

@@ -26,23 +26,24 @@ public abstract class Pathfinder : MonoBehaviour
         while (temp.Previous != null)
         {
             path.Add(temp);
-            PathCost += temp.CostFromOrigin;
             temp = temp.Previous;
         }
-        path.Add(temp);
-        path.Reverse();
+
+        if(path.Count != 0)
+        {
+            path.Add(temp);
+            path.Reverse();
+        }
+        
         return path;
     }
 
-    public float CostPath(LogicMap objective)
+    public float CostPath(List<LogicMap> path)
     {
-        List<LogicMap> path = new List<LogicMap>();
-        LogicMap temp = objective;
+        float PathCost = 0;
 
-        while (temp.Previous != null)
-        {
-            PathCost += temp.CostFromOrigin;
-        }
+        foreach (LogicMap p in path)
+            PathCost += p.Score;
 
         return PathCost;
     }
