@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public static class Config
+public static class Constants
 {
     public static int NUMBER_OF_AGENTS = 5;
     public static int POINTS_TEAM_1 = 0;
@@ -9,16 +9,12 @@ public static class Config
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa
 
+    
+    public static string MAP_FILE = @"\Heightmap_0_0.png";
+    public static string MAP_SATELLITE_FILE = @"\Satelite_0_0.png";
+    public static string MAP_HEIGHTMAP_DIRECTORY = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap";
+    public static string MAP_SATELLITE_DIRECTORY = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Satelite";
 
-    public static string MAP_FILE = "Heightmap/Heightmap_0_0.png";
-    public static string MAP_SATELLITE_FILE = "Satelite/Satelite_0_0.png";
-    public static string MAP_PATH = "C:/Users/crisl/OneDrive/Documentos/GitHub/Hunt the flag Game/Assets/Resources/Mapas/MapasCortados/";
-
-    //public static int[] LIMITS_X_AGENT_TEAM_1 = {-490, 490};
-    //public static int[] LIMITS_X_AGENT_TEAM_2 = {-490, 490};
-    //public static int[] LIMITS_Y_AGENT_TEAM_1 = {-490, -100};
-    //public static int[] LIMITS_Y_AGENT_TEAM_2 = {100, 490};
-    //public static int CLICK_POSITION_OFFSET = -49;
     public static int[] LIMITS_X_AGENT_TEAM_1 = { -1340, 1340 };
     public static int[] LIMITS_X_AGENT_TEAM_2 = { -1340, 1340 };
     public static int[] LIMITS_Y_AGENT_TEAM_1 = { -1340, -270 };

@@ -21,7 +21,7 @@ public class PathfinderPointsController : MonoBehaviour
     /// </summary>
     private void FindComponents()
     {
-        simulationController = GameObject.Find(Config.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
+        simulationController = GameObject.Find(Constants.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
     }
 
     /// <summary>
@@ -50,18 +50,18 @@ public class PathfinderPointsController : MonoBehaviour
             pathType = simulationController.GetPathType();
             if (pathType.Equals(PathType.NORMAL))
             {
-                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Constants.MAP_OFFSET;
                 simulationController.ReceiveObjectivePositions(positionClick, deceptivePosition);
             }
             else if (!hasDeceptivePosition)
             {
-                deceptivePosition = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
+                deceptivePosition = new Vector3Int(positionClick.x, positionClick.y, 0) / Constants.MAP_OFFSET;
                 Utils.InstantiateLineDrawer(positionClick, Color.green);
                 hasDeceptivePosition = true;
             }
             else
             {
-                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Config.MAP_OFFSET;
+                positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Constants.MAP_OFFSET;
                 simulationController.ReceiveObjectivePositions(positionClick, deceptivePosition);
                 hasDeceptivePosition = false;
             }

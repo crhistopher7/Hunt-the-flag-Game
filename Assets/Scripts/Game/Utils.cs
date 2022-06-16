@@ -99,7 +99,7 @@ public static class Utils
         Ray ray = Camera.main.ScreenPointToRay(vector);
         if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
             if (hit.transform != null)
-                if (hit.transform.CompareTag(Config.TAG_TEAM_1) || hit.transform.CompareTag(Config.TAG_TEAM_2))
+                if (hit.transform.CompareTag(Constants.TAG_TEAM_1) || hit.transform.CompareTag(Constants.TAG_TEAM_2))
                     return hit.transform.gameObject.name;              
 
         return "";

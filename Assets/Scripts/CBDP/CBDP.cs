@@ -30,12 +30,12 @@ public class CBDP : MonoBehaviour
 
     private void ConvertCSVToCaseBase()
     {
-        using var reader = new StreamReader(Config.DATA_BASE);
+        using var reader = new StreamReader(Constants.DATA_BASE);
 
         if (!reader.EndOfStream)
         {
             var header = reader.ReadLine();
-            features = header.Split(Config.SPLITTER);
+            features = header.Split(Constants.SPLITTER);
             //Debug.Log("Cabeçalho: " + header);
 
             while (!reader.EndOfStream)
@@ -43,7 +43,7 @@ public class CBDP : MonoBehaviour
                 var line = reader.ReadLine();
                 //Debug.Log("Lendo linha: " + line);
 
-                var values = line.Split(Config.SPLITTER);
+                var values = line.Split(Constants.SPLITTER);
                 Case c = CaseToCase(values);
                 cbr.AddCase(c);
             }
@@ -108,11 +108,11 @@ public class CBDP : MonoBehaviour
                 countDeceptiveActions++;
         }
 
-        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_HIGHLY_DECEPTIVE)
+        if (countDeceptiveActions / countTotalActions >= Constants.LIMIAR_HIGHLY_DECEPTIVE)
             return DeceptiveLevel.HIGHLY_DECEPTIVE;
-        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_PARTIALLY_DECEPTIVE)
+        if (countDeceptiveActions / countTotalActions >= Constants.LIMIAR_PARTIALLY_DECEPTIVE)
             return DeceptiveLevel.PARTIALLY_DECEPTIVE;
-        if (countDeceptiveActions / countTotalActions >= Config.LIMIAR_LITTLE_DECEPTIVE)
+        if (countDeceptiveActions / countTotalActions >= Constants.LIMIAR_LITTLE_DECEPTIVE)
             return DeceptiveLevel.LITTLE_DECEPTIVE;
 
         return DeceptiveLevel.NOT_DECEPTIVE;
@@ -121,18 +121,18 @@ public class CBDP : MonoBehaviour
     public void StartFile()
     {
         string str = "";
-        str += "caseID" + Config.SPLITTER;
-        str += "seed" + Config.SPLITTER;
-        str += "agentsRelationships" + Config.SPLITTER;
-        str += "agentsGoalsRelationships" + Config.SPLITTER;
-        str += "agentsRelationships_distance_angle" + Config.SPLITTER;
-        str += "agentsRelationships_int" + Config.SPLITTER;
-        str += "agentsGoalsRelationships_int" + Config.SPLITTER;
-        str += "agentsBattleFieldLocalization" + Config.SPLITTER;
-        str += "deceptiveLevel" + Config.SPLITTER;
-        str += "strategy" + Config.SPLITTER;
-        str += "description" + Config.SPLITTER;
-        str += "result" + Config.SPLITTER;
+        str += "caseID" + Constants.SPLITTER;
+        str += "seed" + Constants.SPLITTER;
+        str += "agentsRelationships" + Constants.SPLITTER;
+        str += "agentsGoalsRelationships" + Constants.SPLITTER;
+        str += "agentsRelationships_distance_angle" + Constants.SPLITTER;
+        str += "agentsRelationships_int" + Constants.SPLITTER;
+        str += "agentsGoalsRelationships_int" + Constants.SPLITTER;
+        str += "agentsBattleFieldLocalization" + Constants.SPLITTER;
+        str += "deceptiveLevel" + Constants.SPLITTER;
+        str += "strategy" + Constants.SPLITTER;
+        str += "description" + Constants.SPLITTER;
+        str += "result" + Constants.SPLITTER;
 
         str += "Planning";
         //salvando 
@@ -186,7 +186,7 @@ public class CBDP : MonoBehaviour
         }
 
         //matriz de distancia/dire��o entre os agentes e objetivos (string e int)
-        GameObject[] objectives = GameObject.FindGameObjectsWithTag(Config.TAG_FLAG);
+        GameObject[] objectives = GameObject.FindGameObjectsWithTag(Constants.TAG_FLAG);
 
         currentCase.matrix_objetives = new string[agents_list.Count, objectives.Length];
         currentCase.int_matrix_objetives = new int[agents_list.Count, objectives.Length];
@@ -248,7 +248,7 @@ public class CBDP : MonoBehaviour
     {
         if (a.transform.position.y < -100)
         {
-            if (a.CompareTag(Config.TAG_TEAM_1))
+            if (a.CompareTag(Constants.TAG_TEAM_1))
                 return Sector.DEFENSIVE;
             else
                 return Sector.OFENSIVE;
@@ -256,7 +256,7 @@ public class CBDP : MonoBehaviour
 
         if (a.transform.position.y > 100)
         {
-            if (a.CompareTag(Config.TAG_TEAM_2))
+            if (a.CompareTag(Constants.TAG_TEAM_2))
                 return Sector.OFENSIVE;
             else
                 return Sector.DEFENSIVE;
@@ -303,7 +303,7 @@ public class CBDP : MonoBehaviour
     private void Save(string str)
     {
         //Open File
-        TextWriter tw = new StreamWriter(Config.DATA_BASE, true);
+        TextWriter tw = new StreamWriter(Constants.DATA_BASE, true);
 
         //Write to file
         tw.WriteLine(str);
@@ -319,7 +319,7 @@ public class CBDP : MonoBehaviour
         var case_str = this.currentCase.ToString();
 
         Debug.Log("CASO ATUAL: " + case_str);
-        Case currentCase = CaseToCase(case_str.Split(Config.SPLITTER));
+        Case currentCase = CaseToCase(case_str.Split(Constants.SPLITTER));
         List<Result> similiarCases = GetResultsOfSimilarCases(currentCase);
 
         foreach (Result similarCase in similiarCases)

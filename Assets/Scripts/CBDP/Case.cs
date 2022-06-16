@@ -33,18 +33,18 @@ public class CaseCBDP
     {
         string str = "";
 
-        str += caseId.ToString() + Config.SPLITTER;
-        str += seedMap.ToString() + Config.SPLITTER;
-        str += ToMatrixString(matrix_agents) + Config.SPLITTER;
-        str += ToMatrixString(matrix_objetives) + Config.SPLITTER;
-        str += ToMatrixString(matrix_agents_distance_angle) + Config.SPLITTER;
-        str += ToMatrixString(int_matrix_agents) + Config.SPLITTER;
-        str += ToMatrixString(int_matrix_objetives) + Config.SPLITTER;
-        str += ToVectorString(vector_sector) + Config.SPLITTER;
-        str += solutionType.ToString() + Config.SPLITTER;
-        str += strategy.ToString() + Config.SPLITTER;
-        str += description + Config.SPLITTER;
-        str += result.ToString() + Config.SPLITTER;
+        str += caseId.ToString() + Constants.SPLITTER;
+        str += seedMap.ToString() + Constants.SPLITTER;
+        str += ToMatrixString(matrix_agents) + Constants.SPLITTER;
+        str += ToMatrixString(matrix_objetives) + Constants.SPLITTER;
+        str += ToMatrixString(matrix_agents_distance_angle) + Constants.SPLITTER;
+        str += ToMatrixString(int_matrix_agents) + Constants.SPLITTER;
+        str += ToMatrixString(int_matrix_objetives) + Constants.SPLITTER;
+        str += ToVectorString(vector_sector) + Constants.SPLITTER;
+        str += solutionType.ToString() + Constants.SPLITTER;
+        str += strategy.ToString() + Constants.SPLITTER;
+        str += description + Constants.SPLITTER;
+        str += result.ToString() + Constants.SPLITTER;
         str += plan.ToString();
 
         return str;

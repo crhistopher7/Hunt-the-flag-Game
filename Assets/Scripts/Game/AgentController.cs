@@ -13,7 +13,7 @@ public class AgentController : MatchBehaviour
 
    
     protected Vector3 CurrentPosition;
-    private float DistanceToChangeWayPoint = 0.5f;
+    private float distanceToChangeWayPoint = 0.5f;
     List<LogicMap> path;
     int indexPath;
     protected bool followingpath;
@@ -42,18 +42,18 @@ public class AgentController : MatchBehaviour
         isCarryingFlag = false;
         lifeBar.localScale = new Vector3(level.life, 1, 1);
 
-        AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
-        DeceptiveAStar_1 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_1>();
-        DeceptiveAStar_2 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_2>();
-        DeceptiveAStar_3 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_3>();
-        DeceptiveAStar_4 = GameObject.Find(Config.PATHFINDER).GetComponent<DeceptiveAStar_4>();
+        AStar = GameObject.Find(Constants.PATHFINDER).GetComponent<AStar>();
+        DeceptiveAStar_1 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_1>();
+        DeceptiveAStar_2 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_2>();
+        DeceptiveAStar_3 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_3>();
+        DeceptiveAStar_4 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_4>();
     }
 
     public void InitPosition(int seed)
     {
-        AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
-        var limits_x = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_X_AGENT_TEAM_1 : Config.LIMITS_X_AGENT_TEAM_2;
-        var limits_y = CompareTag(Config.TAG_TEAM_1) ? Config.LIMITS_Y_AGENT_TEAM_1 : Config.LIMITS_Y_AGENT_TEAM_2;
+        AStar = GameObject.Find(Constants.PATHFINDER).GetComponent<AStar>();
+        var limits_x = CompareTag(Constants.TAG_TEAM_1) ? Constants.LIMITS_X_AGENT_TEAM_1 : Constants.LIMITS_X_AGENT_TEAM_2;
+        var limits_y = CompareTag(Constants.TAG_TEAM_1) ? Constants.LIMITS_Y_AGENT_TEAM_1 : Constants.LIMITS_Y_AGENT_TEAM_2;
 
         prng = new System.Random(seed);
         LogicMap point;
@@ -62,11 +62,11 @@ public class AgentController : MatchBehaviour
         {
             int x = prng.Next(limits_x[0], limits_x[1]);
             int y = prng.Next(limits_y[0], limits_y[1]);
-            int z = Config.AGENT_POSITION_Z;
+            int z = Constants.AGENT_POSITION_Z;
 
             position = new Vector3Int(x, y, z);
 
-            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(x, y, 0)) / Config.MAP_OFFSET);
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(x, y, 0)) / Constants.MAP_OFFSET);
         } while (!point.Walkable);
 
         this.transform.position = position;
@@ -105,10 +105,10 @@ public class AgentController : MatchBehaviour
         }
         //retirar da lista de agentes do controller a referencia desse agente
         PlayerController pc;
-        if (transform.CompareTag(Config.TAG_TEAM_1))
-            pc = GameObject.Find(Config.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
+        if (transform.CompareTag(Constants.TAG_TEAM_1))
+            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
         else
-            pc = GameObject.Find(Config.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
+            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
        
         pc.Agents.Remove(this);
 
@@ -125,7 +125,7 @@ public class AgentController : MatchBehaviour
             foreach (RaycastHit hit in listOfHit)
             {
                 //verificar se é uma bandeira
-                if(hit.transform.CompareTag(Config.TAG_FLAG))
+                if(hit.transform.CompareTag(Constants.TAG_FLAG))
                 {
                     // é uma bandeira, se for do inimigo e não estou carregando nada, devo carregar 
                     FlagController flagController = hit.transform.GetComponent<FlagController>();
@@ -154,10 +154,10 @@ public class AgentController : MatchBehaviour
 
                     //devo dar pontos por ter pego a bandeira
                     PlayerController pc;
-                    if (transform.CompareTag(Config.TAG_TEAM_1))
-                        pc = GameObject.Find(Config.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
+                    if (transform.CompareTag(Constants.TAG_TEAM_1))
+                        pc = GameObject.Find(Constants.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
                     else
-                        pc = GameObject.Find(Config.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
+                        pc = GameObject.Find(Constants.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
                     
                     pc.Points += flagCarrying.value;
                     pc.PointsPainel.text = pc.gameObject.tag + " Points: " + pc.Points;
@@ -190,7 +190,7 @@ public class AgentController : MatchBehaviour
     public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
 
-        LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x) / Config.MAP_OFFSET, (int)Math.Round(rb.position.y) / Config.MAP_OFFSET, 0));
+        LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x) / Constants.MAP_OFFSET, (int)Math.Round(rb.position.y) / Constants.MAP_OFFSET, 0));
         LogicMap objective = AStar.GetTileByPosition(Vector3Int.FloorToInt(objectivePosition));
         LogicMap deceptive = AStar.GetTileByPosition(Vector3Int.FloorToInt(deceptivePosition));
 
@@ -298,7 +298,7 @@ public class AgentController : MatchBehaviour
 
     private void Move()
     {
-        Vector3 targetDirection = path[indexPath].ClickPosition - Vector3Int.FloorToInt(rb.position / Config.MAP_OFFSET);
+        Vector3 targetDirection = path[indexPath].ClickPosition - Vector3Int.FloorToInt(rb.position / Constants.MAP_OFFSET);
 
         rb.MovePosition(rb.position + (targetDirection * Time.fixedDeltaTime * level.speed));
         //transform.position = Vector3.MoveTowards(transform.position, targetDirection, level.speed * Time.fixedDeltaTime);
@@ -306,13 +306,13 @@ public class AgentController : MatchBehaviour
     
     private void CheckWayPoint()
     {
-        Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(rb.position.x / Config.MAP_OFFSET, rb.position.y / Config.MAP_OFFSET));
+        Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(rb.position.x / Constants.MAP_OFFSET, rb.position.y / Constants.MAP_OFFSET));
         Vector2 newPosition =  new Vector2(path[indexPath].ClickPosition.x, path[indexPath].ClickPosition.y);
         
 
-        if (Vector2.Distance(newPosition, agentPosition) < DistanceToChangeWayPoint)
+        if (Vector2.Distance(newPosition, agentPosition) < distanceToChangeWayPoint)
         {
-            CurrentPosition = path[indexPath].ClickPosition * Config.MAP_OFFSET;
+            CurrentPosition = path[indexPath].ClickPosition * Constants.MAP_OFFSET;
             indexPath++;
             if (indexPath == path.Count)
             {

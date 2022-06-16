@@ -19,7 +19,7 @@ public class Client : MonoBehaviour
     private CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
     private SimulationController simulationController;
     private bool debugMode = true;
-    private string playerControllerTag = Config.TAG_TEAM_1;
+    private string playerControllerTag = Constants.TAG_TEAM_1;
 
     private InputField clientNameInputField;
     private InputField serverAddressInputField;
@@ -40,14 +40,14 @@ public class Client : MonoBehaviour
         clientNameInputField = canvas.transform.Find("UserNameInputField").GetComponent<InputField>();
         serverAddressInputField = canvas.transform.Find("IPInput").GetComponent<InputField>();
         passwordInputField = canvas.transform.Find("PasswordInputField").GetComponent<InputField>();
-        GameObject mapGeneratorPrefab = Resources.Load("Prefabs/" + Config.MAP_GENERATOR) as GameObject;
+        GameObject mapGeneratorPrefab = Resources.Load("Prefabs/" + Constants.MAP_GENERATOR) as GameObject;
         this.mapGeneratorPrefab = mapGeneratorPrefab.GetComponent<MapGenerator>();
     }
 
 
     public void SearchSimulationController()
     {
-        simulationController = GameObject.Find(Config.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
+        simulationController = GameObject.Find(Constants.SIMULATION_CONTROLLER).GetComponent<SimulationController>();
     }
 
     public string getClientName()
@@ -164,10 +164,10 @@ public class Client : MonoBehaviour
         var seed = int.Parse(strSeed);
         this.seed = seed;
 
-        mapGenerator.GenerateRealMap(Config.MAP_PATH, Config.MAP_FILE, Config.MAP_SATELLITE_FILE);
-        mapGenerator.name = Config.MAP_GENERATOR;
+        mapGenerator.GenerateRealMap(Constants.MAP_HEIGHTMAP_DIRECTORY, Constants.MAP_SATELLITE_DIRECTORY, Constants.MAP_FILE, Constants.MAP_SATELLITE_FILE);
+        mapGenerator.name = Constants.MAP_GENERATOR;
 
-        SceneManager.LoadScene(Config.MAIN_SCENE);
+        SceneManager.LoadScene(Constants.MAIN_SCENE);
     }
 
     private void OnApplicationQuit()

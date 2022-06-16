@@ -54,20 +54,20 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
     }
 
-    public void GenerateRealMap(string path, string heightmap, string realmap)
+    public void GenerateRealMap(string heightPath,  string realPath, string heightmap, string realmap)
     {
         byte[] fileData;
 
-        if (!File.Exists(path + heightmap) || !File.Exists(path + realmap))
+        if (!File.Exists(heightPath + heightmap) || !File.Exists(realPath + realmap))
         {
-            Debug.Log(path + heightmap);
-            Debug.Log(path + realmap);
+            Debug.Log(heightPath + heightmap);
+            Debug.Log(realPath + realmap);
             Debug.LogError("Não encontrou as imagens do mapa");
             return;
         }
             
 
-        fileData = File.ReadAllBytes(path + heightmap);
+        fileData = File.ReadAllBytes(heightPath + heightmap);
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
 
@@ -86,14 +86,14 @@ public class MapGenerator : MonoBehaviour
                 int moveCost = int.MaxValue;
 
                 // Debug.Log(currentHeigth);
-                if (Config.Walkable(currentHeigth))
+                if (Constants.Walkable(currentHeigth))
                     moveCost = 1;
 
                 LogicMap logicMap = new LogicMap
                 {
                     Position = new Vector3Int(x, y, 0),
-                    ClickPosition = new Vector3Int(Config.CLICK_POSITION_OFFSET + x, Config.CLICK_POSITION_OFFSET + y, 0),
-                    Walkable = Config.Walkable(currentHeigth),
+                    ClickPosition = new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0),
+                    Walkable = Constants.Walkable(currentHeigth),
                     MoveCost = moveCost,
                     ColorMapIndex = y * tex.width + x
                 };
@@ -102,7 +102,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        fileData = File.ReadAllBytes(path + realmap);
+        fileData = File.ReadAllBytes(realPath + realmap);
         Texture2D real_tex = new Texture2D(2, 2);
         real_tex.LoadImage(fileData);
 
@@ -131,7 +131,7 @@ public class MapGenerator : MonoBehaviour
                         int moveCost = int.MaxValue;
 
                         //pode andar em tudo que não for agua
-                        if (Config.Walkable(currentHeigth))
+                        if (Constants.Walkable(currentHeigth))
                         {
                             moveCost = 1;
                         }
@@ -139,8 +139,8 @@ public class MapGenerator : MonoBehaviour
                         LogicMap logicMap = new LogicMap
                         {
                             Position = new Vector3Int(x, y, 0),             
-                            ClickPosition = new Vector3Int(Config.CLICK_POSITION_OFFSET + x, Config.CLICK_POSITION_OFFSET + y, 0),
-                            Walkable = Config.Walkable(currentHeigth),
+                            ClickPosition = new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0),
+                            Walkable = Constants.Walkable(currentHeigth),
                             MoveCost = moveCost,
                             ColorMapIndex = y * mapWidth + x
                         };

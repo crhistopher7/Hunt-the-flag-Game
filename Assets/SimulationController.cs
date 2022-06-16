@@ -1,3 +1,4 @@
+using AnotherFileBrowser.Windows;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,22 +50,45 @@ public class SimulationController : MonoBehaviour
             ExecutePlan();
     }
 
+
+    public void OpenFileBrowser()
+    {
+        var bp = new BrowserProperties();
+        bp.title = "Select Heightmap Image File";
+        bp.filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+        bp.filterIndex = 0;
+        bp.initialDir = Constants.MAP_HEIGHTMAP_DIRECTORY;
+
+        new FileBrowser().OpenFileBrowser(bp, path =>
+        {
+            Debug.Log(path);
+        });
+
+        bp.title = "Select Satellite Image File";
+        bp.initialDir = Constants.MAP_SATELLITE_DIRECTORY;
+
+        new FileBrowser().OpenFileBrowser(bp, path =>
+        {
+            Debug.Log(path);
+        });
+    }
+
     /// <summary>
     /// Função que istancia os prefabs dos controladores de cada time de agentes
     /// </summary>
     public void InitPlayers()
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + Config.PLAYER_CONTROLLER_1);
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + Constants.PLAYER_CONTROLLER_1);
         GameObject go = Instantiate(prefab);
 
         pcTeam1 = go.GetComponent<PlayerController>();
-        pcTeam1.name = Config.PLAYER_CONTROLLER_1;
+        pcTeam1.name = Constants.PLAYER_CONTROLLER_1;
 
-        prefab = Resources.Load<GameObject>("Prefabs/" + Config.PLAYER_CONTROLLER_2);
+        prefab = Resources.Load<GameObject>("Prefabs/" + Constants.PLAYER_CONTROLLER_2);
         go = Instantiate(prefab);
 
         pcTeam2 = go.GetComponent<PlayerController>();
-        pcTeam2.name = Config.PLAYER_CONTROLLER_2;
+        pcTeam2.name = Constants.PLAYER_CONTROLLER_2;
     }
 
     /// <summary>
@@ -120,7 +144,7 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void SetDescription()
     {
-        cbdp.SetDescriptionInCase(inputDescription.text.Replace(Config.SPLITTER, ' '));
+        cbdp.SetDescriptionInCase(inputDescription.text.Replace(Constants.SPLITTER, ' '));
 
         canvasDescription.SetActive(false);
         canvasResult.SetActive(true);
@@ -237,7 +261,7 @@ public class SimulationController : MonoBehaviour
 
     public bool VerifySelectedGroupAgent(Vector2[] corners)
     {
-        var Agents = CompareTag(Config.TAG_TEAM_1) ? pcTeam1.Agents : pcTeam2.Agents;
+        var Agents = CompareTag(Constants.TAG_TEAM_1) ? pcTeam1.Agents : pcTeam2.Agents;
 
         //Quais agentes est�o dentro dos limites da box
         foreach (AgentController agent in Agents)
@@ -315,7 +339,7 @@ public class SimulationController : MonoBehaviour
 
     public void ReceiveMove(string name, string team, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
-        if (team.Equals(Config.TAG_TEAM_1))
+        if (team.Equals(Constants.TAG_TEAM_1))
             pcTeam1.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
         else
             pcTeam2.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
@@ -446,7 +470,7 @@ public class SimulationController : MonoBehaviour
         // repetir at� que a posi��o seja poss�vel de atingir
         Vector3Int position;
         LogicMap point;
-        var AStar = GameObject.Find(Config.PATHFINDER).GetComponent<AStar>();
+        var AStar = GameObject.Find(Constants.PATHFINDER).GetComponent<AStar>();
         var random = new System.Random();
         do
         {
@@ -455,18 +479,18 @@ public class SimulationController : MonoBehaviour
             double angle = random.Next(minDirection, maxDirection);
 
             position = Utils.PositionByDistanceAndAngle(angle, h, new Vector2(positionAgent.x, positionAgent.y));
-            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / Config.MAP_OFFSET);
+            point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(position.x, position.y, 0)) / Constants.MAP_OFFSET);
 
         } while (point == null || !point.Walkable);
 
-        return position / Config.MAP_OFFSET;
+        return position / Constants.MAP_OFFSET;
     }
 
     private Vector3Int GetPositionByName(string objetive)
     {
         var gameObject = GameObject.Find(objetive);
 
-        return Vector3Int.FloorToInt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0) / Config.MAP_OFFSET);
+        return Vector3Int.FloorToInt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0) / Constants.MAP_OFFSET);
     }
 
     public void ReceivePlan(string plan)

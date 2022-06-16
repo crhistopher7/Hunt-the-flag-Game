@@ -36,9 +36,9 @@ public class PlayerController : MatchBehaviour
         GameObject prefab = Resources.Load("Prefabs/Agent") as GameObject;
         GameObject go;
         string name = "Agent";
-        Material material = (CompareTag(Config.TAG_TEAM_1)) ? 
-            Resources.Load(Config.MATERIAL_AGENT_TEAM_1, typeof(Material)) as Material 
-            : Resources.Load(Config.MATERIAL_AGENT_TEAM_2, typeof(Material)) as Material;
+        Material material = (CompareTag(Constants.TAG_TEAM_1)) ? 
+            Resources.Load(Constants.MATERIAL_AGENT_TEAM_1, typeof(Material)) as Material 
+            : Resources.Load(Constants.MATERIAL_AGENT_TEAM_2, typeof(Material)) as Material;
 
         int i = 1;
         do
@@ -49,11 +49,11 @@ public class PlayerController : MatchBehaviour
             agent.tag = this.tag;
             agent.GetComponent<Renderer>().sharedMaterial = material;
             agent.transform.SetParent(this.transform);
-            agent.transform.localScale = new Vector3(Config.AGENT_SCALE, Config.AGENT_SCALE, 1);
+            agent.transform.localScale = new Vector3(Constants.AGENT_SCALE, Constants.AGENT_SCALE, 1);
             agent.InitPosition(prng.Next());
             this.Agents.Add(agent);
             i++;
-        } while (i <= Config.NUMBER_OF_AGENTS);
+        } while (i <= Constants.NUMBER_OF_AGENTS);
     }
 
     /// <summary>
