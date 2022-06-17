@@ -540,7 +540,7 @@ public class SimulationController : MonoBehaviour
 
     private void SearchSimillarCases()
     {
-        //Lista de [Descrição, Plano]
+        //Lista de [Descrição, Plano, Percentage]
         listOfSimilarCases = cbdp.SearchSimilarCases();
 
         GameObject prefab = Resources.Load<GameObject>("Prefabs/ButtonCase");
@@ -551,10 +551,12 @@ public class SimulationController : MonoBehaviour
             go.transform.position = contentButtonsCase.transform.position;
             go.transform.SetParent(contentButtonsCase.transform);
 
-            Text text = go.GetComponentInChildren<Text>();
+            Text text = go.transform.Find("Text").GetComponent<Text>();
+            Text percentage = go.transform.Find("Percentage").GetComponent<Text>();
             Button button = go.GetComponent<Button>();
             SetButtonOnClickAnswer(button, i);
             text.text = "Case " + i.ToString() + ": " + listOfSimilarCases[i][0];
+            percentage.text = listOfSimilarCases[i][2] + " %";
         }
 
     }

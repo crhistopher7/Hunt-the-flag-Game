@@ -267,7 +267,6 @@ public class CBDP : MonoBehaviour
 
     public void PlanAddAction(Action action)
     {
-        Debug.Log("Adicionando Action: " + action.ToString());
         currentCase.plan.actions.Enqueue(action);
     }
 
@@ -318,13 +317,13 @@ public class CBDP : MonoBehaviour
         List<string[]> cases = new List<string[]>();
         var case_str = this.currentCase.ToString();
 
-        Debug.Log("CASO ATUAL: " + case_str);
+        //Debug.Log("CASO ATUAL: " + case_str);
         Case currentCase = CaseToCase(case_str.Split(Constants.SPLITTER));
         List<Result> similiarCases = GetResultsOfSimilarCases(currentCase);
 
         foreach (Result similarCase in similiarCases)
         {
-            cases.Add(new string[] { similarCase.matchCase.caseDescription[10].value, similarCase.matchCase.caseSolution[0].value });
+            cases.Add(new string[] { similarCase.matchCase.caseDescription[10].value, similarCase.matchCase.caseSolution[0].value, (similarCase.matchPercentage * 100).ToString("0.00") });
         }
 
         return cases;
