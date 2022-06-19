@@ -981,7 +981,7 @@ Camera:
   far clip plane: 1000
   field of view: 55.97075
   orthographic: 1
-  orthographic size: 500
+  orthographic size: 1360
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -4323,16 +4323,16 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
+    m_Top: 5
+    m_Bottom: 30
+  m_ChildAlignment: 7
+  m_Spacing: 25
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &5264162233201554616
 MonoBehaviour:

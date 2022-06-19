@@ -548,8 +548,9 @@ public class SimulationController : MonoBehaviour
         for (int i = 0; i < listOfSimilarCases.Count; i++)
         {
             GameObject go = Instantiate(prefab);
-            go.transform.position = contentButtonsCase.transform.position;
             go.transform.SetParent(contentButtonsCase.transform);
+            go.transform.localScale = Vector3.one;
+            go.transform.position = contentButtonsCase.transform.position;
 
             Text text = go.transform.Find("Text").GetComponent<Text>();
             Text percentage = go.transform.Find("Percentage").GetComponent<Text>();
