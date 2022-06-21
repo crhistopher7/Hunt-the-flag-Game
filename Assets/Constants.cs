@@ -42,7 +42,7 @@ public static class Constants
 
     public static string MATERIAL_AGENT_TEAM_1 = "Agents/UnitType/Friend/Materials/infantaria";
     public static string MATERIAL_AGENT_TEAM_2 = "Agents/UnitType/Hostile/Materials/infantaria";
-    public static int AGENT_SCALE = 25;
+    public static int AGENT_SCALE = 30;
     public static int AGENT_POSITION_Z = -10;
 
     public static float HEURISTIC_MULTIPLIER = 10;

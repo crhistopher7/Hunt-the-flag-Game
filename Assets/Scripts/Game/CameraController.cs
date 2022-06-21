@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float panSpeed = 200f;
-    private float panBorderThickeness = 5f;
-    private float scrollSpeed = 100f;
+    private readonly float panSpeed = 200f;
+    private readonly float panBorderThickeness = 5f;
+    private readonly float scrollSpeed = 100f;
 
     Camera cam;
 
     private void Start()
     {
         cam = GetComponent<Camera>();
+        cam.orthographicSize = Constants.CAMERA_LIMIT_PAN;
     }
 
     // Update is called once per frame
