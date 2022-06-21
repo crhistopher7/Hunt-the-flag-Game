@@ -199,7 +199,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2421958442661215660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SimulationController, Assembly-CSharp
+        m_MethodName: SearchSimillarCases
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &225721855903781340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,7 +2646,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6605301628257867743}
   m_HandleRect: {fileID: 5559868368304307968}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4116,7 +4128,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7176769178086944216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SimulationController, Assembly-CSharp
+        m_MethodName: OpenFileBrowser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5206196276696509944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4350,7 @@ MonoBehaviour:
     m_Top: 5
     m_Bottom: 30
   m_ChildAlignment: 7
-  m_Spacing: 25
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -5388,7 +5412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5451716521104872206}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SimulationController, Assembly-CSharp
+        m_MethodName: RestartWithNewCase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6644838412907282695
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,7 +5996,19 @@ MonoBehaviour:
   m_Value: 0.9
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SimulationController, Assembly-CSharp
+        m_MethodName: SetThresholdText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7144534144012810864
 GameObject:
   m_ObjectHideFlags: 0
@@ -6950,7 +6998,7 @@ GameObject:
   - component: {fileID: 4979126191802745511}
   - component: {fileID: 5275672357852960840}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextPercentage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

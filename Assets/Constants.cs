@@ -35,6 +35,7 @@ public static class Constants
     public static string TAG_TEAM_1 = "Team1";
     public static string TAG_TEAM_2 = "Team2";
     public static string TAG_FLAG = "Flag";
+    public static string TAG_BUTTON_CASE = "ButtonCase";
     public static string MAP_GENERATOR = "Map Generator";
     public static string SIMULATION_CONTROLLER = "SimulationController";
 

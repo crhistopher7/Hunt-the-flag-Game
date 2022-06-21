@@ -21,6 +21,7 @@ public class SimulationController : MonoBehaviour
     private GameObject canvasPainels;
     private GameObject contentButtonsCase;
     private InputField inputDescription;
+    private Text thresholdSliderText;
     private List<AgentController> selectedAgents;
     private Dropdown dropdown;
     private RectTransform rectPanel;
@@ -34,6 +35,14 @@ public class SimulationController : MonoBehaviour
     private DateTime dateStartPlan;
     private Plan plan;
     private int selectedSimilarCaseId;
+
+    //Configuration Variables
+    public InputField inputRetrivelCasesNumber;
+    public Slider sliderRetrivelCasesThreshold;
+    public InputField inputNumberOfAgents;
+    public string MAP_HEIGHTMAP;
+    public string MAP_SATELLITE;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +59,9 @@ public class SimulationController : MonoBehaviour
             ExecutePlan();
     }
 
-
+    /// <summary>
+    /// Função que abre o FileBrowser para o usuário selecionar as imagens do mapa
+    /// </summary>
     public void OpenFileBrowser()
     {
         var bp = new BrowserProperties();
@@ -96,14 +107,35 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void EndCase()
     {
+        DestroyAllMatchObjects();
+
+        canvasPainels.SetActive(false);
+        canvasType.SetActive(true);
+    }
+
+    /// <summary>
+    /// Função que destrói todos os game objects referentes ao caso no simulador
+    /// </summary>
+    private void DestroyAllMatchObjects()
+    {
         //Destruir os agents
         var matchObjects = FindObjectsOfType<MatchBehaviour>();
 
         foreach (var matchObject in matchObjects)
             Destroy(matchObject.gameObject);
+    }
 
-        canvasPainels.SetActive(false);
-        canvasType.SetActive(true);
+    /// <summary>
+    /// Função que inicia novamente com um novo caso e chama para atualizar seus casos similares
+    /// </summary>
+    public void RestartWithNewCase()
+    {
+        DestroyAllMatchObjects();
+
+        //RestartGame
+        InitPlayers();
+        Invoke(nameof(ComandStartCase), 0.5f);
+        Invoke(nameof(SearchSimillarCases), 1f);
     }
 
     /// <summary>
@@ -116,13 +148,22 @@ public class SimulationController : MonoBehaviour
         {
             DeceptiveLevel level = cbdp.CalculateDeceptionLevel();
             cbdp.SetSolutionTypeInCase(level);
-        }            
+        }
         else
             cbdp.SetSolutionTypeInCase(DeceptiveLevel.NOT_DECEPTIVE);
 
         canvasType.SetActive(false);
         canvasStrategy.SetActive(true);
     }
+
+    /// <summary>
+    /// Função chamada na alteração do slider para alterar o valor do campo do texto
+    /// </summary>
+    public void SetThresholdText()
+    {
+        thresholdSliderText.text = ">= " + sliderRetrivelCasesThreshold.value.ToString("0.00") + " %";
+    }
+
 
     /// <summary>
     /// Função que recebe a estratégia do caso (ofensivo ou defensivo) e envia para o CBDP a informação
@@ -206,6 +247,7 @@ public class SimulationController : MonoBehaviour
         Invoke(nameof(ComandStartCase), 0.5f);
         EnableComponentSelectController();
         DesableComponentPathfinderPointsController();
+        SetThresholdText();
     }
 
     /// <summary>
@@ -234,8 +276,18 @@ public class SimulationController : MonoBehaviour
         contentButtonsCase = canvasPainels.transform.Find("Right Panel").transform.Find("Scroll View").transform.Find("Viewport").transform.Find("Content").gameObject;
         inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
         cbdp = GameObject.Find("CBDP").GetComponent<CBDP>();
+
+        inputRetrivelCasesNumber = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesInput").GetComponentInChildren<InputField>();
+        sliderRetrivelCasesThreshold = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").GetComponentInChildren<Slider>();
+        thresholdSliderText = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").transform.Find("TextPercentage").GetComponent<Text>();
+        inputNumberOfAgents = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("NumberOfAgents").GetComponentInChildren<InputField>();
     }
 
+    /// <summary>
+    /// Função que envia oara o servidor e para o caso no CBDP as posições (enganosa e objetivo real) dos agentes selecionados
+    /// </summary>
+    /// <param name="objectivePosition">Vector3Int da posição do objetivo real</param>
+    /// <param name="deceptivePosition">Vector3Int da posição do objetivo enganoso</param>
     private void SendObjectivesToAgents(Vector3Int objectivePosition, Vector3Int deceptivePosition)
     {
         Message send = new Message();
@@ -538,14 +590,49 @@ public class SimulationController : MonoBehaviour
         yield return null;
     }
 
-    private void SearchSimillarCases()
+    /// <summary>
+    /// Função que realiza a busca no CBDP pelos casos similares ao caso atual e preenche o content com eles
+    /// </summary>
+    public void SearchSimillarCases()
     {
+        float threshold = sliderRetrivelCasesThreshold.value * 100; 
+        int.TryParse(inputRetrivelCasesNumber.text, out int maxRetrivelCases);
+
+        if (inputRetrivelCasesNumber.text.Equals("") || maxRetrivelCases <= 0)
+        {
+            Debug.Log("O número máximo de casos similares deve ser um número válido!");
+            return;
+        }
+            
+
         //Lista de [Descrição, Plano, Percentage]
         listOfSimilarCases = cbdp.SearchSimilarCases();
 
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/ButtonCase");
+        //Limpar lista de botões de casos similares no content 
+        ClearButtonCaseInContent();
 
-        for (int i = 0; i < listOfSimilarCases.Count; i++)
+        Debug.Log("maxRetrivelCases = " + maxRetrivelCases.ToString());
+        Debug.Log("threshold = " + threshold.ToString());
+
+        float percentageValue = float.Parse(listOfSimilarCases[0][2]);
+        Debug.Log("percentageValue = " + percentageValue.ToString());
+        Debug.Log("bool = " + (percentageValue >= threshold));
+
+        if (listOfSimilarCases.Count == 0)
+        {
+            Debug.Log("Nenhum caso similar foi encontrado!");
+            return;
+        } else if (percentageValue < threshold)
+        {
+            Debug.Log("Nenhum caso acima do threshold "+ threshold.ToString() + " foi encontrado!");
+            Debug.Log("Caso mais similar obteve: " + percentageValue.ToString() + " % de similaridade");
+            return;
+        }
+
+        //prefab do botão para listar no content
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/ButtonCase");
+        // criar e adicionar cada botão referente aos casos similares
+        for (int i = 0; i < listOfSimilarCases.Count && i < maxRetrivelCases && percentageValue >= threshold; i++)
         {
             GameObject go = Instantiate(prefab);
             go.transform.SetParent(contentButtonsCase.transform);
@@ -556,12 +643,32 @@ public class SimulationController : MonoBehaviour
             Text percentage = go.transform.Find("Percentage").GetComponent<Text>();
             Button button = go.GetComponent<Button>();
             SetButtonOnClickAnswer(button, i);
-            text.text = "Case " + i.ToString() + ": " + listOfSimilarCases[i][0];
-            percentage.text = listOfSimilarCases[i][2] + " %";
+            text.text = "Description: " + listOfSimilarCases[i][0];
+            percentage.text = "Case " + i.ToString() + ": " + percentageValue.ToString() + " %";
+            percentageValue = float.Parse(listOfSimilarCases[i][2]);
         }
-
     }
 
+    /// <summary>
+    /// Função que limpa o content que contém os botões de casos similares no canvas
+    /// </summary>
+    private void ClearButtonCaseInContent()
+    {
+        Transform[] allButton = contentButtonsCase.GetComponentsInChildren<Transform>();
+
+        foreach (Transform button in allButton)
+        {
+            if (button.CompareTag(Constants.TAG_BUTTON_CASE))
+                Destroy(button.gameObject);
+        }
+            
+    }
+
+    /// <summary>
+    /// Função que seta um action em cada botão adicionado no content de casos similares
+    /// </summary>
+    /// <param name="button">Botão de caso similar</param>
+    /// <param name="value">Index correspondente na lista de casos similares</param>
     private void SetButtonOnClickAnswer(Button button, int value)
     {
         button.onClick.AddListener(() => SetIdOfSimilarCaseSelected(value));
