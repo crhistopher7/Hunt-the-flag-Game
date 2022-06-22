@@ -9,11 +9,8 @@ public static class Constants
     public static int MAX_DISTANCE = 1414;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa  
 
-    
-    public static string MAP_FILE = @"\Heightmap_0_0.png";
-    public static string MAP_SATELLITE_FILE = @"\Satelite_0_0.png";
-    public static string MAP_HEIGHTMAP_DIRECTORY = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap";
-    public static string MAP_SATELLITE_DIRECTORY = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Satelite";
+    public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap\Heightmap_0_0.png";
+    public static string MAP_SATELLITE_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Satelite\Satelite_0_0.png";
 
     public static int[] LIMITS_X_AGENT_TEAM_1 = { -1340, 1340 };
     public static int[] LIMITS_X_AGENT_TEAM_2 = { -1340, 1340 };

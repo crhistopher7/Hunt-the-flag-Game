@@ -164,7 +164,7 @@ public class Client : MonoBehaviour
         var seed = int.Parse(strSeed);
         this.seed = seed;
 
-        mapGenerator.GenerateRealMap(Constants.MAP_HEIGHTMAP_DIRECTORY, Constants.MAP_SATELLITE_DIRECTORY, Constants.MAP_FILE, Constants.MAP_SATELLITE_FILE);
+        mapGenerator.GenerateRealMap(Constants.MAP_HEIGHTMAP_FILE, Constants.MAP_SATELLITE_FILE);
         mapGenerator.name = Constants.MAP_GENERATOR;
 
         SceneManager.LoadScene(Constants.MAIN_SCENE);

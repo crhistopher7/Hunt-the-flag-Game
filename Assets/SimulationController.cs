@@ -30,6 +30,7 @@ public class SimulationController : MonoBehaviour
     private CBDP cbdp;
     private PlayerController pcTeam1;
     private PlayerController pcTeam2;
+    private MapGenerator mapGenerator;
     private List<string[]> listOfSimilarCases;
     private bool hasPlan = false;
     private DateTime dateStartPlan;
@@ -60,28 +61,42 @@ public class SimulationController : MonoBehaviour
     }
 
     /// <summary>
-    /// Função que abre o FileBrowser para o usuário selecionar as imagens do mapa
+    /// Função que abre o FileBrowser para o usuário selecionar as imagens do mapa e manda reiniciar
     /// </summary>
     public void OpenFileBrowser()
     {
+        string MAP_HEIGHTMAP_FILE = "";
+        string MAP_SATELLITE_FILE = "";
+
         var bp = new BrowserProperties();
         bp.title = "Select Heightmap Image File";
         bp.filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
         bp.filterIndex = 0;
-        bp.initialDir = Constants.MAP_HEIGHTMAP_DIRECTORY;
 
         new FileBrowser().OpenFileBrowser(bp, path =>
         {
             Debug.Log(path);
+            MAP_HEIGHTMAP_FILE = path;
         });
 
         bp.title = "Select Satellite Image File";
-        bp.initialDir = Constants.MAP_SATELLITE_DIRECTORY;
 
         new FileBrowser().OpenFileBrowser(bp, path =>
         {
             Debug.Log(path);
+            MAP_SATELLITE_FILE = path;
         });
+
+        //Destroy current case
+        DestroyAllMatchObjects();
+
+        //Reload Map
+        mapGenerator.GenerateRealMap(MAP_HEIGHTMAP_FILE, MAP_SATELLITE_FILE);
+
+        //RestartGame
+        InitPlayers();
+        Invoke(nameof(ComandStartCase), 0.5f);
+        Invoke(nameof(SearchSimillarCases), 1f);
     }
 
     /// <summary>
@@ -276,6 +291,7 @@ public class SimulationController : MonoBehaviour
         contentButtonsCase = canvasPainels.transform.Find("Right Panel").transform.Find("Scroll View").transform.Find("Viewport").transform.Find("Content").gameObject;
         inputDescription = canvasDescription.transform.Find("Panel").transform.Find("Description").GetComponentInChildren<InputField>();
         cbdp = GameObject.Find("CBDP").GetComponent<CBDP>();
+        mapGenerator = GameObject.Find(Constants.MAP_GENERATOR).GetComponent<MapGenerator>();
 
         inputRetrivelCasesNumber = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesInput").GetComponentInChildren<InputField>();
         sliderRetrivelCasesThreshold = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").GetComponentInChildren<Slider>();

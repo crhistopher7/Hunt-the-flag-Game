@@ -54,20 +54,20 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
     }
 
-    public void GenerateRealMap(string heightPath,  string realPath, string heightmap, string realmap)
+    public void GenerateRealMap(string heightmap, string realmap)
     {
         byte[] fileData;
 
-        if (!File.Exists(heightPath + heightmap) || !File.Exists(realPath + realmap))
+        if (!File.Exists(heightmap) || !File.Exists(realmap))
         {
-            Debug.Log(heightPath + heightmap);
-            Debug.Log(realPath + realmap);
+            Debug.Log(heightmap);
+            Debug.Log(realmap);
             Debug.LogError("Não encontrou as imagens do mapa");
             return;
         }
             
 
-        fileData = File.ReadAllBytes(heightPath + heightmap);
+        fileData = File.ReadAllBytes(heightmap);
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
 
@@ -103,7 +103,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        fileData = File.ReadAllBytes(realPath + realmap);
+        fileData = File.ReadAllBytes(realmap);
         Texture2D real_tex = new Texture2D(2, 2);
         real_tex.LoadImage(fileData);
 
