@@ -295,7 +295,7 @@ public class SimulationController : MonoBehaviour
 
         inputRetrivalCasesNumber = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivalCasesInput").GetComponentInChildren<InputField>();
         sliderRetrivalCasesThreshold = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivalCasesThreshold").GetComponentInChildren<Slider>();
-        thresholdSliderText = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").transform.Find("TextPercentage").GetComponent<Text>();
+        thresholdSliderText = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivalCasesThreshold").transform.Find("TextPercentage").GetComponent<Text>();
         inputNumberOfAgents = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("NumberOfAgents").GetComponentInChildren<InputField>();
     }
 
