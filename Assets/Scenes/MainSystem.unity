@@ -318,6 +318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 317316240988872222, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: Retrival Threshold
+      objectReference: {fileID: 0}
     - target: {fileID: 1273326309151111834, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -330,6 +334,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 138579475}
+    - target: {fileID: 1676287630701900351, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Name
+      value: RetrivalCasesThreshold
+      objectReference: {fileID: 0}
     - target: {fileID: 2192996771037618316, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -338,6 +346,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 138579475}
+    - target: {fileID: 2900307779825536103, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Name
+      value: RetrivalCasesInput
+      objectReference: {fileID: 0}
     - target: {fileID: 2912372244497474397, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -354,6 +366,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 138579475}
+    - target: {fileID: 4204271129056570710, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: Retrival N Cases
+      objectReference: {fileID: 0}
     - target: {fileID: 4205774880495704538, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

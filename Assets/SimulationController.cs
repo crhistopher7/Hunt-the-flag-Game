@@ -38,8 +38,8 @@ public class SimulationController : MonoBehaviour
     private int selectedSimilarCaseId;
 
     //Configuration Variables
-    public InputField inputRetrivelCasesNumber;
-    public Slider sliderRetrivelCasesThreshold;
+    public InputField inputRetrivalCasesNumber;
+    public Slider sliderRetrivalCasesThreshold;
     public InputField inputNumberOfAgents;
     public string MAP_HEIGHTMAP;
     public string MAP_SATELLITE;
@@ -176,7 +176,7 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void SetThresholdText()
     {
-        thresholdSliderText.text = ">= " + sliderRetrivelCasesThreshold.value.ToString("0.00") + " %";
+        thresholdSliderText.text = ">= " + sliderRetrivalCasesThreshold.value.ToString("0.00") + " %";
     }
 
 
@@ -293,8 +293,8 @@ public class SimulationController : MonoBehaviour
         cbdp = GameObject.Find("CBDP").GetComponent<CBDP>();
         mapGenerator = GameObject.Find(Constants.MAP_GENERATOR).GetComponent<MapGenerator>();
 
-        inputRetrivelCasesNumber = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesInput").GetComponentInChildren<InputField>();
-        sliderRetrivelCasesThreshold = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").GetComponentInChildren<Slider>();
+        inputRetrivalCasesNumber = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivalCasesInput").GetComponentInChildren<InputField>();
+        sliderRetrivalCasesThreshold = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivalCasesThreshold").GetComponentInChildren<Slider>();
         thresholdSliderText = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("RetrivelCasesThreshold").transform.Find("TextPercentage").GetComponent<Text>();
         inputNumberOfAgents = canvasPainels.transform.Find("Left Panel").transform.Find("ConfigsPanel").transform.Find("NumberOfAgents").GetComponentInChildren<InputField>();
     }
@@ -611,10 +611,10 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void SearchSimillarCases()
     {
-        float threshold = sliderRetrivelCasesThreshold.value * 100; 
-        int.TryParse(inputRetrivelCasesNumber.text, out int maxRetrivelCases);
+        float threshold = sliderRetrivalCasesThreshold.value * 100; 
+        int.TryParse(inputRetrivalCasesNumber.text, out int maxRetrivelCases);
 
-        if (inputRetrivelCasesNumber.text.Equals("") || maxRetrivelCases <= 0)
+        if (inputRetrivalCasesNumber.text.Equals("") || maxRetrivelCases <= 0)
         {
             Debug.Log("O número máximo de casos similares deve ser um número válido!");
             return;
