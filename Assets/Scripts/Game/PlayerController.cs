@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class PlayerController : MatchBehaviour
 {
     public List<AgentController> Agents;
+    public int numberOfAgents;
     System.Random prng;
 
     void Start()
     {
         SetVariables();
-        StartAgents();
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class PlayerController : MatchBehaviour
     }
 
     /// <summary>
-    /// Função que inicializa os agentes de player de acordo com a quantidade de agentes setada nos configs em posições randomicas
+    /// Função que inicializa os agentes de player de acordo com a quantidade de agentes setada em posições randomicas
     /// </summary>
     public void StartAgents()
     {
@@ -51,7 +51,7 @@ public class PlayerController : MatchBehaviour
             agent.InitPosition(prng.Next());
             this.Agents.Add(agent);
             i++;
-        } while (i <= Constants.NUMBER_OF_AGENTS);
+        } while (i <= numberOfAgents);
     }
 
     /// <summary>

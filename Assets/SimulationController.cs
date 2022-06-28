@@ -104,17 +104,27 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void InitPlayers()
     {
+        if (inputNumberOfAgents.text == "" || int.Parse(inputNumberOfAgents.text) <= 0)
+        {
+            Debug.Log("Numero de agentes invalido");
+            return;
+        }
+
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + Constants.PLAYER_CONTROLLER_1);
         GameObject go = Instantiate(prefab);
 
         pcTeam1 = go.GetComponent<PlayerController>();
+        pcTeam1.numberOfAgents = int.Parse(inputNumberOfAgents.text);
         pcTeam1.name = Constants.PLAYER_CONTROLLER_1;
+        pcTeam1.StartAgents();
 
         prefab = Resources.Load<GameObject>("Prefabs/" + Constants.PLAYER_CONTROLLER_2);
         go = Instantiate(prefab);
 
         pcTeam2 = go.GetComponent<PlayerController>();
+        pcTeam2.numberOfAgents = int.Parse(inputNumberOfAgents.text);
         pcTeam2.name = Constants.PLAYER_CONTROLLER_2;
+        pcTeam2.StartAgents();
     }
 
     /// <summary>
