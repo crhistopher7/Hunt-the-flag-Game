@@ -10,7 +10,7 @@ public class PlayerController : MatchBehaviour
     public int numberOfAgents;
     System.Random prng;
 
-    void Start()
+    void Awake()
     {
         SetVariables();
     }
@@ -38,13 +38,17 @@ public class PlayerController : MatchBehaviour
             Resources.Load(Constants.MATERIAL_AGENT_TEAM_1, typeof(Material)) as Material 
             : Resources.Load(Constants.MATERIAL_AGENT_TEAM_2, typeof(Material)) as Material;
 
+        Color color = (CompareTag(Constants.TAG_TEAM_1)) ? Color.blue : Color.red;
+
         int i = 1;
         do
         {
             go = Instantiate(prefab);
+           
             AgentController agent = go.GetComponent<AgentController>();
             agent.name = name + i.ToString();
             agent.tag = this.tag;
+            agent.color = color;
             agent.GetComponent<Renderer>().sharedMaterial = material;
             agent.transform.SetParent(this.transform);
             agent.transform.localScale = new Vector3(Constants.AGENT_SCALE, Constants.AGENT_SCALE, 1);

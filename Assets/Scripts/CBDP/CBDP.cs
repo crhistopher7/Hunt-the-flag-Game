@@ -221,7 +221,15 @@ public class CBDP : MonoBehaviour
         };
     }
 
-    
+    internal void NormalizeTimeInPlan()
+    {
+        int normalizerTime = currentCase.plan.actions.Peek().time - 1;
+
+        foreach (Action action in currentCase.plan.actions)
+        {
+            action.time -= normalizerTime;
+        }
+    }
 
     public void SetSolutionTypeInCase(DeceptiveLevel type)
     {

@@ -6,7 +6,7 @@ public static class Constants
     public static int NUMBER_OF_AGENTS = 5;
     public static int POINTS_TEAM_1 = 0;
     public static int POINTS_TEAM_2 = 0;
-    public static int MAX_DISTANCE = 1414;
+    public static int MAX_DISTANCE = 3800;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa  
 
     public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap\Heightmap_0_0.png";
@@ -17,7 +17,6 @@ public static class Constants
     public static int[] LIMITS_Y_AGENT_TEAM_1 = { -1340, -270 };
     public static int[] LIMITS_Y_AGENT_TEAM_2 = { 270, 1340 };
     public static int CLICK_POSITION_OFFSET = -134;
-
 
     public static float LIMIAR_HIGHLY_DECEPTIVE = 0.75f;
     public static float LIMIAR_PARTIALLY_DECEPTIVE = 0.3f;
@@ -33,9 +32,9 @@ public static class Constants
     public static string TAG_TEAM_2 = "Team2";
     public static string TAG_FLAG = "Flag";
     public static string TAG_BUTTON_CASE = "ButtonCase";
+    public static string TAG_LINE_OF_PATH = "LineOfPath";
     public static string MAP_GENERATOR = "Map Generator";
     public static string SIMULATION_CONTROLLER = "SimulationController";
-
 
     public static string MATERIAL_AGENT_TEAM_1 = "Agents/UnitType/Friend/Materials/infantaria";
     public static string MATERIAL_AGENT_TEAM_2 = "Agents/UnitType/Hostile/Materials/infantaria";

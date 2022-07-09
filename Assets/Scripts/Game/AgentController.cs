@@ -11,7 +11,8 @@ public class AgentController : MatchBehaviour
     private DeceptiveAStar_3 DeceptiveAStar_3;
     private DeceptiveAStar_4 DeceptiveAStar_4;
 
-   
+    private GameObject prefabLine;
+
     protected Vector3 CurrentPosition;
     private float distanceToChangeWayPoint = 0.5f;
     List<LogicMap> path;
@@ -24,6 +25,7 @@ public class AgentController : MatchBehaviour
     public Transform lifeBar;
 
     public Material[] materials;
+    public Color color;
     Renderer rend;
     public int seed;
     System.Random prng;
@@ -47,6 +49,10 @@ public class AgentController : MatchBehaviour
         DeceptiveAStar_2 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_2>();
         DeceptiveAStar_3 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_3>();
         DeceptiveAStar_4 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_4>();
+
+        prefabLine = Resources.Load("Prefabs/PathLine") as GameObject;
+        SpriteRenderer back = transform.Find("Background").GetComponent<SpriteRenderer>();
+        back.color = color;
     }
 
     public void InitPosition(int seed)
@@ -252,8 +258,15 @@ public class AgentController : MatchBehaviour
         if(path.Count != 0)
         {
             followingpath = true;
-            // TODO Desenhar path no mapa com lines
-            // chamar função passando o path e posição do agent, a função deve carregar um prefab line e adicionar linhas
+            
+            GameObject go;
+            go = Instantiate(prefabLine);
+            go.GetComponent<LineRenderer>().startColor = color;
+            go.GetComponent<LineRenderer>().endColor = color;
+            LineController line = go.GetComponent<LineController>();
+           
+            line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
+            
         }
         else
         {
@@ -311,7 +324,6 @@ public class AgentController : MatchBehaviour
     {
         Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(rb.position.x / Constants.MAP_OFFSET, rb.position.y / Constants.MAP_OFFSET));
         Vector2 newPosition =  new Vector2(path[indexPath].ClickPosition.x, path[indexPath].ClickPosition.y);
-        
 
         if (Vector2.Distance(newPosition, agentPosition) < distanceToChangeWayPoint)
         {

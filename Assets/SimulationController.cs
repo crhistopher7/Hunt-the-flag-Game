@@ -48,8 +48,9 @@ public class SimulationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitPlayers();
         FindComponents();
+        InitPlayers();
+        
         SetVariables();
         Invoke(nameof(SearchSimillarCases), 0.5f);
     }
@@ -87,8 +88,14 @@ public class SimulationController : MonoBehaviour
             MAP_SATELLITE_FILE = path;
         });
 
+        if (MAP_HEIGHTMAP_FILE.Equals("") || MAP_SATELLITE_FILE.Equals(""))
+        {
+            Debug.Log("File vazio");
+            return;
+        }
+
         //Destroy current case
-        DestroyAllMatchObjects();
+        DestroyAllMatchObjectsAndLines();
 
         //Reload Map
         mapGenerator.GenerateRealMap(MAP_HEIGHTMAP_FILE, MAP_SATELLITE_FILE);
@@ -132,22 +139,24 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void EndCase()
     {
-        DestroyAllMatchObjects();
+        DestroyAllMatchObjectsAndLines();
 
         canvasPainels.SetActive(false);
         canvasType.SetActive(true);
     }
 
     /// <summary>
-    /// Função que destrói todos os game objects referentes ao caso no simulador
+    /// Função que destrói todos os game objects referentes ao caso no simulador e as linhas dos paths
     /// </summary>
-    private void DestroyAllMatchObjects()
+    private void DestroyAllMatchObjectsAndLines()
     {
         //Destruir os agents
-        var matchObjects = FindObjectsOfType<MatchBehaviour>();
-
-        foreach (var matchObject in matchObjects)
+        foreach (var matchObject in FindObjectsOfType<MatchBehaviour>())
             Destroy(matchObject.gameObject);
+
+        //Destruir as linhas dos paths desenhados
+        foreach (var line in GameObject.FindGameObjectsWithTag(Constants.TAG_LINE_OF_PATH))
+            Destroy(line);
     }
 
     /// <summary>
@@ -155,7 +164,7 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void RestartWithNewCase()
     {
-        DestroyAllMatchObjects();
+        DestroyAllMatchObjectsAndLines();
 
         //RestartGame
         InitPlayers();
@@ -224,6 +233,9 @@ public class SimulationController : MonoBehaviour
     {
         cbdp.SetResultInCase(result);
         canvasResult.SetActive(false);
+
+        //normalizar o time das ações
+        cbdp.NormalizeTimeInPlan();
 
         //save case
         cbdp.SaveCase(cbdp.GetCase());

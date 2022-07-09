@@ -9,7 +9,7 @@ public class ScreenShot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            ScreenCapture.CaptureScreenshot("SomeLevel");
+            ScreenCapture.CaptureScreenshot("SomeLevel.png");
         }
     }
 }

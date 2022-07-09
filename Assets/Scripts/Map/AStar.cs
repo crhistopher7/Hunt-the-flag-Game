@@ -59,7 +59,7 @@ public class AStar : Pathfinder
                 if (!TilesSearch.Contains(next))
                 {
                     openSet.Add(next);
-                }            
+                }
             }
         }
     }

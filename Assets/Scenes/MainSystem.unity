@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449bc27c6f43349428864b8d7b7d76a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputRetrivelCasesNumber: {fileID: 0}
-  sliderRetrivelCasesThreshold: {fileID: 0}
+  inputRetrivalCasesNumber: {fileID: 0}
+  sliderRetrivalCasesThreshold: {fileID: 0}
   inputNumberOfAgents: {fileID: 0}
   MAP_HEIGHTMAP: 
   MAP_SATELLITE: 
@@ -360,6 +360,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3204704334241098127, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794043974110219917, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794043974110219917, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794043974110219917, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3959997981558397729, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
