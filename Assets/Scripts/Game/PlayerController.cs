@@ -38,7 +38,7 @@ public class PlayerController : MatchBehaviour
             Resources.Load(Constants.MATERIAL_AGENT_TEAM_1, typeof(Material)) as Material 
             : Resources.Load(Constants.MATERIAL_AGENT_TEAM_2, typeof(Material)) as Material;
 
-        Color color = (CompareTag(Constants.TAG_TEAM_1)) ? Color.blue : Color.red;
+        Color color = (CompareTag(Constants.TAG_TEAM_1)) ? new Color(0, 0, 0.5f, 0.5f) : new Color(0.5f,0,0, 0.5f);
 
         int i = 1;
         do

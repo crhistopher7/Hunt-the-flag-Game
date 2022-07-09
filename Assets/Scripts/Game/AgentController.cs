@@ -233,15 +233,16 @@ public class AgentController : MatchBehaviour
             }
             else if (pathType == PathType.DECEPTIVE_3)
             {
-                // Falta implementar o octile
-                
-                DeceptiveAStar_3.Search(current, objective, deceptiveObjective);
+                // Encontra o target
                 LogicMap target = FindTarget(current, objective, deceptive);
 
                 if (target != null)
                 {
-                    AStar.SearchOctile(current, target);
+                    // Custom a* (start, target, obj)
+                    AStar.SearchOctile(current, target, objective);
                     path = AStar.BuildPath(target);
+
+                    // Path target to obj
                     AStar.Search(target, objective);
                     List<LogicMap> secondPath = AStar.BuildPath(objective);
                     path.AddRange(secondPath);
@@ -249,9 +250,19 @@ public class AgentController : MatchBehaviour
             }
             else
             {
-                // Não esta Implementado 
-                DeceptiveAStar_4.Search(current, objective, deceptiveObjective);
-                path = DeceptiveAStar_4.BuildPath(objective);
+                Debug.Log("Deceptive 4");
+                LogicMap target = FindTarget(current, objective, deceptive);
+
+                if (target != null)
+                {
+                    // CustomAstar (start , target)
+                    AStar.SearchAstarCustom4(current, target);
+                    path = AStar.BuildPath(target);
+                    // Path 2
+                    AStar.Search(target, objective);
+                    List<LogicMap> secondPath = AStar.BuildPath(objective);
+                    path.AddRange(secondPath);
+                }
             }
         }
        
