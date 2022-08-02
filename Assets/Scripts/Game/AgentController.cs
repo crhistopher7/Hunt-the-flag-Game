@@ -138,7 +138,8 @@ public class AgentController : MatchBehaviour
                     if (!transform.CompareTag(flagController.team) && !isCarryingFlag && !flagController.beingCarried)
                     {
                         SimulationController simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
-                        simulation.EndCase();
+                        simulation.TakeAPicture();
+                        StartCoroutine(simulation.EndCase());
 
 
                         /* flagController.agentSpeed = level.speed;

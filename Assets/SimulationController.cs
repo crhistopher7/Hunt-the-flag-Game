@@ -137,8 +137,9 @@ public class SimulationController : MonoBehaviour
     /// <summary>
     /// Função que destrói os agentes do caso corrente e inicia os paineis de informação do caso
     /// </summary>
-    public void EndCase()
+    public IEnumerator EndCase()
     {
+        yield return new WaitForEndOfFrame();
         DestroyAllMatchObjectsAndLines();
 
         canvasPainels.SetActive(false);
@@ -157,6 +158,13 @@ public class SimulationController : MonoBehaviour
         //Destruir as linhas dos paths desenhados
         foreach (var line in GameObject.FindGameObjectsWithTag(Constants.TAG_LINE_OF_PATH))
             Destroy(line);
+    }
+
+    public void TakeAPicture()
+    {
+        //Tirar o print
+        ScreenShot ss = GameObject.Find(Constants.CAMERA_SCREEN_SHOT).GetComponent<ScreenShot>();
+        ss.DoScreenShot(cbdp.GetCase().caseId);
     }
 
     /// <summary>
@@ -253,13 +261,47 @@ public class SimulationController : MonoBehaviour
     {
         if (selectedSimilarCaseId == -1)
         {
-            Debug.Log("Deve escolher um caso similar primeiro");
+            Debug.Log("Deve escolher um caso similar primeiro!");
             return;
         }
 
+        ConstructPlanOfSimilarCase();
         Debug.Log("Executando o Plano: " + listOfSimilarCases[selectedSimilarCaseId][1]);
         ReceivePlan(listOfSimilarCases[selectedSimilarCaseId][1]);
     }
+
+    public void ConstructPlanOfSimilarCase()
+    {
+        this.plan = new Plan(listOfSimilarCases[selectedSimilarCaseId][1]);
+
+        Dictionary<Action, Message> dicActionsMessage = CreateMessagesOfPlanExecution(plan.actions);
+    }
+
+    private Dictionary<Action, Message> CreateMessagesOfPlanExecution(Queue<Action> actions)
+    {
+        Dictionary<Action, Message> dic = new Dictionary<Action, Message>();
+        foreach (Action action in actions)
+        {
+
+        }
+        return dic;
+    }
+
+    /// <summary>
+    /// Função que 
+    /// </summary>
+    public void ExecutePreview()
+    {
+        if (selectedSimilarCaseId == -1)
+        {
+            Debug.Log("Deve escolher um caso similar primeiro!");
+            return;
+        }
+
+        ConstructPlanOfSimilarCase();
+        // mandar agentes printar
+    }
+
 
     /// <summary>
     /// Função que recebe o id do plano escolhido como similar e o seta na variável do plano similar
@@ -337,8 +379,6 @@ public class SimulationController : MonoBehaviour
         clientOfExecution.Send(send.ToString());
         selectedAgents.Clear();
     }
-
-
 
     private void ShowArrowPathConstructor()
     {
@@ -494,24 +534,24 @@ public class SimulationController : MonoBehaviour
         switch (distance)
         {
             case "VC":
-                maxDistance = 87;
+                maxDistance = (Constants.MAX_DISTANCE / 16) - 1;
                 minDistance = 0;
                 break;
             case "C":
-                maxDistance = 175;
-                minDistance = 88;
+                maxDistance = (Constants.MAX_DISTANCE / 8) - 1;
+                minDistance = Constants.MAX_DISTANCE / 16;
                 break;
             case "A":
-                maxDistance = 352;
-                minDistance = 176;
+                maxDistance = (Constants.MAX_DISTANCE / 4) - 1;
+                minDistance = Constants.MAX_DISTANCE / 8;
                 break;
             case "F":
-                maxDistance = 706;
-                minDistance = 353;
+                maxDistance = (Constants.MAX_DISTANCE / 2) - 1;
+                minDistance = Constants.MAX_DISTANCE / 4;
                 break;
             case "VF":
-                maxDistance = 1414;
-                minDistance = 707;
+                maxDistance = Constants.MAX_DISTANCE;
+                minDistance = Constants.MAX_DISTANCE / 2;
                 break;
             default:
                 break;
@@ -692,14 +732,10 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     private void ClearButtonCaseInContent()
     {
-        Transform[] allButton = contentButtonsCase.GetComponentsInChildren<Transform>();
-
-        foreach (Transform button in allButton)
-        {
+        foreach (Transform button in contentButtonsCase.GetComponentsInChildren<Transform>())
             if (button.CompareTag(Constants.TAG_BUTTON_CASE))
                 Destroy(button.gameObject);
-        }
-            
+
     }
 
     /// <summary>

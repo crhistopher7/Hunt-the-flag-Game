@@ -51,6 +51,8 @@ public static class Constants
 
     public static float CAMERA_LIMIT_PAN = 1360f;
 
+    public static string CAMERA_SCREEN_SHOT = "CameraScreenShot";
+
     public static bool Walkable(float value)
     {
         return (value > MIN_WALKABLE && value <= MAX_WALKABLE);

@@ -51,7 +51,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 4
+    widthMultiplier: 20
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -95,8 +95,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.039569214, g: 0.09852241, b: 0.3679245, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -119,13 +119,13 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -142,3 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f9ba336ccfa734cbb02bad2c3d1bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normal: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  dotted: {fileID: 2100000, guid: 48b45e35a4ea222469e686ab1ab1e4d6, type: 2}
+  trail: {fileID: 2100000, guid: c5cc5e602642c394eacb1d68c32dd9a4, type: 2}
+  arrow: {fileID: 2100000, guid: 16f5f17b93958f64a8134e0f8cd87700, type: 2}
+  star: {fileID: 2100000, guid: 63cdcf42731b6b049a9ae69a027f2cdb, type: 2}
