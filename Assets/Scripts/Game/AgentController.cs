@@ -240,7 +240,7 @@ public class AgentController : MatchBehaviour
                 if (target != null)
                 {
                     // Custom a* (start, target, obj)
-                    AStar.SearchOctile(current, target, objective);
+                    AStar.SearchAstarCustom3(current, target, objective);
                     path = AStar.BuildPath(target);
 
                     // Path target to obj
@@ -256,8 +256,14 @@ public class AgentController : MatchBehaviour
 
                 if (target != null)
                 {
+                    //calcular um astar para a char o custo
+                    AStar.Search(current, objective);
+                    float costReal = AStar.CostPath(AStar.BuildPath(objective));
+                    AStar.Search(current, deceptive);
+                    float costDeceptive = AStar.CostPath(AStar.BuildPath(deceptive));
+
                     // CustomAstar (start , target)
-                    AStar.SearchAstarCustom4(current, target);
+                    AStar.SearchAstarCustom4(current, target, objective, deceptiveObjective, costReal, costDeceptive);
                     path = AStar.BuildPath(target);
                     // Path 2
                     AStar.Search(target, objective);

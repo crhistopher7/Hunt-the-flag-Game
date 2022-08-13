@@ -43,8 +43,8 @@ public static class CBDPUtils
 
     public static Distance CalculeDistance(Vector3 a, Vector3 b)
     {
-        //float distance = Vector3.Distance(a, b);
-        float distance = GetDistanceByAStarPath(a, b);
+        float distance = Vector3.Distance(a, b);
+        //float distance = GetDistanceByAStarPath(a, b);
 
         if (distance >= Constants.MAX_DISTANCE / 2)
             return Distance.VF;

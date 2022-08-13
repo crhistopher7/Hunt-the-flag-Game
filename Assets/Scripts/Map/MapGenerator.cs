@@ -54,6 +54,23 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
     }
 
+    public Dictionary<Vector3Int, LogicMap> CopyOfNavMap()
+    {
+        return CloneDictionaryCloningValues(NavMap);
+    }
+
+    public static Dictionary<TKey, TValue> CloneDictionaryCloningValues<TKey, TValue>
+    (Dictionary<TKey, TValue> original) where TValue : ICloneable
+    {
+        Dictionary<TKey, TValue> ret = new Dictionary<TKey, TValue>(original.Count,
+                                                                original.Comparer);
+        foreach (KeyValuePair<TKey, TValue> entry in original)
+        {
+            ret.Add(entry.Key, (TValue)entry.Value.Clone());
+        }
+        return ret;
+    }
+
     public void GenerateRealMap(string heightmap, string realmap)
     {
         byte[] fileData;
@@ -85,7 +102,6 @@ public class MapGenerator : MonoBehaviour
                 float currentHeigth = pixel.grayscale;
                 int moveCost = int.MaxValue;
 
-                // Debug.Log(currentHeigth);
                 if (Constants.Walkable(currentHeigth))
                     moveCost = 1;
 
@@ -95,8 +111,9 @@ public class MapGenerator : MonoBehaviour
                     ClickPosition = new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0),
                     Walkable = Constants.Walkable(currentHeigth),
                     MoveCost = moveCost,
-                    heigth = currentHeigth,
-                    ColorMapIndex = y * tex.width + x
+                    heigth = currentHeigth * 255,
+                    ColorMapIndex = y * tex.width + x,
+                    isDeceptive = false
                 };
                 //Debug.Log(logicMap.ClickPosition);
                 NavMap.Add(logicMap.ClickPosition, logicMap);
@@ -190,6 +207,7 @@ public class MapGenerator : MonoBehaviour
             t.CostToObjective = int.MaxValue;
             t.Score = int.MaxValue;
             t.Previous = null;
+            t.isDeceptive = false;
         }
     }
 

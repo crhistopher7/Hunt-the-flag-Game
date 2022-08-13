@@ -176,7 +176,8 @@ public class CBDP : MonoBehaviour
                 Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, agents_list[j].transform.position);
                 Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
-                float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
+                //float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
+                float distance_float = Vector3.Distance(agents_list[i].transform.position, agents_list[j].transform.position);
                 float angle = Vector3.Angle(agents_list[i].transform.position, agents_list[j].transform.position);
 
                 currentCase.matrix_agents[i, j] = distance.ToString() + "-" + direction.ToString();

@@ -46,8 +46,8 @@ public static class Constants
     //CENAS
     public static string MAIN_SCENE = "MainSystem";
 
-    public static float MAX_WALKABLE = 0.8f;
-    public static float MIN_WALKABLE = 0.1f;
+    public static float MAX_WALKABLE = 0.9f;
+    public static float MIN_WALKABLE = 0.05f;
 
     public static float CAMERA_LIMIT_PAN = 1360f;
 
