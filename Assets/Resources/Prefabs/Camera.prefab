@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retrival N Cases
+  m_Text: Retrieval N Cases
 --- !u!1 &100709120345863204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,7 +2207,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retrival Threshold
+  m_Text: Retrieval Threshold
 --- !u!1 &2874079725933555742
 GameObject:
   m_ObjectHideFlags: 0

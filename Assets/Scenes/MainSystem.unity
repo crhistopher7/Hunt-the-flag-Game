@@ -413,14 +413,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 1432412584605380838, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432412584605380838, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
     - target: {fileID: 1649645341527174730, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -444,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 3204704334241098127, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646274522688349716, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: Retrieved  Cases
       objectReference: {fileID: 0}
     - target: {fileID: 3794043974110219917, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_AnchorMax.x
@@ -525,6 +521,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 138579475}
+    - target: {fileID: 5457455710533728514, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: "O plano constru\xEDdo e executado obteve sucesso?"
+      objectReference: {fileID: 0}
     - target: {fileID: 5559868368304307968, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -537,6 +537,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 138579475}
+    - target: {fileID: 5906637353048110119, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: "O plano constru\xEDdo e executado foi ofensivo?"
+      objectReference: {fileID: 0}
     - target: {fileID: 6055373118238497556, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -553,9 +557,9 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7726903360915046635, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 8699092246634056969, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: "O plano constru\xEDdo e executado foi enganoso?"
       objectReference: {fileID: 0}
     - target: {fileID: 9112786306240584010, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

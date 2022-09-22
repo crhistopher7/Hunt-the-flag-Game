@@ -38,7 +38,7 @@ public class ScreenShot : MonoBehaviour
         Destroy(rt);
 
         byte[] bytes = screenShot.EncodeToPNG();
-        System.IO.File.WriteAllBytes("Case_"+id+".png", bytes);
+        System.IO.File.WriteAllBytes(@"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\"+"Case_"+id+".png", bytes);
         canvasPainels.SetActive(true);
     }
 

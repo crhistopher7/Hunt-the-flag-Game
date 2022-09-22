@@ -332,7 +332,7 @@ public class CBDP : MonoBehaviour
 
         foreach (Result similarCase in similiarCases)
         {
-            cases.Add(new string[] { similarCase.matchCase.caseDescription[10].value, similarCase.matchCase.caseSolution[0].value, (similarCase.matchPercentage * 100).ToString("0.00") });
+            cases.Add(new string[] { similarCase.matchCase.caseDescription[10].value, similarCase.matchCase.caseSolution[0].value, (similarCase.matchPercentage * 100).ToString("0.00"), similarCase.matchCase.caseDescription[0].value });
         }
 
         return cases;

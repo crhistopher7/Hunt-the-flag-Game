@@ -2,6 +2,7 @@ using AnotherFileBrowser.Windows;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -683,7 +684,7 @@ public class SimulationController : MonoBehaviour
         }
             
 
-        //Lista de [Descrição, Plano, Percentage]
+        //Lista de [Descrição, Plano, Percentage, ID]
         listOfSimilarCases = cbdp.SearchSimilarCases();
 
         //Limpar lista de botões de casos similares no content 
@@ -719,11 +720,18 @@ public class SimulationController : MonoBehaviour
 
             Text text = go.transform.Find("Text").GetComponent<Text>();
             Text percentage = go.transform.Find("Percentage").GetComponent<Text>();
+            Image image = go.transform.Find("Image").GetComponent<Image>();
             Button button = go.GetComponent<Button>();
             SetButtonOnClickAnswer(button, i);
             text.text = "Description: " + listOfSimilarCases[i][0];
             percentage.text = "Case " + i.ToString() + ": " + percentageValue.ToString() + " %";
             percentageValue = float.Parse(listOfSimilarCases[i][2]);
+
+            Sprite aSprite = Resources.Load<Sprite>("Case_" + listOfSimilarCases[i][3]);
+            Debug.Log("Case_" + listOfSimilarCases[i][3] + ".png");
+            Debug.Log(aSprite.name);
+            image.sprite = aSprite;          
+            
         }
     }
 

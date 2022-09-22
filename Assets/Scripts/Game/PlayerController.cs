@@ -21,7 +21,7 @@ public class PlayerController : MatchBehaviour
     private void SetVariables()
     {
         Agents = new List<AgentController>();
-        prng = new System.Random();
+        prng = new System.Random(1);
     }
 
     /// <summary>
