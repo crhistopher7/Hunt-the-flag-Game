@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b5ea63a-9f0b-4c57-99bd-32899d6d8672" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/PathLine.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/PathLine.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/AgentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/AgentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimulationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimulationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CaseBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/CaseBase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainSystem.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainSystem.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/Action.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/CBDPUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/CBDPUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/Case.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/Case.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/MatrixSimilarity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/MatrixSimilarity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/Plan.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/Plan.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CBDP/TestValidation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CBDP/TestValidation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Sensor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Sensor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

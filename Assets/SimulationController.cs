@@ -461,7 +461,7 @@ public class SimulationController : MonoBehaviour
         return pathType;
     }
 
-    public void ReceiveObjectivePositions(Vector3Int objectivePosition, Vector3Int deceptivePosition)
+    public void ReceiveObjectivePositions(Vector3Int objectivePosition, Vector3Int? deceptivePosition)
     {
         DesableComponentPathfinderPointsController();
         SendObjectivesToAgents(objectivePosition, deceptivePosition);
@@ -662,6 +662,11 @@ public class SimulationController : MonoBehaviour
         direction = CBDPUtils.CalculeDirection(deceptivePosition.x, deceptivePosition.y);
 
         action.distance_directionDeceptive = distance.ToString() + '-' + direction.ToString();
+
+        if(pathType.Equals(PathType.NORMAL))
+            action.cost = Vector3.Distance(agent.transform.position, objetivePosition);
+        else
+            action.cost = Vector3.Distance(agent.transform.position, deceptivePosition) + Vector3.Distance(deceptivePosition, objetivePosition);
 
         //send to plan
         cbdp.PlanAddAction(action);

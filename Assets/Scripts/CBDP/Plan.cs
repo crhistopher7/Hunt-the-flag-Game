@@ -74,4 +74,67 @@ public class Plan
         return str.Remove(str.Length - 1, 1) + ")";
     }
 
+    public int CountAgentsInPlan()
+    {
+        List<string> agents = new List<string>();
+        foreach (Action action in this.actions)
+        {
+            agents.Add(action.agent);
+        }
+        return agents.Distinct().Count();
+    }
+
+
+    public int[] CountActionsOfAgentsInPlan()
+    {
+        var size = 5;//quantidade de agentes
+        int[] counts = new int[size];
+
+
+        for (int i = 0; i < size; i++)
+            counts[i] = 0;
+
+        foreach (var a in this.actions)
+            counts[int.Parse(a.agent.Remove(0, a.agent.Length - 1)) - 1]++;
+
+        return counts;
+    }
+
+    public int[] CountDeceptionActionsOfPlan()
+    {
+        int size = Enum.GetNames(typeof(PathType)).Length;
+        int[] counts = new int[size];
+
+        for (int i = 0; i < size; i++)
+            counts[i] = 0;
+
+        foreach (var a in this.actions)
+            counts[(int)a.pathType]++;
+
+        return counts;
+    }
+
+    public int[] CountDeceptionDensityOfPlan()
+    {
+        int size = Enum.GetNames(typeof(DeceptiveLevel)).Length;
+        int[] counts = new int[size];
+
+        for (int i = 0; i < size; i++)
+            counts[i] = 0;
+
+        foreach (var a in this.actions)
+            counts[(int)a.actionDefinition]++;
+
+        return counts;
+    }
+
+    public float[] GetCostOfActions()
+    {
+        List<float> costs = new List<float>();
+
+        foreach (var a in this.actions)
+            costs.Add(a.cost);
+
+        return costs.ToArray();
+    }
 }

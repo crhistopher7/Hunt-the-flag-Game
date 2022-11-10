@@ -45,35 +45,40 @@ public class TestValidation : MonoBehaviour
 
     private float PlanSimilarity(string caseSolution1, string caseSolution2)
     {
-        var size = 5;
+        var A = new Plan(caseSolution1);
+        var B = new Plan(caseSolution2);
 
-        int[] counts_a = new int[size];
-        int[] counts_b = new int[size];
 
-        var A = new Plan(caseSolution1).actions.ToList();
-        var B = new Plan(caseSolution2).actions.ToList();
+        //Contar a quantidade de ações
+        int actions_count_A = A.actions.Count;
+        int actions_count_B = B.actions.Count;
 
-        for (int i = 0; i < size; i++)
-        {
-            counts_a[i] = 0;
-            counts_b[i] = 0;
-        }
+        //Contar a quantidade de agentes envolvidos
+        int agents_count_A = A.CountAgentsInPlan();
+        int agents_count_B = B.CountAgentsInPlan();
 
-        foreach (var a in A)
-        {
-            var i = int.Parse(a.agent.Remove(0, a.agent.Length - 1)) - 1;
-            counts_a[i]++;
-        }
+        //Contar a quatidade de agentes envolvidos e a quantidade de ações que cada agente participa
+        int[] counts_a = A.CountActionsOfAgentsInPlan();
+        int[] counts_b = B.CountActionsOfAgentsInPlan();
 
-        foreach (var b in B)
-        {
-            var i = int.Parse(b.agent.Remove(0, b.agent.Length - 1)) - 1;
-            counts_b[i]++;
-        }
+        //Contar a Densidade de engano das ações do Plano
+        int[] count_deceptions_A = A.CountDeceptionActionsOfPlan();
+        int[] count_deceptions_B = B.CountDeceptionActionsOfPlan();
+
+        //Contar a Densidade de engano das ações do Plano
+        int[] count_density_A = A.CountDeceptionDensityOfPlan();
+        int[] count_density_B = B.CountDeceptionDensityOfPlan();
+
+        //Calcular a similaridade entre os movimentos das ações de cada plano
+
+        //Comparar o custo do caminho das ações
+        float[] costs_A = A.GetCostOfActions();
+        float[] costs_B = B.GetCostOfActions();
+
 
         var similarity = 0f;
         
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < 5; i++)
         {
             
             float max = (counts_a[i] >= counts_b[i]) ? counts_a[i] : counts_b[i];
@@ -82,7 +87,7 @@ public class TestValidation : MonoBehaviour
             similarity += (max - min) / max;
         }
 
-        similarity /= size;
+        similarity /= 5;
 
         return 1f - similarity;
     }

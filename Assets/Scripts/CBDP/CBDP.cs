@@ -296,7 +296,7 @@ public class CBDP : MonoBehaviour
         action.distance_direction = str[5];
         action.distance_directionDeceptive = str[6];
         action.time = int.Parse(str[7]);
-
+        action.cost = float.Parse(str[8]);
         currentCase.plan.actions.Enqueue(action);
     }
 

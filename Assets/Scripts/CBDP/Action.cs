@@ -17,6 +17,7 @@ public class Action
     public string distance_direction;
     public string distance_directionDeceptive;
     public int time;
+    public float cost;
 
     /// <summary>
     /// Override do ToString
@@ -25,6 +26,6 @@ public class Action
     public override string ToString()
     {
         return action + "," + agent + "," + objetive + "," + actionDefinition + "," +
-            pathType + "," + distance_direction + "," + distance_directionDeceptive + "," + time;
+            pathType + "," + distance_direction + "," + distance_directionDeceptive + "," + time + "," + cost;
     }
 }

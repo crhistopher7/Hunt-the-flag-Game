@@ -100,10 +100,8 @@ public class Sensor : MonoBehaviour
         print("Distance to other: " + (b.position - a.position));
         if (Physics.Raycast(a.position, a.TransformDirection(b.position - a.position), out RaycastHit hit))
             Debug.DrawRay(a.position, a.TransformDirection(b.position - a.position), Color.red);
-         else
+        else
             Debug.DrawRay(a.position, a.TransformDirection(b.position - a.position), Color.blue);
-
-
     }
     
 
