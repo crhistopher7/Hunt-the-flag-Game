@@ -1,3 +1,4 @@
+using Assets.Scripts.CBDP;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ public enum Distance
 
 public enum Direction
 {
-    F = 10, RF = 20, LF = 30, R = 40, L = 50, B = 60, RB = 70, LB = 80
+    F = 1, RF = 2, LF = 3, R = 4, L = 5, B = 60, RB = 70, LB = 80
 }
 
 public enum Strategy
@@ -39,6 +40,49 @@ public static class CBDPUtils
     public static List<AgentController> OrderAgentList(List<AgentController> agents)
     {
         return agents.OrderBy(p => p.transform.position.x).ThenBy(p => p.transform.position.y).ToList();
+    }
+
+    public static IEnumerable<T> Flatten<T>(this T[,] matrix)
+    {
+        foreach (var item in matrix) yield return item;
+    }
+
+    public static List<Qualitative> ToQualitative(this IEnumerable<string> vector)
+    {
+        List<Qualitative> list = new List<Qualitative>();
+
+        foreach (var item in vector)
+        {
+            if(item != "")
+                list.Add(new Qualitative(item));
+        }
+
+        return list;
+    }
+
+    /// <summary>
+    /// Função que reescreve uma matriz[,] do tipo string em forma de string
+    /// </summary>
+    /// <param name="matrix">A matriz[,] do tipo string</param>
+    /// <param name="delimiter">Delimitador</param>
+    /// <returns>Matrix no formato de string</returns>
+    public static string ToMatrixString<T>(this T[,] matrix, string delimiter = ",")
+    {
+        string s = "{";
+
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            s += "{";
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                s += matrix[i, j].ToString() + (delimiter);
+            }
+            s = s.Remove(s.Length - 1, 1);
+            s += "}:";
+        }
+        s = s.Remove(s.Length - 1, 1);
+
+        return s += "}";
     }
 
     public static Distance CalculeDistance(Vector3 a, Vector3 b)
@@ -133,5 +177,66 @@ public static class CBDPUtils
                 return Direction.LB;
             }
         }
+    }
+
+    public static string[,] StringToMatrix(string str)
+    {
+        string[,] matrix;
+
+        // Removendo o {} de fora da matriz
+        string aux = str.Remove(0, 1);
+        aux = aux.Remove(aux.Length - 1, 1);
+
+        // Separando em linhas
+        var lines = aux.Split(':');
+
+        // Pegando a quantidade de valores que tem na matrix
+        var columnsSize = CountOccurrences(lines[0], ',');
+
+        // Iniciando a matriz
+        matrix = new string[lines.Length, columnsSize];
+
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            // Exemplo: { VF - RB,A - LB,,,,,,,,,}
+
+            var line = lines[i];
+
+            // Removendo o {}
+            line = line.Remove(0, 1);
+            line = line.Remove(line.Length - 1, 1);
+
+            var values = line.Split(',');
+
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                matrix[i, j] = values[j];
+            }
+        }
+
+        return matrix;
+    }
+
+    private static int CountOccurrences(string str, char delimiter)
+    {
+        int count = 0;
+        foreach (char c in str)
+            if (c == delimiter) count++;
+
+        return count;
+    }
+
+    public static float Octile(Vector2 a, Vector2 b)
+    {
+        var dx = Mathf.Abs(a.x - b.x);
+        var dy = Mathf.Abs(a.y - b.y);
+
+        return Mathf.Max(dx, dy) + ((Mathf.Sqrt(2) - 1) * Mathf.Min(dx, dy));
+    }
+
+
+    public static float Euclidian(Vector2 a, Vector2 b)
+    {
+        return Vector2.Distance(a, b);
     }
 }

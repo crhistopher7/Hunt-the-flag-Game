@@ -51,7 +51,7 @@ public class PathfinderPointsController : MonoBehaviour
             if (pathType.Equals(PathType.NORMAL))
             {
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Constants.MAP_OFFSET;
-                simulationController.ReceiveObjectivePositions(positionClick, deceptivePosition);
+                simulationController.ReceiveObjectivePositions(positionClick, positionClick); //Caso seja normal, não tem posição enganosa
             }
             else if (!hasDeceptivePosition)
             {
