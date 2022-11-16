@@ -57,6 +57,7 @@ public class Plan
             action.distance_direction = features[5];
             action.distance_directionDeceptive = features[6];
             action.time = int.Parse(features[7]);
+            action.cost = float.Parse(features[8]);
 
             this.actions.Enqueue(action);
         }

@@ -13,6 +13,7 @@ namespace Assets.Scripts.CBDP
         public readonly Direction direction;
         public readonly double? angle;
         public readonly double? numericDistance;
+        public readonly bool isNull = false;
         public readonly char splitter = '-';
 
         Dictionary<string, float> DicDistance = new Dictionary<string, float>()
@@ -87,7 +88,6 @@ namespace Assets.Scripts.CBDP
             {"VF-LB", new Vector2(-5,-5)}
         };
 
-
         Dictionary<string, float> DicDirection = new Dictionary<string, float>()
         {
             {"F-F", 0},
@@ -156,6 +156,11 @@ namespace Assets.Scripts.CBDP
             {"LB-LB", 0}
         };
 
+        public Qualitative()
+        {
+            isNull = true;
+        }
+
         public Qualitative(Distance distance, Direction direction)
         {
             this.distance = distance;
@@ -187,6 +192,8 @@ namespace Assets.Scripts.CBDP
 
         public string ToString(bool num)
         {
+            if (isNull)
+                return "";
             if (num)
                 return angle.ToString() + splitter + numericDistance.ToString();
             else
@@ -195,6 +202,9 @@ namespace Assets.Scripts.CBDP
 
         public override string ToString()
         {
+            if (isNull)
+                return "";
+
             return distance.ToString() + splitter + direction.ToString();
         }
 

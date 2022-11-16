@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.CBDP;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,13 +10,18 @@ public class CaseCBDP
 {
     public int caseId;
     public int seedMap;
-    public string[,] matrix_agents;
-    public string[,] matrix_objetives;
-    public string[,] matrix_agents_distance_angle;
+    
+    public Qualitative[,] matrix_agents;
+    public Qualitative[,] matrix_objetives;
+    public Qualitative[,] matrix_agents_distance_angle;
 
-    public int[,] int_matrix_agents;
-    public int[,] int_matrix_objetives;
-    public int[,] int_matrix_agents_distance_angle;
+    public string[,] matrix_agents_;
+    public string[,] matrix_objetives_;
+    public string[,] matrix_agents_distance_angle_;
+
+    //public int[,] int_matrix_agents;
+    //public int[,] int_matrix_objetives;
+    //public int[,] int_matrix_agents_distance_angle;
 
     public Sector[] vector_sector;
 
@@ -39,8 +45,8 @@ public class CaseCBDP
         str += CBDPUtils.ToMatrixString(matrix_agents) + Constants.SPLITTER;
         str += CBDPUtils.ToMatrixString(matrix_objetives) + Constants.SPLITTER;
         str += CBDPUtils.ToMatrixString(matrix_agents_distance_angle) + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(int_matrix_agents) + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(int_matrix_objetives) + Constants.SPLITTER;
+        //str += CBDPUtils.ToMatrixString(int_matrix_agents) + Constants.SPLITTER;
+        //str += CBDPUtils.ToMatrixString(int_matrix_objetives) + Constants.SPLITTER;
         str += ToVectorString(vector_sector) + Constants.SPLITTER;
         str += solutionType.ToString() + Constants.SPLITTER;
         str += strategy.ToString() + Constants.SPLITTER;

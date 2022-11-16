@@ -74,4 +74,80 @@ public class JaccardMatrixSimilarity : AbstractLocalSimilarity
         return 1f - similarityScore;
     }
 
+    // Function to return the
+    // intersection set of s1 and s2
+    static HashSet<int> intersection(HashSet<int> a, HashSet<int> b)
+    {
+
+        // Find the intersection of the two sets
+        HashSet<int> intersect = new HashSet<int>();
+        foreach (int n in a)
+        {
+            if (b.Contains(n))
+                intersect.Add(n);
+        }
+
+        return intersect;
+    }
+
+    // Function to return the Jaccard index of two sets
+    static double jaccard_index(HashSet<int> s1, HashSet<int> s2)
+    {
+        // Sizes of both the sets
+        int size_s1 = s1.Count;
+        int size_s2 = s2.Count;
+
+        // Get the intersection set
+        HashSet<int> intersect = intersection(s1, s2);
+
+        // Size of the intersection set
+        int size_in = intersect.Count;
+
+        // Calculate the Jaccard index
+        // using the formula
+        double jaccard_in = (double)size_in / (double)(size_s1 + size_s2 - size_in);
+
+        // Return the Jaccard index
+        return jaccard_in;
+    }
+
+    // Function to return the Jaccard distance
+    static double jaccard_distance(double jaccardIndex)
+    {
+        // Calculate the Jaccard distance
+        // using the formula
+        double jaccard_dist = 1 - jaccardIndex;
+
+        // Return the Jaccard distance
+        return jaccard_dist;
+    }
+
+    // Driver code
+
+    // Elements of the 1st set
+    public static void Main(string[] args)
+    {
+        HashSet<int> s1 = new HashSet<int>();
+        s1.Add(1);
+        s1.Add(2);
+        s1.Add(3);
+        s1.Add(4);
+        s1.Add(5);
+
+        // Elements of the 2nd set
+        HashSet<int> s2 = new HashSet<int>();
+        s2.Add(4);
+        s2.Add(5);
+        s2.Add(6);
+        s2.Add(7);
+        s2.Add(8);
+        s2.Add(9);
+        s2.Add(10);
+
+        double jaccardIndex = jaccard_index(s1, s2);
+
+        // Print the Jaccard index and Jaccard distance
+        Console.WriteLine("Jaccard index = " + jaccardIndex);
+        Console.WriteLine("Jaccard distance = " + jaccard_distance(jaccardIndex));
+    }
 }

@@ -381,6 +381,7 @@ public class SimulationController : MonoBehaviour
         selectedAgents.Clear();
     }
 
+
     private void ShowArrowPathConstructor()
     {
         Color color = pathType.Equals(PathType.NORMAL) ? Color.green : Color.red;
@@ -461,7 +462,7 @@ public class SimulationController : MonoBehaviour
         return pathType;
     }
 
-    public void ReceiveObjectivePositions(Vector3Int objectivePosition, Vector3Int? deceptivePosition)
+    public void ReceiveObjectivePositions(Vector3Int objectivePosition, Vector3Int deceptivePosition)
     {
         DesableComponentPathfinderPointsController();
         SendObjectivesToAgents(objectivePosition, deceptivePosition);
