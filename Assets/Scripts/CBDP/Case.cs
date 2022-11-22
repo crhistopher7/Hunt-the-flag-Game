@@ -44,7 +44,7 @@ public class CaseCBDP
         str += seedMap.ToString() + Constants.SPLITTER;
         str += CBDPUtils.ToMatrixString(matrix_agents) + Constants.SPLITTER;
         str += CBDPUtils.ToMatrixString(matrix_objetives) + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(matrix_agents_distance_angle) + Constants.SPLITTER;
+        str += CBDPUtils.ToMatrixString(matrix_agents_distance_angle, true) + Constants.SPLITTER;
         //str += CBDPUtils.ToMatrixString(int_matrix_agents) + Constants.SPLITTER;
         //str += CBDPUtils.ToMatrixString(int_matrix_objetives) + Constants.SPLITTER;
         str += ToVectorString(vector_sector) + Constants.SPLITTER;

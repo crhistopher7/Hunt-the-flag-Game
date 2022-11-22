@@ -176,29 +176,22 @@ namespace Assets.Scripts.CBDP
         public Qualitative(string str)
         {
             var aux = str.Split(splitter);
-            
-            if(Enum.TryParse(aux[0], out this.distance))
+
+            if(Double.TryParse(aux[0].Replace(".", ","), out double a))
             {
+                this.angle = a;
+                this.numericDistance = Double.Parse(aux[1].Replace(".", ","));
+            }
+            else
+            {
+                Enum.TryParse(aux[0], out this.distance);
                 Enum.TryParse(aux[1], out this.direction);
                 this.angle = null;
                 this.numericDistance = null;
             }
-            else
-            {
-                this.angle = Double.Parse(aux[0]);
-                this.numericDistance = Double.Parse(aux[1]);
-            }
         }
 
-        public string ToString(bool num)
-        {
-            if (isNull)
-                return "";
-            if (num)
-                return angle.ToString() + splitter + numericDistance.ToString();
-            else
-                return ToString();
-        }
+       
 
         public override string ToString()
         {
@@ -226,6 +219,19 @@ namespace Assets.Scripts.CBDP
         {
             DicPoint.TryGetValue(this.ToString(), out Vector2 p);
             return p;
+        }
+
+        public string ToString(bool num)
+        {
+            if (isNull)
+                return "";
+            if (num)
+            {
+                return angle.ToString().Replace(",", ".") + splitter + numericDistance.ToString().Replace(",", ".");
+            }
+                
+            else
+                return ToString();
         }
     }
 }

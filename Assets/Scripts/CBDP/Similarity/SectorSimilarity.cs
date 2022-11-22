@@ -25,45 +25,51 @@ public class SectorSimilarity : AbstractLocalSimilarity
     {
         string value1 = searchCase.caseDescription[consultParams.indexes[0]].value;
         string value2 = retrieveCase.caseDescription[consultParams.indexes[0]].value;
-        float similarity;
-
-        int countDefensive_A = 0;
-        int countNeutral_A = 0;
-        int countOfensive_A = 0;
-
-        int countDefensive_B = 0;
-        int countNeutral_B = 0;
-        int countOfensive_B = 0;
 
         var A = StringToVecSector(value1);
         var B = StringToVecSector(value2);
 
+        int[] count_A = { 0, 0, 0 };
+        int[] count_B = { 0, 0, 0 };
+
+        // Ter a quantidade em cada setor
         for (int i = 0; i < A.Length; i++)
         {
-            if (A[i].Equals(Sector.DEFENSIVE))
-                countDefensive_A++;
-            else if (A[i].Equals(Sector.NEUTRAL))
-                countNeutral_A++;
-            else
-                countOfensive_A++;
-
-            if (B[i].Equals(Sector.DEFENSIVE))
-                countDefensive_B++;
-            else if (B[i].Equals(Sector.NEUTRAL))
-                countNeutral_B++;
-            else
-                countOfensive_B++;
+            count_A[(int)A[i]]++;
+            count_B[(int)B[i]]++;
         }
 
-        int diff = Math.Abs(countOfensive_A - countOfensive_B);
-        diff += Math.Abs(countDefensive_A - countDefensive_B); 
-        diff += Math.Abs(countNeutral_A - countNeutral_B);
+        int count = 0;
+        for (int i = 0; i < count_A.Length; i++)
+        {
+            count += Math.Abs(count_A[i] - count_B[i]);
+        }
+        float distance_sector = count / A.Length;
 
-        similarity = diff / A.Length;
+        // ter a distância de similaridade entre os vetores, vendo se são iguais
+        count = 0;
+        for (int i = 0; i < A.Length; i++) //Usando hamming
+            if (A[i] != B[i])
+                count++;
+        float distance_hamming = count / A.Length;
 
-        //Debug.Log("Similaridade do Vetor do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
+        //Usando similaridade criada por distância dos setores
+        float count_qualitative = 0;
+        for (int i = 0; i < A.Length; i++)
+        {
+            if (A[i] == B[i])
+                continue;
+            else if (A[i].Equals(Sector.NEUTRAL) || B[i].Equals(Sector.NEUTRAL)) //Um dos dois está no meio, ou seja, mais próximo que completamente do outro lado
+                count_qualitative += 0.5f;
+            else
+                count_qualitative += 1; //Completamente oposta
+        }
+        float distance_qualitative = count_qualitative / A.Length;
 
-        return 1f - similarity;
+
+        Debug.Log("Similaridade do Vetor do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - (distance_sector + distance_hamming + distance_qualitative) / 3));
+
+        return 1f - (distance_sector + distance_hamming + distance_qualitative) / 3; //média normal (poderia ser euclidiana)
     }
 
     private Sector[] StringToVecSector(string str)

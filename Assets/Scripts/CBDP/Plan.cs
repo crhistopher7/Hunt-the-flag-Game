@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.CBDP;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -137,5 +138,23 @@ public class Plan
             costs.Add(a.cost);
 
         return costs.ToArray();
+    }
+
+    public List<Qualitative> GetRealObjectives()
+    {
+        List<Qualitative> ob = new List<Qualitative>();
+
+        foreach (var a in this.actions)
+            ob.Add(new Qualitative(a.distance_direction));
+        return ob;
+    }
+
+    public List<Qualitative> GetDeceptiveObjectives()
+    {
+        List<Qualitative> ob = new List<Qualitative>();
+
+        foreach (var a in this.actions)
+            ob.Add(new Qualitative(a.distance_directionDeceptive));
+        return ob;
     }
 }

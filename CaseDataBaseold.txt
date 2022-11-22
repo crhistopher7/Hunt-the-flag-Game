@@ -1,0 +1,1 @@
+caseID;seed;agentsRelationships;agentsGoalsRelationships;agentsRelationships_distance_angle;agentsRelationships_int;agentsGoalsRelationships_int;agentsBattleFieldLocalization;deceptiveLevel;strategy;description;result;Planning

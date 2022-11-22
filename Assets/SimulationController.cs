@@ -671,7 +671,6 @@ public class SimulationController : MonoBehaviour
 
         //send to plan
         cbdp.PlanAddAction(action);
-
         yield return null;
     }
 
@@ -699,15 +698,16 @@ public class SimulationController : MonoBehaviour
         Debug.Log("maxRetrivelCases = " + maxRetrivelCases.ToString());
         Debug.Log("threshold = " + threshold.ToString());
 
-        float percentageValue = float.Parse(listOfSimilarCases[0][2]);
-        Debug.Log("percentageValue = " + percentageValue.ToString());
-        Debug.Log("bool = " + (percentageValue >= threshold));
-
         if (listOfSimilarCases.Count == 0)
         {
             Debug.Log("Nenhum caso similar foi encontrado!");
             return;
-        } else if (percentageValue < threshold)
+        }
+
+        float percentageValue = float.Parse(listOfSimilarCases[0][2]);
+        Debug.Log("percentageValue = " + percentageValue.ToString());
+        Debug.Log("bool = " + (percentageValue >= threshold));
+        if (percentageValue < threshold)
         {
             Debug.Log("Nenhum caso acima do threshold "+ threshold.ToString() + " foi encontrado!");
             Debug.Log("Caso mais similar obteve: " + percentageValue.ToString() + " % de similaridade");

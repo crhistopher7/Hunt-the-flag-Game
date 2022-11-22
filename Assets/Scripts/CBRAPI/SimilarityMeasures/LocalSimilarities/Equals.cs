@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Classe utilizada como função de similaridade local na qual compara se dois atributos são iguais.
@@ -27,8 +28,14 @@ public class Equals : AbstractLocalSimilarity
 		string value2 = retrieveCase.caseDescription[consultParams.indexes[0]].value;
 
 		if (value1 == value2)
+        {
+			Debug.Log("Similaridade Iguals id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": 1");
 			return 1f;
-		else
+		}
+        else
+        {
+			Debug.Log("Similaridade Iguals id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": 0");
 			return 0f;
+		}
 	}
 }

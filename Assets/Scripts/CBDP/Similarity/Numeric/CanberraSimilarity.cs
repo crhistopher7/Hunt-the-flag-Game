@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using AForge.Math.Metrics;
 /// <summary>
 /// Classe utilizada como função de similaridade local na qual retorna a similaridade de duas matrizes.
 /// </summary>
-public class CosineMatrixSimilarity : AbstractLocalSimilarity
+public class CanberraSimilarity : AbstractLocalSimilarity
 {
 
    
     /// <summary>
     /// Construtor da classe MatrixSimilarity.
     /// </summary>
-    public CosineMatrixSimilarity()
+    public CanberraSimilarity()
 	{
 
 	}
@@ -26,9 +24,11 @@ public class CosineMatrixSimilarity : AbstractLocalSimilarity
 	/// <returns>Valor de similaridade entre duas strings[,].</returns>
 	public override float GetSimilarity(ConsultParams consultParams, Case searchCase, Case retrieveCase)
 	{
-        
         string value1 = searchCase.caseDescription[consultParams.indexes[0]].value;
 		string value2 = retrieveCase.caseDescription[consultParams.indexes[0]].value;
+
+        Debug.Log("valor 1: " + value1);
+        Debug.Log("valor 2: " + value2);
 
         var A = CBDPUtils.StringToMatrix(value1);
         var B = CBDPUtils.StringToMatrix(value2);
@@ -39,44 +39,23 @@ public class CosineMatrixSimilarity : AbstractLocalSimilarity
         var vectorA = CBDPUtils.ToQualitative(CBDPUtils.Flatten(A));
         var vectorB = CBDPUtils.ToQualitative(CBDPUtils.Flatten(B));
 
-        double[] vecA = new double[vectorA.Count];
-        double[] vecB = new double[vectorB.Count];
+        float similarity = 0;
+
         // Se for de angulo e distancia  
         if (vectorA[0].angle != null)
         {
+            // Can(A, B) = Sum |A - B| / |A| + |B| 
             for (int i = 0; i < vectorA.Count; i++)
             {
-                double angle = (double)vectorA[i].angle;
-                double h = (double)vectorA[i].numericDistance;
-                vecA[i] = Math.Sin(angle) * h;
+                Vector2 vA = CBDPUtils.PointByDistanceAndAngle((double)vectorA[i].angle, (double)vectorA[i].numericDistance, Vector2.zero);
+                Vector2 vB = CBDPUtils.PointByDistanceAndAngle((double)vectorB[i].angle, (double)vectorB[i].numericDistance, Vector2.zero);
 
-                angle = (double)vectorB[i].angle;
-                h = (double)vectorB[i].numericDistance;
-                vecB[i] = Math.Sin(angle) * h;
-            }
-
-        }
-        // Se for de distancia e direção qualitativa
-        else
-        {
-            for (int i = 0; i < vectorA.Count; i++)
-            {
-                var p = vectorA[i].GetPoint();
-                vecA[i] = CBDPUtils.Euclidian(Vector2.zero, p);
-                //vecA[i] = CBDPUtils.Octile(Vector2.zero, p);
-
-                p = vectorB[i].GetPoint();
-                vecB[i] = CBDPUtils.Euclidian(Vector2.zero, p);
-                //vecB[i] = CBDPUtils.Octile(Vector2.zero, p);
+                similarity += Math.Abs(vA.x - vB.x) / Math.Abs(vA.x) + Math.Abs(vB.x); // X
+                similarity += Math.Abs(vA.y - vB.y) / Math.Abs(vA.y) + Math.Abs(vB.y); // Y
             }
         }
-
-
-
-        // instantiate new similarity class
-        CosineSimilarity sim = new CosineSimilarity();
-        float similarityScore = (float) sim.GetSimilarityScore(vecA, vecB);
-        return similarityScore;
+        Debug.Log("Similaridade de canberra, caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
+        return 1f - similarity;
 	}
 
     

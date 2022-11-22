@@ -192,103 +192,113 @@ public class AgentController : MatchBehaviour
         LogicMap deceptive = AStar.GetTileByPosition(Vector3Int.FloorToInt(deceptivePosition));
 
         if (!objective.Walkable)
-            return;
-
-        if (pathType == PathType.NORMAL)
         {
-            indexPath = 0;
-            AStar.Search(current, objective);
-            path = AStar.BuildPath(objective);
+            Debug.Log("not walkable!");
+            return;
         }
         else
         {
-            LogicMap deceptiveObjective = AStar.GetTileByPosition(Vector3Int.FloorToInt(deceptivePosition));
-
-            if (!deceptiveObjective.Walkable)
-                return;
-
-            indexPath = 0;
-            if (pathType == PathType.DECEPTIVE_1)
+            if (pathType == PathType.NORMAL)
             {
-                // Funcionando 
-                AStar.Search(current, deceptiveObjective);
-                path = AStar.BuildPath(deceptiveObjective);
-                AStar.Search(deceptiveObjective, objective);
-                List<LogicMap> secondPath = AStar.BuildPath(objective);
-
-                path.AddRange(secondPath);
-            }
-            else if (pathType == PathType.DECEPTIVE_2)
-            {
-                //Achar ponto entre enganoso e objetivo
-                LogicMap target = FindTarget(current, objective, deceptive);
-
-                if(target != null)
-                {
-                    AStar.Search(current, target);
-                    path = AStar.BuildPath(target);
-                    AStar.Search(target, objective);
-                    List<LogicMap> secondPath = AStar.BuildPath(objective);
-                    path.AddRange(secondPath);
-                }        
-            }
-            else if (pathType == PathType.DECEPTIVE_3)
-            {
-                // Encontra o target
-                LogicMap target = FindTarget(current, objective, deceptive);
-
-                if (target != null)
-                {
-                    // Custom a* (start, target, obj)
-                    AStar.SearchAstarCustom3(current, target, objective);
-                    path = AStar.BuildPath(target);
-
-                    // Path target to obj
-                    AStar.Search(target, objective);
-                    List<LogicMap> secondPath = AStar.BuildPath(objective);
-                    path.AddRange(secondPath);
-                }
+                indexPath = 0;
+                AStar.Search(current, objective);
+                path = AStar.BuildPath(objective);
             }
             else
             {
-                Debug.Log("Deceptive 4");
-                LogicMap target = FindTarget(current, objective, deceptive);
+                LogicMap deceptiveObjective = AStar.GetTileByPosition(Vector3Int.FloorToInt(deceptivePosition));
 
-                if (target != null)
+                if (!deceptiveObjective.Walkable)
                 {
-                    //calcular um astar para a char o custo
-                    AStar.Search(current, objective);
-                    float costReal = AStar.CostPath(AStar.BuildPath(objective));
-                    AStar.Search(current, deceptive);
-                    float costDeceptive = AStar.CostPath(AStar.BuildPath(deceptive));
-
-                    // CustomAstar (start , target)
-                    AStar.SearchAstarCustom4(current, target, objective, deceptiveObjective, costReal, costDeceptive);
-                    path = AStar.BuildPath(target);
-                    // Path 2
-                    AStar.Search(target, objective);
-                    List<LogicMap> secondPath = AStar.BuildPath(objective);
-                    path.AddRange(secondPath);
+                    Debug.Log("not walkable!");
+                    return;
                 }
+                else
+                {
+                    indexPath = 0;
+                    if (pathType == PathType.DECEPTIVE_1)
+                    {
+                        // Funcionando 
+                        AStar.Search(current, deceptiveObjective);
+                        path = AStar.BuildPath(deceptiveObjective);
+                        AStar.Search(deceptiveObjective, objective);
+                        List<LogicMap> secondPath = AStar.BuildPath(objective);
+
+                        path.AddRange(secondPath);
+                    }
+                    else if (pathType == PathType.DECEPTIVE_2)
+                    {
+                        //Achar ponto entre enganoso e objetivo
+                        LogicMap target = FindTarget(current, objective, deceptive);
+
+                        if (target != null)
+                        {
+                            AStar.Search(current, target);
+                            path = AStar.BuildPath(target);
+                            AStar.Search(target, objective);
+                            List<LogicMap> secondPath = AStar.BuildPath(objective);
+                            path.AddRange(secondPath);
+                        }
+                    }
+                    else if (pathType == PathType.DECEPTIVE_3)
+                    {
+                        // Encontra o target
+                        LogicMap target = FindTarget(current, objective, deceptive);
+
+                        if (target != null)
+                        {
+                            // Custom a* (start, target, obj)
+                            AStar.SearchAstarCustom3(current, target, objective);
+                            path = AStar.BuildPath(target);
+
+                            // Path target to obj
+                            AStar.Search(target, objective);
+                            List<LogicMap> secondPath = AStar.BuildPath(objective);
+                            path.AddRange(secondPath);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Deceptive 4");
+                        LogicMap target = FindTarget(current, objective, deceptive);
+
+                        if (target != null)
+                        {
+                            //calcular um astar para a char o custo
+                            AStar.Search(current, objective);
+                            float costReal = AStar.CostPath(AStar.BuildPath(objective));
+                            AStar.Search(current, deceptive);
+                            float costDeceptive = AStar.CostPath(AStar.BuildPath(deceptive));
+
+                            // CustomAstar (start , target)
+                            AStar.SearchAstarCustom4(current, target, objective, deceptiveObjective, costReal, costDeceptive);
+                            path = AStar.BuildPath(target);
+                            // Path 2
+                            AStar.Search(target, objective);
+                            List<LogicMap> secondPath = AStar.BuildPath(objective);
+                            path.AddRange(secondPath);
+                        }
+                    }
+                }                
             }
-        }
-       
-        if(path.Count != 0)
-        {
-            followingpath = true;
-            
-            GameObject go;
-            go = Instantiate(prefabLine);
-            go.GetComponent<LineRenderer>().startColor = color;
-            go.GetComponent<LineRenderer>().endColor = color;
-            LineController line = go.GetComponent<LineController>();
-           
-            line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
-            
-        }
-        else
-        {
-            Debug.Log("Path Vazio, não foi possível construir um caminho");
+
+            if (path.Count != 0)
+            {
+                followingpath = true;
+
+                GameObject go;
+                go = Instantiate(prefabLine);
+                go.GetComponent<LineRenderer>().startColor = color;
+                go.GetComponent<LineRenderer>().endColor = color;
+                LineController line = go.GetComponent<LineController>();
+
+                line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
+
+            }
+            else
+            {
+                Debug.Log("Path Vazio, não foi possível construir um caminho");
+            }
         }
     }
 

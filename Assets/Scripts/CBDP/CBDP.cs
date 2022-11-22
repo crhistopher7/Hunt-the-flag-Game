@@ -215,6 +215,8 @@ public class CBDP : MonoBehaviour
             currentCase.vector_sector[i] = CalculeSector(agents_list[i]);
         }
 
+        currentCase.strategy = Strategy.OFENSIVE;
+
         //init plan
         currentCase.plan = new Plan
         {
@@ -333,7 +335,8 @@ public class CBDP : MonoBehaviour
 
         foreach (Result similarCase in similiarCases)
         {
-            cases.Add(new string[] { similarCase.matchCase.caseDescription[10].value,
+            //Lista de [Descrição, Plano, Percentage, ID]
+            cases.Add(new string[] { similarCase.matchCase.caseDescription[8].value,
                 similarCase.matchCase.caseSolution[0].value,
                 (similarCase.matchPercentage * 100).ToString("0.00"),
                 similarCase.matchCase.caseDescription[0].value 
@@ -357,13 +360,16 @@ public class CBDP : MonoBehaviour
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));                //strategy 7
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));      //agentsRelationships 2
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new MatrixSimilarity()));      //agentsGoalsRelationships 3
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 4 }, 1f, new JaccardMatrixSimilarity()));      //agentsRelationships_distance_angle 4
+        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 4 }, 1f, new CosineSimilarity()));      //agentsRelationships_distance_angle 4
         consultStructure.consultParams.Add(new ConsultParams(new List<int> { 5 }, 1f, new SectorSimilarity()));      //agentsBattleFieldLocalization 5
 
         // Realizando uma consulta na base de casos (lista já ordenada por maior score)
         List<Result> results = cbr.Retrieve(currentCase, consultStructure);
 
-        //Debug.Log("Caso recuperado: " + result.matchCase.caseDescription[0].value + " com " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
+        foreach (var result in results)
+            Debug.Log("Caso recuperado: " + result.matchCase.caseDescription[0].value + " com " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
+
+        
         return results;
     }
 }

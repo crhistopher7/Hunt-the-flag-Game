@@ -50,14 +50,20 @@ public static class CBDPUtils
     public static List<Qualitative> ToQualitative(this IEnumerable<string> vector)
     {
         List<Qualitative> list = new List<Qualitative>();
-
         foreach (var item in vector)
         {
             if(item != "")
                 list.Add(new Qualitative(item));
+                
         }
 
         return list;
+    }
+
+    public static List<Qualitative> Intersection(List<Qualitative> list1, List<Qualitative> list2)
+    {
+        IEnumerable<string> strs = list1.Select(i => i.ToString()).Intersect(list2.Select(i => i.ToString()));
+        return list1.Where(x => strs.Contains(x.ToString())).ToList();
     }
 
     /// <summary>
@@ -66,7 +72,7 @@ public static class CBDPUtils
     /// <param name="matrix">A matriz[,] do tipo string</param>
     /// <param name="delimiter">Delimitador</param>
     /// <returns>Matrix no formato de string</returns>
-    public static string ToMatrixString<T>(this T[,] matrix, string delimiter = ",")
+    public static string ToMatrixString(Qualitative[,] matrix, bool num = false, string delimiter = ",")
     {
         string s = "{";
 
@@ -75,7 +81,7 @@ public static class CBDPUtils
             s += "{";
             for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                s += matrix[i, j].ToString() + (delimiter);
+                s += matrix[i, j].ToString(num) + (delimiter);
             }
             s = s.Remove(s.Length - 1, 1);
             s += "}:";
@@ -238,5 +244,19 @@ public static class CBDPUtils
     public static float Euclidian(Vector2 a, Vector2 b)
     {
         return Vector2.Distance(a, b);
+    }
+
+    public static Vector2 PointByDistanceAndAngle(double angle, double distance, Vector2 point)
+    {
+        // Co (x) = sen * D
+        float x = (float)(Math.Sin(angle) * distance);
+        // Ca (y) = cos * D
+        float y = (float)(Math.Cos(angle) * distance);
+
+        //offset em relação ao ponto
+        x += point.x;
+        y += point.y;
+
+        return new Vector2(x,y);
     }
 }

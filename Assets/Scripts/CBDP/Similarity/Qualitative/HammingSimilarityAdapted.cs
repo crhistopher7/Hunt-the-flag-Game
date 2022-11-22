@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-/// <summary>
+﻿/// <summary>
 /// Classe utilizada como função de similaridade local na qual retorna a similaridade de duas matrizes.
 /// </summary>
-public class HammingSimilarity : AbstractLocalSimilarity
+public class HammingSimilarityAdapted : AbstractLocalSimilarity
 {
     /// <summary>
     /// Construtor da classe MatrixSimilarity.
     /// </summary>
-    public HammingSimilarity()
+    public HammingSimilarityAdapted()
 	{
 
 	}
@@ -38,12 +35,6 @@ public class HammingSimilarity : AbstractLocalSimilarity
         var vectorB = CBDPUtils.ToQualitative(CBDPUtils.Flatten(B));
 
 
-        /*
-        for (int i = 0; i < vectorA.Count; i++)
-            if (vectorA[i].ToString() != vectorB[i].ToString())
-                count++;
-        */
-
         for (int i = 0; i < vectorA.Count; i++)
         {
             if (vectorA[i].distance.ToString() != vectorB[i].distance.ToString())
@@ -53,7 +44,6 @@ public class HammingSimilarity : AbstractLocalSimilarity
                 count++;
         }
 
-        //float total_size = vectorA.Count;
         float total_size = vectorA.Count * 2;
         float distance = count / total_size;
 
