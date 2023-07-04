@@ -37,9 +37,13 @@ public class CosineSimilarity : AbstractLocalSimilarity
         var vectorA = CBDPUtils.ToQualitative(CBDPUtils.Flatten(A));
         var vectorB = CBDPUtils.ToQualitative(CBDPUtils.Flatten(B));
 
-        double divd = 0;
-        double divsA = 0;
-        double divsB = 0;
+        double divdx = 0;
+        double divsAx = 0;
+        double divsBx = 0;
+
+        double divdy = 0;
+        double divsAy = 0;
+        double divsBy = 0;
 
         // Se for de angulo e distancia  
         if (vectorA[0].angle != null)
@@ -50,15 +54,22 @@ public class CosineSimilarity : AbstractLocalSimilarity
                 Vector2 vA = CBDPUtils.PointByDistanceAndAngle((double)vectorA[i].angle, (double)vectorA[i].numericDistance, Vector2.zero);
                 Vector2 vB = CBDPUtils.PointByDistanceAndAngle((double)vectorB[i].angle, (double)vectorB[i].numericDistance, Vector2.zero);
 
-                divd += vA.x * vB.x + vA.y * vB.y; //Dividendo
-                divsA += Math.Pow(vA.x, 2) + Math.Pow(vA.y, 2); //Divisor parte ||A||
-                divsB += Math.Pow(vB.x, 2) + Math.Pow(vB.y, 2); //Divisor parte ||B||
+                divdx += vA.x * vB.x; //Dividendo
+                divdy +=  vA.y * vB.y; //Dividendo
+                divsAx += Math.Pow(vA.x, 2); //Divisor parte ||A||
+                divsAy += Math.Pow(vA.y, 2); //Divisor parte ||A||
+                divsBx += Math.Pow(vB.x, 2); //Divisor parte ||B||
+                divsBy += Math.Pow(vB.y, 2); //Divisor parte ||B||
             }
         }
         else
             return 0;
 
-        float similarity = (float) (divd / Math.Sqrt(divsA) * Math.Sqrt(divsB));
+        float similarity = (float) (((divdx / Math.Sqrt(divsAx * divsBx)) + (divdy / Math.Sqrt(divsAy * divsBy))) / 2);
+        similarity += 1;
+        similarity /= 2; //normalize to 0 1
+        Debug.Log("Similaridade da Cosine id " + consultParams.indexes[0] + " entre caso " + searchCase.caseDescription[0].value + " e caso " + retrieveCase.caseDescription[0].value + ": " + (similarity * 100).ToString("0.00"));
+
         return similarity;
 	}
 

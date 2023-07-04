@@ -43,6 +43,7 @@ public class AStar : Pathfinder
                 if (next == null)
                     continue;
 
+                //yield return new WaitForEndOfFrame();
                 iterationCount++;
 
                 var vNext = new Vector3(next.ClickPosition.x, next.ClickPosition.y, next.heigth);
@@ -130,7 +131,7 @@ public class AStar : Pathfinder
         }
     }
 
-    public void SearchAstarCustom4(LogicMap start, LogicMap objective, LogicMap objectiveReal, LogicMap deceptiveObjective,  float costReal, float costDeceptive)
+    public void SearchAstarCustom4(LogicMap start, LogicMap objective, LogicMap objectiveReal, LogicMap deceptiveObjective,  float costReal, float costDeceptive, List<Vector2> area = null)
     {
         int iterationCount = 0;
         MapGenerator.ClearSearch();
@@ -168,6 +169,9 @@ public class AStar : Pathfinder
                 LogicMap next = MapGenerator.GetTile(current.ClickPosition + MapGenerator.Directions[i]);
                 if (next == null)
                     continue;
+                if (next.InArea(area))
+                    continue;
+
                 iterationCount++;
 
 
@@ -212,7 +216,7 @@ public class AStar : Pathfinder
         return next.isDeceptive;
     }
 
-    private float GetJustCost(LogicMap s, LogicMap o)
+    public float GetJustCost(LogicMap s, LogicMap o)
     {
         List<LogicMap> TilesSearch = new List<LogicMap>();
         List<LogicMap> openSet = new List<LogicMap>();
@@ -306,7 +310,6 @@ public class AStar : Pathfinder
 
         return Mathf.Max(dx, dy) + ((Mathf.Sqrt(2) - 1) * Mathf.Min(dx, dy));
     }
-
 
     private float Euclidian(LogicMap current, LogicMap objective)
     {

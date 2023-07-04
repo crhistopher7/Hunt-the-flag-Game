@@ -44,7 +44,9 @@ public class SimulationController : MonoBehaviour
     public InputField inputNumberOfAgents;
     public string MAP_HEIGHTMAP;
     public string MAP_SATELLITE;
-    
+    int[] ids = { 1477686966, 1931235537, 1902959905 };
+    int id = 0;
+    //Casos q dão erro 471, 277, 209
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +114,10 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void InitPlayers()
     {
+        System.Random prng = new System.Random();
+        int id = prng.Next(0, 1000);
+        Debug.Log("ID do Random do caso: "+id);
+
         if (inputNumberOfAgents.text == "" || int.Parse(inputNumberOfAgents.text) <= 0)
         {
             Debug.Log("Numero de agentes invalido");
@@ -124,25 +130,49 @@ public class SimulationController : MonoBehaviour
         pcTeam1 = go.GetComponent<PlayerController>();
         pcTeam1.numberOfAgents = int.Parse(inputNumberOfAgents.text);
         pcTeam1.name = Constants.PLAYER_CONTROLLER_1;
-        pcTeam1.StartAgents();
+        pcTeam1.StartAgents(id);
 
         prefab = Resources.Load<GameObject>("Prefabs/" + Constants.PLAYER_CONTROLLER_2);
         go = Instantiate(prefab);
 
         pcTeam2 = go.GetComponent<PlayerController>();
-        pcTeam2.numberOfAgents = int.Parse(inputNumberOfAgents.text);
+        //pcTeam2.numberOfAgents = int.Parse(inputNumberOfAgents.text);
         pcTeam2.name = Constants.PLAYER_CONTROLLER_2;
-        pcTeam2.StartAgents();
+        //pcTeam2.StartAgents(id+1);
+
+        ReorderAgents();
     }
 
     /// <summary>
-    /// Função que destrói os agentes do caso corrente e inicia os paineis de informação do caso
+    /// Função que reordena os agentes pela posição e os renomeia;
     /// </summary>
-    public IEnumerator EndCase()
+    private void ReorderAgents()
     {
+        pcTeam1.Agents = CBDPUtils.OrderAgentList(pcTeam1.Agents);
+
+        for (int i = 0; i < pcTeam1.Agents.Count; i++)
+        {
+            pcTeam1.Agents[i].name = "Agent" + i.ToString();
+            pcTeam1.Agents[i].SetNameText(i.ToString());
+        }
+            
+
+
+        /*pcTeam2.Agents = CBDPUtils.OrderAgentList(pcTeam2.Agents);
+
+        for (int i = 0; i < pcTeam2.Agents.Count; i++)
+            pcTeam2.Agents[i].name = "Agent" + i.ToString();*/
+    }
+
+    /// <summary>
+    /// Função que destrói os agentes do caso corrente, inicia os paineis de informação do caso e manda para o cbdp quem finalizou o plano
+    /// </summary>
+    public IEnumerator EndCase(string agent, string goal)
+    {
+        TakeAPicture("Solution");
         yield return new WaitForEndOfFrame();
         DestroyAllMatchObjectsAndLines();
-
+        cbdp.UpdateWhoEndtheCase(agent, goal);
         canvasPainels.SetActive(false);
         canvasType.SetActive(true);
     }
@@ -161,11 +191,11 @@ public class SimulationController : MonoBehaviour
             Destroy(line);
     }
 
-    public void TakeAPicture()
+    public void TakeAPicture(string type)
     {
         //Tirar o print
         ScreenShot ss = GameObject.Find(Constants.CAMERA_SCREEN_SHOT).GetComponent<ScreenShot>();
-        ss.DoScreenShot(cbdp.GetCase().caseId);
+        StartCoroutine(ss.DoScreenShot(id, type));
     }
 
     /// <summary>
@@ -252,6 +282,7 @@ public class SimulationController : MonoBehaviour
         //RestartGame
         InitPlayers();
         Invoke(nameof(ComandStartCase), 0.5f);
+        Invoke(nameof(SearchSimillarCases), 1f);
         canvasPainels.SetActive(true);
     }
 
@@ -335,7 +366,7 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     private void ComandStartCase()
     {
-        cbdp.ConstructInitCase(pcTeam1.Agents, pcTeam2.Agents);
+        cbdp.ConstructInitCase(pcTeam1.Agents, pcTeam2.Agents, id);
     }
 
     /// <summary>
@@ -365,7 +396,7 @@ public class SimulationController : MonoBehaviour
     }
 
     /// <summary>
-    /// Função que envia oara o servidor e para o caso no CBDP as posições (enganosa e objetivo real) dos agentes selecionados
+    /// Função que envia para o servidor e para o caso no CBDP as posições (enganosa e objetivo real) dos agentes selecionados
     /// </summary>
     /// <param name="objectivePosition">Vector3Int da posição do objetivo real</param>
     /// <param name="deceptivePosition">Vector3Int da posição do objetivo enganoso</param>
@@ -498,22 +529,25 @@ public class SimulationController : MonoBehaviour
         {
             case "Move":
                 {
-                    Vector3Int objetivePosition, deceptivePosition = new Vector3Int();
+                    Vector3Int objectivePosition, deceptivePosition = new Vector3Int();
                     Vector3 position = GetPositionByName(action.agent);
                     // Verificar se existe um objetivo
                     if (action.objetive.Equals(""))
                         //n�o existe, ent�o usar o distance_direction
-                        objetivePosition = GetPositionByDistanceDirection(action.distance_direction, position);
+                        objectivePosition = GetPositionByDistanceDirection(action.distance_direction, position);
                     else
                         //usar a localiza��o do objetivo
-                        objetivePosition = GetPositionByName(action.objetive);
+                        objectivePosition = GetPositionByName(action.objetive);
 
                     if (!action.pathType.Equals(PathType.NORMAL))
                         deceptivePosition = GetPositionByDistanceDirection(action.distance_directionDeceptive, position);
 
                     // Mandando movimenta��o para o servidor
                     Message send = new Message();
-                    send.AddMessage("Moves", gameObject.tag, action.agent, action.pathType, objetivePosition, deceptivePosition);
+                    send.AddMessage("Moves", gameObject.tag, action.agent, action.pathType, objectivePosition, deceptivePosition);
+
+                    AgentController agent = GameObject.Find(action.agent).GetComponent<AgentController>();
+                    StartCoroutine(SendActionToCase("Move", agent, objectivePosition, deceptivePosition, action.pathType));
                     clientOfExecution.Send(send.ToString());
                     break;
                 }
@@ -695,8 +729,8 @@ public class SimulationController : MonoBehaviour
         //Limpar lista de botões de casos similares no content 
         ClearButtonCaseInContent();
 
-        Debug.Log("maxRetrivelCases = " + maxRetrivelCases.ToString());
-        Debug.Log("threshold = " + threshold.ToString());
+        //Debug.Log("maxRetrivelCases = " + maxRetrivelCases.ToString());
+        //Debug.Log("threshold = " + threshold.ToString());
 
         if (listOfSimilarCases.Count == 0)
         {
@@ -705,8 +739,8 @@ public class SimulationController : MonoBehaviour
         }
 
         float percentageValue = float.Parse(listOfSimilarCases[0][2]);
-        Debug.Log("percentageValue = " + percentageValue.ToString());
-        Debug.Log("bool = " + (percentageValue >= threshold));
+        //Debug.Log("percentageValue = " + percentageValue.ToString());
+        //Debug.Log("bool = " + (percentageValue >= threshold));
         if (percentageValue < threshold)
         {
             Debug.Log("Nenhum caso acima do threshold "+ threshold.ToString() + " foi encontrado!");
@@ -730,14 +764,14 @@ public class SimulationController : MonoBehaviour
             Button button = go.GetComponent<Button>();
             SetButtonOnClickAnswer(button, i);
             text.text = "Description: " + listOfSimilarCases[i][0];
-            percentage.text = "Case " + i.ToString() + ": " + percentageValue.ToString() + " %";
-            percentageValue = float.Parse(listOfSimilarCases[i][2]);
-
-            Sprite aSprite = Resources.Load<Sprite>("Case_" + listOfSimilarCases[i][3]);
-            Debug.Log("Case_" + listOfSimilarCases[i][3] + ".png");
-            Debug.Log(aSprite.name);
-            image.sprite = aSprite;          
             
+            percentageValue = float.Parse(listOfSimilarCases[i][2]);
+            percentage.text = "Case " + i.ToString() + ": " + percentageValue.ToString() + " %";
+
+            Sprite aSprite = Resources.Load<Sprite>("Solution_Case_" + listOfSimilarCases[i][3]);
+            image.sprite = aSprite;
+
+            Debug.Log("Similaridade Global com Caso "+ listOfSimilarCases[i][3] + " é de " + percentageValue.ToString() + " %");
         }
     }
 

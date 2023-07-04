@@ -12,7 +12,7 @@ public enum Distance
 
 public enum Direction
 {
-    F = 1, RF = 2, LF = 3, R = 4, L = 5, B = 60, RB = 70, LB = 80
+    F = 1, RF = 2, LF = 3, R = 4, L = 5, B = 6, RB = 7, LB = 8
 }
 
 public enum Strategy
@@ -66,6 +66,17 @@ public static class CBDPUtils
         return list1.Where(x => strs.Contains(x.ToString())).ToList();
     }
 
+    public static List<GameObject> Filter(GameObject[] array, string criteria)
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (var item in array)
+        {
+            if (item.name.Contains(criteria))
+                list.Add(item);
+        }
+        return list;
+    }
+
     /// <summary>
     /// Função que reescreve uma matriz[,] do tipo string em forma de string
     /// </summary>
@@ -91,10 +102,22 @@ public static class CBDPUtils
         return s += "}";
     }
 
-    public static Distance CalculeDistance(Vector3 a, Vector3 b)
+    public static Distance CalculeDistance(Vector3 a, Vector3 b, bool useAStar = false, bool verbose = false, string description = null)
     {
-        float distance = Vector3.Distance(a, b);
-        //float distance = GetDistanceByAStarPath(a, b);
+        float distance; 
+        if (useAStar)
+            distance = GetDistanceByAStarPath(a, b);
+        else
+            distance = Vector3.Distance(a, b);
+
+        if (verbose)
+        {
+            if (useAStar)
+                Debug.Log("AStar distance between " + description + " is " + distance);
+            else
+                Debug.Log("Distance between " + description + " is " + distance);
+        }
+
 
         if (distance >= Constants.MAX_DISTANCE / 2)
             return Distance.VF;
@@ -120,18 +143,7 @@ public static class CBDPUtils
         LogicMap pointA = AStar.GetTileByPosition(new Vector3Int((int) a.x, (int) a.y, 0) / Constants.MAP_OFFSET);
         LogicMap pointB = AStar.GetTileByPosition(new Vector3Int((int) b.x, (int) b.y, 0) / Constants.MAP_OFFSET);
 
-        AStar.Search(pointA, pointB);
-        List<LogicMap>  path = AStar.BuildPath(pointB);
-
-        if (path.Count == 0)
-            return float.MaxValue;
-
-        float distance = 0;
-
-        for (int i = 0; i < path.Count - 1; i++)
-            distance += Vector3.Distance(path[i].ClickPosition, path[i + 1].ClickPosition);
-
-        return distance;
+        return AStar.GetJustCost(pointA, pointB); 
     }
 
     public static Direction CalculeDirection(float x, float y)

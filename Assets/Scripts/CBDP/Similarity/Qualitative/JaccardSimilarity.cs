@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// Classe utilizada como função de similaridade local na qual retorna a similaridade de duas matrizes.
 /// </summary>
 public class JaccardSimilarity : AbstractLocalSimilarity
@@ -27,9 +28,9 @@ public class JaccardSimilarity : AbstractLocalSimilarity
 		var vectorB = CBDPUtils.ToQualitative(CBDPUtils.Flatten(CBDPUtils.StringToMatrix(value2)));
 		var intersection = CBDPUtils.Intersection(vectorA, vectorB);
 
-		float similarity = intersection.Count / (vectorA.Count + vectorB.Count - intersection.Count); // |A ∩ B| / |A| + |B| - |A ∩ B|
+		float similarity = ((float)intersection.Count / (float)(vectorA.Count + vectorB.Count - intersection.Count)); // |A ∩ B| / |A| + |B| - |A ∩ B|
+		Debug.Log("Similaridade da Jaccard id " + consultParams.indexes[0] + " entre caso " + searchCase.caseDescription[0].value + " e caso " + retrieveCase.caseDescription[0].value + ": " + (similarity * 100).ToString("0.00"));
 
-		//Debug.Log("Similaridade da Matriz id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
 		return similarity;
 	}
 

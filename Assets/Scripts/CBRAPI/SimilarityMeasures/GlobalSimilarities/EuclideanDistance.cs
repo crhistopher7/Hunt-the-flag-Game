@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Classe que utiliza da função da Distância Euclidiana para calcular a similaridade global entre dois casos.
@@ -40,7 +41,6 @@ public class EuclideanDistance : AbstractGlobalSimilarity {
 
 		if (sumWeights == 0f)
 			return 0f;
-
 		return (float)Math.Sqrt(similarity/sumWeights);
 	}
 }

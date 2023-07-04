@@ -21,15 +21,16 @@ public class PlayerController : MatchBehaviour
     private void SetVariables()
     {
         Agents = new List<AgentController>();
-        prng = new System.Random(1);
+        prng = new System.Random();
     }
 
     /// <summary>
     /// Função que inicializa os agentes de player de acordo com a quantidade de agentes setada em posições randomicas
     /// </summary>
-    public void StartAgents()
+    public void StartAgents(int id)
     {
         Agents.Clear();
+        prng = new System.Random(id);
 
         GameObject prefab = Resources.Load("Prefabs/Agent") as GameObject;
         GameObject go;
@@ -53,6 +54,7 @@ public class PlayerController : MatchBehaviour
             agent.transform.SetParent(this.transform);
             agent.transform.localScale = new Vector3(Constants.AGENT_SCALE, Constants.AGENT_SCALE, 1);
             agent.InitPosition(prng.Next());
+            agent.SetNameText(i.ToString());
             this.Agents.Add(agent);
             i++;
         } while (i <= numberOfAgents);

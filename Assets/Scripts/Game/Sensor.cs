@@ -17,14 +17,14 @@ public class Sensor : MonoBehaviour
         {
             for (float y = -1; y <= 1f; y += 0.01f)
             {
-                if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(x, y, 0)), out hit, 20))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(x, y, 0)), out hit, 10))
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(x, y, 0)) * 20, Color.red);
                     //tocou em alguma coisa
                     listOfHit.Add(hit);
                 }
 
-                if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(y, x, 0)), out hit, 20))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(y, x, 0)), out hit, 10))
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(y, x, 0)) * 20, Color.red);
                     //tocou em alguma coisa

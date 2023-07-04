@@ -63,18 +63,22 @@ public class CBDP : MonoBehaviour
         caso.caseDescription.Add(new CaseFeature(0, features[0], typeof(int), values[0]));
         //seed
         caso.caseDescription.Add(new CaseFeature(1, features[1], typeof(int), values[1]));
-        //agentsRelationships
+        //friendAgentsRelationships
         caso.caseDescription.Add(new CaseFeature(2, features[2], typeof(string), values[2]));
-        //agentsGoalsRelationships
+        //enemyAgentsRelationships
+        //caso.caseDescription.Add(new CaseFeature(3, features[3], typeof(string), values[3]));
+        //friendAgentsGoalsRelationships
         caso.caseDescription.Add(new CaseFeature(3, features[3], typeof(string), values[3]));
-        //agentsRelationships_distance_angle
-        caso.caseDescription.Add(new CaseFeature(4, features[4], typeof(string), values[4]));
-        //agentsRelationships_int
+        //enemyAgentsGoalsRelationships
         //caso.caseDescription.Add(new CaseFeature(5, features[5], typeof(string), values[5]));
-        //agentsGoalsRelationships_int
-        //caso.caseDescription.Add(new CaseFeature(6, features[6], typeof(string), values[6]));
-        //agentsBattleFieldLocalization
+        //friendAgentsRelationships_distance_angle
+        caso.caseDescription.Add(new CaseFeature(4, features[4], typeof(string), values[4]));
+        //enemyAgentsRelationships_distance_angle
+        //caso.caseDescription.Add(new CaseFeature(7, features[7], typeof(string), values[7]));
+        //friendAgentsBattleFieldLocalization
         caso.caseDescription.Add(new CaseFeature(5, features[5], typeof(string), values[5]));
+        //enemyAgentsBattleFieldLocalization
+        //caso.caseDescription.Add(new CaseFeature(9, features[9], typeof(string), values[9]));
         //deceptiveLevel
         caso.caseDescription.Add(new CaseFeature(6, features[6], typeof(string), values[6]));
         //strategy
@@ -124,12 +128,14 @@ public class CBDP : MonoBehaviour
         string str = "";
         str += "caseID" + Constants.SPLITTER;
         str += "seed" + Constants.SPLITTER;
-        str += "agentsRelationships" + Constants.SPLITTER;
-        str += "agentsGoalsRelationships" + Constants.SPLITTER;
-        str += "agentsRelationships_distance_angle" + Constants.SPLITTER;
-        //str += "agentsRelationships_int" + Constants.SPLITTER;
-        //str += "agentsGoalsRelationships_int" + Constants.SPLITTER;
-        str += "agentsBattleFieldLocalization" + Constants.SPLITTER;
+        str += "friendAgentsRelationships" + Constants.SPLITTER;
+        //str += "enemyAgentsRelationships" + Constants.SPLITTER;
+        str += "friendAgentsGoalsRelationships" + Constants.SPLITTER;
+        //str += "enemyAgentsGoalsRelationships" + Constants.SPLITTER;
+        str += "friendAgentsRelationships_distance_angle" + Constants.SPLITTER;
+        //str += "enemyAgentsRelationships_distance_angle" + Constants.SPLITTER;
+        str += "friendAgentsBattleFieldLocalization" + Constants.SPLITTER;
+        //str += "enemyAgentsBattleFieldLocalization" + Constants.SPLITTER;
         str += "deceptiveLevel" + Constants.SPLITTER;
         str += "strategy" + Constants.SPLITTER;
         str += "description" + Constants.SPLITTER;
@@ -140,82 +146,135 @@ public class CBDP : MonoBehaviour
         Save(str);
     }
 
-    public void ConstructInitCase(List<AgentController> agentsTeam1, List<AgentController> agentsTeam2)
+    public void UpdateWhoEndtheCase(string agent, string goal)
+    {
+
+        currentCase.plan.UpdateLastAction(agent, goal);
+    }
+
+    public void ConstructInitCase(List<AgentController> agentsTeam1, List<AgentController> agentsTeam2, int id)
     {
         currentCase = new CaseCBDP();
 
         // id do caso
-        currentCase.caseId = idOfLast++;
+        currentCase.caseId = id;
 
         // Seed do mapa
-        currentCase.seedMap = 0; //GameObject.Find("Client").GetComponent<Client>().seed;
+        currentCase.seedMap = 1; //GameObject.Find("Client").GetComponent<Client>().seed;
 
-        //matriz de distancia/dire��o entre os agentes e agentes (string e int)
-        List<AgentController> agents_list = new List<AgentController>();
-        agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam1));
-        agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam2));
+        //matriz de distancia/direção entre os agentes e agentes (qualitative e dist_angle)
+        List<AgentController> friend_agents_list = new List<AgentController>();
+        friend_agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam1));
+        //friend_agents_list.AddRange(agentsTeam1);
+        currentCase.matrix_friend_agents = new Qualitative[friend_agents_list.Count, friend_agents_list.Count];
+        currentCase.matrix_friend_agents_distance_angle = new Qualitative[friend_agents_list.Count, friend_agents_list.Count];
 
-        currentCase.matrix_agents = new Qualitative[agents_list.Count, agents_list.Count];
-        currentCase.matrix_agents_distance_angle = new Qualitative[agents_list.Count, agents_list.Count];
-        //currentCase.int_matrix_agents = new int[agents_list.Count, agents_list.Count];
-
-        for (int i = 0; i < agents_list.Count; i++)
+        //friend
+        for (int i = 0; i < friend_agents_list.Count; i++)
         {
-            for (int j = 0; j < agents_list.Count; j++)
+            for (int j = 0; j < friend_agents_list.Count; j++)
             {
                 if (i <= j)
                 {
                     //vazio a parte superior da matrix 
-                    currentCase.matrix_agents[i, j] = new Qualitative();
-                    currentCase.matrix_agents_distance_angle[i, j] = new Qualitative();
-                    //currentCase.int_matrix_agents[i, j] = 0;
+                    currentCase.matrix_friend_agents[i, j] = new Qualitative();
+                    currentCase.matrix_friend_agents_distance_angle[i, j] = new Qualitative();
                     continue;
                 }
 
-                float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, agents_list[j].transform);
+                float[] sensorDirection = Sensor.CheckDirection(friend_agents_list[i].transform, friend_agents_list[j].transform);
 
-                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, agents_list[j].transform.position);
+                Distance distance = CBDPUtils.CalculeDistance(friend_agents_list[i].transform.position, friend_agents_list[j].transform.position);
                 Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
                 //float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
-                float distance_float = Vector3.Distance(agents_list[i].transform.position, agents_list[j].transform.position);
-                float angle = Vector3.Angle(agents_list[i].transform.position, agents_list[j].transform.position);
+                float distance_float = Vector3.Distance(friend_agents_list[i].transform.position, friend_agents_list[j].transform.position);
+                float angle = Vector3.Angle(friend_agents_list[i].transform.position, friend_agents_list[j].transform.position);
 
-                currentCase.matrix_agents[i, j] = new Qualitative(distance, direction);
-                currentCase.matrix_agents_distance_angle[i, j] = new Qualitative(angle, distance_float);
-                //currentCase.int_matrix_agents[i, j] = (int)distance + (int)direction;
+                currentCase.matrix_friend_agents[i, j] = new Qualitative(distance, direction);
+                currentCase.matrix_friend_agents_distance_angle[i, j] = new Qualitative(angle, distance_float);
             }
         }
 
-        //matriz de distancia/dire��o entre os agentes e objetivos (string e int)
-        GameObject[] objectives = GameObject.FindGameObjectsWithTag(Constants.TAG_FLAG);
+        /*List<AgentController> enemy_agents_list = new List<AgentController>();
+        enemy_agents_list.AddRange(CBDPUtils.OrderAgentList(agentsTeam2));
+        currentCase.matrix_enemy_agents = new Qualitative[enemy_agents_list.Count, enemy_agents_list.Count];
+        currentCase.matrix_enemy_agents_distance_angle = new Qualitative[enemy_agents_list.Count, enemy_agents_list.Count];
 
-        currentCase.matrix_objetives = new Qualitative[agents_list.Count, objectives.Length];
-        //currentCase.int_matrix_objetives = new int[agents_list.Count, objectives.Length];
-
-        for (int i = 0; i < agents_list.Count; i++)
+        //enemy
+        for (int i = 0; i < enemy_agents_list.Count; i++)
         {
-            for (int j = 0; j < objectives.Length; j++)
+            for (int j = 0; j < enemy_agents_list.Count; j++)
             {
-                float[] sensorDirection = Sensor.CheckDirection(agents_list[i].transform, objectives[j].transform);
+                if (i <= j)
+                {
+                    //vazio a parte superior da matrix 
+                    currentCase.matrix_enemy_agents[i, j] = new Qualitative();
+                    currentCase.matrix_enemy_agents_distance_angle[i, j] = new Qualitative();
+                    continue;
+                }
 
-                Distance distance = CBDPUtils.CalculeDistance(agents_list[i].transform.position, objectives[j].transform.position);
+                float[] sensorDirection = Sensor.CheckDirection(enemy_agents_list[i].transform, enemy_agents_list[j].transform);
+
+                Distance distance = CBDPUtils.CalculeDistance(enemy_agents_list[i].transform.position, enemy_agents_list[j].transform.position);
                 Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
-                currentCase.matrix_objetives[i, j] = new Qualitative(distance, direction);
-                //currentCase.int_matrix_objetives[i, j] = (int)distance + (int)direction;
+                //float distance_float = CBDPUtils.GetDistanceByAStarPath(agents_list[i].transform.position, agents_list[j].transform.position);
+                float distance_float = Vector3.Distance(enemy_agents_list[i].transform.position, enemy_agents_list[j].transform.position);
+                float angle = Vector3.Angle(enemy_agents_list[i].transform.position, enemy_agents_list[j].transform.position);
+
+                currentCase.matrix_enemy_agents[i, j] = new Qualitative(distance, direction);
+                currentCase.matrix_enemy_agents_distance_angle[i, j] = new Qualitative(angle, distance_float);
+            }
+        }*/
+
+
+        //matriz de distancia/direção entre os agentes e objetivos (Qualitative)
+        GameObject[] objectives = GameObject.FindGameObjectsWithTag(Constants.TAG_FLAG);
+        List<GameObject> friend_objectives = CBDPUtils.Filter(objectives, Constants.TAG_TEAM_2);
+
+        currentCase.matrix_friend_objetives = new Qualitative[friend_agents_list.Count, friend_objectives.Count];
+        
+        for (int i = 0; i < friend_agents_list.Count; i++)
+        {
+            for (int j = 0; j < friend_objectives.Count; j++)
+            {
+                float[] sensorDirection = Sensor.CheckDirection(friend_agents_list[i].transform, friend_objectives[j].transform);
+                Distance distance = CBDPUtils.CalculeDistance(friend_agents_list[i].transform.position, friend_objectives[j].transform.position,
+                    false, false, friend_agents_list[i].tag + " - " + friend_agents_list[i].name + " and " + friend_objectives[j].name);
+                Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
+
+                currentCase.matrix_friend_objetives[i, j] = new Qualitative(distance, direction);
             }
         }
 
-        //vetor setores
-        currentCase.vector_sector = new Sector[agents_list.Count];
+        /*List<GameObject> enemy_objectives = CBDPUtils.Filter(objectives, Constants.TAG_TEAM_1);
+        currentCase.matrix_enemy_objetives = new Qualitative[enemy_agents_list.Count, enemy_objectives.Count];
 
-        for (int i = 0; i < agents_list.Count; i++)
+        for (int i = 0; i < enemy_agents_list.Count; i++)
         {
-            currentCase.vector_sector[i] = CalculeSector(agents_list[i]);
-        }
+            for (int j = 0; j < enemy_objectives.Count; j++)
+            {
+                float[] sensorDirection = Sensor.CheckDirection(enemy_agents_list[i].transform, enemy_objectives[j].transform);
+                Distance distance = CBDPUtils.CalculeDistance(enemy_agents_list[i].transform.position, enemy_objectives[j].transform.position,
+                    false, false, enemy_agents_list[i].tag + " - " + enemy_agents_list[i].name + " and " + enemy_objectives[j].name);
+                Direction direction = CBDPUtils.CalculeDirection(sensorDirection[0], sensorDirection[1]);
 
+                currentCase.matrix_enemy_objetives[i, j] = new Qualitative(distance, direction);
+            }
+        }*/
+
+        //vetor setores
+        currentCase.vector_friend_sector = new Sector[friend_agents_list.Count];
+        for (int i = 0; i < friend_agents_list.Count; i++)
+            currentCase.vector_friend_sector[i] = CalculeSector(friend_agents_list[i]);
+
+        //currentCase.vector_enemy_sector = new Sector[enemy_agents_list.Count];
+        //for (int i = 0; i < enemy_agents_list.Count; i++)
+        //    currentCase.vector_enemy_sector[i] = CalculeSector(enemy_agents_list[i]);
+        
         currentCase.strategy = Strategy.OFENSIVE;
+        currentCase.solutionType = DeceptiveLevel.NOT_DECEPTIVE;
 
         //init plan
         currentCase.plan = new Plan
@@ -223,6 +282,10 @@ public class CBDP : MonoBehaviour
             caseid = currentCase.caseId,
             actions = new Queue<Action>()
         };
+
+        //tirar print do caso, sem plano
+        SimulationController simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+        simulation.TakeAPicture("Case");
     }
 
     internal void NormalizeTimeInPlan()
@@ -346,30 +409,173 @@ public class CBDP : MonoBehaviour
         return cases;
     }
 
-    private List<Result> GetResultsOfSimilarCases(Case currentCase)
+
+    private List<Result> GetResultsOfSimilarCases(Case searchCase)
     {
-        // Instanciacao da estrutura do caso
-        ConsultStructure consultStructure = new ConsultStructure();
+        List<ConsultStructure> structsList = Structures();
+        List<Result> allResults = new List<Result>();
 
-        // Informando qual medida de similaridade global utilizar
-        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        foreach (var structure in structsList)
+        {
+            List<Result> results = cbr.Retrieve(searchCase, structure);
 
-        // Estruturacao de como o caso sera consultado na base de casos
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 1 }, 1f, new Equals()));                //Seed 1
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 6 }, 1f, new Equals()));                //deceptiveLevel 6
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 7 }, 1f, new Equals()));                //strategy 7
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 2 }, 1f, new MatrixSimilarity()));      //agentsRelationships 2
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 3 }, 1f, new MatrixSimilarity()));      //agentsGoalsRelationships 3
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 4 }, 1f, new CosineSimilarity()));      //agentsRelationships_distance_angle 4
-        consultStructure.consultParams.Add(new ConsultParams(new List<int> { 5 }, 1f, new SectorSimilarity()));      //agentsBattleFieldLocalization 5
+            foreach (var result in results)
+                Debug.Log("Usando a estrutura ("+structure.description+"), o Caso " + result.matchCase.caseDescription[0].value + " teve " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
 
-        // Realizando uma consulta na base de casos (lista já ordenada por maior score)
-        List<Result> results = cbr.Retrieve(currentCase, consultStructure);
+            allResults.AddRange(results);
+        }
 
-        foreach (var result in results)
-            Debug.Log("Caso recuperado: " + result.matchCase.caseDescription[0].value + " com " + (result.matchPercentage * 100).ToString("0.00") + "% de similaridade");
-
-        
-        return results;
+        return allResults;
     }
+
+    private List<ConsultStructure> Structures()
+    {
+        List<ConsultStructure> list = new List<ConsultStructure>();
+        ConsultStructure consultStructure;
+
+        //friendAgentsRelationships 2
+        List<int> matrixList = new List<int> { 2 };
+        //friendAgentsGoalsRelationships 3
+        List<int> matrixList2 = new List<int> { 3 };
+        //friendAgentsRelationships_distance_angle 4
+        List<int> numMatrixList = new List<int> { 4 };
+        //friendAgentsBattleFieldLocalization 5
+        List<int> vetorList = new List<int> { 5 };
+        //deceptiveLevel 6, strategy 7
+        List<int> equalsList = new List<int> { 6, 7 };
+        
+
+        /*//----------------------------Qualitative Matriz and Cosine---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Qualitative Matriz and Cosine";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Qualitative Matriz and Canberra---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Qualitative Matriz and Canberra";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Jaccard and Cosine---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Jaccard and Cosine";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Jaccard and Canberra---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Jaccard and Canberra";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Sorensen and Cosine---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Sorensen and Cosine";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Sorensen and Canberra---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Sorensen and Canberra";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+
+        //----------------------------Hamming and Cosine---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Hamming and Cosine";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Hamming and Canberra---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Hamming and Canberra";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Hamming Adapted and Cosine---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Hamming Adapted and Cosine";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        //----------------------------Hamming Adapted and Canberra---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "Hamming Adapted and Canberra";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+        */
+        //----------------------------ALL---------------------------------
+        consultStructure = new ConsultStructure();
+        consultStructure.globalSimilarity = new EuclideanDistance(consultStructure);
+        consultStructure.description = "All functions";
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new MatrixSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new JaccardSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new HammingSimilarityAdapted()));
+        consultStructure.consultParams.Add(new ConsultParams(matrixList2, 1f, new SorensenSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CosineSimilarity()));
+        consultStructure.consultParams.Add(new ConsultParams(numMatrixList, 1f, new CanberraSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(vetorList, 1f, new SectorSimilarity()));
+        //consultStructure.consultParams.Add(new ConsultParams(equalsList, 1f, new Equals()));
+        list.Add(consultStructure);
+
+        return list;
+    } 
 }

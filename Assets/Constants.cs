@@ -12,11 +12,12 @@ public static class Constants
     public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap\Heightmap_0_0.png";
     public static string MAP_SATELLITE_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Satelite\Satelite_0_0.png";
 
-    public static int[] LIMITS_X_AGENT_TEAM_1 = { -1340, 1340 };
+    public static int[] LIMITS_X_AGENT_TEAM_1 = { -1340, -670 };
     public static int[] LIMITS_X_AGENT_TEAM_2 = { -1340, 1340 };
-    public static int[] LIMITS_Y_AGENT_TEAM_1 = { -1340, -270 };
+    public static int[] LIMITS_Y_AGENT_TEAM_1 = { -1340, 0 }; //{ -1340, -270 };
     public static int[] LIMITS_Y_AGENT_TEAM_2 = { 270, 1340 };
     public static int CLICK_POSITION_OFFSET = -134;
+    public static int[] IMAGE_SIZE = { 100, 100 };
 
     public static float LIMIAR_HIGHLY_DECEPTIVE = 0.75f;
     public static float LIMIAR_PARTIALLY_DECEPTIVE = 0.3f;
@@ -38,10 +39,11 @@ public static class Constants
 
     public static string MATERIAL_AGENT_TEAM_1 = "Agents/UnitType/Friend/Materials/infantaria";
     public static string MATERIAL_AGENT_TEAM_2 = "Agents/UnitType/Hostile/Materials/infantaria";
-    public static int AGENT_SCALE = 30;
+    public static int AGENT_SCALE = 60;
     public static int AGENT_POSITION_Z = -10;
 
     public static float HEURISTIC_MULTIPLIER = 10;
+    public static string REAL_GOAL = "Flag10_Team2";
 
     //CENAS
     public static string MAIN_SCENE = "MainSystem";

@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// Classe utilizada como função de similaridade local na qual retorna a similaridade de duas matrizes.
 /// </summary>
 public class HammingSimilarityAdapted : AbstractLocalSimilarity
@@ -47,7 +48,8 @@ public class HammingSimilarityAdapted : AbstractLocalSimilarity
         float total_size = vectorA.Count * 2;
         float distance = count / total_size;
 
-        //Debug.Log("Similaridade da Matriz id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
-    	return 1f - distance;
+        Debug.Log("Similaridade da Hamming Adapted id " + consultParams.indexes[0] + " entre caso " + searchCase.caseDescription[0].value + " e caso " + retrieveCase.caseDescription[0].value + ": " + ((1f - distance) * 100).ToString("0.00"));
+
+        return 1f - distance;
 	}
 }

@@ -27,9 +27,6 @@ public class CanberraSimilarity : AbstractLocalSimilarity
         string value1 = searchCase.caseDescription[consultParams.indexes[0]].value;
 		string value2 = retrieveCase.caseDescription[consultParams.indexes[0]].value;
 
-        Debug.Log("valor 1: " + value1);
-        Debug.Log("valor 2: " + value2);
-
         var A = CBDPUtils.StringToMatrix(value1);
         var B = CBDPUtils.StringToMatrix(value2);
 
@@ -39,7 +36,11 @@ public class CanberraSimilarity : AbstractLocalSimilarity
         var vectorA = CBDPUtils.ToQualitative(CBDPUtils.Flatten(A));
         var vectorB = CBDPUtils.ToQualitative(CBDPUtils.Flatten(B));
 
-        float similarity = 0;
+        float similarityX = 0;
+        float similarityY = 0;
+        int zX = 0;
+        int zY = 0;
+        int n = vectorA.Count;
 
         // Se for de angulo e distancia  
         if (vectorA[0].angle != null)
@@ -50,12 +51,20 @@ public class CanberraSimilarity : AbstractLocalSimilarity
                 Vector2 vA = CBDPUtils.PointByDistanceAndAngle((double)vectorA[i].angle, (double)vectorA[i].numericDistance, Vector2.zero);
                 Vector2 vB = CBDPUtils.PointByDistanceAndAngle((double)vectorB[i].angle, (double)vectorB[i].numericDistance, Vector2.zero);
 
-                similarity += Math.Abs(vA.x - vB.x) / Math.Abs(vA.x) + Math.Abs(vB.x); // X
-                similarity += Math.Abs(vA.y - vB.y) / Math.Abs(vA.y) + Math.Abs(vB.y); // Y
+                similarityX += Math.Abs(vA.x - vB.x) / (Math.Abs(vA.x) + Math.Abs(vB.x)); // X
+                similarityY += Math.Abs(vA.y - vB.y) / (Math.Abs(vA.y) + Math.Abs(vB.y)); // Y
+
+                if (vA.x == 0) zX++;
+                if (vA.y == 0) zY++;
+                if (vB.x == 0) zX++;
+                if (vB.y == 0) zY++;
+
             }
         }
-        Debug.Log("Similaridade de canberra, caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
-        return 1f - similarity;
+        float similarity = ((similarityX / n - zX) + (similarityY / n - zY));
+        Debug.Log("Similaridade da canberra id " + consultParams.indexes[0] + " entre caso " + searchCase.caseDescription[0].value + " e caso " + retrieveCase.caseDescription[0].value + ": " + (Math.Abs(similarity - 1f) * 100).ToString("0.00"));
+
+        return Math.Abs(similarity - 1f);
 	}
 
     

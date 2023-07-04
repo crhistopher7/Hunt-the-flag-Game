@@ -13312,6 +13312,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 929113185237618212, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
+      propertyPath: m_Text
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1273326309151111834, guid: 71285f0ee62031c418edba1a8998b334, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

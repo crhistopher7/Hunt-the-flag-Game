@@ -13,31 +13,31 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-F,,,,}:{VC-L,F-LB,,,}:{C-RF,A-B,A-R,,}:{F-F,VC-LB,F-F,A-F,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-LF,F-F}:{VF-LF,VF-F}:{VF-LF,F-F}:{VF-LF,F-F}:{VF-LF,VF-F}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{58.6503028869629-1143.1474609375,,,,}:{0.587508141994476-191.376586914063,58.0818405151367-1161.99865722656,,,}:{32.663745880127-420.525848388672,25.9899940490723-851.243774414063,32.0971183776855-560.568481445313,,}:{52.9903793334961-1067.11804199219,5.66022396087646-131.897689819336,52.4217567443848-1068.59997558594,20.331714630127-814.936218261719,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
@@ -55,7 +55,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Caso 1477686966 Original"
                 },
                 {
                     "id": 9,
@@ -69,7 +69,372 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,905,798>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "3"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-LF,,,,}:{F-L,F-LB,,,}:{F-L,A-LB,C-RF,,}:{F-L,F-LB,C-L,A-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{VF-LF,VF-F}:{VF-LF,F-F}:{VF-LF,F-F}:{VF-LF,F-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{75.3188781738281-1200.82055664063,,,,}:{150.658096313477-1585.61791992188,75.3621444702148-1160.78332519531,,,}:{116.704383850098-1329.07971191406,41.3944206237793-724.721313476563,33.9677276611328-436.331298828125,,}:{145.183654785156-1872.58374023438,69.8762435913086-1248.17468261719,5.49165678024292-334.104766845703,28.4827499389648-589.234252929688,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "NOT_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Caso 1931235537 Original"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:3|solutionType:NOT_DECEPTIVE|actions:<Move,Agent5,Flag10_Team2,NOT_DECEPTIVE,NORMAL,F-RF,F-RF,1,1031,795>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "5"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VF-L,,,,}:{A-B,F-R,,,}:{VF-L,C-RB,F-L,,}:{A-L,F-R,A-F,F-R,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{VF-LF,VF-F}:{F-F,VF-RF}:{VF-LF,F-F}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{84.4607543945313-2082.60913085938,,,,}:{15.3789186477661-792.773620605469,99.8360824584961-1791.53259277344,,,}:{88.9755249023438-1976.36279296875,4.52073383331299-394.320922851563,104.349273681641-1550.0322265625,,}:{11.4934101104736-512.969787597656,72.9673385620117-1570.857421875,26.8706130981445-647.027038574219,77.4821624755859-1469.0146484375,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "NOT_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Caso 1902959905 Original"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:5|solutionType:NOT_DECEPTIVE|actions:<Move,Agent4,Flag10_Team2,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,859,4586>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "1477686966"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{VC-LB,A-F,,,}:{F-B,C-LB,F-B,,}:{F-LB,A-L,F-LB,VC-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-LF,VF-F}:{VF-LF,F-F}:{VF-LF,VF-F}:{VF-LF,F-F}:{VF-LF,F-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{25.9899940490723-851.243774414063,,,,}:{5.66022396087646-131.897689819336,20.331714630127-814.936218261719,,,}:{58.6503028869629-1143.1474609375,32.663745880127-420.525848388672,52.9903793334961-1067.11804199219,,}:{58.0818405151367-1161.99865722656,32.0971183776855-560.568481445313,52.4217567443848-1068.59997558594,0.587508141994476-191.376586914063,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "NOT_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Caso 1477686966"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent4,Flag10_Team2,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,904,8961>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "1931235537"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-LF,,,,}:{F-L,A-LB,,,}:{F-L,F-LB,C-LB,,}:{F-L,F-LB,A-L,C-L,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{VF-LF,VF-F}:{VF-LF,F-F}:{VF-LF,F-F}:{VF-LF,F-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{75.3188781738281-1200.82055664063,,,,}:{116.704383850098-1329.07971191406,41.3944206237793-724.721313476563,,,}:{150.658096313477-1585.61791992188,75.3621444702148-1160.78332519531,33.9677276611328-436.331298828125,,}:{145.183654785156-1872.58374023438,69.8762435913086-1248.17468261719,28.4827499389648-589.234252929688,5.49165678024292-334.104766845703,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "NOT_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "caso 1931235537"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:3|solutionType:NOT_DECEPTIVE|actions:<Move,Agent4,Flag10_Team2,NOT_DECEPTIVE,NORMAL,F-RF,F-RF,1,1030,853>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "1902959905"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-L,A-F,,,}:{VF-L,F-L,F-L,,}:{VF-L,F-L,F-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-LF,F-F}:{VF-LF,VF-F}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{15.3789186477661-792.773620605469,,,,}:{11.4934101104736-512.969787597656,26.8706130981445-647.027038574219,,,}:{88.9755249023438-1976.36279296875,104.349273681641-1550.0322265625,77.4821624755859-1469.0146484375,,}:{84.4607543945313-2082.60913085938,99.8360824584961-1791.53259277344,72.9673385620117-1570.857421875,4.52073383331299-394.320922851563,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "NOT_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "caso 1902959905 ajustado"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:3|solutionType:NOT_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,860,8583>)"
                 }
             ]
         },
@@ -86,31 +451,31 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-F,,,,}:{A-L,F-B,,,}:{A-L,F-B,VC-LB,,}:{A-LF,A-LB,A-F,A-F,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{46.221004486084-1133.01062011719,,,,}:{11.3114786148071-484.199340820313,34.9124984741211-983.988830566406,,,}:{9.23386478424072-487.821685791016,36.9911155700684-1019.44934082031,2.07867217063904-35.8468971252441,,}:{42.7667808532715-864.801147460938,3.46040034294128-572.031494140625,31.4570198059082-509.519378662109,33.5355834960938-539.393188476563,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
@@ -128,7 +493,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "1"
                 },
                 {
                     "id": 9,
@@ -142,7 +507,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,Flag10_Team2,NOT_DECEPTIVE,NORMAL,F-RF,F-RF,1,955,9754>)"
                 }
             ]
         },
@@ -159,37 +524,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -201,7 +566,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 4 agentes com ds1"
                 },
                 {
                     "id": 9,
@@ -215,7 +580,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
                 }
             ]
         },
@@ -232,37 +597,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -274,7 +639,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 1 agente com ds2"
                 },
                 {
                     "id": 9,
@@ -288,7 +653,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
                 }
             ]
         },
@@ -305,37 +670,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -347,7 +712,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 4 agentes com ds1"
                 },
                 {
                     "id": 9,
@@ -361,7 +726,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
                 }
             ]
         },
@@ -378,37 +743,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -420,7 +785,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 1 agente com ds2"
                 },
                 {
                     "id": 9,
@@ -434,7 +799,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
                 }
             ]
         },
@@ -451,37 +816,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -493,7 +858,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 4 agentes com ds1"
                 },
                 {
                     "id": 9,
@@ -507,7 +872,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
                 }
             ]
         },
@@ -524,37 +889,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -566,7 +931,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 1 agente com ds2"
                 },
                 {
                     "id": 9,
@@ -580,7 +945,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
                 }
             ]
         },
@@ -597,37 +962,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -639,7 +1004,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "1"
                 },
                 {
                     "id": 9,
@@ -653,7 +1018,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
                 }
             ]
         },
@@ -670,37 +1035,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -712,7 +1077,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 4 agentes com ds1"
                 },
                 {
                     "id": 9,
@@ -726,7 +1091,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
                 }
             ]
         },
@@ -743,37 +1108,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -785,7 +1150,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "Movimentação de 1 agente com ds2"
                 },
                 {
                     "id": 9,
@@ -799,7 +1164,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
                 }
             ]
         },
@@ -816,37 +1181,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -858,7 +1223,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "1"
                 },
                 {
                     "id": 9,
@@ -872,7 +1237,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
                 }
             ]
         },
@@ -889,37 +1254,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -931,7 +1296,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "lkjdçlkajs"
                 },
                 {
                     "id": 9,
@@ -945,7 +1310,7 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
                 }
             ]
         },
@@ -962,37 +1327,37 @@
                     "id": 1,
                     "name": "seed",
                     "type": "System.Int32",
-                    "value": "0"
+                    "value": "1"
                 },
                 {
                     "id": 2,
-                    "name": "agentsRelationships",
+                    "name": "friendAgentsRelationships",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{A-L,,,,,,,,,}:{F-L,C-LF,,,,,,,,}:{F-L,C-L,VC-LB,,,,,,,}:{F-L,F-L,A-L,A-LF,,,,,,}:{F-B,VF-B,VF-RB,VF-RB,VF-RB,,,,,}:{F-LB,F-B,F-B,F-B,VF-B,A-L,,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-LF,,,}:{F-LB,F-B,F-B,F-B,VF-B,F-L,C-L,VC-LB,,}:{VF-LB,F-LB,F-LB,F-LB,F-B,F-L,F-L,A-L,A-LF,}}"
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
                 },
                 {
                     "id": 3,
-                    "name": "agentsGoalsRelationships",
+                    "name": "friendAgentsGoalsRelationships",
                     "type": "System.String",
-                    "value": "{{F-R,A-LB,F-F,VF-RF}:{F-RB,F-L,VF-LF,F-RF}:{A-RB,F-L,VF-LF,F-F}:{A-RB,F-L,VF-LF,F-F}:{VC-L,VF-L,VF-LF,VF-F}:{VF-RB,VF-B,C-LB,F-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-R}:{VF-B,VF-LB,F-L,A-B}:{F-B,VF-LB,VF-L,C-LF}}"
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
                 },
                 {
                     "id": 4,
-                    "name": "agentsRelationships_distance_angle",
+                    "name": "friendAgentsRelationships_distance_angle",
                     "type": "System.String",
-                    "value": "{{,,,,,,,,,}:{0-0,,,,,,,,,}:{0-0,0-0,,,,,,,,}:{0-0,0-0,0-0,,,,,,,}:{0-0,0-0,0-0,0-0,,,,,,}:{0-0,0-0,0-0,0-0,0-0,,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,,}:{0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,0-0,}}"
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
                 },
                 {
                     "id": 5,
-                    "name": "agentsBattleFieldLocalization",
+                    "name": "friendAgentsBattleFieldLocalization",
                     "type": "System.String",
-                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE,OFENSIVE}"
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
                 },
                 {
                     "id": 6,
                     "name": "deceptiveLevel",
                     "type": "System.String",
-                    "value": "NOT_DECEPTIVE"
+                    "value": "HIGHLY_DECEPTIVE"
                 },
                 {
                     "id": 7,
@@ -1004,7 +1369,7 @@
                     "id": 8,
                     "name": "description",
                     "type": "System.String",
-                    "value": "Exemplo 1"
+                    "value": "xasxxxx"
                 },
                 {
                     "id": 9,
@@ -1018,7 +1383,1832 @@
                     "id": 0,
                     "name": "Planning",
                     "type": "System.String",
-                    "value": "(case_id:0|solutionType:NOT_DECEPTIVE|actions:<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,1,825,1891>,<Move,Agent4,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,707,3572>,<Move,Agent5,,PARTIALLY_DECEPTIVE,DECEPTIVE_2,A-RF,A-LB,15,977,8898>,<Move,Agent2,,NOT_DECEPTIVE,NORMAL,A-LF,A-LF,21,620,5219>,<Move,Agent1,,NOT_DECEPTIVE,NORMAL,A-RF,A-RF,33,752,4972>)"
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 4 agentes com ds1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 1 agente com ds2"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "lkjdçlkajs"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "xasxxxx"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 4 agentes com ds1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 1 agente com ds2"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "lkjdçlkajs"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "xasxxxx"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 4 agentes com ds1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 1 agente com ds2"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "lkjdçlkajs"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "xasxxxx"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 4 agentes com ds1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 1 agente com ds2"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "lkjdçlkajs"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "xasxxxx"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{VC-LB,,,,}:{C-LB,VC-LB,,,}:{A-F,A-F,A-B,,}:{A-L,A-L,C-LF,A-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{3.7365403175354-150.61540222168,,,,}:{8.19769191741943-335.715667724609,4.46111249923706-186.231033325195,,,}:{31.6154155731201-773.987060546875,35.3517150878906-845.939147949219,39.8122863769531-936.389343261719,,}:{12.6631593704224-616.937622070313,16.3977355957031-529.13232421875,20.8568515777588-437.471130371094,18.95823097229-762.115478515625,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,NEUTRAL,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 4 agentes com ds1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1489,356>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1357,114>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1185,369>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-RF,A-LF,1,950,1821>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{C-LB,A-B,,,}:{A-LB,A-F,C-LB,,}:{A-L,F-F,C-L,C-LF,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{36.3869514465332-1133.13940429688,,,,}:{2.15867018699646-273.382507324219,34.228630065918-893.143310546875,,,}:{1.26408469676971-560.575622558594,35.1295433044434-744.432678222656,0.905254185199738-294.613311767578,,}:{15.2857980728149-563.355102539063,51.671817779541-1188.83642578125,17.4436092376709-470.923553466797,16.5422821044922-446.363067626953,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "Movimentação de 1 agente com ds2"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,PARTIALLY_DECEPTIVE,DECEPTIVE_2,F-RF,F-LF,1,1290,469>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-F,,,,}:{F-F,C-B,,,}:{A-LF,A-LB,A-LB,,}:{F-F,A-L,C-L,A-F,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{F-F,VF-R}:{VF-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{39.2158355712891-1004.24548339844,,,,}:{45.4925270080566-1242.03100585938,6.27669858932495-237.928558349609,,,}:{39.2497177124023-785.97265625,0.188711598515511-539.633178710938,6.24585485458374-708.216064453125,,}:{56.6715126037598-1269.5078125,17.4561462402344-486.087432861328,11.1797895431519-444.716766357422,17.4219951629639-523.114685058594,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{NEUTRAL,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "1"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent3,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-LF,1,1251,737>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{F-B,,,,}:{A-LB,A-F,,,}:{A-B,C-F,VC-B,,}:{A-LB,C-LF,C-LB,VC-LB,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{38.8461570739746-1035.49792480469,,,,}:{11.2765331268311-594.155700683594,27.5700931549072-479.613372802734,,,}:{18.4272651672363-736.778137207031,20.4192371368408-332.640960693359,7.1508584022522-150.402786254883,,}:{21.07297706604-881.955200195313,17.7749195098877-290.387664794922,9.79645156860352-288.118041992188,2.64708018302917-162.606887817383,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "lkjdçlkajs"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent1,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-LF,1,1033,597>)"
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "caseDescription": [
+                {
+                    "id": 0,
+                    "name": "caseID",
+                    "type": "System.Int32",
+                    "value": "0"
+                },
+                {
+                    "id": 1,
+                    "name": "seed",
+                    "type": "System.Int32",
+                    "value": "1"
+                },
+                {
+                    "id": 2,
+                    "name": "friendAgentsRelationships",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{A-B,,,,}:{A-B,C-LB,,,}:{A-LB,A-LF,A-F,,}:{F-B,A-LB,VC-LB,A-B,}}"
+                },
+                {
+                    "id": 3,
+                    "name": "friendAgentsGoalsRelationships",
+                    "type": "System.String",
+                    "value": "{{VF-F,VF-RF}:{F-F,VF-RF}:{F-F,VF-RF}:{VF-F,VF-RF}:{F-F,VF-RF}}"
+                },
+                {
+                    "id": 4,
+                    "name": "friendAgentsRelationships_distance_angle",
+                    "type": "System.String",
+                    "value": "{{,,,,}:{17.5105514526367-638.95068359375,,,,}:{26.8514595031738-947.800109863281,9.34115028381348-329.261291503906,,,}:{8.05868625640869-507.140991210938,25.5675525665283-548.031005859375,34.9077072143555-709.631591796875,,}:{31.4087524414063-1134.77575683594,13.8994045257568-548.031005859375,4.55926179885864-229.392669677734,39.4639625549316-814,}}"
+                },
+                {
+                    "id": 5,
+                    "name": "friendAgentsBattleFieldLocalization",
+                    "type": "System.String",
+                    "value": "{DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE,DEFENSIVE}"
+                },
+                {
+                    "id": 6,
+                    "name": "deceptiveLevel",
+                    "type": "System.String",
+                    "value": "HIGHLY_DECEPTIVE"
+                },
+                {
+                    "id": 7,
+                    "name": "strategy",
+                    "type": "System.String",
+                    "value": "OFENSIVE"
+                },
+                {
+                    "id": 8,
+                    "name": "description",
+                    "type": "System.String",
+                    "value": "xasxxxx"
+                },
+                {
+                    "id": 9,
+                    "name": "result",
+                    "type": "System.String",
+                    "value": "True"
+                }
+            ],
+            "caseSolution": [
+                {
+                    "id": 0,
+                    "name": "Planning",
+                    "type": "System.String",
+                    "value": "(case_id:0|solutionType:HIGHLY_DECEPTIVE|actions:<Move,Agent0,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RB,F-LB,1,1759,095>,<Move,Agent1,,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,F-RB,1,1505,626>,<Move,Agent2,Flag10_Team2,HIGHLY_DECEPTIVE,DECEPTIVE_1,F-RF,A-RB,1,1192,499>,<Move,Agent4,,HIGHLY_DECEPTIVE,DECEPTIVE_1,A-LF,A-RF,1,874,4063>)"
                 }
             ]
         }

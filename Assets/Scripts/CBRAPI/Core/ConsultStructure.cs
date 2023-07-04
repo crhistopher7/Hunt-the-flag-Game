@@ -18,12 +18,18 @@ public class ConsultStructure  {
 	public List<ConsultParams> consultParams;
 
 	/// <summary>
+	/// Descrição da estrutura
+	/// </summary>
+	public string description;
+
+	/// <summary>
 	/// Construtor da classe ConsultStructure.
 	/// </summary>
 	public ConsultStructure()
 	{
 		consultParams = new List<ConsultParams>();
 		globalSimilarity = new EuclideanDistance(this);
+		description = "";
 	}
 
 	/// <summary>

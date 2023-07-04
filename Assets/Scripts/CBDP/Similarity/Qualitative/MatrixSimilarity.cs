@@ -51,7 +51,7 @@ public class MatrixSimilarity : AbstractLocalSimilarity
 
         similarity /= count;
 
-        Debug.Log("Similaridade da Matriz id " + consultParams.indexes[0] + " do caso " + retrieveCase.caseDescription[0].value + ": " + (1f - similarity));
+        Debug.Log("Similaridade da Matriz id " + consultParams.indexes[0] + " entre caso " + searchCase.caseDescription[0].value + " e caso " + retrieveCase.caseDescription[0].value + ": " + ((1f - similarity) * 100).ToString("0.00"));
     	return 1f - similarity;
 	}
 }

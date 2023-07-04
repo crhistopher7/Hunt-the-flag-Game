@@ -17,6 +17,14 @@ public class LogicMap : ICloneable
     public float heigth;
     public LogicMap Previous;
 
+    public bool InArea(List<Vector2> area)
+    {
+        float x = this.Position.x;
+        float y = this.Position.y;
+
+        return x >= area[0].x && x <= area[1].x && y >= area[0].y && y <= area[1].y;
+    }
+
     public object Clone()
     {
         LogicMap logicMap = new LogicMap

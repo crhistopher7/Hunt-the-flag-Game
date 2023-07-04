@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 
 public class AgentController : MatchBehaviour
 {
     private AStar AStar;
-    private DeceptiveAStar_1 DeceptiveAStar_1;
-    private DeceptiveAStar_2 DeceptiveAStar_2;
-    private DeceptiveAStar_3 DeceptiveAStar_3;
-    private DeceptiveAStar_4 DeceptiveAStar_4;
 
     private GameObject prefabLine;
 
@@ -30,6 +28,9 @@ public class AgentController : MatchBehaviour
     public int seed;
     System.Random prng;
     Rigidbody rb;
+    public TextMesh nameText;
+
+    private bool alreadyTakenAPicture;
 
 
     // Start is called before the first frame update
@@ -39,20 +40,17 @@ public class AgentController : MatchBehaviour
         rend = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
         rend.enabled = true;
-        level = new AgentLevel(1);
+        level = new AgentLevel(3);
         followingpath = false;
-        isCarryingFlag = false;
-        lifeBar.localScale = new Vector3(level.life, 1, 1);
+        //isCarryingFlag = false;
+        //lifeBar.localScale = new Vector3(level.life, 1, 1);
 
         AStar = GameObject.Find(Constants.PATHFINDER).GetComponent<AStar>();
-        DeceptiveAStar_1 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_1>();
-        DeceptiveAStar_2 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_2>();
-        DeceptiveAStar_3 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_3>();
-        DeceptiveAStar_4 = GameObject.Find(Constants.PATHFINDER).GetComponent<DeceptiveAStar_4>();
 
         prefabLine = Resources.Load("Prefabs/PathLine") as GameObject;
         SpriteRenderer back = transform.Find("Background").GetComponent<SpriteRenderer>();
         back.color = color;
+        alreadyTakenAPicture = false;
     }
 
     public void InitPosition(int seed)
@@ -73,54 +71,40 @@ public class AgentController : MatchBehaviour
             position = new Vector3Int(x, y, z);
 
             point = AStar.GetTileByPosition(Vector3Int.FloorToInt(new Vector3Int(x, y, 0)) / Constants.MAP_OFFSET);
-        } while (!point.Walkable);
+        } while (point == null || !point.Walkable);
 
         this.transform.position = position;
+    }
+
+    internal void SetNameText(string name)
+    {
+        nameText = transform.Find("Background").GetComponentInChildren<TextMesh>();
+        nameText.text = name;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        //verificar se esse agente morreu
-        //if(level.life <= 0)
-            //Die();
-
-
         //verificar se encontrou agentes ou bandeira ao seu redor 
-        List<RaycastHit> listOfHit = sensor.Check();
-        CheckHits(listOfHit);
+        if (!alreadyTakenAPicture)
+        {
+            List<RaycastHit> listOfHit = sensor.Check();
+            CheckHits(listOfHit);
+        }
+            
 
         // Se estiver seguindo um caminho se movimentar
         if (followingpath)
         {
             Move();
             CheckWayPoint();
-            if (isCarryingFlag)
-                flagCarrying.Agentposition = rb.position;
+            //if (isCarryingFlag)
+            //    flagCarrying.Agentposition = rb.position;
         }
     }
 
-    private void Die()
-    {
-        // verificar se estava carregando uma bandeira
-        if (isCarryingFlag)
-        {
-            // dizer q a bandeira não esta mais sendo carregada
-            flagCarrying.beingCarried = false;
-        }
-        //retirar da lista de agentes do controller a referencia desse agente
-        PlayerController pc;
-        if (transform.CompareTag(Constants.TAG_TEAM_1))
-            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
-        else
-            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
-       
-        pc.Agents.Remove(this);
 
-        //morreu
-        Destroy(this.gameObject);
-    }
 
     private void CheckHits(List<RaycastHit> listOfHit)
     {
@@ -131,28 +115,31 @@ public class AgentController : MatchBehaviour
             foreach (RaycastHit hit in listOfHit)
             {
                 //verificar se é uma bandeira
-                if(hit.transform.CompareTag(Constants.TAG_FLAG))
+                if(hit.transform.CompareTag(Constants.TAG_FLAG) && hit.transform.name == Constants.REAL_GOAL)
                 {
-                    // é uma bandeira, se for do inimigo e não estou carregando nada, devo carregar 
-                    FlagController flagController = hit.transform.GetComponent<FlagController>();
-                    if (!transform.CompareTag(flagController.team) && !isCarryingFlag && !flagController.beingCarried)
+                    if (!alreadyTakenAPicture)
                     {
+                        alreadyTakenAPicture = true;
                         SimulationController simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
-                        simulation.TakeAPicture();
-                        StartCoroutine(simulation.EndCase());
+                        StartCoroutine(simulation.EndCase(transform.name, hit.transform.name));
+                    }
 
+                    // é uma bandeira, se for do inimigo e não estou carregando nada, devo carregar 
+                    /*FlagController flagController = hit.transform.GetComponent<FlagController>();
+                    if (!transform.CompareTag(flagController.team))// && !isCarryingFlag && !flagController.beingCarried)
+                    {
 
                         /* flagController.agentSpeed = level.speed;
                          flagController.Agentposition = rb.position;
                          flagController.beingCarried = true;
                          isCarryingFlag = true;
                          flagCarrying = flagController;
-                         rend.sharedMaterial = materials[1];*/
-                    }
+                         rend.sharedMaterial = materials[1];
+                    }*/
 
                 }
                 //verificar se o hit é a base dele e ele carrega a bandeira
-                else if (hit.transform.name.Contains("BaseTeam") && hit.transform.CompareTag(transform.tag) && isCarryingFlag)
+                /*else if (hit.transform.name.Contains("BaseTeam") && hit.transform.CompareTag(transform.tag) && isCarryingFlag)
                 {
                     flagCarrying.RestartPosition();
                     isCarryingFlag = false;
@@ -165,23 +152,10 @@ public class AgentController : MatchBehaviour
                     // este agente é inimigo, setar um dano para ele
                     //AgentController EnemyAgentController = hit.transform.GetComponent<AgentController>();
                     //Invoke(nameof(EnemyAgentController.SetDamage), 0.1f);
-                } 
+                } */
                 
             }
         }
-    }
-    private void SetDamage()
-    {
-        level.life -= 1;
-        lifeBar.localScale = new Vector3(level.life, 1, 1);
-    }
-
-    bool CheckFriendAgent(RaycastHit hit)
-    {
-        Rigidbody rigidbody;
-        if (rigidbody = hit.transform.GetComponent<Rigidbody>())
-            return rigidbody.transform.IsChildOf(this.transform.parent);
-        return true;
     }
 
     public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
@@ -213,73 +187,80 @@ public class AgentController : MatchBehaviour
                     Debug.Log("not walkable!");
                     return;
                 }
-                else
-                {
-                    indexPath = 0;
-                    if (pathType == PathType.DECEPTIVE_1)
-                    {
-                        // Funcionando 
-                        AStar.Search(current, deceptiveObjective);
-                        path = AStar.BuildPath(deceptiveObjective);
-                        AStar.Search(deceptiveObjective, objective);
-                        List<LogicMap> secondPath = AStar.BuildPath(objective);
 
+                indexPath = 0;
+                if (pathType == PathType.DECEPTIVE_1)
+                {
+                    List<Vector2> area = OccupationAreaLimits(current.Position, deceptiveObjective.Position, objective.Position);
+                    // Funcionando 
+                    AStar.Search(current, deceptiveObjective);
+                    path = AStar.BuildPath(deceptiveObjective);
+                    AStar.Search(deceptiveObjective, objective);
+                    List<LogicMap> secondPath = AStar.BuildPath(objective);
+
+                    path.AddRange(secondPath);
+                }
+                else if (pathType == PathType.DECEPTIVE_2)
+                {
+                    //Achar ponto entre enganoso e objetivo
+                    LogicMap target = FindTarget(current, objective, deceptive);
+                    LogicMap ldpt = FindLDPt(target, current, objective, deceptive, pathType);
+                    List<Vector2> area = OccupationAreaLimits(current.Position, deceptiveObjective.Position, objective.Position, target.Position, ldpt.Position);
+
+                    if (target != null)
+                    {
+                        AStar.Search(current, ldpt);
+                        path = AStar.BuildPath(ldpt);
+                        AStar.Search(ldpt, objective);
+                        List<LogicMap> secondPath = AStar.BuildPath(objective);
                         path.AddRange(secondPath);
                     }
-                    else if (pathType == PathType.DECEPTIVE_2)
+                }
+                else if (pathType == PathType.DECEPTIVE_3)
+                {
+                    // Encontra o target
+                    LogicMap target = FindTarget(current, objective, deceptive);
+                    LogicMap ldpt = FindLDPt(target, current, objective, deceptive, pathType);
+                    List<Vector2> area = OccupationAreaLimits(current.Position, deceptiveObjective.Position, objective.Position, target.Position, ldpt.Position);
+
+                    if (target != null)
                     {
-                        //Achar ponto entre enganoso e objetivo
-                        LogicMap target = FindTarget(current, objective, deceptive);
+                        // Custom a* (start, target, obj)
+                        AStar.SearchAstarCustom3(current, ldpt, objective);
+                        path = AStar.BuildPath(ldpt);
 
-                        if (target != null)
-                        {
-                            AStar.Search(current, target);
-                            path = AStar.BuildPath(target);
-                            AStar.Search(target, objective);
-                            List<LogicMap> secondPath = AStar.BuildPath(objective);
-                            path.AddRange(secondPath);
-                        }
+                        // Path target to obj
+                        AStar.Search(ldpt, objective);
+                        List<LogicMap> secondPath = AStar.BuildPath(objective);
+                        path.AddRange(secondPath);
                     }
-                    else if (pathType == PathType.DECEPTIVE_3)
+                }
+                else
+                {
+                    Debug.Log("Deceptive 4");
+                    LogicMap target = FindTarget(current, objective, deceptive);
+
+                    if (target != null)
                     {
-                        // Encontra o target
-                        LogicMap target = FindTarget(current, objective, deceptive);
+                        //calcular um astar para a char o custo
+                        AStar.Search(current, objective);
+                        float costReal = AStar.CostPath(AStar.BuildPath(objective));
+                        AStar.Search(current, deceptive);
+                        float costDeceptive = AStar.CostPath(AStar.BuildPath(deceptive));
 
-                        if (target != null)
-                        {
-                            // Custom a* (start, target, obj)
-                            AStar.SearchAstarCustom3(current, target, objective);
-                            path = AStar.BuildPath(target);
+                        LogicMap ldpt = FindLDPt(target, current, objective, deceptive, pathType, costReal, costDeceptive);
+                        List<Vector2> area = OccupationAreaLimits(current.Position, deceptiveObjective.Position, objective.Position, target.Position, ldpt.Position);
 
-                            // Path target to obj
-                            AStar.Search(target, objective);
-                            List<LogicMap> secondPath = AStar.BuildPath(objective);
-                            path.AddRange(secondPath);
-                        }
+                        // CustomAstar (start , target)
+                        AStar.SearchAstarCustom4(current, ldpt, objective, deceptiveObjective, costReal, costDeceptive);
+                        path = AStar.BuildPath(ldpt);
+                        // Path 2
+                        AStar.Search(ldpt, objective);
+                        List<LogicMap> secondPath = AStar.BuildPath(objective);
+                        path.AddRange(secondPath);
                     }
-                    else
-                    {
-                        Debug.Log("Deceptive 4");
-                        LogicMap target = FindTarget(current, objective, deceptive);
-
-                        if (target != null)
-                        {
-                            //calcular um astar para a char o custo
-                            AStar.Search(current, objective);
-                            float costReal = AStar.CostPath(AStar.BuildPath(objective));
-                            AStar.Search(current, deceptive);
-                            float costDeceptive = AStar.CostPath(AStar.BuildPath(deceptive));
-
-                            // CustomAstar (start , target)
-                            AStar.SearchAstarCustom4(current, target, objective, deceptiveObjective, costReal, costDeceptive);
-                            path = AStar.BuildPath(target);
-                            // Path 2
-                            AStar.Search(target, objective);
-                            List<LogicMap> secondPath = AStar.BuildPath(objective);
-                            path.AddRange(secondPath);
-                        }
-                    }
-                }                
+                }
+                      
             }
 
             if (path.Count != 0)
@@ -293,7 +274,6 @@ public class AgentController : MatchBehaviour
                 LineController line = go.GetComponent<LineController>();
 
                 line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
-
             }
             else
             {
@@ -301,6 +281,40 @@ public class AgentController : MatchBehaviour
             }
         }
     }
+
+    public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, float tolerance = 5f)
+    {
+        // Calcula os valores máximos e mínimos permitidos em x e y
+        float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
+        float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
+        float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x) - tolerance, 1);
+        float min_y = Mathf.Max(Mathf.Min(a.y, b.y, c.y) - tolerance, 1);
+
+        return new List<Vector2> { new Vector2(max_x, max_y), new Vector2(min_x, min_y) };
+    }
+
+    public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d,  float tolerance = 5f)
+    {
+        // Calcula os valores máximos e mínimos permitidos em x e y
+        float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x, d.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
+        float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y, d.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
+        float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x, d.x) - tolerance, 1);
+        float min_y = Mathf.Max(Mathf.Min(a.y, b.y, c.y, d.y) - tolerance, 1);
+
+        return new List<Vector2> { new Vector2(max_x, max_y), new Vector2(min_x, min_y) };
+    }
+
+    public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d, Vector3Int e, float tolerance = 5f)
+    {
+        // Calcula os valores máximos e mínimos permitidos em x e y
+        float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x, d.x, e.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
+        float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y, d.y, e.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
+        float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x, d.x, e.x) - tolerance, 1);
+        float min_y = Mathf.Max(Mathf.Min(a.y, b.y, c.y, d.y, e.y) - tolerance, 1);
+
+        return new List<Vector2> { new Vector2(min_x, min_y), new Vector2(max_x, max_y) };
+    }
+
 
     private LogicMap FindTarget(LogicMap start, LogicMap objective, LogicMap deceptive)
     {
@@ -337,8 +351,50 @@ public class AgentController : MatchBehaviour
             costSoFar += cost2;
         }
 
+        Debug.Log("Find LDP: " + path[next].Position.ToString());
         return path[next];
     }
+
+
+    private LogicMap FindLDPt(LogicMap target, LogicMap start, LogicMap goal, LogicMap fakegoal, PathType pathType,  float costToReal=0, float costToDeceptive=0)
+    {
+        // calcular area  area = model.occupation_area_limits(start, fakegoal, goal, target)
+        List<Vector2> area = OccupationAreaLimits(start.Position, fakegoal.Position, goal.Position, target.Position);
+
+        if (pathType == PathType.DECEPTIVE_3)
+        {
+            AStar.SearchAstarCustom3(start, target, goal);
+        }
+        else if (pathType == PathType.DECEPTIVE_4)
+        {
+            AStar.SearchAstarCustom4(start, target, goal, fakegoal, costToReal, costToDeceptive);
+        }
+        else
+        {
+            AStar.Search(start, target);
+        }
+
+        List<LogicMap> path = AStar.BuildPath(target);
+        Dictionary<LogicMap, float> ratios = new Dictionary<LogicMap, float>();
+
+        foreach (LogicMap node in path)
+        {
+            // Ratio(n) = cost(S, n) / cost(G, LDP)
+
+            float costSP = AStar.GetJustCost(start, node); 
+            float costG = AStar.GetJustCost(goal, node);
+            if (costG != 0)
+            {
+                float ratio = costSP / costG;
+                ratios[node] = ratio;
+            }
+        }
+
+        LogicMap ldpt = ratios.OrderBy(kv => kv.Value).First().Key;
+        Debug.Log("Find LDP: " + ldpt.Position.ToString());
+        return ldpt;
+    }
+
 
     private void Move()
     {
@@ -365,5 +421,40 @@ public class AgentController : MatchBehaviour
            
         }
 
+    }
+
+    private void SetDamage()
+    {
+        level.life -= 1;
+        lifeBar.localScale = new Vector3(level.life, 1, 1);
+    }
+
+    bool CheckFriendAgent(RaycastHit hit)
+    {
+        Rigidbody rigidbody;
+        if (rigidbody = hit.transform.GetComponent<Rigidbody>())
+            return rigidbody.transform.IsChildOf(this.transform.parent);
+        return true;
+    }
+
+    private void Die()
+    {
+        // verificar se estava carregando uma bandeira
+        if (isCarryingFlag)
+        {
+            // dizer q a bandeira não esta mais sendo carregada
+            flagCarrying.beingCarried = false;
+        }
+        //retirar da lista de agentes do controller a referencia desse agente
+        PlayerController pc;
+        if (transform.CompareTag(Constants.TAG_TEAM_1))
+            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_1).GetComponent<PlayerController>();
+        else
+            pc = GameObject.Find(Constants.PLAYER_CONTROLLER_2).GetComponent<PlayerController>();
+
+        pc.Agents.Remove(this);
+
+        //morreu
+        Destroy(this.gameObject);
     }
 }

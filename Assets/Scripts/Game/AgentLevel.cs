@@ -16,22 +16,22 @@ public class AgentLevel
             case 1:
                 this.level = 1;
                 this.life = 100;
-                this.speed = 40.0f;
-                this.sensorMultiplier = 20;
+                this.speed = 60.0f;
+                this.sensorMultiplier = 10;
                 break;
 
             case 2:
                 this.level = 2;
                 this.life = 120;
-                this.speed = 45.0f;
-                this.sensorMultiplier = 25;
+                this.speed = 70.0f;
+                this.sensorMultiplier = 10;
                 break;
 
             case 3:
                 this.level = 3;
                 this.life = 140;
-                this.speed = 50.0f;
-                this.sensorMultiplier = 30;
+                this.speed = 80.0f;
+                this.sensorMultiplier = 10;
                 break;
 
             default:

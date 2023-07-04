@@ -11,19 +11,15 @@ public class CaseCBDP
     public int caseId;
     public int seedMap;
     
-    public Qualitative[,] matrix_agents;
-    public Qualitative[,] matrix_objetives;
-    public Qualitative[,] matrix_agents_distance_angle;
+    public Qualitative[,] matrix_friend_agents;
+    //public Qualitative[,] matrix_enemy_agents;
+    public Qualitative[,] matrix_friend_objetives;
+    //public Qualitative[,] matrix_enemy_objetives;
+    public Qualitative[,] matrix_friend_agents_distance_angle;
+    //public Qualitative[,] matrix_enemy_agents_distance_angle;
 
-    public string[,] matrix_agents_;
-    public string[,] matrix_objetives_;
-    public string[,] matrix_agents_distance_angle_;
-
-    //public int[,] int_matrix_agents;
-    //public int[,] int_matrix_objetives;
-    //public int[,] int_matrix_agents_distance_angle;
-
-    public Sector[] vector_sector;
+    public Sector[] vector_friend_sector;
+    //public Sector[] vector_enemy_sector;
 
     public DeceptiveLevel solutionType;
     public Strategy strategy;
@@ -42,12 +38,14 @@ public class CaseCBDP
 
         str += caseId.ToString() + Constants.SPLITTER;
         str += seedMap.ToString() + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(matrix_agents) + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(matrix_objetives) + Constants.SPLITTER;
-        str += CBDPUtils.ToMatrixString(matrix_agents_distance_angle, true) + Constants.SPLITTER;
-        //str += CBDPUtils.ToMatrixString(int_matrix_agents) + Constants.SPLITTER;
-        //str += CBDPUtils.ToMatrixString(int_matrix_objetives) + Constants.SPLITTER;
-        str += ToVectorString(vector_sector) + Constants.SPLITTER;
+        str += CBDPUtils.ToMatrixString(matrix_friend_agents) + Constants.SPLITTER;
+        //str += CBDPUtils.ToMatrixString(matrix_enemy_agents) + Constants.SPLITTER;
+        str += CBDPUtils.ToMatrixString(matrix_friend_objetives) + Constants.SPLITTER;
+        //str += CBDPUtils.ToMatrixString(matrix_enemy_objetives) + Constants.SPLITTER;
+        str += CBDPUtils.ToMatrixString(matrix_friend_agents_distance_angle, true) + Constants.SPLITTER;
+        //str += CBDPUtils.ToMatrixString(matrix_enemy_agents_distance_angle, true) + Constants.SPLITTER;
+        str += ToVectorString(vector_friend_sector) + Constants.SPLITTER;
+        //str += ToVectorString(vector_enemy_sector) + Constants.SPLITTER;
         str += solutionType.ToString() + Constants.SPLITTER;
         str += strategy.ToString() + Constants.SPLITTER;
         str += description + Constants.SPLITTER;

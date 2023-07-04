@@ -157,4 +157,18 @@ public class Plan
             ob.Add(new Qualitative(a.distance_directionDeceptive));
         return ob;
     }
+
+    public void UpdateLastAction(string agent, string goal)
+    {
+        for (int i = this.actions.Count-1; i >= 0; i--)
+        {
+            var action = this.actions.ToArray().ToList()[i] as Action;
+
+            if (action.agent.Equals(agent))
+            {
+                action.objetive = goal;
+                return;
+            }
+        }
+    }
 }
