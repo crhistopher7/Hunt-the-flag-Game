@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
+using System.IO;
+using System.Text.RegularExpressions;
 
 public class AgentController : MatchBehaviour
 {
@@ -84,7 +88,7 @@ public class AgentController : MatchBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //verificar se encontrou agentes ou bandeira ao seu redor 
         if (!alreadyTakenAPicture)
@@ -158,7 +162,7 @@ public class AgentController : MatchBehaviour
         }
     }
 
-    public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
+    public void BuildPath(Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType, string MAP_HEIGHTMAP_FILE)
     {
 
         LogicMap current = AStar.GetTileByPosition(new Vector3Int((int)Math.Round(rb.position.x) / Constants.MAP_OFFSET, (int)Math.Round(rb.position.y) / Constants.MAP_OFFSET, 0));
@@ -172,7 +176,13 @@ public class AgentController : MatchBehaviour
         }
         else
         {
-            if (pathType == PathType.NORMAL)
+            if (Constants.USE_P4_CODE)
+            {
+                indexPath = 0;
+                path = RunP4Code(current, objective, deceptive, pathType, MAP_HEIGHTMAP_FILE);
+            }
+
+            else if (pathType == PathType.NORMAL)
             {
                 indexPath = 0;
                 AStar.Search(current, objective);
@@ -280,6 +290,95 @@ public class AgentController : MatchBehaviour
                 Debug.Log("Path Vazio, não foi possível construir um caminho");
             }
         }
+    }
+
+    private List<LogicMap> RunP4Code(LogicMap current, LogicMap objective, LogicMap deceptive, PathType pathType, string MAP_HEIGHTMAP_FILE)
+    {
+        string agent = "";
+        if (pathType == PathType.NORMAL)
+            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_astar";
+        else if (pathType == PathType.DECEPTIVE_1)
+            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds1";
+        else if (pathType == PathType.DECEPTIVE_2)
+            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds2";
+        else if (pathType == PathType.DECEPTIVE_3)
+            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds3";
+        else
+            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds4";
+
+        string pathfinder = "astar";
+        string start = current.Position.x.ToString() + "," + current.Position.y.ToString();
+        string deceptiveGoal = deceptive.Position.x.ToString() + "," + deceptive.Position.y.ToString();
+        string realGoal = objective.Position.x.ToString() + "," + objective.Position.y.ToString();
+        string map = MAP_HEIGHTMAP_FILE.Replace(".png", ".tif");
+        string quotedMapImagePath = $"\"{map}\"";
+
+        // Caminho do executável do Python dentro do ambiente virtual "tcc_ricardo"
+        string pythonFilePath = @"C:\Users\crisl\anaconda3\envs\tcc_ricardo\python.exe";
+        string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad";
+        string scriptPath = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\p4.py";
+
+        Debug.Log(pythonArguments);
+
+
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = pythonFilePath,
+            Arguments = $"\"{scriptPath}\" {pythonArguments}",
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true // Criar sem janela para evitar exibição extra do CMD
+        };
+
+        // Iniciando o processo do Python
+        Process process = new Process
+        {
+            StartInfo = psi
+        };
+
+        // Iniciar o processo e os redirecionamentos de saída
+        process.Start();
+        StreamReader standardOutputReader = process.StandardOutput;
+        StreamReader standardErrorReader = process.StandardError;
+
+        // Ler a saída do processo Python (saída padrão e saída de erro) após a conclusão
+        string output = standardOutputReader.ReadToEnd();
+        string errorOutput = standardErrorReader.ReadToEnd();
+
+        process.WaitForExit();
+
+        // Exibindo a saída e saída de erro
+        Debug.Log("Saída do Python: \n" + output);
+        Debug.Log("Saída de erro do Python: \n" + errorOutput);
+
+        List<LogicMap> logicMapList = new List<LogicMap>();
+        if (output.Contains("FULL PATH"))
+        {
+            string listaString = output.Split(':').Last();
+            Debug.Log(listaString);
+
+            // Remover os colchetes e espaços para obter apenas as coordenadas
+            string coordinatesString = listaString.Replace("[", "").Replace("]", "").Replace(" ", "");
+
+            // Usar expressão regular para extrair os números de cada coordenada
+            Regex regex = new Regex(@"\((\d+),(\d+)\)");
+            MatchCollection matches = regex.Matches(coordinatesString);
+
+            // Converter cada par de coordenadas em um Vector3Int e adicioná-lo à lista
+            foreach (Match match in matches)
+            {
+                int x = int.Parse(match.Groups[1].Value);
+                int y = int.Parse(match.Groups[2].Value);
+
+                LogicMap point = AStar.GetTileByPosition(new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0));
+                logicMapList.Add(point);
+            }
+
+        }
+
+        return logicMapList;
     }
 
     public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, float tolerance = 5f)

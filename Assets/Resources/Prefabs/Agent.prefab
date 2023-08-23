@@ -358,10 +358,11 @@ GameObject:
   - component: {fileID: 7736414060415969163}
   - component: {fileID: 7736414061086817890}
   - component: {fileID: 6148305773255007118}
+  - component: {fileID: 3277519436915551940}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Team1
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -489,3 +490,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &3277519436915551940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736414061086817893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7742cfcdca6a86e43a08f855a5db53de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reposition: 0

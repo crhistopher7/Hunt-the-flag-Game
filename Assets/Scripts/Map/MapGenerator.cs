@@ -16,6 +16,7 @@ public struct TerrainType
 public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance;
+    public string MAP_HEIGHTMAP_FILE;
     private int mapWidth = 100;
     private int mapHeigth = 100;
     private float noiseScale = 23;
@@ -82,8 +83,8 @@ public class MapGenerator : MonoBehaviour
             Debug.LogError("Não encontrou as imagens do mapa");
             return;
         }
-            
 
+        this.MAP_HEIGHTMAP_FILE = heightmap;
         fileData = File.ReadAllBytes(heightmap);
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);

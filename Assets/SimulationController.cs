@@ -24,6 +24,7 @@ public class SimulationController : MonoBehaviour
     private InputField inputDescription;
     private Text thresholdSliderText;
     private List<AgentController> selectedAgents;
+    private List<SetNewPosition> repositionObjects;
     private Dropdown dropdown;
     private RectTransform rectPanel;
     private RectTransform rectCanvas;
@@ -115,7 +116,7 @@ public class SimulationController : MonoBehaviour
     public void InitPlayers()
     {
         System.Random prng = new System.Random();
-        int id = prng.Next(0, 1000);
+        int id = prng.Next(0, 10000);
         Debug.Log("ID do Random do caso: "+id);
 
         if (inputNumberOfAgents.text == "" || int.Parse(inputNumberOfAgents.text) <= 0)
@@ -156,8 +157,6 @@ public class SimulationController : MonoBehaviour
             pcTeam1.Agents[i].SetNameText(i.ToString());
         }
             
-
-
         /*pcTeam2.Agents = CBDPUtils.OrderAgentList(pcTeam2.Agents);
 
         for (int i = 0; i < pcTeam2.Agents.Count; i++)
@@ -353,6 +352,7 @@ public class SimulationController : MonoBehaviour
     {
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
+        repositionObjects = new List<SetNewPosition>();
         selectedSimilarCaseId = -1;
         clientOfExecution.SearchSimulationController();
         Invoke(nameof(ComandStartCase), 0.5f);
@@ -467,6 +467,7 @@ public class SimulationController : MonoBehaviour
     public bool VerifySelectedSingleAgent(Vector3 point)
     {
         Ray ray = Camera.main.ScreenPointToRay(point);
+        Debug.Log(Camera.main.ScreenToWorldPoint(point));
 
         if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
             if (hit.transform.CompareTag(gameObject.tag))
@@ -478,6 +479,32 @@ public class SimulationController : MonoBehaviour
         return false;
     }
 
+
+    public bool VerifySelectedSingleObject(Vector3 point)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(point);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 50000.0f))
+            if (hit.transform.gameObject.TryGetComponent<SetNewPosition>(out SetNewPosition ob))
+            {
+                repositionObjects.Add(ob);
+                ob.reposition = true;
+                return true;
+            }
+        return false;
+    }
+
+    public void ClearSelectedObjects()
+    {
+        foreach (SetNewPosition ob in repositionObjects)
+        {
+            ob.reposition = false;
+        }
+
+        repositionObjects.Clear();
+        //ConstructInitCase
+    }
+
     public void SetPathfinder()
     {
         pathType = (PathType)dropdown.value;
@@ -485,6 +512,16 @@ public class SimulationController : MonoBehaviour
         canvasSelectPathfinder = canvasPainels.transform.Find("Left Panel").transform.Find("PathSelect").gameObject;
         canvasSelectPathfinder.SetActive(false);
         ShowArrowPathConstructor();
+        // ao inves de construir as linhas para setar os objetivos, utilizar os objetivos fixos
+        // todo: posicionar os objetivos
+        /*
+        bool flag = selectedAgents[0].tag.Equals(Constants.TAG_TEAM_1);
+        var deceptivePosition = flag ? pcTeam2.getDeceptiveGoalPosition() : pcTeam1.getDeceptiveGoalPosition();
+        var realPosition = flag ?  pcTeam2.getRealGoalPosition() : pcTeam1.getRealGoalPosition();
+        Debug.Log(deceptivePosition);
+        Debug.Log(realPosition);
+        ReceiveObjectivePositions(realPosition, deceptivePosition);
+        */
         dropdown.value = 0;
     }
 
@@ -503,9 +540,9 @@ public class SimulationController : MonoBehaviour
     public void ReceiveMove(string name, string team, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
     {
         if (team.Equals(Constants.TAG_TEAM_1))
-            pcTeam1.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
+            pcTeam1.ReceiveMove(name, objectivePosition, deceptivePosition, pathType, mapGenerator.MAP_HEIGHTMAP_FILE);
         else
-            pcTeam2.ReceiveMove(name, objectivePosition, deceptivePosition, pathType);
+            pcTeam2.ReceiveMove(name, objectivePosition, deceptivePosition, pathType, mapGenerator.MAP_HEIGHTMAP_FILE);
     }
 
     private void ExecutePlan()

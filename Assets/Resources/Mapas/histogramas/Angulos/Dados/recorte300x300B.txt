@@ -1,0 +1,6 @@
+Greater than 5 degrees:  0.7775027870680045
+Greater than 10 degrees:  0.5786733556298773
+Greater than 15 degrees:  0.397742474916388
+Greater than 20 degrees:  0.24204570791527313
+Greater than 25 degrees:  0.10516164994425864
+Greater than 30 degrees:  0.03689520624303233

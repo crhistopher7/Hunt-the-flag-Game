@@ -109,8 +109,9 @@ GameObject:
   - component: {fileID: 3256285099635461158}
   - component: {fileID: 6166832708935121797}
   - component: {fileID: 5043636697796290111}
+  - component: {fileID: 1769421921194942200}
   m_Layer: 0
-  m_Name: Flag10_Team2
+  m_Name: Real_Team2
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2802877164082616619}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 81, y: 261, z: -10}
+  m_LocalPosition: {x: -81, y: 261, z: -10}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 8052831173543030598}
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2802877164082616619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
@@ -223,9 +224,22 @@ MonoBehaviour:
   team: Team2
   value: 10
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: 1000, y: 1000, z: -10}
+  StartFlagposition: {x: 100, y: 100, z: -10}
   agentSpeed: 0
   beingCarried: 0
+--- !u!114 &1769421921194942200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802877164082616619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7742cfcdca6a86e43a08f855a5db53de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reposition: 0
 --- !u!1 &5102108362764092809
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,8 +254,9 @@ GameObject:
   - component: {fileID: 4184502661879583534}
   - component: {fileID: 2664025085810295664}
   - component: {fileID: 6372927904281236266}
+  - component: {fileID: 5173749848119287037}
   m_Layer: 0
-  m_Name: Flag1_Team2
+  m_Name: Deceptive_Team2
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102108362764092809}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 182, y: 266, z: -10}
+  m_LocalPosition: {x: 282, y: 266, z: -10}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 8052831173543030598}
@@ -346,7 +361,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102108362764092809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ba4b6b3ec5becf408d3521aec17ce77, type: 3}
   m_Name: 
@@ -354,9 +369,22 @@ MonoBehaviour:
   team: Team2
   value: 1
   Agentposition: {x: 0, y: 0, z: 0}
-  StartFlagposition: {x: -1000, y: 1000, z: -10}
+  StartFlagposition: {x: -100, y: 100, z: -10}
   agentSpeed: 0
   beingCarried: 0
+--- !u!114 &5173749848119287037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102108362764092809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7742cfcdca6a86e43a08f855a5db53de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reposition: 0
 --- !u!1 &5484188477978713651
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,59 @@
+Map 3-1 id 1
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 180
+Distance between Team1 - Agent1 and Flag1_Team2 is 1449,575
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 296
+Distance between Team1 - Agent1 and Flag10_Team2 is 2104,583
+
+Map 3-1 id 2
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 309
+Distance between Team1 - Agent1 and Flag1_Team2 is 2120,265
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 201
+Distance between Team1 - Agent1 and Flag10_Team2 is 1488,464
+
+
+Map 3-1 id 3
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 153
+Distance between Team1 - Agent1 and Flag1_Team2 is 1462,603
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 341
+Distance between Team1 - Agent1 and Flag10_Team2 is 2443,605
+
+
+Map 2-2 id 10
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 179
+Distance between Team1 - Agent1 and Flag1_Team2 is 1721,228
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 365
+Distance between Team1 - Agent1 and Flag10_Team2 is 2588,943
+
+Map 2-2 id 11
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 296
+Distance between Team1 - Agent1 and Flag1_Team2 is 2137,32
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 254
+Distance between Team1 - Agent1 and Flag10_Team2 is 1923,574
+
+Map 2-2 id 12
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 214
+Distance between Team1 - Agent1 and Flag1_Team2 is 1820,757
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 410
+Distance between Team1 - Agent1 and Flag10_Team2 is 2925,604
+
+
+Map 0-0 id 31
+AStar distance between Team1 - Agent1 and Flag1_Team2 is 192
+Distance between Team1 - Agent1 and Flag1_Team2 is 1431,38
+
+AStar distance between Team1 - Agent1 and Flag10_Team2 is 334
+Distance between Team1 - Agent1 and Flag10_Team2 is 2347,094
+
+
+Map 0-0 id 32
+
+
+
+
+

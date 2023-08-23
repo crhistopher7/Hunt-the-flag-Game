@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8135504146671227186}
   - component: {fileID: 901905391441676517}
   m_Layer: 0
-  m_Name: Flag1_Team1
+  m_Name: Deceptive_Team1
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 4842334777093827068}
   - component: {fileID: 2353646769809651530}
   m_Layer: 0
-  m_Name: Flag10_Team1
+  m_Name: Real_Team1
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

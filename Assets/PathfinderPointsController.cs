@@ -40,17 +40,28 @@ public class PathfinderPointsController : MonoBehaviour
         BuildingObjectivesPoints();
     }
 
-    private void BuildingObjectivesPoints()
+    private void BuildingObjectivesPoints(bool debug = false)
     {
+        if (debug) // Deixar os objetivos fixos
+        {
+            Vector3Int realGoal = new Vector3Int(0, 0, 0) / Constants.MAP_OFFSET;
+            Vector3Int deceptiveGoal = new Vector3Int(0, 0, 0) / Constants.MAP_OFFSET;
+
+            simulationController.ReceiveObjectivePositions(realGoal, deceptiveGoal);
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3Int positionClick = Vector3Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             Utils.DestroyLineDrawer();
             pathType = simulationController.GetPathType();
+
             if (pathType.Equals(PathType.NORMAL))
             {
                 positionClick = new Vector3Int(positionClick.x, positionClick.y, 0) / Constants.MAP_OFFSET;
+                Debug.Log(positionClick);
                 simulationController.ReceiveObjectivePositions(positionClick, positionClick); //Caso seja normal, não tem posição enganosa
             }
             else if (!hasDeceptivePosition)

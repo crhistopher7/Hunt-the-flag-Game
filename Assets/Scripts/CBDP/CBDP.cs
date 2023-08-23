@@ -321,7 +321,7 @@ public class CBDP : MonoBehaviour
 
     public Sector CalculeSector(AgentController a)
     {
-        if (a.transform.position.y < -100)
+        if (a.transform.position.y < Constants.SECTOR_LIMITS[0])
         {
             if (a.CompareTag(Constants.TAG_TEAM_1))
                 return Sector.DEFENSIVE;
@@ -329,7 +329,7 @@ public class CBDP : MonoBehaviour
                 return Sector.OFENSIVE;
         }
 
-        if (a.transform.position.y > 100)
+        if (a.transform.position.y > Constants.SECTOR_LIMITS[1])
         {
             if (a.CompareTag(Constants.TAG_TEAM_2))
                 return Sector.OFENSIVE;
@@ -392,7 +392,7 @@ public class CBDP : MonoBehaviour
         List<string[]> cases = new List<string[]>();
         var case_str = this.currentCase.ToString();
 
-        //Debug.Log("CASO ATUAL: " + case_str);
+        Debug.Log("CASO ATUAL: " + case_str);
         Case currentCase = StringCaseToCase(case_str.Split(Constants.SPLITTER));
         List<Result> similiarCases = GetResultsOfSimilarCases(currentCase);
 

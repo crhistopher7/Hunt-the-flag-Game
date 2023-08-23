@@ -10,6 +10,9 @@ public class PlayerController : MatchBehaviour
     public int numberOfAgents;
     System.Random prng;
 
+    Transform realTransform;
+    Transform deceptiveTransform;
+
     void Awake()
     {
         SetVariables();
@@ -22,6 +25,51 @@ public class PlayerController : MatchBehaviour
     {
         Agents = new List<AgentController>();
         prng = new System.Random();
+
+        Transform realTransform = FindTransformWithNameContaining("Real");
+        Transform deceptiveTransform = FindTransformWithNameContaining("Deceptive");
+    }
+
+    public void SetRealGoalPosition(float x, float y)
+    {
+        realTransform.position = new Vector3(x, y, realTransform.position.z);
+    }
+
+    public void SetDeceptiveGoalPosition(float x, float y)
+    {
+        deceptiveTransform.position = new Vector3(x, y, deceptiveTransform.position.z);
+    }
+
+    public Vector3Int GetRealGoalPosition()
+    {
+        if (realTransform != null)
+            return Vector3Int.FloorToInt(new Vector3(realTransform.position.x, realTransform.position.y, 0));
+        else
+            throw new Exception("Não encontrado o objetivo real no player controller");
+    }
+
+    public Vector3Int GetDeceptiveGoalPosition()
+    {
+        if (deceptiveTransform != null)
+            return Vector3Int.FloorToInt(new Vector3(deceptiveTransform.position.x, deceptiveTransform.position.y, 0));
+        else
+            throw new Exception("Não encontrado o objetivo enganoso no player controller");
+    }
+
+
+    private Transform FindTransformWithNameContaining(string partialName)
+    {
+        Transform[] childTransforms = transform.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform childTransform in childTransforms)
+        {
+            if (childTransform.name.Contains(partialName))
+            {
+                return childTransform;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -67,12 +115,12 @@ public class PlayerController : MatchBehaviour
     /// <param name="objectivePosition">Posição do objetivo</param>
     /// <param name="deceptivePosition">Posição do objetivo enganoso</param>
     /// <param name="pathType">Tipo de Pathfinder usado</param>
-    public void ReceiveMove(string name, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType)
+    public void ReceiveMove(string name, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType, string MAP_HEIGHTMAP_FILE)
     {
         foreach (AgentController agent in Agents)
             if (agent.name == name)
             {
-                agent.BuildPath(objectivePosition, deceptivePosition, pathType);
+                agent.BuildPath(objectivePosition, deceptivePosition, pathType, MAP_HEIGHTMAP_FILE);
                 return;
             }
     }

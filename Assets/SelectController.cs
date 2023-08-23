@@ -6,6 +6,7 @@ public class SelectController : MonoBehaviour
 {
     private SimulationController simulationController;
     private bool dragSelect;
+    private bool settingNewPosition;
 
     private Vector3 mousePosition1;
     private Vector3 mousePosition2;
@@ -38,40 +39,54 @@ public class SelectController : MonoBehaviour
     private void SetVariables()
     {
         dragSelect = false;
+        settingNewPosition = false;
     }
 
 
     private void SelectAgentsMode()
     {
-        //1. Quando pressiona o botão, pega o ponto
-        if (Input.GetMouseButtonDown(0))
-            if (Input.GetKey(KeyCode.LeftShift))
-                mousePosition1 = Input.mousePosition;
-            else
-                if (simulationController.VerifySelectedSingleAgent(Input.mousePosition)) // Clicou em um agente. Perguntar Path
+        // Se apertar o direito e tiver um agente ou objetivo
+        if (Input.GetMouseButtonDown(1) && !dragSelect)
+        {
+            if (settingNewPosition)
+            {
+                simulationController.ClearSelectedObjects();
+                settingNewPosition = false;
+            }
+            else if (simulationController.VerifySelectedSingleObject(Input.mousePosition)) // Clicou em um agente ou bandeira e não esta setando uma nova posição 
+                settingNewPosition = true;
+        }
+            
+        else if (!settingNewPosition)
+        {
+            //1. Quando pressiona o botão, pega o ponto
+            if (Input.GetMouseButtonDown(0))
+                if (Input.GetKey(KeyCode.LeftShift))
+                    mousePosition1 = Input.mousePosition;
+                else
+                    if (simulationController.VerifySelectedSingleAgent(Input.mousePosition)) // Clicou em um agente. Perguntar Path
+                    simulationController.DesableComponentSelectController();
+
+            //2. Se continuou pressionando e moveu um ponto, pode criar a box
+            if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
+                if ((mousePosition1 - Input.mousePosition).magnitude > 40)
+                    dragSelect = true;
+
+            //3. Quando soltar o botão...
+            if (Input.GetMouseButtonUp(0) && dragSelect)
+            {
+                var pointOfCanvasPath = new Vector3((mousePosition1.x + Input.mousePosition.x) / 2, (mousePosition1.y + Input.mousePosition.y) / 2, mousePosition1.z);
+
+                mousePosition1 = Camera.main.ScreenToWorldPoint(mousePosition1);
+                mousePosition2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                corners = GetBoundingBox(mousePosition1, mousePosition2);
+
+                if (simulationController.VerifySelectedGroupAgent(corners))
                 {
                     simulationController.DesableComponentSelectController();
                 }
-
-        //2. Se continuou pressionando e moveu um ponto, pode criar a box
-        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
-            if ((mousePosition1 - Input.mousePosition).magnitude > 40)
-                dragSelect = true;
-
-        //3. Quando soltar o botão...
-        if (Input.GetMouseButtonUp(0) && dragSelect)
-        {
-            var pointOfCanvasPath = new Vector3((mousePosition1.x + Input.mousePosition.x) / 2, (mousePosition1.y + Input.mousePosition.y) / 2, mousePosition1.z);
-
-            mousePosition1 = Camera.main.ScreenToWorldPoint(mousePosition1);
-            mousePosition2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            corners = GetBoundingBox(mousePosition1, mousePosition2);
-
-            if (simulationController.VerifySelectedGroupAgent(corners))
-            {
-                simulationController.DesableComponentSelectController();
+                dragSelect = false;
             }
-            dragSelect = false;
         }
     }
 
