@@ -19,7 +19,7 @@ public class PlayerController : MatchBehaviour
     }
 
     /// <summary>
-    /// Função que seta valores iniciais em variáveis
+    /// Funï¿½ï¿½o que seta valores iniciais em variï¿½veis
     /// </summary>
     private void SetVariables()
     {
@@ -45,7 +45,7 @@ public class PlayerController : MatchBehaviour
         if (realTransform != null)
             return Vector3Int.FloorToInt(new Vector3(realTransform.position.x, realTransform.position.y, 0));
         else
-            throw new Exception("Não encontrado o objetivo real no player controller");
+            throw new Exception("Nï¿½o encontrado o objetivo real no player controller");
     }
 
     public Vector3Int GetDeceptiveGoalPosition()
@@ -53,7 +53,7 @@ public class PlayerController : MatchBehaviour
         if (deceptiveTransform != null)
             return Vector3Int.FloorToInt(new Vector3(deceptiveTransform.position.x, deceptiveTransform.position.y, 0));
         else
-            throw new Exception("Não encontrado o objetivo enganoso no player controller");
+            throw new Exception("Nï¿½o encontrado o objetivo enganoso no player controller");
     }
 
 
@@ -73,7 +73,7 @@ public class PlayerController : MatchBehaviour
     }
 
     /// <summary>
-    /// Função que inicializa os agentes de player de acordo com a quantidade de agentes setada em posições randomicas
+    /// Funï¿½ï¿½o que inicializa os agentes de player de acordo com a quantidade de agentes setada em posiï¿½ï¿½es randomicas
     /// </summary>
     public void StartAgents(int id)
     {
@@ -109,11 +109,11 @@ public class PlayerController : MatchBehaviour
     }
 
     /// <summary>
-    /// Função que recebe o movimento que um determinado agente deve executar
+    /// Funï¿½ï¿½o que recebe o movimento que um determinado agente deve executar
     /// </summary>
     /// <param name="name">Nome do agente</param>
-    /// <param name="objectivePosition">Posição do objetivo</param>
-    /// <param name="deceptivePosition">Posição do objetivo enganoso</param>
+    /// <param name="objectivePosition">Posiï¿½ï¿½o do objetivo</param>
+    /// <param name="deceptivePosition">Posiï¿½ï¿½o do objetivo enganoso</param>
     /// <param name="pathType">Tipo de Pathfinder usado</param>
     public void ReceiveMove(string name, Vector3Int objectivePosition, Vector3Int deceptivePosition, PathType pathType, string MAP_HEIGHTMAP_FILE)
     {
@@ -123,5 +123,94 @@ public class PlayerController : MatchBehaviour
                 agent.BuildPath(objectivePosition, deceptivePosition, pathType, MAP_HEIGHTMAP_FILE);
                 return;
             }
+    }
+
+    private List<LogicMap> RunP4Code(LogicMap current, LogicMap objective, LogicMap deceptive, PathType pathType, string MAP_HEIGHTMAP_FILE)
+    {
+        string agent = "";
+        if (pathType == PathType.NORMAL)
+            agent = Constants.AGENT_NORMAL;
+        else if (pathType == PathType.DECEPTIVE_1)
+            agent = Constants.AGENT_DS1;
+        else if (pathType == PathType.DECEPTIVE_2)
+            agent = Constants.AGENT_DS2;
+        else if (pathType == PathType.DECEPTIVE_3)
+            agent = Constants.AGENT_DS3;
+        else
+            agent = Constants.AGENT_DS4;
+
+        string pathfinder = "astar";
+        string start = current.Position.x.ToString() + "," + current.Position.y.ToString();
+        string deceptiveGoal = deceptive.Position.x.ToString() + "," + deceptive.Position.y.ToString();
+        string realGoal = objective.Position.x.ToString() + "," + objective.Position.y.ToString();
+        string map = MAP_HEIGHTMAP_FILE.Replace(".png", ".tif");
+        string quotedMapImagePath = $"\"{map}\"";
+
+        // Caminho do executï¿½vel do Python dentro do ambiente virtual "tcc_ricardo"
+        string pythonFilePath = Constants.PYTHON_FILE_PATH;
+        string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad";
+        string scriptPath = Constants.SCRIPT_FILE_PATH;
+
+        Debug.Log(pythonArguments);
+
+
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = pythonFilePath,
+            Arguments = $"\"{scriptPath}\" {pythonArguments}",
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true // Criar sem janela para evitar exibiï¿½ï¿½o extra do CMD
+        };
+
+        // Iniciando o processo do Python
+        Process process = new Process
+        {
+            StartInfo = psi
+        };
+
+        // Iniciar o processo e os redirecionamentos de saï¿½da
+        process.Start();
+        StreamReader standardOutputReader = process.StandardOutput;
+        StreamReader standardErrorReader = process.StandardError;
+
+        // Ler a saï¿½da do processo Python (saï¿½da padrï¿½o e saï¿½da de erro) apï¿½s a conclusï¿½o
+        string output = standardOutputReader.ReadToEnd();
+        string errorOutput = standardErrorReader.ReadToEnd();
+
+        process.WaitForExit();
+
+        // Exibindo a saï¿½da e saï¿½da de erro
+        Debug.Log("Saï¿½da do Python: \n" + output);
+        Debug.Log("Saï¿½da de erro do Python: \n" + errorOutput);
+
+        List<LogicMap> logicMapList = new List<LogicMap>();
+        if (output.Contains("FULL PATH"))
+        {
+            string listaString = output.Split(':').Last();
+            Debug.Log(listaString);
+
+            // Remover os colchetes e espaï¿½os para obter apenas as coordenadas
+            string coordinatesString = listaString.Replace("[", "").Replace("]", "").Replace(" ", "");
+
+            // Usar expressï¿½o regular para extrair os nï¿½meros de cada coordenada
+            Regex regex = new Regex(@"\((\d+),(\d+)\)");
+            MatchCollection matches = regex.Matches(coordinatesString);
+
+            // Converter cada par de coordenadas em um Vector3Int e adicionï¿½-lo ï¿½ lista
+            foreach (Match match in matches)
+            {
+                int x = int.Parse(match.Groups[1].Value);
+                int y = int.Parse(match.Groups[2].Value);
+
+                LogicMap point = AStar.GetTileByPosition(new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0));
+                logicMapList.Add(point);
+            }
+
+        }
+
+        return logicMapList;
     }
 }

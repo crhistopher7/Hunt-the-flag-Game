@@ -112,13 +112,13 @@ public class AgentController : MatchBehaviour
 
     private void CheckHits(List<RaycastHit> listOfHit)
     {
-        //verificar se é vazio a lista
+        //verificar se ï¿½ vazio a lista
         if (listOfHit.Count != 0)
         {
-            // contém algum agente ou bandeira na lista 
+            // contï¿½m algum agente ou bandeira na lista 
             foreach (RaycastHit hit in listOfHit)
             {
-                //verificar se é uma bandeira
+                //verificar se ï¿½ uma bandeira
                 if(hit.transform.CompareTag(Constants.TAG_FLAG) && hit.transform.name == Constants.REAL_GOAL)
                 {
                     if (!alreadyTakenAPicture)
@@ -128,7 +128,7 @@ public class AgentController : MatchBehaviour
                         StartCoroutine(simulation.EndCase(transform.name, hit.transform.name));
                     }
 
-                    // é uma bandeira, se for do inimigo e não estou carregando nada, devo carregar 
+                    // ï¿½ uma bandeira, se for do inimigo e nï¿½o estou carregando nada, devo carregar 
                     /*FlagController flagController = hit.transform.GetComponent<FlagController>();
                     if (!transform.CompareTag(flagController.team))// && !isCarryingFlag && !flagController.beingCarried)
                     {
@@ -142,7 +142,7 @@ public class AgentController : MatchBehaviour
                     }*/
 
                 }
-                //verificar se o hit é a base dele e ele carrega a bandeira
+                //verificar se o hit ï¿½ a base dele e ele carrega a bandeira
                 /*else if (hit.transform.name.Contains("BaseTeam") && hit.transform.CompareTag(transform.tag) && isCarryingFlag)
                 {
                     flagCarrying.RestartPosition();
@@ -150,10 +150,10 @@ public class AgentController : MatchBehaviour
                     rend.sharedMaterial = materials[0];
                     //TODO aumentar de nivel quando pegar uma bandeira
                 }
-                //verificar se são inimigos
+                //verificar se sï¿½o inimigos
                 else if (!CheckFriendAgent(hit))
                 {
-                    // este agente é inimigo, setar um dano para ele
+                    // este agente ï¿½ inimigo, setar um dano para ele
                     //AgentController EnemyAgentController = hit.transform.GetComponent<AgentController>();
                     //Invoke(nameof(EnemyAgentController.SetDamage), 0.1f);
                 } */
@@ -287,7 +287,7 @@ public class AgentController : MatchBehaviour
             }
             else
             {
-                Debug.Log("Path Vazio, não foi possível construir um caminho");
+                Debug.Log("Path Vazio, nï¿½o foi possï¿½vel construir um caminho");
             }
         }
     }
@@ -296,15 +296,15 @@ public class AgentController : MatchBehaviour
     {
         string agent = "";
         if (pathType == PathType.NORMAL)
-            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_astar";
+            agent = Constants.AGENT_NORMAL;
         else if (pathType == PathType.DECEPTIVE_1)
-            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds1";
+            agent = Constants.AGENT_DS1;
         else if (pathType == PathType.DECEPTIVE_2)
-            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds2";
+            agent = Constants.AGENT_DS2;
         else if (pathType == PathType.DECEPTIVE_3)
-            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds3";
+            agent = Constants.AGENT_DS3;
         else
-            agent = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds4";
+            agent = Constants.AGENT_DS4;
 
         string pathfinder = "astar";
         string start = current.Position.x.ToString() + "," + current.Position.y.ToString();
@@ -313,10 +313,10 @@ public class AgentController : MatchBehaviour
         string map = MAP_HEIGHTMAP_FILE.Replace(".png", ".tif");
         string quotedMapImagePath = $"\"{map}\"";
 
-        // Caminho do executável do Python dentro do ambiente virtual "tcc_ricardo"
-        string pythonFilePath = @"C:\Users\crisl\anaconda3\envs\tcc_ricardo\python.exe";
+        // Caminho do executï¿½vel do Python dentro do ambiente virtual "tcc_ricardo"
+        string pythonFilePath = Constants.PYTHON_FILE_PATH;
         string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad";
-        string scriptPath = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\p4.py";
+        string scriptPath = Constants.SCRIPT_FILE_PATH;
 
         Debug.Log(pythonArguments);
 
@@ -329,7 +329,7 @@ public class AgentController : MatchBehaviour
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            CreateNoWindow = true // Criar sem janela para evitar exibição extra do CMD
+            CreateNoWindow = true // Criar sem janela para evitar exibiï¿½ï¿½o extra do CMD
         };
 
         // Iniciando o processo do Python
@@ -338,20 +338,20 @@ public class AgentController : MatchBehaviour
             StartInfo = psi
         };
 
-        // Iniciar o processo e os redirecionamentos de saída
+        // Iniciar o processo e os redirecionamentos de saï¿½da
         process.Start();
         StreamReader standardOutputReader = process.StandardOutput;
         StreamReader standardErrorReader = process.StandardError;
 
-        // Ler a saída do processo Python (saída padrão e saída de erro) após a conclusão
+        // Ler a saï¿½da do processo Python (saï¿½da padrï¿½o e saï¿½da de erro) apï¿½s a conclusï¿½o
         string output = standardOutputReader.ReadToEnd();
         string errorOutput = standardErrorReader.ReadToEnd();
 
         process.WaitForExit();
 
-        // Exibindo a saída e saída de erro
-        Debug.Log("Saída do Python: \n" + output);
-        Debug.Log("Saída de erro do Python: \n" + errorOutput);
+        // Exibindo a saï¿½da e saï¿½da de erro
+        Debug.Log("Saï¿½da do Python: \n" + output);
+        Debug.Log("Saï¿½da de erro do Python: \n" + errorOutput);
 
         List<LogicMap> logicMapList = new List<LogicMap>();
         if (output.Contains("FULL PATH"))
@@ -359,14 +359,14 @@ public class AgentController : MatchBehaviour
             string listaString = output.Split(':').Last();
             Debug.Log(listaString);
 
-            // Remover os colchetes e espaços para obter apenas as coordenadas
+            // Remover os colchetes e espaï¿½os para obter apenas as coordenadas
             string coordinatesString = listaString.Replace("[", "").Replace("]", "").Replace(" ", "");
 
-            // Usar expressão regular para extrair os números de cada coordenada
+            // Usar expressï¿½o regular para extrair os nï¿½meros de cada coordenada
             Regex regex = new Regex(@"\((\d+),(\d+)\)");
             MatchCollection matches = regex.Matches(coordinatesString);
 
-            // Converter cada par de coordenadas em um Vector3Int e adicioná-lo à lista
+            // Converter cada par de coordenadas em um Vector3Int e adicionï¿½-lo ï¿½ lista
             foreach (Match match in matches)
             {
                 int x = int.Parse(match.Groups[1].Value);
@@ -383,7 +383,7 @@ public class AgentController : MatchBehaviour
 
     public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, float tolerance = 5f)
     {
-        // Calcula os valores máximos e mínimos permitidos em x e y
+        // Calcula os valores mï¿½ximos e mï¿½nimos permitidos em x e y
         float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
         float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
         float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x) - tolerance, 1);
@@ -394,7 +394,7 @@ public class AgentController : MatchBehaviour
 
     public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d,  float tolerance = 5f)
     {
-        // Calcula os valores máximos e mínimos permitidos em x e y
+        // Calcula os valores mï¿½ximos e mï¿½nimos permitidos em x e y
         float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x, d.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
         float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y, d.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
         float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x, d.x) - tolerance, 1);
@@ -405,7 +405,7 @@ public class AgentController : MatchBehaviour
 
     public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d, Vector3Int e, float tolerance = 5f)
     {
-        // Calcula os valores máximos e mínimos permitidos em x e y
+        // Calcula os valores mï¿½ximos e mï¿½nimos permitidos em x e y
         float max_x = Mathf.Min(Mathf.Max(a.x, b.x, c.x, d.x, e.x) + tolerance, Constants.IMAGE_SIZE[0] - 1);
         float max_y = Mathf.Min(Mathf.Max(a.y, b.y, c.y, d.y, e.y) + tolerance, Constants.IMAGE_SIZE[1] - 1);
         float min_x = Mathf.Max(Mathf.Min(a.x, b.x, c.x, d.x, e.x) - tolerance, 1);
@@ -426,7 +426,7 @@ public class AgentController : MatchBehaviour
         AStar.Search(deceptive, objective);
         path = AStar.BuildPath(objective);
         
-        // E se não tiver um caminho entre os dois?
+        // E se nï¿½o tiver um caminho entre os dois?
         if (path.Count == 0)
         {
             return null;
@@ -445,7 +445,7 @@ public class AgentController : MatchBehaviour
                 currentPosition,
                 path[next]
             };
-            cost2 = AStar.CostPath(tempList); // Calcula o custo entre um ponto e o próximo
+            cost2 = AStar.CostPath(tempList); // Calcula o custo entre um ponto e o prï¿½ximo
             currentPosition = path[next];
             costSoFar += cost2;
         }
@@ -541,7 +541,7 @@ public class AgentController : MatchBehaviour
         // verificar se estava carregando uma bandeira
         if (isCarryingFlag)
         {
-            // dizer q a bandeira não esta mais sendo carregada
+            // dizer q a bandeira nï¿½o esta mais sendo carregada
             flagCarrying.beingCarried = false;
         }
         //retirar da lista de agentes do controller a referencia desse agente

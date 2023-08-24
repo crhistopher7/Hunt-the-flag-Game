@@ -9,10 +9,11 @@ public static class Constants
     public static int MAX_DISTANCE = 3072;
     public static int MAP_OFFSET = 10; // Valor que divide a estala do mapa  
 
-    public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\pngs\recorte300x300A.png";
-    //public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Heightmap\Heightmap_0_0.png";
-    public static string MAP_SATELLITE_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\pngs\recorte300x300A.png";
-    //public static string MAP_SATELLITE_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\MapasCortados\Satelite\Satelite_0_0.png";
+    public static string MAP_HEIGHTMAP_FILE = @"/home/crhistopherl/Projetos/Hunt-the-flag-Game/Assets/Resources/Mapas/pngs/recorte300x300A.png"
+    public static string MAP_SATELLITE_FILE = @"/home/crhistopherl/Projetos/Hunt-the-flag-Game/Assets/Resources/Mapas/pngs/recorte300x300A.png"
+
+//    public static string MAP_HEIGHTMAP_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\pngs\recorte300x300A.png";
+//    public static string MAP_SATELLITE_FILE = @"C:\Users\crisl\OneDrive\Documentos\GitHub\Hunt the flag Game\Assets\Resources\Mapas\pngs\recorte300x300A.png";
 
     public static int[] REAL_GOAL_POSITION = { 889, 1111 };
     public static int[] DECEPTIVE_GOAL_POSITION = { -1002, 1032 };
@@ -67,4 +68,26 @@ public static class Constants
     {
         return (value > MIN_WALKABLE && value <= MAX_WALKABLE);
     }
+
+
+    // PYTHON CONSTANTS
+    public static string AGENT_NORMAL = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/agents/agent_astar";
+    public static string AGENT_DS1 = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/agents/agent_ds1";
+    public static string AGENT_DS2 = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/agents/agent_ds2";
+    public static string AGENT_DS3 = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/agents/agent_ds3";
+    public static string AGENT_DS4 = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/agents/agent_ds4";
+
+    public static string PYTHON_FILE_PATH = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/venv/bin/python.exe";
+    public static string SCRIPT_FILE_PATH = @"/home/crhistopherl/Projetos/p4-deception-project-to-3d-terrain/p4-simulator-gr-master/src/p4.py";
+
+    // WINDOWS
+//    public static string PYTHON_FILE_PATH = @"C:\Users\crisl\anaconda3\envs\tcc_ricardo\python.exe";
+//    public static string SCRIPT_FILE_PATH = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\p4.py";
+
+//    public static string AGENT_NORMAL = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_astar";
+//    public static string AGENT_DS1 = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds1";
+//    public static string AGENT_DS2 = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds2";
+//    public static string AGENT_DS3 = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds3";
+//    public static string AGENT_DS4 = @"C:\Users\crisl\OneDrive\Documentos\p4 deception project to 3d terrain\p4-simulator-gr-master\src\agents\agent_ds4";
+
 }
