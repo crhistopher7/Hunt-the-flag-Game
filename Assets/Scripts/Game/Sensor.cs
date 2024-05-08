@@ -19,17 +19,17 @@ public class Sensor : MonoBehaviour
             {
                 if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(x, y, 0)), out hit, 10))
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(x, y, 0)) * 20, Color.red);
+                    //Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(x, y, 0)) * 20, Color.red);
                     //tocou em alguma coisa
                     listOfHit.Add(hit);
                 }
 
-                if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(y, x, 0)), out hit, 10))
+               /* if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(y, x, 0)), out hit, 10))
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(y, x, 0)) * 20, Color.red);
+                    //Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(y, x, 0)) * 20, Color.red);
                     //tocou em alguma coisa
                     listOfHit.Add(hit);
-                }
+                }*/
             }
         }
 
@@ -77,6 +77,7 @@ public class Sensor : MonoBehaviour
                         // devo verificar se o agente q quero encontrar não esta atras do hit encontrado
                         while (Physics.Raycast(hit.transform.position, hit.transform.TransformDirection(new Vector3(y, x, 0)), out hit, distance))
                         {
+                            Debug.Log("while checkDirection");
                             if (GameObject.ReferenceEquals(hit.transform.gameObject, b.gameObject))
                             {
                                 Debug.DrawRay(hit.transform.position, hit.transform.TransformDirection(new Vector3(y, x, 0) * distance), Color.green);

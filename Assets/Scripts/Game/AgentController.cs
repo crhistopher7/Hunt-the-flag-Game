@@ -55,6 +55,7 @@ public class AgentController : MatchBehaviour
         SpriteRenderer back = transform.Find("Background").GetComponent<SpriteRenderer>();
         back.color = color;
         alreadyTakenAPicture = false;
+        Debug.Log("End Agent Start");
     }
 
     public void InitPosition(int seed)

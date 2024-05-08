@@ -22,6 +22,7 @@ public class CBDP : MonoBehaviour
         cbr = new CBRAPI();
         //StartFile();
         ConvertCSVToCaseBase();
+        Debug.Log("End CBDP Start");
     }
 
     public CaseCBDP GetCase()
@@ -154,6 +155,7 @@ public class CBDP : MonoBehaviour
 
     public void ConstructInitCase(List<AgentController> agentsTeam1, List<AgentController> agentsTeam2, int id)
     {
+        Debug.Log("ConstructInitCase");
         currentCase = new CaseCBDP();
 
         // id do caso
@@ -286,6 +288,7 @@ public class CBDP : MonoBehaviour
         //tirar print do caso, sem plano
         SimulationController simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
         simulation.TakeAPicture("Case");
+        Debug.Log("finish ConstructInitCase");
     }
 
     internal void NormalizeTimeInPlan()

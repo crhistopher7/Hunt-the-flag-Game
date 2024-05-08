@@ -54,9 +54,9 @@ public class SimulationController : MonoBehaviour
     {
         FindComponents();
         InitPlayers();
-        
         SetVariables();
-        Invoke(nameof(SearchSimillarCases), 0.5f);
+        Invoke(nameof(SearchSimillarCases), 1f);
+        Debug.Log("End SimulationController Start");
     }
 
     void Update()
@@ -116,7 +116,7 @@ public class SimulationController : MonoBehaviour
     public void InitPlayers()
     {
         System.Random prng = new System.Random();
-        int id = prng.Next(0, 10000);
+        int id = 1826; //prng.Next(0, 10000);
         Debug.Log("ID do Random do caso: "+id);
 
         if (inputNumberOfAgents.text == "" || int.Parse(inputNumberOfAgents.text) <= 0)
@@ -151,7 +151,7 @@ public class SimulationController : MonoBehaviour
     {
         pcTeam1.Agents = CBDPUtils.OrderAgentList(pcTeam1.Agents);
 
-        for (int i = 0; i < pcTeam1.Agents.Count; i++)
+        for (int i = 0; i < pcTeam1.numberOfAgents; i++)
         {
             pcTeam1.Agents[i].name = "Agent" + i.ToString();
             pcTeam1.Agents[i].SetNameText(i.ToString());
@@ -366,7 +366,9 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     private void ComandStartCase()
     {
+        Debug.Log("2.1");
         cbdp.ConstructInitCase(pcTeam1.Agents, pcTeam2.Agents, id);
+        Debug.Log("2.2");
     }
 
     /// <summary>
@@ -750,6 +752,7 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     public void SearchSimillarCases()
     {
+        Debug.Log("SearchSimillarCases 0");
         float threshold = sliderRetrivalCasesThreshold.value * 100; 
         int.TryParse(inputRetrivalCasesNumber.text, out int maxRetrivelCases);
 
@@ -758,10 +761,12 @@ public class SimulationController : MonoBehaviour
             Debug.Log("O número máximo de casos similares deve ser um número válido!");
             return;
         }
-            
+        Debug.Log("SearchSimillarCases 1");
 
         //Lista de [Descrição, Plano, Percentage, ID]
         listOfSimilarCases = cbdp.SearchSimilarCases();
+
+        Debug.Log("SearchSimillarCases 2");
 
         //Limpar lista de botões de casos similares no content 
         ClearButtonCaseInContent();
@@ -810,6 +815,7 @@ public class SimulationController : MonoBehaviour
 
             Debug.Log("Similaridade Global com Caso "+ listOfSimilarCases[i][3] + " é de " + percentageValue.ToString() + " %");
         }
+        Debug.Log("SearchSimillarCases 3");
     }
 
     /// <summary>
