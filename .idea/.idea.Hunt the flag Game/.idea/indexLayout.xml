@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UserContentModel">
+    <attachedFolders />
+    <explicitIncludes>
+      <Path>.gitattributes</Path>
+      <Path>.gitignore</Path>
+      <Path>Assets/Config.cs</Path>
+      <Path>Assets/DrawArrowLine.cs</Path>
+      <Path>Assets/Editor</Path>
+      <Path>Assets/Materials</Path>
+      <Path>Assets/Message.cs</Path>
+      <Path>Assets/PathfinderPointsController.cs</Path>
+      <Path>Assets/Resources</Path>
+      <Path>Assets/Scenes</Path>
+      <Path>Assets/ScreenShot.cs</Path>
+      <Path>Assets/Scripts/CBDP/Action.cs</Path>
+      <Path>Assets/Scripts/CBDP/CBDP.cs</Path>
+      <Path>Assets/Scripts/CBDP/CBDPUtils.cs</Path>
+      <Path>Assets/Scripts/CBDP/Case.cs</Path>
+      <Path>Assets/Scripts/CBDP/MatrixSimilarity.cs</Path>
+      <Path>Assets/Scripts/CBRAPI/AbstractClasses</Path>
+      <Path>Assets/Scripts/CBRAPI/Core</Path>
+      <Path>Assets/Scripts/CBRAPI/SimilarityMeasures</Path>
+      <Path>Assets/Scripts/Game</Path>
+      <Path>Assets/Scripts/Map</Path>
+      <Path>Assets/SelectController.cs</Path>
+      <Path>Assets/SimulationController.cs</Path>
+      <Path>Assets/Sprintes</Path>
+      <Path>CaseBase.json</Path>
+      <Path>CaseDataBase.txt</Path>
+      <Path>CaseDataBaseTest.txt</Path>
+      <Path>CaseDataBaseTestAntigo.txt</Path>
+      <Path>Hunt the flag Game.sln.DotSettings.user</Path>
+      <Path>Hunt-the-flag-Game.sln</Path>
+      <Path>SomeLevel</Path>
+    </explicitIncludes>
+    <explicitExcludes />
+  </component>
+</project>
