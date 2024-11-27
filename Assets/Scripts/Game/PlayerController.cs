@@ -157,7 +157,7 @@ public class PlayerController : MatchBehaviour
 
         // Caminho do execut�vel do Python dentro do ambiente virtual "tcc_ricardo"
         string pythonFilePath = Constants.PYTHON_FILE_PATH;
-        string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad";
+        string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad -u";
         string scriptPath = Constants.SCRIPT_FILE_PATH;
 
         UnityEngine.Debug.Log(pythonArguments);

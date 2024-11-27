@@ -181,6 +181,7 @@ public class AgentController : MatchBehaviour
             {
                 indexPath = 0;
                 path = RunP4Code(current, objective, deceptive, pathType, MAP_HEIGHTMAP_FILE);
+                Debug.Log(path);
             }
 
             else if (pathType == PathType.NORMAL)
@@ -314,23 +315,28 @@ public class AgentController : MatchBehaviour
         string map = MAP_HEIGHTMAP_FILE.Replace(".png", ".tif");
         string quotedMapImagePath = $"\"{map}\"";
 
-        // Caminho do execut�vel do Python dentro do ambiente virtual "tcc_ricardo"
         string pythonFilePath = Constants.PYTHON_FILE_PATH;
         string pythonArguments = $"-m {quotedMapImagePath} -s {start} -G {deceptiveGoal} -g {realGoal} -a \"{agent}\" -k {pathfinder} -ad";
         string scriptPath = Constants.SCRIPT_FILE_PATH;
 
         Debug.Log(pythonArguments);
 
+        // Caminho do script conda.bat e nome do ambiente
+        string condaScript = @"C:\Users\Thiago\anaconda3\condabin\conda.bat";
+        string condaEnv = "tfenv2";
+
+        // Comando para ativar o ambiente e chamar o script Python
+        string command = $"/C \"CALL {condaScript} activate {condaEnv} && python {scriptPath} {pythonArguments}\"";
 
         ProcessStartInfo psi = new ProcessStartInfo
         {
-            FileName = pythonFilePath,
-            Arguments = $"\"{scriptPath}\" {pythonArguments}",
+            FileName = "cmd.exe",
+            Arguments = command,
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            CreateNoWindow = true // Criar sem janela para evitar exibi��o extra do CMD
+            CreateNoWindow = true // Criar sem janela para evitar exibição extra do CMD
         };
 
         // Iniciando o processo do Python
@@ -339,20 +345,20 @@ public class AgentController : MatchBehaviour
             StartInfo = psi
         };
 
-        // Iniciar o processo e os redirecionamentos de sa�da
+        // Iniciar o processo e os redirecionamentos de saída
         process.Start();
         StreamReader standardOutputReader = process.StandardOutput;
         StreamReader standardErrorReader = process.StandardError;
 
-        // Ler a sa�da do processo Python (sa�da padr�o e sa�da de erro) ap�s a conclus�o
+        // Ler a saída do processo Python (saída padrão e saída de erro) após a conclusão
         string output = standardOutputReader.ReadToEnd();
         string errorOutput = standardErrorReader.ReadToEnd();
 
         process.WaitForExit();
 
-        // Exibindo a sa�da e sa�da de erro
-        Debug.Log("Sa�da do Python: \n" + output);
-        Debug.Log("Sa�da de erro do Python: \n" + errorOutput);
+        // Exibindo a saída e saída de erro
+        Debug.Log("Saída do Python: \n" + output);
+        Debug.Log("Saída de erro do Python: \n" + errorOutput);
 
         List<LogicMap> logicMapList = new List<LogicMap>();
         if (output.Contains("FULL PATH"))
@@ -360,14 +366,14 @@ public class AgentController : MatchBehaviour
             string listaString = output.Split(':').Last();
             Debug.Log(listaString);
 
-            // Remover os colchetes e espa�os para obter apenas as coordenadas
+            // Remover os colchetes e espaços para obter apenas as coordenadas
             string coordinatesString = listaString.Replace("[", "").Replace("]", "").Replace(" ", "");
 
-            // Usar express�o regular para extrair os n�meros de cada coordenada
+            // Usar expressão regular para extrair os números de cada coordenada
             Regex regex = new Regex(@"\((\d+),(\d+)\)");
             MatchCollection matches = regex.Matches(coordinatesString);
 
-            // Converter cada par de coordenadas em um Vector3Int e adicion�-lo � lista
+            // Converter cada par de coordenadas em um Vector3Int e adicioná-lo à lista
             foreach (Match match in matches)
             {
                 int x = int.Parse(match.Groups[1].Value);
@@ -376,11 +382,12 @@ public class AgentController : MatchBehaviour
                 LogicMap point = AStar.GetTileByPosition(new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0));
                 logicMapList.Add(point);
             }
-
         }
 
         return logicMapList;
     }
+
+
 
     public List<Vector2> OccupationAreaLimits(Vector3Int a, Vector3Int b, Vector3Int c, float tolerance = 5f)
     {
