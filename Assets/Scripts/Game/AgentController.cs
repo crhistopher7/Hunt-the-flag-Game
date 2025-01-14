@@ -8,17 +8,24 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEditor.Experimental.GraphView;
 
 public class AgentController : MatchBehaviour
 {
+    private SimulationController simulation;
     private AStar AStar;
-
     private GameObject prefabLine;
+
 
     protected Vector3 CurrentPosition;
     private float distanceToChangeWayPoint = 0.5f;
     List<LogicMap> path;
+    LogicMap ldpt_point;
+    int ldptIndex;
+    bool has_ldpt;
+    int currentGoalIndex;
     int indexPath;
+    private bool travelToLDPT;
     protected bool followingpath;
     Sensor sensor;
     AgentLevel level;
@@ -46,9 +53,13 @@ public class AgentController : MatchBehaviour
         rend.enabled = true;
         level = new AgentLevel(3);
         followingpath = false;
+        has_ldpt = false;
+        travelToLDPT = false;
+        ldptIndex = -1;
         //isCarryingFlag = false;
         //lifeBar.localScale = new Vector3(level.life, 1, 1);
 
+        simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
         AStar = GameObject.Find(Constants.PATHFINDER).GetComponent<AStar>();
 
         prefabLine = Resources.Load("Prefabs/PathLine") as GameObject;
@@ -124,8 +135,7 @@ public class AgentController : MatchBehaviour
                 {
                     if (!alreadyTakenAPicture)
                     {
-                        alreadyTakenAPicture = true;
-                        SimulationController simulation = GameObject.Find("SimulationController").GetComponent<SimulationController>();
+                        alreadyTakenAPicture = true;                        
                         StartCoroutine(simulation.EndCase(transform.name, hit.transform.name));
                     }
 
@@ -278,14 +288,24 @@ public class AgentController : MatchBehaviour
             if (path.Count != 0)
             {
                 followingpath = true;
+                if (simulation.GetAutomaticTravel())
+                {
+                    currentGoalIndex = path.Count;
+                    Debug.Log("Automatic Travel, seguindo rota!");
 
-                GameObject go;
-                go = Instantiate(prefabLine);
-                go.GetComponent<LineRenderer>().startColor = color;
-                go.GetComponent<LineRenderer>().endColor = color;
-                LineController line = go.GetComponent<LineController>();
+                    GameObject go;
+                    go = Instantiate(prefabLine);
+                    go.GetComponent<LineRenderer>().startColor = color;
+                    go.GetComponent<LineRenderer>().endColor = color;
+                    LineController line = go.GetComponent<LineController>();
 
-                line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
+                    line.SetUpLine(path, rb.position / Constants.MAP_OFFSET, pathType);
+                }
+                else
+                {
+                    Debug.Log("Manual Travelling!");
+                    simulation.SetManualTravelling(true, path.Count, this);
+                }
             }
             else
             {
@@ -363,25 +383,91 @@ public class AgentController : MatchBehaviour
         List<LogicMap> logicMapList = new List<LogicMap>();
         if (output.Contains("FULL PATH"))
         {
-            string listaString = output.Split(':').Last();
+            // Usar expressão regular para extrair os números de cada coordenada
+            Regex regex = new Regex(@"\((\d+),\s*(\d+)\)");
+
+            // Se não houver LDPT, o output deve ser FULL PATH: [...] -> splitado em 2 elementos 
+            // Se houver LDPT, o output deve ser FULL PATH: [...] :LDPT: (X, y) -> splitado em 4 elementos.
+            string[] splitted_output = output.Split('?').Last().Split(':');
+            string listaString = splitted_output[1];
+
+            if (output.Contains("LDPT"))
+            {
+                // Se houver ldpt, ele vai ser o quarto (último) elemento do split.
+                string ldptstring = splitted_output[3];
+                Debug.Log("LDPT");
+                Debug.Log(ldptstring);
+                Debug.Log(splitted_output);
+
+                Match match = regex.Match(ldptstring);
+
+                if (match.Success)
+                {
+                    Debug.Log("Correspondência encontrada: " + match.Value);
+                    Debug.Log("Grupo 1: " + match.Groups[1].Value);
+                    Debug.Log("Grupo 2: " + match.Groups[2].Value);
+
+                    try
+                    {
+                        int x1 = int.Parse(match.Groups[1].Value);
+                        int y1 = int.Parse(match.Groups[2].Value);
+                        // Use x e y conforme necessário
+                        Debug.Log("Valores convertidos com sucesso: x=" + x1 + ", y=" + y1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Debug.LogError("Erro ao converter os valores para inteiros: " + e.Message);
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        Debug.LogError("Valor nulo encontrado ao tentar converter para inteiros: " + e.Message);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Nenhuma correspondência encontrada para a string fornecida.");
+                }
+
+                int x = int.Parse(match.Groups[1].Value);
+                int y = int.Parse(match.Groups[2].Value);
+                ldpt_point = AStar.GetTileByPosition(new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0));
+                has_ldpt = true;
+                simulation.travelToLDPTToggle.interactable = true;
+
+                Debug.Log(ldptstring);
+            }
+            else
+            {
+                ldptIndex = -1;
+                has_ldpt = false;
+                simulation.travelToLDPTToggle.interactable = false;
+            }
             Debug.Log(listaString);
 
             // Remover os colchetes e espaços para obter apenas as coordenadas
             string coordinatesString = listaString.Replace("[", "").Replace("]", "").Replace(" ", "");
 
-            // Usar expressão regular para extrair os números de cada coordenada
-            Regex regex = new Regex(@"\((\d+),(\d+)\)");
-            MatchCollection matches = regex.Matches(coordinatesString);
 
+            MatchCollection matches = regex.Matches(coordinatesString);
             // Converter cada par de coordenadas em um Vector3Int e adicioná-lo à lista
             foreach (Match match in matches)
             {
+                Debug.Log("MATCH");
+                Debug.Log(match);
                 int x = int.Parse(match.Groups[1].Value);
                 int y = int.Parse(match.Groups[2].Value);
 
                 LogicMap point = AStar.GetTileByPosition(new Vector3Int(Constants.CLICK_POSITION_OFFSET + x, Constants.CLICK_POSITION_OFFSET + y, 0));
                 logicMapList.Add(point);
             }
+
+            if (has_ldpt)
+            {
+                // Encontrar o índice de ldpt_point na lista logicMapList
+                ldptIndex = logicMapList.FindIndex(point => point.Equals(ldpt_point));
+                Debug.Log("Índice de ldpt_point em logicMapList: " + ldptIndex);
+            }
+
         }
 
         return logicMapList;
@@ -513,19 +599,31 @@ public class AgentController : MatchBehaviour
     
     private void CheckWayPoint()
     {
+        int localGoalIndex = currentGoalIndex;
+        if (travelToLDPT)
+        {
+            if (has_ldpt && ldptIndex > -1)
+                localGoalIndex = ldptIndex;
+            else Debug.Log("Está tentando caminhar até o LDPT, mas o LDPT não existe");
+        }
+
+
         Vector2 agentPosition = Vector2Int.FloorToInt(new Vector2(rb.position.x / Constants.MAP_OFFSET, rb.position.y / Constants.MAP_OFFSET));
         Vector2 newPosition =  new Vector2(path[indexPath].ClickPosition.x, path[indexPath].ClickPosition.y);
 
         if (Vector2.Distance(newPosition, agentPosition) < distanceToChangeWayPoint)
         {
             CurrentPosition = path[indexPath].ClickPosition * Constants.MAP_OFFSET;
-            indexPath++;
-            if (indexPath == path.Count)
+
+            // Agente pode voltar pra trás por conta do manual travelling!
+            if(localGoalIndex > indexPath)
+                indexPath++;
+            else if (indexPath == localGoalIndex)
             {
                 followingpath = false;
                 rb.angularVelocity.Set(0, 0, 0);
             }
-           
+            else if (indexPath > 0) indexPath--;
         }
 
     }
@@ -542,6 +640,52 @@ public class AgentController : MatchBehaviour
         if (rigidbody = hit.transform.GetComponent<Rigidbody>())
             return rigidbody.transform.IsChildOf(this.transform.parent);
         return true;
+    }
+
+    public void ChangeCurrentGoal(LogicMap point)
+    {
+        if (path.Count > 0)
+        {
+            for (int i = 0; i < path.Count; i++)
+            {
+                if (path[i] == point)
+                {
+                    currentGoalIndex = i;
+                    break;
+                }
+            }
+            followingpath = true;
+        }
+    }
+    public void ChangeCurrentGoal(int currentGoal)
+    {
+        if(path.Count > 0)
+        {
+            currentGoalIndex = currentGoal;
+            followingpath = true;
+        }
+    }
+    public void ChangeCurrentGoalPercentage(int currentGoal, int relativeMax)
+    {
+        double relativeGoal = Math.Round(((double) currentGoal / (double) relativeMax) * (double) path.Count);
+
+        Debug.Log("Relative: " + relativeGoal.ToString() + " Current: " + currentGoal.ToString() + "RelativeMax: " + relativeMax.ToString());
+        if (path.Count > 0)
+        {
+            currentGoalIndex = (int) relativeGoal;
+            followingpath = true;
+        }
+    }
+
+
+    public void SetTravelToLDPT(bool value)
+    {
+        if(path.Count <= 0)
+            { return; }
+
+        travelToLDPT = value;
+        simulation.pathSlider.value = ldptIndex;
+        followingpath = true;
     }
 
     private void Die()
@@ -564,4 +708,6 @@ public class AgentController : MatchBehaviour
         //morreu
         Destroy(this.gameObject);
     }
+
+    public bool HasLDPT() { return has_ldpt; }
 }

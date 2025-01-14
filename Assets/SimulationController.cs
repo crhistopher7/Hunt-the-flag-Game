@@ -34,10 +34,13 @@ public class SimulationController : MonoBehaviour
     private PlayerController pcTeam2;
     private MapGenerator mapGenerator;
     private List<string[]> listOfSimilarCases;
+    private bool AutomaticTravel;
+    private bool ManualTravelling;
     private bool hasPlan = false;
     private DateTime dateStartPlan;
     private Plan plan;
     private int selectedSimilarCaseId;
+    private List<AgentController> AgentsTravelling;
 
     //Configuration Variables
     public Material deceptiveFlag;
@@ -46,6 +49,8 @@ public class SimulationController : MonoBehaviour
     public InputField inputRetrivalCasesNumber;
     public Slider sliderRetrivalCasesThreshold;
     public InputField inputNumberOfAgents;
+    public Slider pathSlider;
+    public Toggle travelToLDPTToggle;
     public string MAP_HEIGHTMAP;
     public string MAP_SATELLITE;
     int[] ids = { 1477686966, 1931235537, 1902959905 };
@@ -353,10 +358,12 @@ public class SimulationController : MonoBehaviour
     /// </summary>
     private void SetVariables()
     {
+        AgentsTravelling = new List<AgentController>();
         gameObject.tag = clientOfExecution.GetPlayerControllerTag();
         selectedAgents = new List<AgentController>();
         repositionObjects = new List<SetNewPosition>();
         selectedSimilarCaseId = -1;
+        AutomaticTravel = true;
         clientOfExecution.SearchSimulationController();
         Invoke(nameof(ComandStartCase), 0.5f);
         EnableComponentSelectController();
@@ -853,5 +860,51 @@ public class SimulationController : MonoBehaviour
         {
             pcTeam2.deceptiveTransform.GetComponent<MeshRenderer>().material = deceptiveFlag;
         }
+    }
+
+    public void SetAutomaticTravel(Boolean value)
+    {
+        AutomaticTravel = value;
+        pathSlider.interactable = !AutomaticTravel;
+    }
+
+    // Cada agente chama essa função após calcular o caminho.
+    public void SetManualTravelling(Boolean value, int pathLength, AgentController agent)
+    {
+        // Adaptar para dar suporte aos múltiplos agentes.
+        ManualTravelling = true;
+
+        if(pathSlider.maxValue < pathLength)
+            pathSlider.maxValue = pathLength;
+
+        if(agent.HasLDPT())
+        {
+            travelToLDPTToggle.interactable = true;
+        }
+        AgentsTravelling.Add(agent);
+    }
+
+    public void ChangeManualTravellingGoals(float currentIndex)
+    {
+        foreach(AgentController agent in AgentsTravelling)
+        {
+            agent.ChangeCurrentGoalPercentage((int) currentIndex, (int) pathSlider.maxValue);
+        }
+    }
+    public void ChangeManualTravellingGoalsToLDPT(bool value)
+    {
+        foreach (AgentController agent in AgentsTravelling)
+        {
+            agent.SetTravelToLDPT(value);
+        }
+    }
+
+    public Boolean GetAutomaticTravel()
+    {
+        return AutomaticTravel;
+    }
+    public Boolean GetManualTravelling()
+    {
+        return ManualTravelling;
     }
 }
